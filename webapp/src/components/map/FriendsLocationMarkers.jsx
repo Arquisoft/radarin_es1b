@@ -1,26 +1,45 @@
-import React from 'react'
+
+import React, { Component } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import { getFriendsLocations } from '../../api/api';
 import { useLDflexValue } from '@solid/react';
 
-const FriendsLocationMarkers = (webId) => {
 
-    let localizaciones = getFriendsLocations(webId);
-    // { useLDflexValue("[" + loc.user + "].firstName") }
+export default class FriendsLocationMarkers extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            webId: props.webId,
+            locs: []
+        }
+    }
 
-    localizaciones.forEach((loc) => {
-        console.log(loc);
-    });
+    componentDidMount() {
+        var promise = getFriendsLocations(this.state.webId)
 
-    return (
-        localizaciones.forEach((loc) => {
-            <Marker position={[loc.location[0], loc.location[1]]}>
-            <Popup>
-
-            </Popup>
-        </Marker>
+        promise.then((result) =>{
+            result.map((e)=>{
+                this.state.locs.push(e) 
+            })           
+                
+            this.state.locs.forEach(e => {        
+                console.log("entro");
+                console.log(e.user);
+            });
         })
-    );
-}
+    }
 
-export default FriendsLocationMarkers
+    render() {
+        if(this.state.locs > 0){
+            console.log("Estamos")
+            return (
+                <div>
+                </div>
+            )
+        }
+        return (
+            <div>
+            </div>
+        )
+    }
+}

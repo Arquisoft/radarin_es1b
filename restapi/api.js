@@ -88,7 +88,7 @@ router.post("/friends/locations/", async (req, res) => {
                     console.log("Error al encontrar los usuarios dados los amigos")
                 } else {
                     console.log(docs);
-                    res.send(docs);
+                    res.send({"locs": docs});
                 }
             })
         }

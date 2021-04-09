@@ -5,7 +5,7 @@ import { addLocation, getFriendsLocations, getFriends } from '../../api/api';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
 
-Geocode.setApiKey(process.env.GEOCODE_KEY);
+Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
@@ -62,8 +62,6 @@ const Map = (props) => {
                   props.webId, [latlng.lat, latlng.lng],
                   state, country);
               console.log(apicall)
-              const friends = getFriends(props.webId);
-              console.log(friends)
             },
             (error) => {
               console.log("No se ha podido guardar la localización")
@@ -72,7 +70,7 @@ const Map = (props) => {
         );
     }
 
-    useEffect(() => {
+/*     useEffect(() => {
         const fetchData = async () => {
             try {
                 const resp = await getFriendsLocations();
@@ -82,7 +80,7 @@ const Map = (props) => {
         };
 
         fetchData();
-    }, []);
+    }, []); */
 
     return (
         <div style={{ marginBottom: 10, position: 'relative' }}>

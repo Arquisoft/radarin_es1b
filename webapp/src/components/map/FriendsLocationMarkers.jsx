@@ -10,7 +10,8 @@ export default class FriendsLocationMarkers extends Component {
         super(props);
         this.state = {
             webId: props.webId,
-            locs: []
+            locs: [],
+            updated: false
         }
     }
 
@@ -27,14 +28,19 @@ export default class FriendsLocationMarkers extends Component {
                 console.log(e.user);
             });
         })
+        this.render()
     }
 
     render() {
-        if(this.state.locs > 0){
-            console.log("Estamos")
-            return (
-                <div>
-                </div>
+        console.log("Render:")
+        console.log(this.state.locs.length)
+        if(this.state.locs.length > 0){
+            return(
+                <Marker position={[this.state.locs[0].location[0],this.state.locs[0].location[1]]}>
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
             )
         }
         return (

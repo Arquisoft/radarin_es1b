@@ -72,18 +72,6 @@ const Map = (props) => {
         );
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resp = await getFriendsLocations();
-                console.log(resp);
-                setLocations(resp)
-            } catch (e) { }
-        };
-
-        fetchData();
-    }, []);
-
     return (
         <div style={{ marginBottom: 10, position: 'relative' }}>
             <h1>Ubicación del usuario</h1>

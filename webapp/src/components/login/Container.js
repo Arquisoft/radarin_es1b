@@ -1,18 +1,41 @@
 import React from 'react';
 import Button from "@material-ui/core/Button";
 
-import { LoggedIn, AuthButton} from '@solid/react';
+import { LoggedIn, AuthButton, LoggedOut} from '@solid/react';
+import Typography from '@material-ui/core/Typography';
 
 import LoginBadge from './LoginBadge';
 
 //Url que sirve para iniciar sesión en solid desde una APP 
 const popupUri = 'https://solidcommunity.net/common/popup.html';
 
+var conectado = false;
+var cont = 0;
+  
+  function UserGreeting(props) {
+
+    return conectado=true;
+
+  }
+  
+  function GuestGreeting(props) {
+   
+    return conectado=false;
+  }
+
+  function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+      return <UserGreeting/>;
+    }
+    return <GuestGreeting />;
+  }
+
 // see https://material-ui.com/guides/composition/#caveat-with-refs
 
 //AuthButtonComponent usa React.forwardRef para obtener la ref que le pasaron, y luego reenviarla al span que renderiza:
 export const AuthButtonComponent = React.forwardRef((props, ref) => 
-<span ref={ref}><AuthButton {...props} />
+<span  ref={ref}><AuthButton {...props} />
     <div 
         style={{display: 'none'}}>{props.children}
     </div>
@@ -22,13 +45,28 @@ export const AuthButtonComponent = React.forwardRef((props, ref) =>
 export default ({fullName, imageSrc, webId}) => {
     return <span>
         {/* LoggedIn solo se muestra si el usuario esta logueado */}
-        <LoggedIn>
-            {/* LoginnBadge es el boton de acceso al perfin de usuario una vez logueado el usuario , el componente  LoginBadge crea el boton que recibe como parametro webId,nombre y foto del usuario logueado */}
-          <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
+        <LoggedIn>   
+           {console.log("ENTRANDOOO")}
+           <Greeting isLoggedIn={true}/>  
+           {console.log("Conectado : " + conectado)}
+           
+           
+             {
+               (conectado) ? console.log("Contador : " + ++cont):  console.log("Contador : " + cont)
+             }
+
+             {(cont >= 27) ? <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />: console.log("NOOOOOO") }
+             
+             <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
+          
+        {/* LoginnBadge es el boton de acceso al perfin de usuario una vez logueado el usuario , el componente  LoginBadge crea el boton que recibe como parametro webId,nombre y foto del usuario logueado */}
+           
         </LoggedIn>
+        <LoggedOut>
+            <Greeting isLoggedIn={false} />  
+        </LoggedOut>
         {/* Boton para iniciar sesion en solid , muestra el boton de log in o log out dependiendo del estado del usuario */}
-        <Button  variant="contained" color="primary" edge="end" component={AuthButtonComponent} popup={popupUri}>
-          ...
+        <Button onClick  variant="contained" color="primary" edge="end"  component={AuthButtonComponent} popup={popupUri}>
         </Button>
     </span>;
 };

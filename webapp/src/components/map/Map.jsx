@@ -4,6 +4,7 @@ import { LocationsContext } from '../../context/LocationsContext';
 import { addLocation, getFriendsLocations, getFriends } from '../../api/api';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
+import MeetsMenu from "./MeetsMenu"
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -12,8 +13,9 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Map = (props) => {
-    const { locations, setLocations } = useContext(LocationsContext);
+    const [markers, serMarkers] = React.useState([]);
     const { position, setPosition } = useContext(LocationsContext);
+    const { createMeet, setCreateMeet } = useContext(LocationsContext);
 
     function MyMapEvent() {
         const map = useMapEvents({
@@ -21,6 +23,7 @@ const Map = (props) => {
                 map.locate()
             },
             locationfound(e) {
+                console.log(createMeet)
                 saveLocation(e.latlng)
                 setPosition(e.latlng)
                 map.flyTo(e.latlng, map.getZoom())
@@ -40,6 +43,23 @@ const Map = (props) => {
         }
     }
 
+    function createNewMeet(e) {
+        if(createMeet){
+            
+            setCreateMeet(false)
+            console.log(e)
+            markers.push(e.latlng)
+            /*return (
+                <Marker position={}>
+                    <Popup>
+                        NuevaReunion <br />
+                    </Popup>
+                </Marker>
+            )*/
+            
+        }
+        setCreateMeet(false)
+    }
     function saveLocation(latlng) {
         Geocode.fromLatLng(latlng.lat, latlng.lng).then(
             (response) => {
@@ -73,9 +93,15 @@ const Map = (props) => {
     return (
         <div style={{ marginBottom: 10, position: 'relative' }}>
             <h1>Ubicación del usuario</h1>
+            <div>
+                <MeetsMenu />
+            </div>
 
             <div>
-                <MapContainer center={[43.36, -5.90]} zoom={10} scrollWheelZoom={true}>
+                <MapContainer center={[43.36, -5.90]}
+                              onClick={createNewMeet}
+                              zoom={10}
+                              scrollWheelZoom={true}>
                     <MyMapEvent />
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -83,6 +109,13 @@ const Map = (props) => {
                     />
 
                     <FriendsLocationMarkers webId={props.webId}/>
+                    {markers.map((position, idx) => 
+                        <Marker key={`marker-${idx}`} position={position}>
+                            <Popup>
+                                <span>Nueva Reunion</span>
+                            </Popup>
+                        </Marker>
+                    )}
                 </MapContainer>
             </div>
         </div>
@@ -90,4 +123,5 @@ const Map = (props) => {
 }
 
 export default Map
+
 

@@ -43,11 +43,6 @@ export async function getFriendsLocations(webId){
         })
       })
     return await response.json()
-    /*console.log("Pidiendo localizacionies")
-    return {'locs': [ {'altitud':51.505, 'latitud':-0.09},
-                            {'altitud':50.505, 'latitud':-1.09},
-                            {'altitud':53.505, 'latitud':-3.09}
-                        ]}*/
 }
 
 export async function getFriends(webId){

@@ -22,9 +22,6 @@ class App extends React.Component {
     }
   }
 
-
-
-  
   render() {
 
     return (
@@ -48,6 +45,7 @@ class App extends React.Component {
                 //SaveWebId(params.webId)
                 return <Profile webId={params.webId} />
               }} />
+             
             </main>
 
 

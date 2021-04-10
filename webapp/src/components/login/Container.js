@@ -10,16 +10,38 @@ import LoginBadge from './LoginBadge';
 const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 var conectado = false;
+var llamada = false;
 var cont = 0;
+var entradas = 0;
   
   function UserGreeting(props) {
 
-    return conectado=true;
+    // if (conectado && cont>=5) {
+    //     conectado=false;
+    // }
+
+    // if(conectado==false && cont<5){
+    //     cont++;
+    //     conectado=true
+    //     console.log("ENTRO AQUIIII" + conectado);
+    //     console.log("Aumenta" + cont);
+        
+    // }
+   
+    return conectado = true;
 
   }
+
+  function IniciarSesion(props) {
+
+    return <h1>amargado estoy</h1>
+
+  }
+
   
   function GuestGreeting(props) {
    
+    cont = 0;
     return conectado=false;
   }
 
@@ -29,6 +51,17 @@ var cont = 0;
       return <UserGreeting/>;
     }
     return <GuestGreeting />;
+  }
+
+  function Entro(props) {
+    const isIn = props.isIn;
+    if (isIn) {
+      entradas++;
+      if(entradas==28)
+         return <h1> estoy aqui  {entradas}</h1>;
+    
+    }
+    return <h1>No estoy aqui</h1>;
   }
 
 // see https://material-ui.com/guides/composition/#caveat-with-refs
@@ -46,27 +79,29 @@ export default ({fullName, imageSrc, webId}) => {
     return <span>
         {/* LoggedIn solo se muestra si el usuario esta logueado */}
         <LoggedIn>   
-           {console.log("ENTRANDOOO")}
            <Greeting isLoggedIn={true}/>  
-           {console.log("Conectado : " + conectado)}
-           
-           
-             {
-               (conectado) ? console.log("Contador : " + ++cont):  console.log("Contador : " + cont)
-             }
+            {console.log("Conectado : " + conectado)}
+            {/* {((conectado) ? 
+                ((llamada==false) ? 
+                    llamada=true
+                    ((llamada==true)?
+                        console.log("Hago la llamada")
+                    : console.log("NOOO Hago la llamada"))
+                : console.log("NOOO Hago la llamada"))
+            : console.log("NOOO Hago la llamada"))}   */}
 
-             {(cont >= 27) ? <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />: console.log("NOOOOOO") }
-             
              <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
           
         {/* LoginnBadge es el boton de acceso al perfin de usuario una vez logueado el usuario , el componente  LoginBadge crea el boton que recibe como parametro webId,nombre y foto del usuario logueado */}
-           
+        
         </LoggedIn>
+      
         <LoggedOut>
             <Greeting isLoggedIn={false} />  
         </LoggedOut>
         {/* Boton para iniciar sesion en solid , muestra el boton de log in o log out dependiendo del estado del usuario */}
-        <Button onClick  variant="contained" color="primary" edge="end"  component={AuthButtonComponent} popup={popupUri}>
+        <Button variant="contained" color="primary" edge="end" onClick={<IniciarSesion/>} component={AuthButtonComponent} popup={popupUri} >
+
         </Button>
     </span>;
 };

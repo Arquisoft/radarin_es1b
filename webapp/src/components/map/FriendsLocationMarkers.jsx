@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import { getFriendsLocations } from '../../api/api';
 import { useLDflexValue } from '@solid/react';
-
+import {iconPerson } from "./markers/IconPerson"
 
 export default class FriendsLocationMarkers extends Component {
     constructor(props){
@@ -29,7 +29,7 @@ export default class FriendsLocationMarkers extends Component {
         if(this.state.locs.length > 0){
             return(
                 this.state.locs.map((loc) => {
-                    return (<Marker position={[loc.location[0],loc.location[1]]}>
+                    return (<Marker position={[loc.location[0],loc.location[1]]} icon={ iconPerson }>
                         <Popup>
                             {loc.user}
                         </Popup>

@@ -1,14 +1,7 @@
 import React from 'react';
 import {addUser} from "../../api/api";
-import { useLDflexValue, useWebId } from "@solid/react";
 
 
-async function Name(props) {
-     
-    let webId = props.webId;
-    let fullName = useLDflexValue(`[${webId}].name`);
-    return fullName;
-}
 
 class AddUsersContainer extends React.Component{
     

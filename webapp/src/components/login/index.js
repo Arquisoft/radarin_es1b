@@ -12,32 +12,6 @@ export default () => {
     // almacena en profile las fotos, name , url ...
     const profile = useProfile(webId)
     
-
-
-
-    // function Greeting(props) {
-    //     const isLoggedIn = props.isLoggedIn;
-    //     const fetchUsers = async () => {
-    //       const webId = profile.loggedUserWebID;
-    //       const fullName = profile.fullName;
-    //       console.log("WebId " + webId)
-    //       console.log("fullName " + fullName)
-    //       try {
-    //           const resp = await addUser(webId,fullName);
-    //           console.log(resp);
-    //           console.log("Hago la llamada")
-          
-    //       } catch (e) {
-    //           console.log("Error adding users to restapi.")
-    //        }
-    //     };
-        
-    //     if (isLoggedIn) {
-    //         fetchUsers();
-    //     }
-    //     return <h1></h1>;
-    //   }
-    
     //<LoginContainer es un nombre cualquiera , lo que nos interesa es pasarle como parametro el ...profile a export default.. la funcion de la clase Container
     return <span> 
         <LoginContainer {...profile} />  

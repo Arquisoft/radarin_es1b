@@ -8,7 +8,6 @@ import FriendList from '../friendList';
 import Image from './Image';
 import ButtonFriendship from './ButtonFriendship'
 import Paper from "@material-ui/core/Paper";
-import {addUser} from "../../api/api";
 import styles from "./Profile.module.css";
 
 
@@ -33,7 +32,6 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
         </Typography>
       </Paper>
       <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
-      {/* <Button onClick={addUser(loggedUser,fullName)}> </Button>      */}
     </Grid>
     <Grid item xs={12} md={12}>
       <Typography variant="h6" component="h4">

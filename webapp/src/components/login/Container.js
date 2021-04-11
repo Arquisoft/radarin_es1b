@@ -2,18 +2,11 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 
 import { LoggedIn, AuthButton, LoggedOut} from '@solid/react';
-import Typography from '@material-ui/core/Typography';
-import {addUser} from "../../api/api";
 import LoginBadge from './LoginBadge';
 
 
 //Url que sirve para iniciar sesión en solid desde una APP 
 const popupUri = 'https://solidcommunity.net/common/popup.html';
-
-var conectado = false;
-var llamada = false;
-var cont = 0;
-var entradas = 0;
 
 // see https://material-ui.com/guides/composition/#caveat-with-refs
 
@@ -37,7 +30,6 @@ export default ({fullName, imageSrc, webId}) => {
         
         </LoggedIn>
       
-        
         {/* Boton para iniciar sesion en solid , muestra el boton de log in o log out dependiendo del estado del usuario */}
         <Button variant="contained" color="primary" edge="end" component={AuthButtonComponent} popup={popupUri} >
 

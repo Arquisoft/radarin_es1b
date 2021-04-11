@@ -9,7 +9,7 @@ export async function addUser(webId, nombre){
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
             'webId':webId,
-            'nombre':nombre
+            'nombre': String(nombre)
         })
       })
     return await response.json()

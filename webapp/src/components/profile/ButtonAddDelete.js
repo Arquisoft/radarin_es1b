@@ -1,115 +1,115 @@
 import React, { useState } from 'react';
-import {addFriend, removeFriend, getFriendShip} from '../../api/api';
+import { addFriend, removeFriend, getFriendShip } from '../../api/api';
 import { Button } from '@material-ui/core';
-
-
-async function checkFriend(loggedUser , webId)  {
-    console.log("Comprobando amistad de "+loggedUser+" y "+webId)
-    let aux= getFriendShip(loggedUser , webId).then(friendship=>{return auxmethond(friendship).then(aux=>{return aux} )})
-    
-    return  aux;
-}
+import friend from '../friendList/friend';
 
 
 
-
-async function auxmethond(friendship){
-    console.log(friendship)
-    if(friendship==null){
-        console.log("No son amigos")
-        return false;
-    }
-    console.log("Resultado de checkear amistad:" + friendship.status)
-    
-    if(await friendship.status=="accepted"){
-        console.log("Son amigos")
-        return true;
-    }
-    console.log("No son amigos2")
-
-    return false;
-}
 
 class ButtonAddDelete extends React.Component {
 
     constructor(props) {
         super(props);
-
+        this.loggedUser = props.loggedUser;
+        this.webId = props.webId;
+        console.log("Nuevo perfil (Constructor): " + this.loggedUser + "; " + this.webId)
+        this.isFriend = this.checkFriend();
         this.state={
-            loggedUser:props.loggedUser,
-            webId : props.webId,
-            isFriend: ""
+            text:""
         }
-        console.log("Nuevo perfil (Constructor): "+this.state.loggedUser+"; "+this.state.webId) 
-        const fetchFriendShip=async()=>{
-            const response= await  checkFriend(this.state.loggedUser, this.state.webId);  
-            const {isFriend  }= await response;
-            this.setState({
-                isFriend
-            })
-        }
-        fetchFriendShip();
         
-        
-           
-        
-      }
+    }
+
+    componentDidUpdate(props) {
+        this.loggedUser = props.loggedUser;
+        this.webId = props.webId;
+        console.log("Nuevo perfil (Update): " + this.loggedUser + "; " + this.webId)
+        this.isFriend = this.checkFriend();
+    }
 
     addFriendship(loggedUser, webId) {
         addFriend(loggedUser, webId)
     }
-
-    componentDidUpdate(props){
-        let loggedUser=props.loggedUser;
-        let webId = props.webId;
-        this.setState({
-            loggedUser,
-            webId
-        })
-        console.log("Nuevo perfil (Update): "+this.state.loggedUser+"; "+this.state.webId)
-        const fetchFriendShip=async()=>{
-            const response= await  checkFriend(this.state.loggedUser, this.state.webId);  
-            const {isFriend  }= await response;
-            this.setState({
-                isFriend
-            })
-        }
-        fetchFriendShip();
-       
-            
-            
-    } 
-    
-
     removeFriendship(loggedUser, webId) {
         removeFriend(loggedUser, webId);
     }
-
     handleClick(e) {
         this.onClick();
-    }    
-
-    onClick(){
-        let value= this.state.isFriend
-        if(value){
-            this.removeFriendship(this.state.loggedUser, this.state.webId);
-        }
-        else{
-            this.addFriendship(this.state.loggedUser, this.state.webId);
-        }
-
     }
 
-    displayText(){
-        let value= this.state.isFriend;
-        if(value){
-            return "Eliminar amigo";
-        }
-        return "Añadir amigo" 
+
+    
+    checkFriend() {
+        console.log("Comprobando amistad de " + this.loggedUser + " y " + this.webId)
+        let aux = getFriendShip(this.loggedUser, this.webId).then(friendship => { return friendship; })
+
+        return aux;
+    }
+
+    onClick() {
+        let value = this.isFriend.then(val => val)
+        console.log("Display:" + value)
+        let ret = this.checkFriend().then(
+            friendship => {
+                if(friendship === null){
+                    this.addFriendship(this.loggedUser, this.webId);
+                }
+                else if (friendship.status !== "accepted") {
+                    this.removeFriendship(this.loggedUser, this.webId);
+                } else {
+                    
+                }
+            }
+        )
+    }
+
+    displayText() {
+        let toRet = "";
+        let ret = this.checkFriend().then(
+            friendship => {
+                let text="";
+                if (friendship === null) {
+                    console.log("Añadir amigo");
+                     text="Añadir amigo"
+                   
+                    
+                }
+                else  /*(friendship.status === "accepted")*/ {
+                    console.log("Eliminar amigo");
+                     text = "Eliminar amigo";
+                }
+
+                this.setState({
+                    text
+                })
+                //console.log(friendship.status);
+            }
+        )
+
+
+
+
     }
 
     render() {
-        return <div ><Button onClick={this.handleClick.bind(this)}> {this.displayText()}</Button> </div>
+        {this.displayText()}
+        return <Button onClick={this.handleClick.bind(this)}> {this.text} </Button>
     }
 }
 export default ButtonAddDelete;
+/* 
+
+auxmethond(friendship) {
+    console.log(friendship)
+    if (friendship == null) {
+        console.log("No son amigos")
+        return false;
+    }
+    console.log("Resultado de checkear amistad:" + friendship.status)
+
+    if (friendship.status == "accepted") {
+        return true;
+    }
+    return false;
+}
+ */

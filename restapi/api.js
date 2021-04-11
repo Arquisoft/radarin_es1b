@@ -74,9 +74,11 @@ router.post("/friends/add", async (req,res)=>{
         status: "pending"
     })
 
-    console.log("Amistad añadida!: "+userWebId+"; "+friendWebId);
+    
 
-    await user.save()
+    await newFriend.save()
+
+    console.log("Amistad añadida!: "+userWebId+"; "+friendWebId);
 
     res.send(newFriend);
 
@@ -90,6 +92,7 @@ router.post("/friends/check", async (req,res)=>{
         "target": friendWebId}
 
     let success=false
+
     let friendship= await  Friend.findOne(query, function(err){
         if(err){
             console.log("Error al acceder a la amistad")

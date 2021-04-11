@@ -60,7 +60,7 @@ export async function addFriend(userWebId, friendwebId){
 }
 
 export async function removeFriend(userWebId, friendwebId){
-    console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
+    console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/remove', {
         method: 'POST',

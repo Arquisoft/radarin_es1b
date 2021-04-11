@@ -51,14 +51,9 @@
 }
 
 .leaflet-container {
+  position: relative;
   margin: auto;
-  width: 50%;
-  height: 50vh;
-}
-
-@media only screen and (max-width: 768px) {
-  .leaflet-container {
-    width: 100vw;
-    height: 65vh;
-  }
+  z-index: 0;
+  width: 100vw;
+  height: 80vh;
 }

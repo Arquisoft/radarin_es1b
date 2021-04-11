@@ -21,10 +21,11 @@ const useStyles = makeStyles({
   }
 });
 
+
+
 const BottomNav = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
-
   const handleChange = async (event, newValue) => {
     setValue(newValue);
   };
@@ -42,7 +43,7 @@ const BottomNav = (props) => {
           <Profile webId={props.webId} />
         </Route>
         <Route path="/">
-          <Start />
+          <Start webId={props.webId} />
         </Route>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

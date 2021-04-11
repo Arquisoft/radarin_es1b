@@ -12,6 +12,8 @@ Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
+
+
 const Map = (props) => {
     const [markers, serMarkers] = React.useState([]);
     const { position, setPosition } = useContext(LocationsContext);

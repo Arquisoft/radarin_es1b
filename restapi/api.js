@@ -12,16 +12,21 @@ router.get("/users/list", async (req, res) => {
 
 //register a new user
 router.post("/users/add", async (req, res) => {
-    let name = req.body.name;
-    let email = req.body.email;
+    
+    let nombre = req.body.nombre;
+    let webId = req.body.webId;
+    console.log("body " + req.body);
+    console.log("webId " + webId);
+    console.log("body.name " + req.body.nombre);
+    
     //Check if the device is already in the db
-    let user = await User.findOne({ email: email })
+    let user = await User.findOne({ webId: webId })
     if (user)
-        res.send({ error: "Error: This user is already registered" })
+        res.send({ error: "Error: This user is already registered" + webId })
     else {
         user = new User({
-            name: name,
-            email: email,
+            webId:webId,
+            nombre: nombre
         })
         await user.save()
         res.send(user)
@@ -81,13 +86,11 @@ router.post("/friends/locations/", async (req, res) => {
             var users = docs.map(function(elem) {
                 return (elem.target == userWebId)?elem.requester : elem.target;
             }, this)
-            console.log(users)
                     
             Location.find({'user' : { $in: users}}, function(err, docs){
                 if(err) {
                     console.log("Error al encontrar los usuarios dados los amigos")
                 } else {
-                    console.log(docs);
                     res.send({"locs": docs});
                 }
             })

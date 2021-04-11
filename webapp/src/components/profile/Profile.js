@@ -1,13 +1,13 @@
 import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import FriendList from '../friendList';
 import Image from './Image';
 import ButtonFriendship from './ButtonFriendship'
 import Paper from "@material-ui/core/Paper";
-
 import styles from "./Profile.module.css";
 
 
@@ -30,11 +30,8 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
         <Typography variant="caption">
           Perfil de solid : {webId}
         </Typography>
-        
       </Paper>
-       
       <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
-       
     </Grid>
     <Grid item xs={12} md={12}>
       <Typography variant="h6" component="h4">
@@ -46,3 +43,4 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
       </Paper>
     </Grid>
   </Grid>
+

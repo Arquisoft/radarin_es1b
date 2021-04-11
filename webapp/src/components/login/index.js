@@ -11,12 +11,13 @@ export default () => {
     const webId = useWebId()
     // almacena en profile las fotos, name , url ...
     const profile = useProfile(webId)
-    
+    let enviado = false;
     //<LoginContainer es un nombre cualquiera , lo que nos interesa es pasarle como parametro el ...profile a export default.. la funcion de la clase Container
     return <span> 
         <LoginContainer {...profile} />  
         <LoggedIn> 
-            {webId!==null && profile.fullName!==undefined ? <AddUsersContainer webId = {webId} fullName={profile.fullName}/> : null}
+            {webId!==null && profile.fullName!==undefined && enviado==false ? (enviado = true, <AddUsersContainer webId = {webId} fullName={profile.fullName}/>) : null}
+            {console.log("enviado " + enviado)}
         </LoggedIn> 
     </span> 
     ;

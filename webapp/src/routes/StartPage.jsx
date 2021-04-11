@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Button from "@material-ui/core/Button";
-
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,11 +9,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles(() => ({
   media: {
     objectFit: 'contain'
   },
 }));
+
+
 
 const Start = () => {
   const classes = useStyles();
@@ -48,7 +50,7 @@ const Start = () => {
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Don't have a profile, yet?
+            Don't have a profile, yet? 
           </Typography>
         </CardContent>
         <CardActions>

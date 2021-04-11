@@ -2,9 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import Button from '@material-ui/core/Button';
 import Image from '../profile/Image';
-
+import {addUser} from "../../api/api";
 import styles from './Login.module.css';
 import {toProfile} from "../../routing";
 
@@ -17,7 +17,9 @@ export default ({fullName, imageSrc, webId}) =>
         label={fullName ? `${fullName}` : 'Conectado'} //mensaje del boton de acceso al perfil una vez 
         avatar={<Image name={fullName || webId} src={imageSrc}/>} //imagen del avatar del boton
         component={Link} to={toProfile(webId)} clickable // indica que al pulsar en el boton nos redirigue a el perfil del usuario
+        
     />
+    
   </Tooltip>
 
 

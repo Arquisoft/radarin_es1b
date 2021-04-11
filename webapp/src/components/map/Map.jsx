@@ -10,7 +10,10 @@ Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
+
+
 const Map = (props) => {
+    
     const { locations, setLocations } = useContext(LocationsContext);
     const { position, setPosition } = useContext(LocationsContext);
 
@@ -38,6 +41,8 @@ const Map = (props) => {
             return null;
         }
     }
+
+    
 
     function saveLocation(latlng) {
         Geocode.fromLatLng(latlng.lat, latlng.lng).then(
@@ -70,6 +75,8 @@ const Map = (props) => {
             }
         );
     }
+
+    
 
     useEffect(() => {
         const fetchData = async () => {

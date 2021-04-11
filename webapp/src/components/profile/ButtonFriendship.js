@@ -2,7 +2,9 @@ import React from 'react';
 
 import ButtonAddOrDelete from './ButtonAddOrDelete';
 
+import ButtonAddDelete from './ButtonAddDelete';
+
 
 
 export default ({webId,loggedUser}) => webId!=loggedUser ?
-    <ButtonAddOrDelete webId={webId} loggedUser={loggedUser} /> : null
+    <ButtonAddDelete webId={webId} loggedUser={loggedUser} /> : null

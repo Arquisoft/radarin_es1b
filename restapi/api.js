@@ -62,6 +62,70 @@ router.post("/location/add", async (req, res) => {
     }
 });
 
+//Solicitud de amistad
+router.post("/friends/add", async (req,res)=>{
+    console.log("Añadiendo amigos desde restApi")
+    let userWebId= req.body.webId
+    let friendWebId=req.body.friendwebId
+
+    let newFriend= new Friend({
+        requester: userWebId,
+        target: friendWebId,
+        status: "pending"
+    })
+
+    console.log("Amistad añadida!: "+userWebId+"; "+friendWebId);
+
+    await user.save()
+
+    res.send(newFriend);
+
+})
+
+router.post("/friends/check", async (req,res)=>{
+    let userWebId= req.body.webId
+    let friendWebId=req.body.friendwebId
+
+    var query={ "requester": userWebId,
+        "target": friendWebId}
+
+    let success=false
+    let friendship= await  Friend.findOne(query, function(err){
+        if(err){
+            console.log("Error al acceder a la amistad")
+        }
+        else{
+            console.log("Acedida amistad")
+            success=true;
+        }
+    })
+    if(success)
+        {
+            res.send(friendship)
+        }
+        else{
+            res.send(null)
+        }
+})
+
+router.post("/friends/remove", async (req,res)=>{
+    let userWebId= req.body.webId
+    let friendWebId=req.body.friendwebId
+
+    var query={ "requester": userWebId,
+        "target": friendWebId}
+
+    await Friend.findOneAndDelete(query,function(err) {
+        if (err) {
+            console.log("Something wrong when deleting friendship!");
+        } else {
+            console.log("Friendship removed!");
+        }
+    });
+
+
+})
+
 // get friends locations
 router.post("/friends/locations/", async (req, res) => {
 

@@ -32,8 +32,8 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
         </Typography>
         
       </Paper>
-       
       <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
+      
        
     </Grid>
     <Grid item xs={12} md={12}>

@@ -75,9 +75,17 @@ export async function removeFriend(userWebId, friendwebId){
 
 export async function getFriends(webId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint+'/friends/list/'+webId+'?user='+webId)
+    let response = await fetch(apiEndPoint+'/friends/list', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId
+        })
+      })
     return await response.json()
 }
+
+
 
 export async function getFriendShip(userWebId, friendwebId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

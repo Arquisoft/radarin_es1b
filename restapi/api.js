@@ -99,6 +99,22 @@ router.post("/friends/locations/", async (req, res) => {
 
 })
 
+// get user name from given webId
+router.post("/friends/name", async (req, res) => {
+    console.log("Estoy entrando en el POST");
+    const webId = req.body.webId;
+    console.log("WEBID FOR NAME: " + webId);
+    
+    let user = await User.findOne({ webId: String(webId) })
+    console.log("USUARIO RECUPERADO");
+    console.log(user);
+    if (user)
+        res.send(user.nombre);
+    else {
+        res.send("Error al recuperar el nombre de " + webId);
+    }
+});
+
 // Meets ------------------------------------------------------------------------/
 router.post("/meets/add", async (req, res) => {
     let creator_webid = req.body.creator_webId;

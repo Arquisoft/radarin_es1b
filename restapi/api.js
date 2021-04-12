@@ -63,9 +63,9 @@ router.post("/location/add", async (req, res) => {
 });
 
 // post peticiones pendientes
-router.post("/friends/pending/", async (req, res) => {
+router.post("/friends/pending/requester", async (req, res) => {
 
-    const userWebId = req.body.webID
+    const userWebId = req.body.userWebId
     var query = { 
          "requester": userWebId, "status": "pending"  
     };
@@ -81,6 +81,38 @@ router.post("/friends/pending/", async (req, res) => {
 
     var users = friends.map(function(elem) {
         return elem.target;
+    })
+
+    await User.find({'webId' : { $in: users}}, function(err, docs){
+        if(err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            var webIds=docs.map((doc) => { return doc.webId})
+            res.send(webIds);
+        }
+    })
+});
+
+
+// post peticiones para aceptar
+router.post("/friends/pending/target", async (req, res) => {
+
+    const userWebId = req.body.userWebId
+    var query = { 
+         "target": userWebId, "status": "pending"  
+    };
+
+    var friends =  await Friend.find((query, function(err, docs) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            return docs;
+        }
+    }))
+
+
+    var users = friends.map(function(elem) {
+        return elem.requester;
     })
 
     await User.find({'webId' : { $in: users}}, function(err, docs){
@@ -121,6 +153,33 @@ router.post("/friends/accept/", async (req, res) => {
     }))
 });
 
+//buscar a una persona 
+router.post("/friends/search/", async (req, res) => {
+    const userWebId = req.body.webID
+    const friendWebId = req.body.friendWebId
+    var query = { 
+         "requester": friendWebId, "target":userWebId, "status": "pending"  
+    };
+
+    await Friend.find((query, function(err, friend) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var query = { "_id" : friend._id };
+            friend.status = "accepted";
+
+            Friend.findOneAndUpdate(query, friend, function(err, doc) {
+                if (err) {
+                    console.log("Something wrong when updating data!");
+                } else {
+                    res.send(doc)
+
+                }
+            });
+
+        }
+    }))
+});
 
 // get friends
 router.get("/friends/list/:id", async (req, res) => {

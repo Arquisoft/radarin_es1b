@@ -2,10 +2,10 @@ import React, {Component} from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 
-import Friend from "../../friendsList/friend";
+import Target from "./Target";
 import Typography from "@material-ui/core/Typography";
 
-export default class FriendList extends Component {
+export default class Lista extends Component {
 
   static defaultProps = {
     friends: [], // Lista de todas los amigos que se mostrarán.
@@ -42,12 +42,12 @@ export default class FriendList extends Component {
           >
             {/* Parte mas importante, accede a los amigos de solid y los añade al array de amigos */}
             {this.state.items.map((webId) => (
-                <Friend key={webId.toString()} webId={webId}/>
+                <Target key={webId.toString()} webId={webId} mywebId={this.webId}/>
             ))}
           </InfiniteScroll>
           {/* Si tiene mas amigos indica un mensaje si no , el otro */}
           <Typography variant="caption" style={{margin: 10}}>
-            {this.state.items.length} / {this.props.friends.length} shown. {this.state.hasMore ? 'Desplazate para abajo para cargar mas amigos.' : "Estos son todos tus amigos."} 
+            {this.state.items.length} / {this.props.friends.length} shown. {this.state.hasMore ? 'Desplazate para abajo para cargar mas amigos.' : "Estos son todos los contactos."} 
           </Typography>
         </List>
     );

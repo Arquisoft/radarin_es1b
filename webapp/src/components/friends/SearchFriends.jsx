@@ -1,17 +1,26 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
 import { getUsers } from '../../api/api';
-import List from './list'
+import List from './List'
 class SearchFriends extends React.Component {
 
     constructor( webId) {
 		super();
 		this.webID = webId;
+		//pasar json a lista
         this.friends=getUsers();
 		this.state = {
-			searchName: ""
+			searchName: "",
+			friends: []
 		};
+		this.getUser();
 		this.handleChange = this.handleChange.bind(this);
+	}
+
+	getUser(){
+		getUsers().then(res => {
+            this.setState({ friends: res.slice(0, 10)});
+        });
 	}
 
     handleChange(event) {
@@ -41,17 +50,22 @@ class SearchFriends extends React.Component {
     }
 
     searchOneFriend(webId, friendsearch) {
-        //Metodo que busque 
-        //si devuelve algo que no sea null muestra el perfil
-        //obteniendo el webId y la inagen de solid
-        /**
-          */
+        //api para buscar la persona
+		
+		//convertir a arryy
+		/**
+		 * ().then(res => {
+            this.setState({ friends: res.slice(0, res.length)});
+        });
+		*/
+		
+
     }
 
     
 
     getLista(){
-        <List friends={this.friends} />
+        <List friends={this.state.friends} />
     }
 
     async handleClick(e) {
@@ -60,7 +74,7 @@ class SearchFriends extends React.Component {
                 this.searchOneFriend(this.webID, this.state.searchName);            
             }
             else{
-                this.friends=getUsers();
+                this.getUser();
             }
     }
 

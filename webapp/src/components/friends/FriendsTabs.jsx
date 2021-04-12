@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import SearchFriends from './SearchFriends';
+import PendingFriends from './PendingFriends';
+import NewRequest from './NewRequest';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,9 +75,9 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
+          <Tab label="Solicitudes de amistad pendientes" {...a11yProps(0)} />
           <Tab label="Buscar Amigos" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Nuevas amistades" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -84,13 +86,13 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <PendingFriends/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <SearchFriends/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <NewRequest/>
         </TabPanel>
       </SwipeableViews>
     </div>

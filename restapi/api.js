@@ -102,7 +102,7 @@ router.post("/friends/check", async (req, res) => {
             console.log("Error al acceder a la amistad")
         }
         else {
-            console.log("Acedida amistad")
+            console.log("Acedida amistad: "+userWebId+"; "+friendWebId)
             success = true;
         }
     })
@@ -124,6 +124,7 @@ router.post("/friends/remove", async (req, res) => {
             { "requester": friendWebId, "target": userWebId }
         ]
     }
+
 
     await Friend.findOneAndDelete(query, function (err) {
         if (err) {

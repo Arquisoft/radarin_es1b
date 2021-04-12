@@ -30,9 +30,9 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
         <Typography variant="caption">
           Perfil de solid : {webId}
         </Typography>
-        
+        <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
       </Paper>
-      <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
+      
       
        
     </Grid>

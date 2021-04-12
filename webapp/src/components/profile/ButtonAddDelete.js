@@ -14,34 +14,35 @@ class ButtonAddDelete extends React.Component {
         this.loggedUser = props.loggedUser;
         this.webId = props.webId;
         //console.log("Nuevo perfil (Constructor): " + this.loggedUser + "; " + this.webId)
-
-        this.text = "";
+        //this.displayText()
+        //this.text = "";
+        this.previousWebId=this.webId;
         this.displayText()
-        this.render()
+        //this.componentDidUpdate(props);
     }
 
     componentDidUpdate(props) {
         this.loggedUser = props.loggedUser;
         this.webId = props.webId;
-        this.displayText()
-        this.render()
+        if( this.webId!==this.previousWebId){
+            this.previousWebId=this.webId;
+            this.displayText()
+        }      
+        
     }
 
-    
-
     addFriendship(loggedUser, webId) {
-        addFriend(loggedUser, webId);
+
+        addFriend(loggedUser, webId).then(res=> {this.displayText()});
     }
 
     removeFriendship(loggedUser, webId) {
-        removeFriend(loggedUser, webId);
+        removeFriend(loggedUser, webId).then(res=> {this.displayText()});
     }
 
     handleClick(e) {
-        this.onClick();
+        this.onClick();       
     }
-
-
 
     checkFriend() {
         console.log("Comprobando amistad de " + this.loggedUser + " y " + this.webId)
@@ -52,43 +53,52 @@ class ButtonAddDelete extends React.Component {
     onClick() {
         let ret = this.checkFriend().then(
             friendship => {
+                
                 if (friendship === null) {
-                    this.addFriendship(this.loggedUser, this.webId);
+                    
+                    return this.addFriendship(this.loggedUser, this.webId);                    
                 }
-                else if (friendship.status !== "accepted") {
-                    this.removeFriendship(this.loggedUser, this.webId);
-                } else {
-                    this.removeFriendship(this.loggedUser, this.webId);
+                else {
+                    return this.removeFriendship(this.loggedUser, this.webId);
                 }
+                
+                
+               
             }
-        ).then(this.forceUpdate());
+
+        );
+
+        return ret;
 
     }
 
+    updateComponent(){
+        this.forceUpdate();
+        this.render();
+    }
+
     displayText() {
-        let toRet = "";
         let ret = this.checkFriend().then(
             friendship => {
                 if (friendship === null) {
                     this.text = "Añadir amigo"
-                    console.log("No son amigos")
                     
-
                 }
+                else if(friendship.status==="pending")
+                    {this.text="Solicitud enviada (Deshacer)"}
                 else  /*(friendship.status === "accepted")*/ {
-                    
-                    this.text = "Eliminar amigo";
-                    console.log("Son amigos")
-                    
+                    this.text = "Eliminar amigo";                    
                 }
-
-
+                this.updateComponent()
+                //this.toUpdate=true;
             }
         )
+
     }
 
     render() {
         {/*this.displayText()*/ }
+        
         return <Button onClick={this.handleClick.bind(this)}> {this.text} </Button>
     }
 }

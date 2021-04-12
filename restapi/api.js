@@ -43,11 +43,11 @@ router.post("/location/add", async (req, res) => {
     let newEntry = await Location.findOne({ user: user });
     // If it exists, then we'll update it
     if (newEntry) {
-        var query = { "_id" : newEntry._id };
+        var query = { "_id": newEntry._id };
         newEntry.location = location;
         newEntry.state = state;
         newEntry.country = country;
-        await Location.findOneAndUpdate(query, newEntry, function(err, doc) {
+        await Location.findOneAndUpdate(query, newEntry, function (err, doc) {
             if (err) {
                 console.log("Something wrong when updating data!");
             } else {
@@ -67,31 +67,115 @@ router.post("/location/add", async (req, res) => {
     }
 });
 
+//Solicitud de amistad
+router.post("/friends/add", async (req, res) => {
+    console.log("Añadiendo amigos desde restApi")
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
+
+    let friend = await Friend.findOne({ requester: userWebId,
+        target: friendWebId })
+    if (friend)
+        res.send({ error: "Error: This user is already registered" })
+    else {
+        let newFriend = new Friend({
+            requester: userWebId,
+            target: friendWebId,
+            status: "pending"
+        })
+        await newFriend.save()
+        console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
+
+        res.send(newFriend);
+    }    
+
+})
+
+router.post("/friends/check", async (req, res) => {
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
+
+    var query = {
+        $or: [
+            { "requester": userWebId, "target": friendWebId },
+            { "requester": friendWebId, "target": userWebId }
+        ]
+    }
+
+    let success = false
+
+    let friendship = await Friend.findOne(query, function (err) {
+        if (err) {
+            console.log("Error, amistad existente")
+        }
+        else {
+            console.log("Acedida amistad: "+userWebId+"; "+friendWebId)
+            success = true;
+        }
+    })
+    if (success) {
+        res.send(friendship)
+    }
+    else {
+        res.send(null)
+    }
+})
+
+router.post("/friends/remove", async (req, res) => {
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
+
+    var query = {
+        $or: [
+            { "requester": userWebId, "target": friendWebId },
+            { "requester": friendWebId, "target": userWebId }
+        ]
+    }
+
+    let friendship = await Friend.deleteMany(query, function (err) {
+        if (err) {
+            console.log("Something wrong when deleting friendship!");
+        } else {
+            console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
+        }
+    });
+
+    res.send(friendship)
+
+
+})
+
 // get friends locations
 router.post("/friends/locations/", async (req, res) => {
 
     const userWebId = req.body.webId
-    var query = { $and: [ 
-        { $or: [ 
-            { "requester": userWebId},
-            { "target": userWebId }
-        ]},
-        { "status": "accepted"}
-       ]};
-    
-    Friend.find().and(query).exec( function(err, docs) {
+    var query = {
+        $and: [
+            {
+                $or: [
+                    { "requester": userWebId },
+                    { "target": userWebId }
+                ]
+            },
+            { "status": "accepted" }
+        ]
+    };
+
+    Friend.find().and(query).exec(function (err, docs) {
         if (err) {
             console.log("Error al encontrar los amigos");
         } else {
-            var users = docs.map(function(elem) {
-                return (elem.target == userWebId)?elem.requester : elem.target;
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
             }, this)
-                    
-            Location.find({'user' : { $in: users}}, function(err, docs){
-                if(err) {
+            console.log(users)
+
+            Location.find({ 'user': { $in: users } }, function (err, docs) {
+                if (err) {
                     console.log("Error al encontrar los usuarios dados los amigos")
                 } else {
-                    res.send({"locs": docs});
+                    console.log(docs);
+                    res.send({ "locs": docs });
                 }
             })
         }

@@ -6,8 +6,8 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import MapIcon from '@material-ui/icons/Map';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import Map from '../routes/Map';
-import Friends from '../routes/Friends';
+import Map from './map/Map';
+import Friends from './friends/Friends';
 import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
@@ -33,7 +33,7 @@ const BottomNav = (props) => {
     <div>
       <Switch>
         <Route path="/map">
-          <Map />
+          <Map webId={props.webId}/>
         </Route>
         <Route path="/friends">
           <Friends />

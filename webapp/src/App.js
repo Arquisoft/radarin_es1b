@@ -10,8 +10,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
 
-import ReactNotifications from 'react-browser-notifications';
-
 class App extends React.Component {
   constructor() {
     super()
@@ -20,8 +18,6 @@ class App extends React.Component {
       users: []
 
     }
-    this.showNotifications = this.showNotifications.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
 
@@ -58,34 +54,12 @@ class App extends React.Component {
           </LocationsContextProvider>
 
 
-          <ReactNotifications
-              onRef={ref => (this.n = ref)} // Required
-              title="Some Title" // Required
-              body="This is the body!"
-              icon="favicon.ico"
-              onClick={event => this.handleClick(event)}
-          />
-
-          <button onClick={this.showNotifications}>
-            Notify Me!
-          </button>
-
-
 
         </div>
 
     )
   }
 
-
-  showNotifications() {
-    if(this.n.supported()) this.n.show();
-  }
-
-  handleClick(event) {
-    window.focus()
-    this.n.close(event.target.tag);
-  }
 
 
 

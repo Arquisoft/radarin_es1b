@@ -128,7 +128,7 @@ const Map = (props) => {
             {console.log("Rerenderizando")}
             <h1>Ubicación del usuario</h1>
             <div>
-                <MeetsMenu saveUserLocation={UpdateUserLocation} />
+                <MeetsMenu />
             </div>
 
             <div>
@@ -136,6 +136,7 @@ const Map = (props) => {
                               zoom={10}
                               scrollWheelZoom={true}>
                     <CreateMeet />
+                    <UpdateUserLocation/>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

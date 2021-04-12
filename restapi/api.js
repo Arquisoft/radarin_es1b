@@ -100,7 +100,6 @@ router.post("/friends/check", async (req, res) => {
             { "requester": friendWebId, "target": userWebId }
         ]
     }
-
     let success = false
 
     let friendship = await Friend.findOne(query, function (err) {
@@ -143,6 +142,44 @@ router.post("/friends/remove", async (req, res) => {
 
 
 })
+
+router.post("/friends/list", async (req, res)=>{
+
+    const userWebId = req.body.webId
+    var query = {
+        $and: [
+            {
+                $or: [
+                    { "requester": userWebId },
+                    { "target": userWebId }
+                ]
+            },
+            { "status": "accepted" }
+        ]
+    };
+    Friend.find().and(query).exec(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
+            }, this)
+            console.log(users)
+            res.send(users)
+            /* User.find({ 'user': { $in: users } }, function (err, docs) {
+                if (err) {
+                    console.log("Error al encontrar los usuarios dados los amigos")
+                } else {
+                    console.log(docs);
+                    res.send(docs);
+                }
+            }) */
+        }
+    })
+}
+
+)
+
 
 // get friends locations
 router.post("/friends/locations/", async (req, res) => {

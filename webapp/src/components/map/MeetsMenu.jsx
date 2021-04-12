@@ -54,9 +54,11 @@ import Checkbox from '@material-ui/core/Checkbox';
     return (
       
       <div className={classes.root}>
-        <Button  onClick={handleClick} color="primary">
-          Ajustes del mapa
-        </Button>
+        <div style = {{ display: "flex", justifyContent: "left" }}>
+          <Button onClick={handleClick} color="primary">
+            Ajustes del mapa
+          </Button>
+        </div>
         <Collapse in={open} timeout="auto" unmountOnExit>  
         <Accordion expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
             <AccordionSummary

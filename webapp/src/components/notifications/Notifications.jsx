@@ -21,8 +21,9 @@ class Notifications extends React.Component {
               onClick={event => this.handleClick(event)}
             />
 
-            {this.showNotifications}
-                
+            <Button onClick={this.showNotifications}>
+                notify me
+            </Button>
             </div>
             
             

@@ -18,6 +18,7 @@ const Map = (props) => {
     const [markers, serMarkers] = React.useState([]);
     const { position, setPosition } = useContext(LocationsContext);
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
+    const { seeFriends, setSeeFriends } = useContext(LocationsContext);
 
     function MyMapEvent() {
         const map = useMapEvents({
@@ -112,7 +113,8 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    <FriendsLocationMarkers webId={props.webId}/>
+                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
+
                     {markers.map((position, idx) => 
                         <Marker key={`marker-${idx}`} position={position}>
                             <Popup>

@@ -38,11 +38,11 @@ router.post("/location/add", async (req, res) => {
     let newEntry = await Location.findOne({ user: user });
     // If it exists, then we'll update it
     if (newEntry) {
-        var query = { "_id" : newEntry._id };
+        var query = { "_id": newEntry._id };
         newEntry.location = location;
         newEntry.state = state;
         newEntry.country = country;
-        await Location.findOneAndUpdate(query, newEntry, function(err, doc) {
+        await Location.findOneAndUpdate(query, newEntry, function (err, doc) {
             if (err) {
                 console.log("Something wrong when updating data!");
             } else {
@@ -63,66 +63,73 @@ router.post("/location/add", async (req, res) => {
 });
 
 //Solicitud de amistad
-router.post("/friends/add", async (req,res)=>{
+router.post("/friends/add", async (req, res) => {
     console.log("Añadiendo amigos desde restApi")
-    let userWebId= req.body.webId
-    let friendWebId=req.body.friendwebId
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
 
-    let newFriend= new Friend({
+    let newFriend = new Friend({
         requester: userWebId,
         target: friendWebId,
         status: "pending"
     })
 
-    
+
 
     await newFriend.save()
 
-    console.log("Amistad añadida!: "+userWebId+"; "+friendWebId);
+    console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
 
     res.send(newFriend);
 
 })
 
-router.post("/friends/check", async (req,res)=>{
-    let userWebId= req.body.webId
-    let friendWebId=req.body.friendwebId
+router.post("/friends/check", async (req, res) => {
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
 
-    var query={ "requester": userWebId,
-        "target": friendWebId}
+    var query = {
+        $or: [
+            { "requester": userWebId, "target": friendWebId },
+            { "requester": friendWebId, "target": userWebId }
+        ]
+    }
 
-    let success=false
+    let success = false
 
-    let friendship= await  Friend.findOne(query, function(err){
-        if(err){
+    let friendship = await Friend.findOne(query, function (err) {
+        if (err) {
             console.log("Error al acceder a la amistad")
         }
-        else{
+        else {
             console.log("Acedida amistad")
-            success=true;
+            success = true;
         }
     })
-    if(success)
-        {
-            res.send(friendship)
-        }
-        else{
-            res.send(null)
-        }
+    if (success) {
+        res.send(friendship)
+    }
+    else {
+        res.send(null)
+    }
 })
 
-router.post("/friends/remove", async (req,res)=>{
-    let userWebId= req.body.webId
-    let friendWebId=req.body.friendwebId
+router.post("/friends/remove", async (req, res) => {
+    let userWebId = req.body.webId
+    let friendWebId = req.body.friendwebId
 
-    var query={ "requester": userWebId,
-        "target": friendWebId}
+    var query = {
+        $or: [
+            { "requester": userWebId, "target": friendWebId },
+            { "requester": friendWebId, "target": userWebId }
+        ]
+    }
 
-    await Friend.findOneAndDelete(query,function(err) {
+    await Friend.findOneAndDelete(query, function (err) {
         if (err) {
             console.log("Something wrong when deleting friendship!");
         } else {
-            console.log("Friendship removed!");
+            console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
         }
     });
 
@@ -133,29 +140,33 @@ router.post("/friends/remove", async (req,res)=>{
 router.post("/friends/locations/", async (req, res) => {
 
     const userWebId = req.body.webId
-    var query = { $and: [ 
-        { $or: [ 
-            { "requester": userWebId},
-            { "target": userWebId }
-        ]},
-        { "status": "accepted"}
-       ]};
-    
-    Friend.find().and(query).exec( function(err, docs) {
+    var query = {
+        $and: [
+            {
+                $or: [
+                    { "requester": userWebId },
+                    { "target": userWebId }
+                ]
+            },
+            { "status": "accepted" }
+        ]
+    };
+
+    Friend.find().and(query).exec(function (err, docs) {
         if (err) {
             console.log("Error al encontrar los amigos");
         } else {
-            var users = docs.map(function(elem) {
-                return (elem.target == userWebId)?elem.requester : elem.target;
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
             }, this)
             console.log(users)
-                    
-            Location.find({'user' : { $in: users}}, function(err, docs){
-                if(err) {
+
+            Location.find({ 'user': { $in: users } }, function (err, docs) {
+                if (err) {
                     console.log("Error al encontrar los usuarios dados los amigos")
                 } else {
                     console.log(docs);
-                    res.send({"locs": docs});
+                    res.send({ "locs": docs });
                 }
             })
         }

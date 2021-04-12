@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useLDflexList } from '@solid/react';
+import { useLDflexList, useLDflex } from '@solid/react';
 
 import { Button } from '@material-ui/core';
 
@@ -32,14 +32,21 @@ async function checkFriend(loggedUser , webId)  {
 
     return false;
 }
-/**
- * async function getFriends(friends){ 
-    const friendsValue=  await friends;
-    return friendsValue;
-} */
+
+
+export default function Prueba(props){
+    const [webId] = useState( props.webId );
+
+    const [userNAme] = useState(useLDflex(`[${webId}].name`))
 
 
 
+    return userNAme;
+
+}
+
+
+/* 
 export default  function ButtonAddOrDelete (props) {
 
 
@@ -59,7 +66,7 @@ export default  function ButtonAddOrDelete (props) {
 
     
 }
-
+ */
 
 
 

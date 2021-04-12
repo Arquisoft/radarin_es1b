@@ -47,8 +47,6 @@ import Checkbox from '@material-ui/core/Checkbox';
     };
 
 
-
-
   const handleCheckChange = (event) => {
     setSeeFriends(event.target.checked);
   };
@@ -59,7 +57,32 @@ import Checkbox from '@material-ui/core/Checkbox';
         <Button  onClick={handleClick} color="primary">
           Ajustes del mapa
         </Button>
-        <Collapse in={open} timeout="auto" unmountOnExit>          
+        <Collapse in={open} timeout="auto" unmountOnExit>  
+        <Accordion expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography className={classes.heading}>Mi localización</Typography>
+              <Typography className={classes.secondaryHeading}>Mostrar mi ubicación<Checkbox
+                checked={seeFriends}
+                onChange={handleCheckChange}
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+              />
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <Typography>Actualizar ubicación
+                <Button
+                    checked={seeFriends}
+                    onChange={handleClick}
+                    color="primary"
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
+              </Typography>
+            </AccordionDetails>
+          </Accordion>        
           <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

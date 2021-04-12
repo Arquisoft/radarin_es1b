@@ -2,6 +2,9 @@ import React from 'react'
 import { Button } from '@material-ui/core';
 import { getUsers } from '../../api/api';
 import List from './List'
+
+import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid';
 class SearchFriends extends React.Component {
 
     constructor( webId) {
@@ -18,9 +21,15 @@ class SearchFriends extends React.Component {
 	}
 
 	getUser(){
-		getUsers().then(res => {
-            this.setState({ friends: res.slice(0, 10)});
-        });
+		let au=[];
+        getUsers().then((result)=>{
+            result.map((e) =>{ 
+                au.push(e)
+            })
+           
+          });
+		  
+		  this.setState({ friends:au});
 	}
 
     handleChange(event) {
@@ -54,8 +63,17 @@ class SearchFriends extends React.Component {
 		
 		//convertir a arryy
 		/**
-		 * ().then(res => {
-            this.setState({ friends: res.slice(0, res.length)});
+		 * let au=[];
+        let aux = getUsers().then((result)=>{
+            result.map((e) =>{ 
+                au.push(e)
+            })
+           
+          });
+		  
+        this.state.friends=au;
+		console.log("user")
+		console.log(this.state.friends)
         });
 		*/
 		
@@ -65,7 +83,7 @@ class SearchFriends extends React.Component {
     
 
     getLista(){
-        <List friends={this.state.friends} />
+        
     }
 
     async handleClick(e) {
@@ -76,16 +94,27 @@ class SearchFriends extends React.Component {
             else{
                 this.getUser();
             }
+
     }
 
     render() {
 		return (
-			<div>
-				<h1>BuscarAmigos</h1>
-			      {this.searchFriends()}
-			    <hr />
-                    {this.getLista()}
-            </div> 
+			<Grid container
+				spacing={2}
+				direction="row"
+				justify="flex-start"
+				alignItems="center">
+				<Grid item xs={12} md={2}>
+					<h1>BuscarAmigos</h1>
+					{this.searchFriends()}
+	
+			</Grid>   
+				<Grid>
+					{console.log("search")}
+					{console.log(this.state.friends)}
+					<List friends={this.state.friends} />
+				</Grid> 
+			</Grid>
 		);
 	}
 

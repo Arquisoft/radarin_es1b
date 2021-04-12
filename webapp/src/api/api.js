@@ -14,7 +14,7 @@ export async function getUsers(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     console.log(apiEndPoint)
     let response = await fetch(apiEndPoint+'/users/list')
-    console.log(response);
+    //console.log(response);
     return await response.json()
 }
 
@@ -54,7 +54,6 @@ export async function getPendingFriends(webId){
             'userWebId':webId, 
         })
       })
-      console.log(response);
     return await response.json()
 }
 

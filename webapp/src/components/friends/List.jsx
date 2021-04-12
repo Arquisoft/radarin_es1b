@@ -41,8 +41,8 @@ export default class Lista extends Component {
               height={this.props.height}
           >
             {/* Parte mas importante, accede a los amigos de solid y los añade al array de amigos */}
-            {this.state.items.map((webId) => (
-                <Friend key={webId.toString()} webId={webId}/>
+            {this.state.items.map((e) => (
+                <Friend key={e.toString()} webId={e}/>
             ))}
           </InfiniteScroll>
           {/* Si tiene mas amigos indica un mensaje si no , el otro */}

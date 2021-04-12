@@ -14,26 +14,23 @@ class NewRequest extends React.Component {
     }
 
     getNewRequ(){
-        /**
-        getTargetFriends(this.webID).then(data => {
-            var tmpArray = []
-            for (var i = 0; i < data.results.length; i++) {
-                tmpArray.push(data.results[i].requester)
-            }
-            this.setState({
-                friends: tmpArray
+      
+        let au=[];
+        getTargetFriends(this.webID).then((result)=>{
+            result.map((e) =>{ 
+                au.push(e)
             })
-        });
-        */
-        getTargetFriends(this.webID).then(res => {
-            this.setState({ friends: res.slice(0, res.length)});
-        })
+           
+          });
+          this.setState({ friends:au});
     }
 
     render() {
         return (
             <div>
-            <ListRe friends={ this.state.friends} webId={this.webID}/>;
+                {console.log("reque")}
+				{console.log(this.state.friends)}
+                <ListRe friends={ this.state.friends} webId={this.webID}/>
             </div>
         );
     }   

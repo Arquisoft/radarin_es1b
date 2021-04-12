@@ -68,19 +68,21 @@ router.post("/friends/add", async (req, res) => {
     let userWebId = req.body.webId
     let friendWebId = req.body.friendwebId
 
-    let newFriend = new Friend({
-        requester: userWebId,
-        target: friendWebId,
-        status: "pending"
-    })
+    let friend = await Friend.findOne({ requester: userWebId,
+        target: friendWebId })
+    if (friend)
+        res.send({ error: "Error: This user is already registered" })
+    else {
+        let newFriend = new Friend({
+            requester: userWebId,
+            target: friendWebId,
+            status: "pending"
+        })
+        await newFriend.save()
+        console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
 
-
-
-    await newFriend.save()
-
-    console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
-
-    res.send(newFriend);
+        res.send(newFriend);
+    }    
 
 })
 
@@ -99,7 +101,7 @@ router.post("/friends/check", async (req, res) => {
 
     let friendship = await Friend.findOne(query, function (err) {
         if (err) {
-            console.log("Error al acceder a la amistad")
+            console.log("Error, amistad existente")
         }
         else {
             console.log("Acedida amistad: "+userWebId+"; "+friendWebId)
@@ -125,14 +127,15 @@ router.post("/friends/remove", async (req, res) => {
         ]
     }
 
-
-    await Friend.findOneAndDelete(query, function (err) {
+    let friendship = await Friend.deleteMany(query, function (err) {
         if (err) {
             console.log("Something wrong when deleting friendship!");
         } else {
             console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
         }
     });
+
+    res.send(friendship)
 
 
 })

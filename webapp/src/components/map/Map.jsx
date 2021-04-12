@@ -1,12 +1,13 @@
-import React, { useEffect, useContext } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import React, {  useContext } from 'react'
+import {  MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
-import { addLocation, getFriendsLocations, getFriends } from '../../api/api';
+import { addLocation, addMeet } from '../../api/api';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
 import MeetsMenu from "./MeetsMenu"
+import {iconMeet} from "./markers/IconMeet"
 
-Geocode.setApiKey(process.env.GEOCODE_KEY);
+Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
 Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
@@ -15,18 +16,17 @@ Geocode.enableDebug();
 
 
 const Map = (props) => {
-    const [markers, serMarkers] = React.useState([]);
     const { position, setPosition } = useContext(LocationsContext);
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
-    const { seeFriends, setSeeFriends } = useContext(LocationsContext);
-
-    function MyMapEvent() {
+    const { seeFriends } = useContext(LocationsContext);
+    const { meetPosition, setMeetPosition } = useContext(LocationsContext);
+    
+    function UpdateUserLocation() {
         const map = useMapEvents({
             click() {
                 map.locate()
             },
             locationfound(e) {
-                console.log(createMeet)
                 saveLocation(e.latlng)
                 setPosition(e.latlng)
                 map.flyTo(e.latlng, map.getZoom())
@@ -45,28 +45,10 @@ const Map = (props) => {
             return null;
         }
     }
-
-    function createNewMeet(e) {
-        if(createMeet){
-            
-            setCreateMeet(false)
-            console.log(e)
-            markers.push(e.latlng)
-            /*return (
-                <Marker position={}>
-                    <Popup>
-                        NuevaReunion <br />
-                    </Popup>
-                </Marker>
-            )*/
-            
-        }
-        setCreateMeet(false)
-    }
+    
     function saveLocation(latlng) {
         Geocode.fromLatLng(latlng.lat, latlng.lng).then(
             (response) => {
-              console.log(response)
               let state, country;
               for (let i = 0; i < response.results[0].address_components.length; i++) {
                 for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
@@ -80,11 +62,58 @@ const Map = (props) => {
                   }
                 }
               }
-              console.log(state, country);
               const apicall = addLocation(
                   props.webId, [latlng.lat, latlng.lng],
                   state, country);
-              console.log(apicall)
+            },
+            (error) => {
+              console.log("No se ha podido guardar la localización")
+              console.error(error);
+            }
+        );
+    }
+
+    function CreateMeet() {
+            const map = useMapEvents({
+                click(e) {
+                    map.locate()
+                    console.log(e.latlng)
+                    if(createMeet){
+                        setMeetPosition(e.latlng)  
+                        saveMeet(e.latlng)                     
+                    }
+                    setCreateMeet(false)
+                }
+            })
+
+              return meetPosition!=undefined?(
+                <Marker position={meetPosition} icon={iconMeet}>
+                    <Popup>
+                        Ubicación del nuevo meet <br />
+                    </Popup>
+                </Marker>
+            ):null    
+    }
+
+    function saveMeet(latlng){
+        Geocode.fromLatLng(latlng.lat, latlng.lng).then(
+            (response) => {
+              let state, country;
+              for (let i = 0; i < response.results[0].address_components.length; i++) {
+                for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+                  switch (response.results[0].address_components[i].types[j]) {
+                    case "administrative_area_level_1":
+                      state = response.results[0].address_components[i].long_name;
+                      break;
+                    case "country":
+                      country = response.results[0].address_components[i].long_name;
+                      break;
+                  }
+                }
+              }
+              const apicall = addMeet(
+                  props.webId, latlng,
+                  state, country);
             },
             (error) => {
               console.log("No se ha podido guardar la localización")
@@ -99,15 +128,14 @@ const Map = (props) => {
             {console.log("Rerenderizando")}
             <h1>Ubicación del usuario</h1>
             <div>
-                <MeetsMenu />
+                <MeetsMenu saveUserLocation={UpdateUserLocation} />
             </div>
 
             <div>
                 <MapContainer center={[43.36, -5.90]}
-                              onClick={createNewMeet}
                               zoom={10}
                               scrollWheelZoom={true}>
-                    <MyMapEvent />
+                    <CreateMeet />
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -115,13 +143,6 @@ const Map = (props) => {
 
                     {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
 
-                    {markers.map((position, idx) => 
-                        <Marker key={`marker-${idx}`} position={position}>
-                            <Popup>
-                                <span>Nueva Reunion</span>
-                            </Popup>
-                        </Marker>
-                    )}
                 </MapContainer>
             </div>
         </div>

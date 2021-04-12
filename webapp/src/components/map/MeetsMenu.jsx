@@ -29,13 +29,14 @@ import Checkbox from '@material-ui/core/Checkbox';
     },
   }));
   
-  export default function MeetsMenu() {
+  export default function MeetsMenu(props) {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [open, setOpen] = React.useState(true);
 
     const { seeFriends, setSeeFriends } = useContext(LocationsContext);
     const { seeMeets, setSeeMeets } = useContext(LocationsContext);
+    const { createMeet, setCreateMeet} = useContext(LocationsContext);
     
     const handleClick = () => {
       setOpen(!open);
@@ -47,9 +48,15 @@ import Checkbox from '@material-ui/core/Checkbox';
     };
 
 
-  const handleCheckChange = (event) => {
-    setSeeFriends(event.target.checked);
-  };
+    const handleCheckChange = (event) => {
+      setSeeFriends(event.target.checked);
+    };
+    const handleCheckSeeMeet = (event) => {
+      setSeeMeets(event.target.checked);
+    };
+    const handleCheckCreateMeet = (event) => {
+      setCreateMeet(event.target.checked);
+    };
   
     return (
       
@@ -69,7 +76,7 @@ import Checkbox from '@material-ui/core/Checkbox';
               <Typography className={classes.heading}>Mi localización</Typography>
               <Typography className={classes.secondaryHeading}>Mostrar mi ubicación<Checkbox
                 checked={seeFriends}
-                onChange={handleCheckChange}
+                onChange={props.saveUserLocation}
                 inputProps={{ 'aria-label': 'primary checkbox' }}
               />
               </Typography>
@@ -113,22 +120,24 @@ import Checkbox from '@material-ui/core/Checkbox';
               id="panel1bh-header"
             >
               <Typography className={classes.heading}>Meets</Typography>
-              <Typography className={classes.secondaryHeading}>Mostrar meets
+              <Typography className={classes.secondaryHeading}>
                 <Checkbox
                   checked={seeMeets}
-                  onChange={handleCheckChange}
+                  onChange={handleCheckSeeMeet}
                   inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
+                Mostrar meets
+              </Typography>
+              <Typography className={classes.secondaryHeading}>
+                <Checkbox
+                    checked={createMeet}
+                    onChange={handleCheckCreateMeet}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                  />
+                Crear nuevo meet   
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>Crear nuevo meet 
-                <Checkbox
-                    checked={seeFriends}
-                    onChange={handleCheckChange}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                  />
-              </Typography>
             </AccordionDetails>
           </Accordion>
         </Collapse>

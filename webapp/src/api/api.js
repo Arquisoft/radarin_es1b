@@ -55,3 +55,20 @@ export async function getFriends(webId){
     let response = await fetch(apiEndPoint+'/friends/list/'+webId+'?user='+webId)
     return await response.json()
 }
+
+// Meets ------------------------------------- /
+export async function addMeet(webId,location,state,country){
+    console.log("wbaide" +webId)
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/add', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'creator_webId': String(webId), 
+            'location':location,
+            'state':state,
+            'country':country
+        })
+      })
+    return await response.json()
+}

@@ -45,7 +45,7 @@ El principal objetivo es conseguir una aplicación con la misma funcionalidad en
 
 Rasgos de Rendimiento y/o Calidad::
 
-- Los datos se almacenarán en PODs, de los que el usuario tendrán el control completo. Por lo tanto, Radarin no almacenará ningún dato, y será el usuario el que tenga la capacidad de decidir sobre su información.
+- Los datos se almacenarán en la BD, ya que el alamacenamiento en Solid es muy costoso a nivel de rendimiernto para la aplicación. Por lo tanto, Radarin no almacenará ningún dato en Solid, pero solo permitirá iniciar sesión en la aplicación a traves de él.
 - Gracias al MVC, las vistas son diferentes para ordenadores y móviles, pero el resto de capas (negocio, persistencia,...) son comunes para cada dispositivo.
 - La aplicación se desplegará en Heroku, y será desde donde el controlador gestione las vistas y el acceso a la capa de persistencia.
 

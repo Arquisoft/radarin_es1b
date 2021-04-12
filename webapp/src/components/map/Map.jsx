@@ -20,6 +20,7 @@ const Map = (props) => {
     const { position, setPosition } = useContext(LocationsContext);
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
     const { seeFriends, setSeeFriends } = useContext(LocationsContext);
+    let pais = null;
 
     function MyMapEvent() {
         const map = useMapEvents({
@@ -81,6 +82,7 @@ const Map = (props) => {
                   }
                 }
               }
+              pais = country;
               console.log(state, country);
               const apicall = addLocation(
                   props.webId, [latlng.lat, latlng.lng],
@@ -114,7 +116,7 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {getNearbyFriends(position, getFriends(props.webId)).length>0?<Notifications/>:console.log("No hay amigos cercanos")}
+                    {getNearbyFriends(pais, getFriends(props.webId)).length>0?<Notifications/>:console.log("No hay amigos cercanos")}
                     {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
                     
                     

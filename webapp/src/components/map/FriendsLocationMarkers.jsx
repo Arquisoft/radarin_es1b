@@ -3,7 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { getFriendsLocations } from '../../api/api';
 import { useLDflexValue } from '@solid/react';
 import {iconPerson } from "./markers/IconPerson"
-import Notifications from "../notifications/Notifications";
+
 
 export default class FriendsLocationMarkers extends Component {
     constructor(props){
@@ -14,8 +14,6 @@ export default class FriendsLocationMarkers extends Component {
             updated: false
         }
 
-        this.posicion = props.posicion;
-        console.log("Mi ubicación: " + this.posicion.lat + ", " + this.posicion.lng);
     }
 
     componentDidMount() {
@@ -45,7 +43,7 @@ export default class FriendsLocationMarkers extends Component {
             )
         }
         return (
-            <div><Notifications/></div>
+            <div></div>
         )
     }
 }

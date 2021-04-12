@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
-import { addLocation, getFriendsLocations, getFriends } from '../../api/api';
+import { addLocation, getFriendsLocations, getFriends, getNearbyFriends } from '../../api/api';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
 import MeetsMenu from "./MeetsMenu"
+import Notifications from "../notifications/Notifications";
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -113,7 +114,9 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {<FriendsLocationMarkers webId={props.webId} posicion={position}/>}{/*:console.log("Amigos " + seeFriends)}*/}
+                    {getNearbyFriends().length>0?<Notifications/>:console.log("No hay amigos cercanos")}
+                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
+                    
                     
                     {markers.map((position, idx) => 
                         <Marker key={`marker-${idx}`} position={position}>

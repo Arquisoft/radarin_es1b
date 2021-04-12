@@ -50,3 +50,14 @@ export async function getFriends(webId){
     let response = await fetch(apiEndPoint+'/friends/list/'+webId+'?user='+webId)
     return await response.json()
 }
+
+export async function getNearbyFriends(userLocation, friends){
+    console.log(friends);
+    const apiEndPoint= process.env.REACT_APP_API_URI || "http://localhost:5000/api";
+    let response = await fetch(apiEndPoint + "/users/location/near", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({"userLocation": userLocation, "friends": friends})
+    });
+    return await response.json();
+};

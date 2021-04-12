@@ -106,6 +106,40 @@ router.post("/friends/locations/", async (req, res) => {
 
 })
 
+router.post("/users/location/near", async (req, res) => {
+    let userLocation = req.body.userLocation;
+    let userFriends = req.body.friends; 
+    let userNearByFriends = [];
+        
+    async.each(userFriends, async function(friend) {
+                        const near = await User.findOne({
+                                                            webId: friend.webId
+                                                            , location: {
+                                                                            $near: {
+                                                                                $geometry: userLocation,
+                                                                                $minDistance: 0, // meters
+                                                                                $maxDistance: 1000000
+                                                                            }   
+                                                                        }
+                                                        });
+                                                        
+                        if(near != null){
+                            console.log(near);
+                            userNearByFriends.push(near);
+                        }
+                        
+                    }, async function(err) {
+                        if(err) {
+                            console.log("A element failed to process", err);
+                            res.status(500).json(err);
+                        } else {
+                            console.log("All elements have been processed successfully");
+                            res.status(200).json(userNearByFriends);
+                        }
+
+                })
+});
+
 
 
 module.exports = router

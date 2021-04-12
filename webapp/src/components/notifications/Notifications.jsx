@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import ReactNotifications from 'react-browser-notifications';
 
@@ -12,7 +13,7 @@ class Notifications extends React.Component {
     render() {
         return (
             <div>
-                <ReactNotifications
+            <ReactNotifications
               onRef={ref => (this.n = ref)} // Required
               title="Radarin" // Required
               body="Hay alguien cerca tuyo!"
@@ -21,6 +22,7 @@ class Notifications extends React.Component {
             />
 
             {this.showNotifications}
+                
             </div>
             
             

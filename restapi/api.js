@@ -2,7 +2,9 @@ const express = require("express")
 const User = require("./models/users")
 const Location = require("./models/locations")
 const Friend = require("./models/friends")
+const Meet = require("./models/meets")
 const router = express.Router()
+const mongoose = require("mongoose")
 
 // Get all users
 router.get("/users/list", async (req, res) => {
@@ -15,9 +17,6 @@ router.post("/users/add", async (req, res) => {
     
     let nombre = req.body.nombre;
     let webId = req.body.webId;
-    console.log("body " + req.body);
-    console.log("webId " + webId);
-    console.log("body.name " + req.body.nombre);
     
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
@@ -183,5 +182,42 @@ router.post("/friends/locations/", async (req, res) => {
 
 
 })
+
+// Meets ------------------------------------------------------------------------/
+router.post("/meets/add", async (req, res) => {
+    let creator_webid = req.body.creator_webId;
+    let location = req.body.location;
+    let state = req.body.state;
+    let country = req.body.country;
+    // Check if the user is already in the db
+    let creator = await User.findOne({ webId: creator_webid });
+    // If it exists, then we'll update it
+
+
+    if (creator) {
+        let newEntry = await Meet.findOne({creator: creator._id, location: [location.lat, location.lng]})
+
+        console.log("Alla")
+        if(!newEntry){
+            console.log(creator._id)
+            newEntry = new Meet({
+                user:  mongoose.Types.ObjectId(creator._id),
+                location: [location.lat, location.lng],
+                state: state,
+                country: country,
+                attendances: []
+            });
+
+            await newEntry.save();
+            res.send(newEntry);
+        } else {
+            res.send({ error: "Error: Ya existe esta reunioni" })
+        }
+    } else {
+        res.send({ error: "Error: Este usuario no existe" + creator_webid })
+    }
+
+});
+
 
 module.exports = router

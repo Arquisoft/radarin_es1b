@@ -1,8 +1,8 @@
 import L from 'leaflet';
-import friendPNG from './placeholder.png';
+import meetPNG from './meeting.png';
 
-const iconPerson = new L.Icon({
-    iconUrl: friendPNG,
+const iconMeet = new L.Icon({
+    iconUrl: meetPNG,
     iconAnchor: null,
     popupAnchor: [0, -15],
     shadowUrl: null,
@@ -11,4 +11,4 @@ const iconPerson = new L.Icon({
     iconSize: new L.Point(50, 50),
 })
 
-export { iconPerson };
+export { iconMeet };

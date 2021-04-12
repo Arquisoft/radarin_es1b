@@ -22,6 +22,10 @@ export async function getUsers(){
     return await response.json()
 }
 
+
+// Locations -----------------------------------------------------------------------
+
+
 export async function addLocation(webId,location,state,country){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/location/add', {
@@ -36,6 +40,11 @@ export async function addLocation(webId,location,state,country){
       })
     return await response.json()
 }
+
+
+
+// Friends ---------------------------------------------------------------------
+
 
 export async function getFriendsLocations(webId){
     console.log("Pidiendo localizacionies de los amigos...")
@@ -84,6 +93,7 @@ export async function getFriends(webId){
     return await response.json()
 }
 
+
 export async function getFriendShip(userWebId, friendwebId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/check', {
@@ -103,4 +113,23 @@ export async function getFriendShip(userWebId, friendwebId){
     }
     //console.log(answer)
     return  answer;
+}
+
+
+
+// Meets ------------------------------------- /
+export async function addMeet(webId,location,state,country){
+    console.log("wbaide" +webId)
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/add', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'creator_webId': String(webId), 
+            'location':location,
+            'state':state,
+            'country':country
+        })
+      })
+    return await response.json()
 }

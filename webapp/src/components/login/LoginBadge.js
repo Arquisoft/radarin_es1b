@@ -16,7 +16,7 @@ export default ({fullName, imageSrc, webId}) =>
         className={styles.badge} //añade un margen a la etiqueta 
         label={fullName ? `${fullName}` : 'Conectado'} //mensaje del boton de acceso al perfil una vez 
         avatar={<Image name={fullName || webId} src={imageSrc}/>} //imagen del avatar del boton
-        component={Link} to={toProfile(webId)} clickable // indica que al pulsar en el boton nos redirigue a el perfil del usuario
+        component={Link} to="/me" clickable // indica que al pulsar en el boton nos redirigue a el perfil del usuario
         
     />
     

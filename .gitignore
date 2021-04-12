@@ -19,3 +19,5 @@ restapi/node_modules
 restapi/data
 
 .eslintcache
+
+.env

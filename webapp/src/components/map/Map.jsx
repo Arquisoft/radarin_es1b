@@ -93,7 +93,9 @@ const Map = (props) => {
     }
 
     return (
+        
         <div style={{ marginBottom: 10, position: 'relative' }}>
+            {console.log("Rerenderizando")}
             <h1>Ubicación del usuario</h1>
             <div>
                 <MeetsMenu />

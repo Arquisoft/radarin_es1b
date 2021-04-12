@@ -24,7 +24,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>
+          {children}
+          </div>
         </Box>
       )}
     </div>
@@ -64,6 +66,22 @@ export default function FullWidthTabs() {
     setValue(index);
   };
 
+  /**return (
+    <div className={classes.root}>
+      <Tabs defaultActiveKey="penidngFriends" id="uncontrolled-tab-example">
+        <Tab eventKey="penidngFriends" title="Solicitudes de amistad pendientes">
+          <PendingFriends/>
+        </Tab>
+        <Tab eventKey="serach" title="Buscar Amigos">
+          <SearchFriends/>
+        </Tab>
+      </Tabs>
+    </div>
+  );*/
+
+
+
+/** */
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
@@ -86,15 +104,17 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <PendingFriends/>
+        <PendingFriends/>
+          
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <SearchFriends/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <NewRequest/>
-        </TabPanel>
+        </TabPanel>*
       </SwipeableViews>
     </div>
-  );
+  ); 
+ 
 }

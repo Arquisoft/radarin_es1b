@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
 import { getUsers } from '../../api/api';
-import List from './List'
+import List from "@material-ui/core/List";
+import Friend from "../friendList/friend";
 
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
@@ -96,25 +97,32 @@ class SearchFriends extends React.Component {
             }
 
     }
-
+	getLIstaItems(){
+		return(
+			this.state.friends.map((e) => (
+				console.log(e)
+			//<Friend key={e.toString()} webId={e}/>
+		))
+		)
+		/**<Friend key={e.toString()} webId={e}/>*/
+	}
     render() {
 		return (
-			<Grid container
-				spacing={2}
-				direction="row"
-				justify="flex-start"
-				alignItems="center">
-				<Grid item xs={12} md={2}>
-					<h1>BuscarAmigos</h1>
-					{this.searchFriends()}
-	
-			</Grid>   
-				<Grid>
-					{console.log("search")}
-					{console.log(this.state.friends)}
-					<List friends={this.state.friends} />
-				</Grid> 
-			</Grid>
+			<div>
+				<h1>BuscarAmigos</h1>
+			      {this.searchFriends()}
+			    <hr />
+				{console.log("search")}
+				{console.log(this.state.friends)}
+				<div>
+				<List dense>
+                {this.getLIstaItems()}
+				</List>
+				</div>
+				
+				
+          
+            </div> 
 		);
 	}
 

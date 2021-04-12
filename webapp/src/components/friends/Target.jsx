@@ -15,7 +15,7 @@ import { acceptFriend } from '../../api/api';
 
 //Amigo del usuario SOLID
 export default ({webId, fullName, imageSrc, mywebId}) =>
-  <ListItem className={styles.friend} button component={Link} to={toProfile(webId)}>
+  <ListItem className={styles.friend} >
     <ListItemIcon>
       <Image className={styles.avatar} fullName={fullName} src={imageSrc}/>
     </ListItemIcon>
@@ -27,5 +27,5 @@ export default ({webId, fullName, imageSrc, mywebId}) =>
             <Button id="añadirFriend" type="button" onClick={(e) => acceptFriend(mywebId,webId)}>
 							Buscar
 						</Button>
-            </ListItemSecondaryAction>
+    </ListItemSecondaryAction>
   </ListItem>

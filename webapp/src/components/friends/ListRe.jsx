@@ -41,7 +41,7 @@ export default class Lista extends Component {
               height={this.props.height}
           >
             {/* Parte mas importante, accede a los amigos de solid y los añade al array de amigos */}
-            {this.state.items.map((webId) => (
+            {this.state.items.forEach(webId => (
                 <Target key={webId.toString()} webId={webId} mywebId={this.webId}/>
             ))}
           </InfiniteScroll>

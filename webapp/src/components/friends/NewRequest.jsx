@@ -1,6 +1,8 @@
 import React from 'react'
 import { getTargetFriends } from '../../api/api';
-import ListRe from './ListRe';
+import List from "@material-ui/core/List";
+
+import Target from "./Target";
 
 
 class NewRequest extends React.Component {
@@ -15,14 +17,13 @@ class NewRequest extends React.Component {
 
     getNewRequ(){
       
-        let au=[];
+        
         getTargetFriends(this.webID).then((result)=>{
             result.map((e) =>{ 
-                au.push(e)
+                this.state.friends.push(e)
             })
            
           });
-          this.setState({ friends:au});
     }
 
     render() {
@@ -30,7 +31,11 @@ class NewRequest extends React.Component {
             <div>
                 {console.log("reque")}
 				{console.log(this.state.friends)}
-                <ListRe friends={ this.state.friends} webId={this.webID}/>
+                <List dense>
+                {this.state.friends.map((e) => (
+                <Target key={e.toString()} webId={e}/>
+            ))}
+            </List>
             </div>
         );
     }   

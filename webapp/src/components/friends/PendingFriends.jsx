@@ -1,11 +1,9 @@
 import React from 'react'
 import { getPendingFriends } from '../../api/api';
-import List from './List';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Paper from "@material-ui/core/Paper";
+import List from "@material-ui/core/List";
 
-import styles from "../profile/Profile.module.css";
+import Friend from "../friendList/friend";
+
 class PendingFriends extends React.Component {
 
     constructor(webId) {
@@ -33,27 +31,37 @@ class PendingFriends extends React.Component {
           });
           console.log("pending")
           console.log(this.state.friends)
+          var cons=this.state.friends[0]
+          //console.log(cons.toString())
+          this.state.friends.forEach(el => console.log(el))
 
     }
-
+ 
+    getLIstaItems(){
+		//return(
+            //<Friend key={"https://uo271288.solidcommunity.net/profile/card#me".toString()} webId={"https://uo271288.solidcommunity.net/profile/card#me"}/>
+			this.state.friends.forEach(el => 
+                //<Friend key={element.toString()} webId={element}/>
+                console.log(el)
+				//console.log(webid)
+        )
+        //)
+		
+	}
+    /**
+   	{this.state.friends.forEach(element => 
+                <Friend key={element.toString()} webId={element}/>
+            )}*/
     render() {
-        return (   
-             <Grid container
-            spacing={2}
-            direction="row"
-            justify="flex-start"
-            alignItems="center">
-            <Grid item xs={12} md={12}>
-              <Typography variant="h6" component="h4">
-                Solicitudes pendientes de aceptar:
-                  </Typography>
-              {/* Muestra la lista de amigos del usuario accediendo al index.js de /friendlist*/}
-              <Paper elevation={1}>
-              <List friends={ this.state.friends} webId={this.webID}/>
-              </Paper>
-            </Grid>
-          </Grid>         
-           
+        return (            
+            <div>
+                <form>
+                <List dense>
+                {this.getLIstaItems()}
+            
+                </List> 
+                </form>          
+            </div>
         );
     }   
 }

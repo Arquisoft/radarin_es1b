@@ -9,6 +9,7 @@ import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
+import { LoggedIn, AuthButton, LoggedOut} from '@solid/react';
 
 
 
@@ -40,11 +41,15 @@ class App extends React.Component {
               {/* <Route exact path="/" component={StartPage}/>  */}
               {/* location es la localizacion donde se encuentra la app y sirve para almacenar donde quieras ir, en este caso si queremos ir a /profile le tenemos que pasar lo que quiere mostrar mediante la llamada a la IU Profile*/}
               {/* En webId lo que le pasa en la direccion del perfil de solid */}
-              <Route path="/profile/" render={({ location }) => {
-                const params = qs.parse(location.search);
-                //SaveWebId(params.webId)
-                return <Profile webId={params.webId} />
-              }} />
+              <LoggedIn>
+                
+                <Route path="/profile/" render={({ location }) => {
+                  const params = qs.parse(location.search);
+                  //SaveWebId(params.webId)
+                  return <Profile webId={params.webId} />
+                }} />
+
+              </LoggedIn>
               
             </main>
 

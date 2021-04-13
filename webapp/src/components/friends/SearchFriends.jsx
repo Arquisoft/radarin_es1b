@@ -117,7 +117,8 @@ class SearchFriends extends React.Component {
 			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
 			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
 			  {this.resultQuery.map((webId) => (
-				<Friend key={webId} webId={webId} logged={this.logged}/>
+				     webId!=this.logged?
+					<Friend key={webId} webId={webId} logged={this.logged}/>:null
 	
 			  ))}
 	

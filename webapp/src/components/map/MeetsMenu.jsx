@@ -67,7 +67,7 @@ import Checkbox from '@material-ui/core/Checkbox';
           </Button>
         </div>
         <Collapse in={open} timeout="auto" unmountOnExit>  
-        <Accordion expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
+          <Accordion expanded={expanded === 'panel0'} onChange={handleChange('panel0')}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1bh-content"
@@ -107,10 +107,6 @@ import Checkbox from '@material-ui/core/Checkbox';
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography>
-                Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-                maximus est, id dignissim quam.
-              </Typography>
             </AccordionDetails>
           </Accordion>
           <Accordion expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>

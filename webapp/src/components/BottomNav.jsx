@@ -11,7 +11,7 @@ import Friends from './friends/Friends';
 import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
-
+import * as qs from 'query-string';
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +36,9 @@ const BottomNav = (props) => {
         <Route path="/map">
           <Map webId={props.webId}/>
         </Route>
+        <Route path="/profile*">
+         
+        </Route>
         <Route path="/friends">
           <Friends webId={props.webId}/>
         </Route>
@@ -43,7 +46,7 @@ const BottomNav = (props) => {
           <Profile webId={props.webId} />
         </Route>
         <Route path="/">
-          <Start webId={props.webId} />
+          <Start/>
         </Route>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

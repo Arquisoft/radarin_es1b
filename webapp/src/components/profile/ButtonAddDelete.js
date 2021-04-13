@@ -104,7 +104,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     render() {        
-        return <Button onClick={()=>this.handleClick.bind(this)}> {this.text} </Button>
+        return <Button onClick={this.handleClick.bind(this)}> {this.text} </Button>
     }
 }
 export default ButtonAddDelete;

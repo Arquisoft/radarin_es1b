@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { getSearcByName } from '../../api/api';
+import { getSearcByName, getUsers } from '../../api/api';
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
@@ -14,7 +14,7 @@ class SearchFriends extends React.Component {
 		super(props)
 		this.resultQuery = []
 		this.logged = this.props.webId;
-
+		this.querySuccess=false;
 		this.state = {
 			searchName: ""
 		};
@@ -35,7 +35,7 @@ class SearchFriends extends React.Component {
 
 	  async fetchData() {
 		var promise = getSearcByName(this.state.searchName)
-	
+		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
 			this.resultQuery=[]
@@ -43,9 +43,26 @@ class SearchFriends extends React.Component {
 			this.resultQuery.push(e)
 			
 		  })
-		  console.log(this.resultQuery)
+
+		  if(result.length===0){
+			  console.log("No encontré nada :(")
+			  var promise2= getUsers()
+
+			  promise2.then((result2)=>{
+				result2.map((user)=>{
+					this.resultQuery.push(user.webId)
+				})
+				this.forceUpdate()
+		  		this.render()
+			  })
+		  }
+		  else{
+			  this.querySuccess=true;
 		  this.forceUpdate()
 		  this.render()
+		  }
+		  
+		  
 		})
 	  }
 
@@ -101,7 +118,8 @@ class SearchFriends extends React.Component {
 			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 
+			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
+			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
 			  {this.resultQuery.map((webId) => (
 				<Friend key={webId} webId={webId} logged={this.logged}/>
 	

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Marker, Popup } from 'react-leaflet';
 import { getFriendsLocations } from '../../api/api';
-import { getFriendName } from '../../api/api';
 import {iconPerson } from "./markers/IconPerson"
 
 export default class FriendsLocationMarkers extends Component {
@@ -20,12 +19,6 @@ export default class FriendsLocationMarkers extends Component {
         promise.then((result) =>{
             console.log(result)
             result.locs.map((e)=>{
-                var getName = getFriendName(e.user);
-                getName.then((friendName) => {
-                    console.log("NOMBRE OBTENIDO: " + friendName);
-                    e.name = friendName
-                });
-                
                 this.state.locs.push(e)
             })
         })
@@ -37,7 +30,7 @@ export default class FriendsLocationMarkers extends Component {
                 this.state.locs.map((loc) => {
                     return (<Marker position={[loc.location[0],loc.location[1]]} icon={ iconPerson }>
                         <Popup>
-                            {loc.name}
+                            {loc.fullName}
                         </Popup>
                     </Marker>)
                 })

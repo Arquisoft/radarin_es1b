@@ -38,6 +38,7 @@ router.post("/location/add", async (req, res) => {
     let location = req.body.location;
     let state = req.body.state;
     let country = req.body.country;
+    let fullName = req.body.fullName;
     // Check if the user is already in the db
     let newEntry = await Location.findOne({ user: user });
     // If it exists, then we'll update it
@@ -46,6 +47,7 @@ router.post("/location/add", async (req, res) => {
         newEntry.location = location;
         newEntry.state = state;
         newEntry.country = country;
+        newEntry.fullName = fullName;
         await Location.findOneAndUpdate(query, newEntry, function(err, doc) {
             if (err) {
                 console.log("Something wrong when updating data!");
@@ -58,7 +60,8 @@ router.post("/location/add", async (req, res) => {
             user: user,
             location: location,
             state: state,
-            country: country
+            country: country,
+            fullName:fullName
         });
 
         await newEntry.save();
@@ -83,7 +86,7 @@ router.post("/friends/locations/", async (req, res) => {
             console.log("Error al encontrar los amigos");
         } else {
             var users = docs.map(function(elem) {
-                return (elem.target == userWebId)?elem.requester : elem.target;
+                return (elem.target == userWebId) ? elem.requester : elem.target;
             }, this)
                     
             Location.find({'user' : { $in: users}}, function(err, docs){

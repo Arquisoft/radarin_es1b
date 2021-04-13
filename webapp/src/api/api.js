@@ -22,8 +22,9 @@ export async function getUsers(){
     return await response.json()
 }
 
-export async function addLocation(webId,location,state,country){
+export async function addLocation(webId,location,state,country,fullName){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    console.log("Que fullName llega " + fullName);
     let response = await fetch(apiEndPoint+'/location/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -31,7 +32,8 @@ export async function addLocation(webId,location,state,country){
             'user':webId, 
             'location':location,
             'state':state,
-            'country':country
+            'country':country,
+            'fullName':String(fullName)
         })
       })
     return await response.json()

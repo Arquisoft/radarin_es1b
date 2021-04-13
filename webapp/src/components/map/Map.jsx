@@ -6,6 +6,7 @@ import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
 import MeetsMenu from "./MeetsMenu"
 import {iconMeet} from "./markers/IconMeet"
+import useProfile from "../profile/useProfile";
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -20,10 +21,12 @@ const Map = (props) => {
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
     const { seeFriends } = useContext(LocationsContext);
     const { meetPosition, setMeetPosition } = useContext(LocationsContext);
-    
+    const profile = useProfile(props.webId)
+
     function UpdateUserLocation() {
         const map = useMapEvents({
             click() {
+                console.log("NOMBRE EN EL MAP" + profile.fullName);
                 map.locate()
             },
             locationfound(e) {
@@ -62,9 +65,13 @@ const Map = (props) => {
                   }
                 }
               }
-              const apicall = addLocation(
-                  props.webId, [latlng.lat, latlng.lng],
-                  state, country);
+              if (profile.fullName!=undefined) {
+
+                const apicall = addLocation(
+                    props.webId, [latlng.lat, latlng.lng],
+                    state, country, profile.fullName);
+                  
+              }
             },
             (error) => {
               console.log("No se ha podido guardar la localización")

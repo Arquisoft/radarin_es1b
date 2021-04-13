@@ -62,7 +62,8 @@ class SearchFriends extends React.Component {
 		}
 		else{
 			console.log("No hay texto para buscar")
-		}
+		} 
+		
 
 }
 

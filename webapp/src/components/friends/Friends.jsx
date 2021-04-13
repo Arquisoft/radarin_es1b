@@ -15,7 +15,9 @@ class Friends extends React.Component{
             <div>
                 <h1>Amigoos</h1>
                 <p>To be done: Vista para buscar usuarios</p>
-                <FriendsTabs webId={this.webId}/>         
+                <div class="contenedorFriends">
+                    <FriendsTabs webId={this.webId}/>
+                </div>
             </div>
         )
     }

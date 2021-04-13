@@ -99,6 +99,32 @@ export async function getFriends(webId){
     return await response.json()
 }
 
+export async function getPendingFriends(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/friends/list/pending', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId
+        })
+      })
+    return await response.json()
+}
+
+export async function acceptPendingFor(loggedUserWebID,webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    console.log("Aceptando: "+ webId)
+    let response = await fetch(apiEndPoint+'/friends/accept', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'target':loggedUserWebID,
+            'webId':webId
+        })
+      })
+    return await response.json()
+}
+
 
 export async function getFriendShip(userWebId, friendwebId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

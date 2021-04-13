@@ -11,6 +11,7 @@ import {toProfile} from '../../../routing';
 import Image from "../../profile/Image";
 
 
+
 //Amigo del usuario SOLID
 export default ({webId, fullName, imageSrc}) =>
   <ListItem className={styles.friend} button component={Link} to={toProfile(webId)}>
@@ -21,4 +22,5 @@ export default ({webId, fullName, imageSrc}) =>
         primary={fullName}
         secondary={webId}
     />
+   
   </ListItem>

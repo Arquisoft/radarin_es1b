@@ -37,7 +37,7 @@ const BottomNav = (props) => {
           <Map webId={props.webId}/>
         </Route>
         <Route path="/friends">
-          <Friends />
+          <Friends webId={props.webId}/>
         </Route>
         <Route path="/me">
           <Profile webId={props.webId} />

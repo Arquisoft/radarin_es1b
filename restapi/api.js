@@ -143,6 +143,40 @@ router.post("/friends/remove", async (req, res) => {
 
 })
 
+
+router.post("/friends/accept", async (req, res) => {
+    
+    let userWebId = req.body.webId
+    let target = req.body.target
+    console.log("Aceptando solicitud para "+userWebId)
+    var query = {
+             "requester": userWebId, "target": target 
+    }
+
+    let oldFriendship=  await Friend.findOne(query);
+
+    if(oldFriendship){
+        console.log("Encontrada solicitud!")
+        oldFriendship.status="accepted"
+        let friendship = await Friend.findOneAndUpdate(query,oldFriendship, function (err) {
+            if (err) {
+                console.log("Something wrong when accepting friendship!");
+            } else {
+                console.log("Amistad acceptada!: " + userWebId + "; " + target);
+                
+            }
+        });
+    }else{
+        console.log("No existe esa peticion")
+    }
+
+    res.send(friendship)
+
+    
+
+
+})
+
 router.post("/friends/list", async (req, res)=>{
 
     const userWebId = req.body.webId
@@ -166,19 +200,34 @@ router.post("/friends/list", async (req, res)=>{
             }, this)
             console.log(users)
             res.send(users)
-            /* User.find({ 'user': { $in: users } }, function (err, docs) {
-                if (err) {
-                    console.log("Error al encontrar los usuarios dados los amigos")
-                } else {
-                    console.log(docs);
-                    res.send(docs);
-                }
-            }) */
+            
         }
     })
 }
 
 )
+
+
+router.post("/friends/list/pending", async (req, res)=>{
+
+    const userWebId = req.body.webId
+    var query = {"target": userWebId,"status":"pending"
+    };
+    Friend.find().and(query).exec(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
+            }, this)
+            console.log(users)
+            console.log("Peticiones: "+ users)
+            res.send(users)
+        }
+    })
+})
+
+
 
 
 // get friends locations

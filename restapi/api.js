@@ -268,6 +268,55 @@ router.post("/friends/locations/", async (req, res) => {
 
 
 })
+// post peticiones pendientes de aveptar por otros
+router.post("/friends/list/request", async (req, res)=>{
+ 
+    const userWebId = req.body.webId
+    var query = { 
+        "requester": userWebId, "status": "pending"  
+   };
+    Friend.find().and(query).exec(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
+            }, this)
+            console.log(users)
+            console.log("Peticiones: "+ users)
+            res.send(users)
+        }
+    })
+})
+
+//aceptar solicitud amistad
+router.post("/friends/accept/", async (req, res) => {
+    const userWebId = req.body.webID
+    const friendWebId = req.body.friendWebId
+    var query = { 
+         "requester": friendWebId, "target":userWebId, "status": "pending"  
+    };
+
+    await Friend.find((query, function(err, friend) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var query = { "_id" : friend._id };
+            friend.status = "accepted";
+
+            Friend.findOneAndUpdate(query, friend, function(err, doc) {
+                if (err) {
+                    console.log("Something wrong when updating data!");
+                } else {
+                    res.send(doc)
+
+                }
+            });
+
+        }
+    }))
+});
+
 
 // Meets ------------------------------------------------------------------------/
 router.post("/meets/add", async (req, res) => {

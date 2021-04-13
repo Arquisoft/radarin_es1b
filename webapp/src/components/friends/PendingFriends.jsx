@@ -8,6 +8,11 @@ import Typography from "@material-ui/core/Typography";
 
 import { getPendingFriends } from '../../api/api';
 
+
+
+
+
+
 export default class PendingFriends extends Component {
 
   constructor(props) {
@@ -39,7 +44,7 @@ export default class PendingFriends extends Component {
     })
   }
 
-  componentDidUpdate(){
+ componentDidUpdate(){
     if(true){
       this.friendList=[]
       this.fetchData();

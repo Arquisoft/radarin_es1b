@@ -114,7 +114,7 @@ export default function FullWidthTabs(props) {
           <SearchFriends webId={webId}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <NewRequest/>
+          <NewRequest webId={webId}/>
         </TabPanel>*
       </SwipeableViews>
     </div>

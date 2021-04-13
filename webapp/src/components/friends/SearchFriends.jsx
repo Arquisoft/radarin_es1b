@@ -63,7 +63,7 @@ class SearchFriends extends React.Component {
 		else{
 			console.log("No hay texto para buscar")
 		} 
-		
+
 
 }
 
@@ -73,10 +73,11 @@ class SearchFriends extends React.Component {
 				<form>
 					<label>
                         Busca un amigo:
-						<input
+						<input 
 							id="friendID"
 							type="text"
-							name="friendId"
+							name="searchArea"
+							onSubmit={ (e)=>this.handleChange(e)}
 							onChange={(e)=>this.handleChange(e)}
 						/>
 
@@ -99,8 +100,7 @@ class SearchFriends extends React.Component {
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  
 			  loader={<h4>Cargando...</h4>} //loader
-			  height={this.props.height}
-			>
+			  height={this.props.height}>
 			 
 			  {this.resultQuery.map((webId) => (
 				<Friend key={webId} webId={webId} logged={this.logged}/>

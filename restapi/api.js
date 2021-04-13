@@ -176,67 +176,29 @@ router.post("/friends/accept", async (req, res) => {
     }
 
     res.send(friendship)
-    // post peticiones pendientes
-    /* router.post("/friends/pending/requester", async (req, res) => {
     
-        const userWebId = req.body.userWebId
-        var query = { 
-             "requester": userWebId, "status": "pending"  
-        };
-    
-        var friends =  await Friend.find((query, function(err, docs) {
-            if (err) {
-                console.log("Error al encontrar los amigos");
-            } else {
-                return docs;
-            }
-        }))
-    
-    
-        var users = friends.map(function(elem) {
-            return elem.target;
-        })
-    
-        await User.find({'webId' : { $in: users}}, function(err, docs){
-            if(err) {
-                console.log("Error al encontrar los usuarios dados los amigos")
-            } else {
-                var webIds=docs.map((doc) => { return doc.webId})
-                res.send(webIds);
-            }
-        })*/
     }); 
 
 
-    // post peticiones para aceptar
+    // post peticiones enviadas por el usuairo
     router.post("/friends/pending/target", async (req, res) => {
-
-        const userWebId = req.body.userWebId
-        var query = {
-            "target": userWebId, "status": "pending"
+        const logged= req.body.logged
+        var query = {$and: [
+            {"requester": logged}, {"status": "pending"}]
         };
 
         var friends = await Friend.find((query, function (err, docs) {
             if (err) {
                 console.log("Error al encontrar los amigos");
             } else {
-                return docs;
+                var webIds = docs.map((doc) => { return doc.target })
+                console.log
+                res.send(webIds)
+
             }
         }))
 
 
-        var users = friends.map(function (elem) {
-            return elem.requester;
-        })
-
-        await User.find({ 'webId': { $in: users } }, function (err, docs) {
-            if (err) {
-                console.log("Error al encontrar los usuarios dados los amigos")
-            } else {
-                var webIds = docs.map((doc) => { return doc.webId })
-                res.send(webIds);
-            }
-        })
     });
 
 
@@ -265,7 +227,7 @@ router.post("/friends/accept", async (req, res) => {
     router.post("/users/search/name", async (req, res) => {
         const str = req.body.str
         var query =
-            { "nombre": { '$regex': str } }
+            { "nombre": { '$regex': ""+str  } }
             ;
         await User.find(query, function (err, docs) {
             if (err) {

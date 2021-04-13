@@ -13,9 +13,6 @@ class ButtonAddDelete extends React.Component {
         super(props);
         this.loggedUser = props.loggedUser;
         this.webId = props.webId;
-        //console.log("Nuevo perfil (Constructor): " + this.loggedUser + "; " + this.webId)
-        //this.displayText()
-        //this.text = "";
         this.previousWebId=this.webId;
         this.displayText()
         
@@ -42,7 +39,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     checkFriend() {
-        console.log("Comprobando amistad de " + this.loggedUser + " y " + this.webId)
+    
         let aux = getFriendShip(this.loggedUser, this.webId).then(friendship => { return friendship; })
         return aux;
     } 

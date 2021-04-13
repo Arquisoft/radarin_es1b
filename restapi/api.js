@@ -230,8 +230,45 @@ router.post("/friends/list/pending", async (req, res)=>{
     })
 })
 
+// post peticiones pendientes de aveptar por otros
+router.post("/friends/list/request", async (req, res)=>{
+ 
+    const userWebId = req.body.webId
+    var query = { 
+        "requester": userWebId, "status": "pending"  
+   };
+    Friend.find().and(query).exec(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los amigos");
+        } else {
+            var users = docs.map(function (elem) {
+                return (elem.target == userWebId) ? elem.requester : elem.target;
+            }, this)
+            console.log(users)
+            console.log("Peticiones: "+ users)
+            res.send(users)
+        }
+    })
+})
 
-
+//buscar a una persona 
+router.post("/users/search/", async (req, res) => {
+    const userWebId = req.body.webID
+    var query = { 
+        
+        "webId": userWebId
+    };
+    console.log(userWebId)
+    await User.find(query, function(err, docs){
+        if(err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            var webIds=docs.map((doc) => { return doc.webId})
+            console.log(webIds)
+            res.send(webIds);
+        }
+    })
+});
 
 // get friends locations
 router.post("/friends/locations/", async (req, res) => {

@@ -8,7 +8,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PendingFriends from './PendingFriends'
-
+import NewRequest from './NewRequest'
+import SearchFriends from './SearchFriends'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -78,8 +79,8 @@ export default function FullWidthTabs(props) {
           aria-label="full width tabs example"
         >
           <Tab label="Pending" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Search" {...a11yProps(1)} />
+          <Tab label="new Request" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -88,15 +89,16 @@ export default function FullWidthTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <PendingFriends webId={webId}/>
+         <PendingFriends webId={webId}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <SearchFriends webId={webId}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <NewRequest webId={webId}/>
         </TabPanel>
       </SwipeableViews>
     </div>
   );
 }
+ /***/

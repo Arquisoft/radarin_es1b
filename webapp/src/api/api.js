@@ -1,4 +1,3 @@
-
 //REACT_APP_API_URI is an enviroment variable defined in the file .env.development or .env.production
 export async function addUser(webId, nombre){
     
@@ -22,9 +21,12 @@ export async function getUsers(){
     return await response.json()
 }
 
-export async function addLocation(webId,location,state,country,fullName){
+
+// Locations -----------------------------------------------------------------------
+
+
+export async function addLocation(webId,location,state,country){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    console.log("Que fullName llega " + fullName);
     let response = await fetch(apiEndPoint+'/location/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -32,8 +34,7 @@ export async function addLocation(webId,location,state,country,fullName){
             'user':webId, 
             'location':location,
             'state':state,
-            'country':country,
-            'fullName':String(fullName)
+            'country':country
         })
       })
     return await response.json()
@@ -92,6 +93,30 @@ export async function getFriends(webId){
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
             'webId':webId
+        })
+      })
+    return await response.json()
+}
+
+export async function getRequestFriends(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/friends/list/request', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId
+        })
+      })
+    return await response.json()
+}
+
+export async function getSearcUser(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webID':webId, 
         })
       })
     return await response.json()

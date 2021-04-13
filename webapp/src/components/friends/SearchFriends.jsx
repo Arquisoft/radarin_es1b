@@ -41,13 +41,9 @@ class SearchFriends extends React.Component {
 			this.resultQuery=[]
 		  result.map((e) => {
 			this.resultQuery.push(e)
-			
 		  })
-
 		  if(result.length===0){
-			  console.log("No encontré nada :(")
 			  var promise2= getUsers()
-
 			  promise2.then((result2)=>{
 				result2.map((user)=>{
 					this.resultQuery.push(user.webId)

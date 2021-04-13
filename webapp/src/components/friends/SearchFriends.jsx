@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { getUsers } from '../../api/api';
+import { getUsers, getSEarcUser } from '../../api/api';
 import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
 
@@ -34,7 +34,7 @@ class SearchFriends extends React.Component {
 	}
 
     handleChange(event) {
-		this.setState({ friendWebID: event.target.value });
+		this.setState({ searchName: event.target.value });
 	}
 
     searchFriends() {
@@ -59,9 +59,41 @@ class SearchFriends extends React.Component {
 		);
     }
 
-    searchOneFriend(webId, friendsearch) {
+    
+    async handleClick(e) {
+            e.preventDefault();
+            if (this.state.searchName !== "") {
+				console.log("searchName")
+				console.log(this.state.searchName)
+                this.searchOneFriend(this.state.searchName);            
+            }
+            else{
+                this.getUser();
+            }
+
+    }
+	getLIstaItems(){
+		return(
+			this.state.friends.map((e) => (
+				console.log(e)
+			//<Friend key={e.toString()} webId={e}/>
+		))
+		)
+		/**<Friend key={e.toString()} webId={e}/>*/
+	}
+
+
+	searchOneFriend(webId) {
         //api para buscar la persona
-		
+		let aux=[];
+		console.log(getSEarcUser(webId))
+		getSEarcUser(webId).then((result)=>{
+            result.map((e) =>{ 
+				aux.push(e)
+            })
+           
+          });
+		  console.log("ITEMS : ",aux)
 		//convertir a arryy
 		/**
 		 * let au=[];
@@ -81,31 +113,7 @@ class SearchFriends extends React.Component {
 
     }
 
-    
 
-    getLista(){
-        
-    }
-
-    async handleClick(e) {
-            e.preventDefault();
-            if (this.state.friendName !== "") {
-                this.searchOneFriend(this.webID, this.state.searchName);            
-            }
-            else{
-                this.getUser();
-            }
-
-    }
-	getLIstaItems(){
-		return(
-			this.state.friends.map((e) => (
-				console.log(e)
-			//<Friend key={e.toString()} webId={e}/>
-		))
-		)
-		/**<Friend key={e.toString()} webId={e}/>*/
-	}
     render() {
 		return (
 			<div>

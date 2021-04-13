@@ -70,18 +70,6 @@ export default function FullWidthTabs(props) {
     setValue(index);
   };
 
-  /**return (
-    <div className={classes.root}>
-      <Tabs defaultActiveKey="penidngFriends" id="uncontrolled-tab-example">
-        <Tab eventKey="penidngFriends" title="Solicitudes de amistad pendientes">
-          <PendingFriends/>
-        </Tab>
-        <Tab eventKey="serach" title="Buscar Amigos">
-          <SearchFriends/>
-        </Tab>
-      </Tabs>
-    </div>
-  );*/
 
 
 

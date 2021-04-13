@@ -116,7 +116,7 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {getNearbyFriends(pais, getFriends(props.webId)).length>0?<Notifications/>:console.log("No hay amigos cercanos")}
+                    {getNearbyFriends(pais, getFriends(props.webId)).length>0?<Notifications/>:console.log("No tienes amigos cerca :'(")}
                     {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
                     
                     

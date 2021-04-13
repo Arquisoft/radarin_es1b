@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactNotifications from 'react-browser-notifications';
 
 class Notifications extends React.Component {
@@ -18,9 +18,9 @@ class Notifications extends React.Component {
               title="Radarin" // Required
               body="Hay alguien cerca tuyo!"
               icon="favicon.ico"
-              onClick={event => this.handleClick(event)}
             />
 
+            {this.componentDidMount}
             <Button onClick={this.showNotifications}>
                 notify me
             </Button>
@@ -30,6 +30,10 @@ class Notifications extends React.Component {
         )
     }
 
+    componentDidMount() {
+        this.interval = this.showNotifications();
+      }
+
     showNotifications() {
         if(this.n.supported()) this.n.show();
     }
@@ -37,6 +41,10 @@ class Notifications extends React.Component {
     handleClick(event) {
         window.focus()
         this.n.close(event.target.tag);
+    }
+
+    doNothing(){
+
     }
 }
 

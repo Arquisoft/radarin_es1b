@@ -10,6 +10,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
 
+import Notifications from "./components/notifications/Notifications";
+
 class App extends React.Component {
   constructor() {
     super()
@@ -53,7 +55,7 @@ class App extends React.Component {
             </Router>
           </LocationsContextProvider>
 
-
+                <Notifications/>
 
         </div>
 

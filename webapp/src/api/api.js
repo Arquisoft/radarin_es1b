@@ -134,7 +134,7 @@ export async function getSearcByName(str){
 
 
 
-export async function acceptFriend(webId,friendWebId){
+/* export async function acceptFriend(webId,friendWebId){
     
        const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
        let response = await fetch(apiEndPoint+'/friends/accept/', {
@@ -146,7 +146,7 @@ export async function acceptFriend(webId,friendWebId){
            })
          })
        return await response.json()
-   } 
+   }  */
 
    export async function getFriends(webId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

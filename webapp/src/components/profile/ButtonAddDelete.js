@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addFriend, removeFriend, getFriendShip } from '../../api/api';
+import { addFriend, removeFriend, getFriendShip,acceptPendingFor } from '../../api/api';
 import { Button } from '@material-ui/core';
 import friend from '../friendList/friend';
 import Prueba from './ButtonAddOrDelete';
@@ -34,7 +34,7 @@ class ButtonAddDelete extends React.Component {
 
 
     componentDidMount(){
-        this.updateComponent();
+        this.displayText();
     }
 
     handleClick(e) {
@@ -53,17 +53,20 @@ class ButtonAddDelete extends React.Component {
                 
                 if (friendship === null) {
                     return addFriend(this.loggedUser, this.webId).then(res=> {
-                        console.log(res)
                         this.displayText();
                     });
-                    // this.addFriendship(this.loggedUser, this.webId);                    
+                                  
+                }
+                if(friendship.status==="pending" && friendship.requester===this.webId){
+                    return acceptPendingFor(this.loggedUser,this.webId).then(res=> {
+                        this.displayText();
+                    });
                 }
                 else {
                     return removeFriend(this.loggedUser, this.webId).then(res=> {
-                        console.log(res)
                         this.displayText()
                     });
-                    // return this.removeFriendship(this.loggedUser, this.webId);
+                    
                 }
             }
         );
@@ -73,7 +76,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     updateComponent(){
-        this.forceUpdate();
+        
         this.render();
     }
 
@@ -84,12 +87,16 @@ class ButtonAddDelete extends React.Component {
                     this.text = "Añadir amigo"
                     
                 }
+                else if(friendship.status==="pending" && friendship.requester===this.webId){
+                    this.text="Aceptar Solicitud"
+                }
                 else if(friendship.status==="pending")
                     {this.text="Solicitud enviada (Deshacer)"}
                 else  /*(friendship.status === "accepted")*/ {
                     this.text = "Eliminar amigo";                    
                 }
                 this.updateComponent()
+                this.forceUpdate();
                 //this.toUpdate=true;
             }
         )
@@ -97,7 +104,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     render() {        
-        return <Button onClick={this.handleClick.bind(this)}> {this.text} </Button>
+        return <Button onClick={()=>this.handleClick.bind(this)}> {this.text} </Button>
     }
 }
 export default ButtonAddDelete;

@@ -107,21 +107,20 @@ router.post("/friends/check", async (req, res) => {
     }
     let success = false
 
-    let friendship = await Friend.findOne(query, function (err) {
+    let friendship = await Friend.findOne(query, function (err, friends) {
         if (err) {
             console.log("Error, amistad existente")
+            res.send(null)
         }
         else {
             console.log("Acedida amistad: " + userWebId + "; " + friendWebId)
             success = true;
+            
+            res.send(friends)
         }
     })
-    if (success) {
-        res.send(friendship)
-    }
-    else {
-        res.send(null)
-    }
+    
+    
 })
 
 router.post("/friends/remove", async (req, res) => {
@@ -194,8 +193,8 @@ router.post("/friends/accept", async (req, res) => {
                 var users = docs.map(function (elem) {
                     return  elem.target;
                 }, this)
-                console.log(users)
-                console.log("Peticiones: " + users)
+                
+               
                 res.send(users)
             }
         })
@@ -215,7 +214,7 @@ router.post("/friends/accept", async (req, res) => {
                 console.log("Error al encontrar los usuarios dados los amigos")
             } else {
                 var webIds = docs.map((doc) => { return doc.webId })
-                console.log(webIds)
+               
                 res.send(webIds);
             }
         })
@@ -234,7 +233,7 @@ router.post("/friends/accept", async (req, res) => {
                 console.log("Error al encontrar los usuarios dados los amigos")
             } else {
                 var webIds = docs.map((doc) => { return doc.webId })
-                console.log(webIds)
+                
                 res.send(webIds);
             }
         })
@@ -242,8 +241,6 @@ router.post("/friends/accept", async (req, res) => {
 
     // get friends
     router.get("/friends/list/:id", async (req, res) => {
-
-
 
 
     })
@@ -269,7 +266,7 @@ router.post("/friends/accept", async (req, res) => {
                 var users = docs.map(function (elem) {
                     return (elem.target == userWebId) ? elem.requester : elem.target;
                 }, this)
-                console.log(users)
+               
                 res.send(users)
 
             }
@@ -292,8 +289,7 @@ router.post("/friends/accept", async (req, res) => {
                 var users = docs.map(function (elem) {
                     return (elem.target == userWebId) ? elem.requester : elem.target;
                 }, this)
-                console.log(users)
-                console.log("Peticiones: " + users)
+                
                 res.send(users)
             }
         })

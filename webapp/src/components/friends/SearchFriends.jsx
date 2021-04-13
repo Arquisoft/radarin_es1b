@@ -107,8 +107,8 @@ class SearchFriends extends React.Component {
               >
                
                 {this.friendList.map((webId) => (
-                  <Friend key={webId} webId={webId} logged={this.logged}/>
-      
+                  webId!=this.logged?
+                  <Friend key={webId} webId={webId} logged={this.logged}/>:null
                 ))}
       
               </InfiniteScroll>
@@ -143,7 +143,7 @@ class SearchFriends extends React.Component {
     render() {
         return (
             <div>
-				<h1>BuscarAmigos</h1>
+				<h1>Buscar por webId</h1>
 			      {this.searchFriends()}
 			    <hr />
 				{this.getList()}

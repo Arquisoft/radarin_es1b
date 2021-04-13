@@ -13,7 +13,7 @@ class Friends extends React.Component{
     render(){
         return (
             <div>
-                <h1>Amigoos</h1>
+                <h1>Amigos</h1>
                 <p>To be done: Vista para buscar usuarios</p>
                 <div class="contenedorFriends">
                     <FriendsTabs webId={this.webId}/>

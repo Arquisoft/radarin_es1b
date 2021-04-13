@@ -78,9 +78,9 @@ export default function FullWidthTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Pending" {...a11yProps(0)} />
-          <Tab label="Search" {...a11yProps(1)} />
-          <Tab label="new Request" {...a11yProps(2)} />
+          <Tab label="Solicitudes pendientes" {...a11yProps(0)} />
+          <Tab label="Buscar Persona" {...a11yProps(1)} />
+          <Tab label="Solicitudes enviadas" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews

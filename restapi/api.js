@@ -182,23 +182,23 @@ router.post("/friends/accept", async (req, res) => {
 
     // post peticiones enviadas por el usuairo
     router.post("/friends/pending/target", async (req, res) => {
-        const logged= req.body.logged
-        var query = {$and: [
-            {"requester": logged}, {"status": "pending"}]
+        const userWebId= req.body.logged
+        
+        var query = {
+            "requester": userWebId, "status": "pending"
         };
-
-        var friends = await Friend.find((query, function (err, docs) {
+        Friend.find().and(query).exec(function (err, docs) {
             if (err) {
                 console.log("Error al encontrar los amigos");
             } else {
-                var webIds = docs.map((doc) => { return doc.target })
-                console.log
-                res.send(webIds)
-
+                var users = docs.map(function (elem) {
+                    return  elem.target;
+                }, this)
+                console.log(users)
+                console.log("Peticiones: " + users)
+                res.send(users)
             }
-        }))
-
-
+        })
     });
 
 

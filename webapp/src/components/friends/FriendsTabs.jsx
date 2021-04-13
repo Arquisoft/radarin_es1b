@@ -97,9 +97,9 @@ export default function FullWidthTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Solicitudes de amistad pendientes" {...a11yProps(0)} />
-          <Tab label="Buscar Amigos" {...a11yProps(1)} />
-          <Tab label="Nuevas amistades" {...a11yProps(2)} />
+          <Tab label="Aceptar Solicitudes" {...a11yProps(0)} />
+          <Tab label="Buscar Usuarios" {...a11yProps(1)} />
+          <Tab label="Solicitudes enviadas" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews

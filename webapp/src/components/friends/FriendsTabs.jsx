@@ -7,7 +7,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import PendingFriends from './PendingFriends'
+import SearchFriends from './SearchFriends';
+import PendingFriends from './PendingFriends';
+import NewRequest from './NewRequest';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -24,7 +26,9 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>
+          {children}
+          </div>
         </Box>
       )}
     </div>
@@ -66,6 +70,22 @@ export default function FullWidthTabs(props) {
     setValue(index);
   };
 
+  /**return (
+    <div className={classes.root}>
+      <Tabs defaultActiveKey="penidngFriends" id="uncontrolled-tab-example">
+        <Tab eventKey="penidngFriends" title="Solicitudes de amistad pendientes">
+          <PendingFriends/>
+        </Tab>
+        <Tab eventKey="serach" title="Buscar Amigos">
+          <SearchFriends/>
+        </Tab>
+      </Tabs>
+    </div>
+  );*/
+
+
+
+/** */
   return (
     <div className={classes.root}>
       <AppBar position="sticky" color="default">
@@ -77,9 +97,9 @@ export default function FullWidthTabs(props) {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Pending" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Solicitudes de amistad pendientes" {...a11yProps(0)} />
+          <Tab label="Buscar Amigos" {...a11yProps(1)} />
+          <Tab label="Nuevas amistades" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -91,12 +111,13 @@ export default function FullWidthTabs(props) {
           <PendingFriends webId={webId}/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <SearchFriends webId={webId}/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
-        </TabPanel>
+          <NewRequest/>
+        </TabPanel>*
       </SwipeableViews>
     </div>
-  );
+  ); 
+ 
 }

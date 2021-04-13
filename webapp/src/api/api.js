@@ -19,6 +19,7 @@ export async function getUsers(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     console.log(apiEndPoint)
     let response = await fetch(apiEndPoint+'/users/list')
+    //console.log(response);
     return await response.json()
 }
 
@@ -85,7 +86,71 @@ export async function removeFriend(userWebId, friendwebId){
     return await response.json()
 }
 
-export async function getFriends(webId){
+/* export async function getPendingFriends(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/friends/pending/requester', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'userWebId':webId, 
+        })
+      })
+    return await response.json()
+}
+ */
+export async function getTargetFriends(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/friends/pending/target', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'userWebId':webId, 
+        })
+      })
+    return await response.json()
+}
+
+export async function getSearcUser(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webID':webId, 
+        })
+      })
+    return await response.json()
+}
+
+export async function getSearcByName(str){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/name', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'str':str, 
+        })
+      })
+    return await response.json()
+}
+
+
+
+export async function acceptFriend(webId,friendWebId){
+    
+       const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+       let response = await fetch(apiEndPoint+'/friends/accept/', {
+           method: 'POST',
+           headers: {'Content-Type':'application/json'},
+           body: JSON.stringify({
+               'webID':webId, 
+               'friendWebId':friendWebId
+           })
+         })
+       return await response.json()
+   } 
+
+   export async function getFriends(webId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/list', {
         method: 'POST',

@@ -3,7 +3,7 @@ import { getTargetFriends } from '../../api/api';
 import List from "@material-ui/core/List";
 
 import InfiniteScroll from "react-infinite-scroll-component";
-import Target from "./Target";
+
 
 import Friend from "../friendList/friend";
 

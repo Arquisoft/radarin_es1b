@@ -7,7 +7,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from './Friend.module.css';
 
-export default ({webId}) =>
+const LoadingFriend = ({webId}) =>
     <ListItem className={styles.friend}>
       <ListItemIcon>
         <CircularProgress/>
@@ -17,3 +17,5 @@ export default ({webId}) =>
           secondary={webId}
       />
     </ListItem>
+
+export default LoadingFriend

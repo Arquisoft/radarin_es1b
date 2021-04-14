@@ -1,13 +1,9 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
 import { getSearcByName, getUsers } from '../../api/api';
-
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
-
-import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
 class SearchFriends extends React.Component {
 
 	constructor(props) {
@@ -39,13 +35,13 @@ class SearchFriends extends React.Component {
 		this.resultQuery=[]
 		promise.then((result) => {
 			this.resultQuery=[]
-		  result.map((e) => {
+		  result.forEach((e) => {
 			this.resultQuery.push(e)
 		  })
 		  if(result.length===0){
 			  var promise2= getUsers()
 			  promise2.then((result2)=>{
-				result2.map((user)=>{
+				result2.forEach((user)=>{
 					this.resultQuery.push(user.webId)
 				})
 				this.forceUpdate()
@@ -117,7 +113,7 @@ class SearchFriends extends React.Component {
 			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
 			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
 			  {this.resultQuery.map((webId) => (
-				     webId!=this.logged?
+				     webId!==this.logged?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null
 	
 			  ))}

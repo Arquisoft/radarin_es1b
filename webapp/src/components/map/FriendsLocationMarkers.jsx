@@ -18,7 +18,7 @@ export default class FriendsLocationMarkers extends Component {
         
         promise.then((result) =>{
             console.log(result)
-            result.locs.map((e)=>{
+            result.locs.forEach((e)=>{
                 this.state.locs.push(e)
             })
         })

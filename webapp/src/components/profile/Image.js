@@ -5,6 +5,8 @@ import FaceIcon from '@material-ui/icons/Face';
 
 import styles from './Profile.module.css';
 
-export default ({name, src, ...props}) => src ?
+const Image = ({name, src, ...props}) => src ?
     <Avatar alt={name} src={src} className={styles.avatar} {...props}/> :
     <Avatar alt={name} className={styles.avatar} {...props}><FaceIcon/></Avatar>
+
+export default Image

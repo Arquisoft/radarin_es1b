@@ -1,6 +1,6 @@
 import { useLDflex, useWebId } from "@solid/react";
 
-export default (webId) => {
+const useProfile = (webId) => {
 
     //WebId es la direccion del perfil de solid logueado
     //Hace consultas a la información del perfil de solid
@@ -23,3 +23,5 @@ export default (webId) => {
         imageSrc: image || photo
     }
 }
+
+export default useProfile

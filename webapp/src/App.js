@@ -9,7 +9,7 @@ import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
-import { LoggedIn, AuthButton, LoggedOut} from '@solid/react';
+import { LoggedIn } from '@solid/react';
 
 
 

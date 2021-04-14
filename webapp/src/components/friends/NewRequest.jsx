@@ -33,9 +33,9 @@ class NewRequest extends React.Component {
 
     promise.then((result) => {
         this.resultQuery=[]
-      result.map((e) => {
-        this.resultQuery.push(e)
-      })
+        result.forEach((e) => {
+          this.resultQuery.push(e)
+        })
       this.forceUpdate()
     })
   }

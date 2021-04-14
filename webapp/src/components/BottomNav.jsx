@@ -11,7 +11,6 @@ import Friends from './friends/Friends';
 import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
-import * as qs from 'query-string';
 
 const useStyles = makeStyles({
   root: {

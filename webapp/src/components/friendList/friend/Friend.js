@@ -13,7 +13,7 @@ import Image from "../../profile/Image";
 
 
 //Amigo del usuario SOLID
-export default ({webId, fullName, imageSrc}) =>
+const Friend = ({webId, fullName, imageSrc}) =>
   <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>
     <ListItemIcon>
       <Image className={styles.avatar} fullName={fullName} src={imageSrc}/>
@@ -24,3 +24,5 @@ export default ({webId, fullName, imageSrc}) =>
     />
    
   </ListItem>
+
+export default Friend 

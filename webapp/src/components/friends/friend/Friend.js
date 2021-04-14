@@ -20,7 +20,7 @@ function acceptfriends(loggedUserWebID,webId) {
 
 
 //Amigo del usuario SOLID
-export default ({ webId, fullName, imageSrc,loggedUser }) =>
+const Friend = ({ webId, fullName, imageSrc,loggedUser }) =>
   <div>
     
     <ListItem className={styles.friend} button component={Link} to={toProfile(webId)}>
@@ -38,3 +38,5 @@ export default ({ webId, fullName, imageSrc,loggedUser }) =>
     </ListItem>
     <Button onClick={()=>{acceptfriends(loggedUser, webId)}}> Aceptar!</Button>
   </div>
+
+export default Friend

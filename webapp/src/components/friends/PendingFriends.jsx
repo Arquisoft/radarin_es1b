@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-
-
 import Friend from "./friend";
-import Typography from "@material-ui/core/Typography";
-
 import { getPendingFriends } from '../../api/api';
 
 export default class PendingFriends extends Component {
@@ -32,7 +28,7 @@ export default class PendingFriends extends Component {
     var promise = getPendingFriends(this.props.webId)
 
     promise.then((result) => {
-      result.map((e) => {
+      result.forEach((e) => {
         this.friendList.push(e)
       })
       this.forceUpdate()

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { addFriend, removeFriend, getFriendShip,acceptPendingFor } from '../../api/api';
 import { Button } from '@material-ui/core';
-import friend from '../friendList/friend';
-import Prueba from './ButtonAddOrDelete';
 
 
 
@@ -78,7 +76,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     displayText() {
-        let ret = this.checkFriend().then(
+        this.checkFriend().then(
             friendship => {
                 if (friendship === null) {
                     this.text = "Añadir amigo"

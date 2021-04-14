@@ -62,12 +62,14 @@ const Map = (props) => {
                     case "country":
                       country = response.results[0].address_components[i].long_name;
                       break;
+                    default:
+                        break;
                   }
                 }
               }
-              if (profile.fullName!=undefined) {
+              if (profile.fullName!==undefined) {
 
-                const apicall = addLocation(
+                addLocation(
                     props.webId, [latlng.lat, latlng.lng],
                     state, country, profile.fullName);
                   
@@ -93,7 +95,7 @@ const Map = (props) => {
                 }
             })
 
-              return meetPosition!=undefined?(
+              return meetPosition!==undefined?(
                 <Marker position={meetPosition} icon={iconMeet}>
                     <Popup>
                         Ubicación del nuevo meet <br />
@@ -115,10 +117,12 @@ const Map = (props) => {
                     case "country":
                       country = response.results[0].address_components[i].long_name;
                       break;
+                    default:
+                      break;
                   }
                 }
               }
-              const apicall = addMeet(
+              addMeet(
                   props.webId, latlng,
                   state, country);
             },

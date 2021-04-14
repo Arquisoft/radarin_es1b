@@ -3,7 +3,7 @@ import LoadingFriend from "./LoadingFriend";
 import React from "react";
 
 //recibe los parametros y si no estan cargando los añade al componente amigo
-export default ({webId, fullName, imageSrc,loggedUserWebID, pending}) => (
+const Container = ({webId, fullName, imageSrc,loggedUserWebID, pending}) => (
     pending ?
         <LoadingFriend webId={`${webId}`}/> :
         <Friend
@@ -13,3 +13,5 @@ export default ({webId, fullName, imageSrc,loggedUserWebID, pending}) => (
             loggedUser={loggedUserWebID}
         />
 );
+
+export default Container

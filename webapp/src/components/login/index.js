@@ -6,7 +6,7 @@ import useProfile from "../profile/useProfile";
 import { LoggedIn} from '@solid/react';
 import AddUsersContainer from "../login/AddUsersContainer"
 
-export default () => {
+const Index = () => {
     //useWebId() te devuelve el url del perfil logeado con una String , que cambia automaticamente cuando el usuario se deslogea o cambia de perfil 
     const webId = useWebId()
     // almacena en profile las fotos, name , url ...
@@ -20,3 +20,5 @@ export default () => {
     </span> 
     ;
 }
+
+export default Index

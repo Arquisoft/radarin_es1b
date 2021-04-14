@@ -8,6 +8,7 @@ import Geocode from "react-geocode";
 import MeetsMenu from "./MeetsMenu"
 import {iconMeet} from "./markers/IconMeet"
 import MainMap from "./MainMap"
+import useProfile from "../profile/useProfile";
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -23,10 +24,12 @@ const Map = (props) => {
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
     const { seeFriends } = useContext(LocationsContext);
     const { meetPosition, setMeetPosition } = useContext(LocationsContext);
-    
+    const profile = useProfile(props.webId)
+
     function UpdateUserLocation() {
        /* const map = useMapEvents({
             click() {
+                console.log("NOMBRE EN EL MAP" + profile.fullName);
                 map.locate()
             },
             locationfound(e) {
@@ -62,12 +65,18 @@ const Map = (props) => {
                     case "country":
                       country = response.results[0].address_components[i].long_name;
                       break;
+                    default:
+                        break;
                   }
                 }
               }
-              const apicall = addLocation(
-                  props.webId, [latlng.lat, latlng.lng],
-                  state, country);
+              if (profile.fullName!==undefined) {
+
+                addLocation(
+                    props.webId, [latlng.lat, latlng.lng],
+                    state, country, profile.fullName);
+                  
+              }
             },
             (error) => {
               console.log("No se ha podido guardar la localización")
@@ -89,7 +98,7 @@ const Map = (props) => {
                 }
             })
 
-              return meetPosition!=undefined?(
+              return meetPosition!==undefined?(
                 <Marker position={meetPosition} icon={iconMeet}>
                     <Popup>
                         Ubicación del nuevo meet <br />
@@ -111,10 +120,12 @@ const Map = (props) => {
                     case "country":
                       country = response.results[0].address_components[i].long_name;
                       break;
+                    default:
+                      break;
                   }
                 }
               }
-              const apicall = addMeet(
+              addMeet(
                   props.webId, latlng,
                   state, country);
             },

@@ -15,10 +15,8 @@ class AddUsersContainer extends React.Component{
 
     async fetchUsers(){
           try {
-              const resp = await addUser(this.webId,this.fullName);
-              console.log(resp);
-              console.log("Hago la llamada")
-          
+              await addUser(this.webId,this.fullName);
+
           } catch (e) {
               console.log("Error adding users to restapi.")
            }
@@ -28,7 +26,7 @@ class AddUsersContainer extends React.Component{
   
     render(){
       return(
-            <h1></h1>
+            null
       )
     }
   }

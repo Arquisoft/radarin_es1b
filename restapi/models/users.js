@@ -6,4 +6,5 @@ const schema = mongoose.Schema({
     nombre: String
 })
 
+
 module.exports = mongoose.model("User", schema)

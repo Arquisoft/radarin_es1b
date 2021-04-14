@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default SartPage => () => {
+const StartPage = () => {
   const classes = useStyles();
   return  <Grid container spacing={3} alignItems="center" justify="center" direction="column">
     <Grid container item xs={12} sm={9} md={6} spacing={0} justify="center"
@@ -89,6 +89,7 @@ export default SartPage => () => {
         </CardActions>
       </Card>
     </Grid>
-  </Grid>;
+  </Grid>
 }
 
+export default StartPage

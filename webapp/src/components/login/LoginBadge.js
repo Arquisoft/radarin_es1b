@@ -2,15 +2,12 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
 import Image from '../profile/Image';
-import {addUser} from "../../api/api";
 import styles from './Login.module.css';
-import {toProfile} from "../../routing";
 
 //Cuando se activa, Tooltips muestran una etiqueta de texto que identifica un elemento, como una descripción de su función.ToolTip etiqueta le pasa la url o ...
 //Los Chips le permiten a los usuarios introducir información, hacer selecciones, filtrar contenido, o activar acciones.
-export default ({fullName, imageSrc, webId}) =>
+const LoginBadge = ({fullName, imageSrc, webId}) =>
   <Tooltip title={webId || '...'}>
     <Chip
         className={styles.badge} //añade un margen a la etiqueta 
@@ -22,5 +19,6 @@ export default ({fullName, imageSrc, webId}) =>
     
   </Tooltip>
 
+export default LoginBadge
 
 

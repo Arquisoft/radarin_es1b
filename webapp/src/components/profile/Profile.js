@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import FriendList from '../friendList';
@@ -13,7 +12,7 @@ import styles from "./Profile.module.css";
 
 //default inicializa a default los valores de los parametros si no se los has pasado explicitamente
 // Este componente corresponde a la parte de la interfaz grafica del perfil
-export default ({ webId, fullName, imageSrc, loggedUser }) =>
+const Profile = ({ webId, fullName, imageSrc, loggedUser }) =>
   <Grid container
     spacing={2}
     direction="row"
@@ -48,3 +47,4 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
     </Grid>
   </Grid>
 
+export default Profile

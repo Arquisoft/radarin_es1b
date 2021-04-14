@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "@material-ui/core/Button";
 
-import { LoggedIn, AuthButton, LoggedOut} from '@solid/react';
+import { LoggedIn, AuthButton} from '@solid/react';
 import LoginBadge from './LoginBadge';
 
 
@@ -19,7 +19,7 @@ export const AuthButtonComponent = React.forwardRef((props, ref) =>
 </span>)
 
 //desde index.js le pasamos a esta función los datos extraidos que solicite, en este caso fullname, imageSrc ...
-export default ({fullName, imageSrc, webId}) => {
+const Container = ({fullName, imageSrc, webId}) => {
     return <span>
         {/* LoggedIn solo se muestra si el usuario esta logueado */}
         <LoggedIn>   
@@ -36,3 +36,5 @@ export default ({fullName, imageSrc, webId}) => {
         </Button>
     </span>;
 };
+
+export default Container

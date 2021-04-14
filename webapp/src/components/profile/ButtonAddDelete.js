@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { addFriend, removeFriend, getFriendShip } from '../../api/api';
+import React from 'react';
+import { addFriend, removeFriend, getFriendShip,acceptPendingFor } from '../../api/api';
 import { Button } from '@material-ui/core';
-import friend from '../friendList/friend';
-import Prueba from './ButtonAddOrDelete';
 
 
 
@@ -13,9 +11,6 @@ class ButtonAddDelete extends React.Component {
         super(props);
         this.loggedUser = props.loggedUser;
         this.webId = props.webId;
-        //console.log("Nuevo perfil (Constructor): " + this.loggedUser + "; " + this.webId)
-        //this.displayText()
-        //this.text = "";
         this.previousWebId=this.webId;
         this.displayText()
         
@@ -34,7 +29,7 @@ class ButtonAddDelete extends React.Component {
 
 
     componentDidMount(){
-        this.updateComponent();
+        this.displayText();
     }
 
     handleClick(e) {
@@ -42,7 +37,7 @@ class ButtonAddDelete extends React.Component {
     }
 
     checkFriend() {
-        console.log("Comprobando amistad de " + this.loggedUser + " y " + this.webId)
+    
         let aux = getFriendShip(this.loggedUser, this.webId).then(friendship => { return friendship; })
         return aux;
     } 
@@ -53,17 +48,20 @@ class ButtonAddDelete extends React.Component {
                 
                 if (friendship === null) {
                     return addFriend(this.loggedUser, this.webId).then(res=> {
-                        console.log(res)
                         this.displayText();
                     });
-                    // this.addFriendship(this.loggedUser, this.webId);                    
+                                  
+                }
+                if(friendship.status==="pending" && friendship.requester===this.webId){
+                    return acceptPendingFor(this.loggedUser,this.webId).then(res=> {
+                        this.displayText();
+                    });
                 }
                 else {
                     return removeFriend(this.loggedUser, this.webId).then(res=> {
-                        console.log(res)
                         this.displayText()
                     });
-                    // return this.removeFriendship(this.loggedUser, this.webId);
+                    
                 }
             }
         );
@@ -73,16 +71,19 @@ class ButtonAddDelete extends React.Component {
     }
 
     updateComponent(){
-        this.forceUpdate();
+        
         this.render();
     }
 
     displayText() {
-        let ret = this.checkFriend().then(
+        this.checkFriend().then(
             friendship => {
                 if (friendship === null) {
                     this.text = "Añadir amigo"
                     
+                }
+                else if(friendship.status==="pending" && friendship.requester===this.webId){
+                    this.text="Aceptar Solicitud"
                 }
                 else if(friendship.status==="pending")
                     {this.text="Solicitud enviada (Deshacer)"}
@@ -90,6 +91,7 @@ class ButtonAddDelete extends React.Component {
                     this.text = "Eliminar amigo";                    
                 }
                 this.updateComponent()
+                this.forceUpdate();
                 //this.toUpdate=true;
             }
         )

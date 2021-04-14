@@ -1,11 +1,13 @@
-import React, {  useContext } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {  MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import { addLocation, addMeet } from '../../api/api';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
 import MeetsMenu from "./MeetsMenu"
 import {iconMeet} from "./markers/IconMeet"
+import MainMap from "./MainMap"
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -13,16 +15,17 @@ Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
-
-
 const Map = (props) => {
+    const [map, setMap] = useState(null);
+
+
     const { position, setPosition } = useContext(LocationsContext);
     const { createMeet, setCreateMeet } = useContext(LocationsContext);
     const { seeFriends } = useContext(LocationsContext);
     const { meetPosition, setMeetPosition } = useContext(LocationsContext);
     
     function UpdateUserLocation() {
-        const map = useMapEvents({
+       /* const map = useMapEvents({
             click() {
                 map.locate()
             },
@@ -31,7 +34,7 @@ const Map = (props) => {
                 setPosition(e.latlng)
                 map.flyTo(e.latlng, map.getZoom())
             },
-        })
+        })*/
 
         if(position){
             return (
@@ -121,6 +124,7 @@ const Map = (props) => {
             }
         );
     }
+ 
 
     return (
         
@@ -132,19 +136,7 @@ const Map = (props) => {
             </div>
 
             <div>
-                <MapContainer center={[43.36, -5.90]}
-                              zoom={10}
-                              scrollWheelZoom={true}>
-                    <CreateMeet />
-                    <UpdateUserLocation/>
-                    <TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-
-                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
-
-                </MapContainer>
+                <MainMap />
             </div>
         </div>
     )

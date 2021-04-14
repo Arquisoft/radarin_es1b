@@ -37,7 +37,7 @@ export default class FriendsLocationMarkers extends Component {
             )
         }
         return (
-            <div></div>
+            null
         )
     }
 }

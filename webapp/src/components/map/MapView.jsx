@@ -17,7 +17,6 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Map = (props) => {
-    const [map, setMap] = useState(null);
 
 
     const { position, setPosition } = useContext(LocationsContext);
@@ -143,11 +142,7 @@ const Map = (props) => {
             {console.log("Rerenderizando")}
             <h1>Ubicación del usuario</h1>
             <div>
-                <MeetsMenu />
-            </div>
-
-            <div>
-                <MainMap />
+                <MainMap webId={props.webId}/>
             </div>
         </div>
     )

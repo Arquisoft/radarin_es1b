@@ -3,13 +3,12 @@ import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } 
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const Map = (props) => {
     const [map, setMap] = useState(null);
     const { position, setPosition } = useContext(LocationsContext);
-
-    const { BaseLayer } = LayersControl;
-
     const { seeFriends } = useContext(LocationsContext);
 
     useEffect(() => {
@@ -27,9 +26,8 @@ const Map = (props) => {
         const latlng = e.latlng;
         const radius = e.accuracy;
         setPosition(e)
-        console.log("blablbllablablablabl"+e.latlng)
-        //L.marker(e.latlng).addTo(map);
     }
+    
 
     return (  
             <div>
@@ -52,9 +50,27 @@ const Map = (props) => {
                             :null}
                         </LayersControl.Overlay>
                         <LayersControl.Overlay checked name="Mostrar Amigos">
-                            <FriendsLocationMarkers webId={props.webId}/>
+                            
+                         <FriendsLocationMarkers webId={props.webId}/>
                         </LayersControl.Overlay>
                         <LayersControl.Overlay checked name="Mostrar Meets">
+                            {position?
+                                <Marker position={position.latlng}>
+                                    <Popup>
+                                        Esta es tu posicion actual
+                                    </Popup>
+                                </Marker>
+                            :null}
+                        </LayersControl.Overlay>
+                        <LayersControl.Overlay checked name="XDDDDDDDDDD">
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
                             {position?
                                 <Marker position={position.latlng}>
                                     <Popup>

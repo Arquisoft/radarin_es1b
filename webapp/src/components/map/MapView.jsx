@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useContext } from 'react'
-import {  MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
+import React, { useContext } from 'react'
+import {   Marker, Popup, useMapEvents } from 'react-leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import { addLocation, addMeet } from '../../api/api';
-import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Geocode from "react-geocode";
-import MeetsMenu from "./MeetsMenu"
 import {iconMeet} from "./markers/IconMeet"
 import MainMap from "./MainMap"
 import useProfile from "../profile/useProfile";

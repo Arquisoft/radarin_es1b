@@ -23,7 +23,6 @@ export async function getUsers(){
 
 export async function addLocation(webId,location,state,country,fullName){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    console.log("Que fullName llega " + fullName);
     let response = await fetch(apiEndPoint+'/location/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -44,7 +43,6 @@ export async function addLocation(webId,location,state,country,fullName){
 
 
 export async function getFriendsLocations(webId){
-    console.log("Pidiendo localizacionies de los amigos...")
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/locations', {
         method: 'POST',

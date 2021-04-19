@@ -26,7 +26,7 @@ const Map = (props) => {
     function UpdateUserLocation() {
         const map = useMapEvents({
             click() {
-                console.log("NOMBRE EN EL MAP" + profile.fullName);
+                //console.log("NOMBRE EN EL MAP" + profile.fullName);
                 map.locate()
             },
             locationfound(e) {
@@ -76,8 +76,8 @@ const Map = (props) => {
               }
             },
             (error) => {
-              console.log("No se ha podido guardar la localización")
-              console.error(error);
+              Console.log("No se ha podido guardar la localización")
+              Console.error(error);
             }
         );
     }
@@ -86,7 +86,6 @@ const Map = (props) => {
             const map = useMapEvents({
                 click(e) {
                     map.locate()
-                    console.log(e.latlng)
                     if(createMeet){
                         setMeetPosition(e.latlng)  
                         saveMeet(e.latlng)                     
@@ -136,7 +135,7 @@ const Map = (props) => {
     return (
         
         <div style={{ marginBottom: 10, position: 'relative' }}>
-            {console.log("Rerenderizando")}
+            {Console.log("Rerenderizando")}
             <h1>Ubicación del usuario</h1>
             <div>
                 <MeetsMenu />
@@ -153,7 +152,7 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
+                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:Console.log("Amigos " + seeFriends)}
 
                 </MapContainer>
             </div>

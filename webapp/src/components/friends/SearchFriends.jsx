@@ -66,11 +66,10 @@ class SearchFriends extends React.Component {
 	handleClick(e) {
 		e.preventDefault();
 		if (this.state.searchName !== "") {
-			console.log(this.state.searchName)
 			this.fetchData()      
 		}
 		else{
-			console.log("No hay texto para buscar")
+			console.error("No hay texto para buscar")
 		} 
 
 

@@ -15,15 +15,13 @@ export async function addUser(webId, nombre){
 
 export async function getUsers(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    console.log(apiEndPoint)
     let response = await fetch(apiEndPoint+'/users/list')
-    //console.log(response);
     return await response.json()
 }
 
 export async function addLocation(webId,location,state,country,fullName){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    console.log("Que fullName llega " + fullName);
+    //console.log("Que fullName llega " + fullName);
     let response = await fetch(apiEndPoint+'/location/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -44,7 +42,6 @@ export async function addLocation(webId,location,state,country,fullName){
 
 
 export async function getFriendsLocations(webId){
-    console.log("Pidiendo localizacionies de los amigos...")
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/locations', {
         method: 'POST',
@@ -57,7 +54,7 @@ export async function getFriendsLocations(webId){
 }
 
 export async function addFriend(userWebId, friendwebId){
-    console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
+    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/add', {
         method: 'POST',
@@ -71,7 +68,7 @@ export async function addFriend(userWebId, friendwebId){
 }
 
 export async function removeFriend(userWebId, friendwebId){
-    console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
+    //console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/friends/remove', {
         method: 'POST',
@@ -174,7 +171,7 @@ export async function getPendingFriends(webId){
 
 export async function acceptPendingFor(loggedUserWebID,webId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    console.log("Aceptando: "+ webId)
+    //console.log("Aceptando: "+ webId)
     let response = await fetch(apiEndPoint+'/friends/accept', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -204,7 +201,6 @@ export async function getFriendShip(userWebId, friendwebId){
     catch{
          answer= null;
     }
-    //console.log(answer)
     return  answer;
 }
 
@@ -212,7 +208,6 @@ export async function getFriendShip(userWebId, friendwebId){
 
 // Meets ------------------------------------- /
 export async function addMeet(webId,location,state,country){
-    console.log("wbaide" +webId)
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/meets/add', {
         method: 'POST',

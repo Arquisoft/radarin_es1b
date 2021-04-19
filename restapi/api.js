@@ -50,7 +50,7 @@ router.post("/location/add", async (req, res) => {
         newEntry.fullName = fullName;
         await Location.findOneAndUpdate(query, newEntry, function (err, doc) {
             if (err) {
-                console.log("Something wrong when updating data!");
+                console.error("Something wrong when updating data!");
             } else {
                 console.log(doc);
             }
@@ -71,7 +71,7 @@ router.post("/location/add", async (req, res) => {
 
 //Solicitud de amistad
 router.post("/friends/add", async (req, res) => {
-    console.log("Añadiendo amigos desde restApi")
+    //console.log("Añadiendo amigos desde restApi")
     let userWebId = req.body.webId
     let friendWebId = req.body.friendwebId
 
@@ -88,7 +88,7 @@ router.post("/friends/add", async (req, res) => {
             status: "pending"
         })
         await newFriend.save()
-        console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
+        //console.log("Amistad añadida!: " + userWebId + "; " + friendWebId);
 
         res.send(newFriend);
     }
@@ -109,11 +109,10 @@ router.post("/friends/check", async (req, res) => {
 
     let friendship = await Friend.findOne(query, function (err, friends) {
         if (err) {
-            console.log("Error, amistad existente")
+            //("Error, amistad existente")
             res.send(null)
         }
         else {
-            console.log("Acedida amistad: " + userWebId + "; " + friendWebId)
             success = true;
             
             res.send(friends)
@@ -211,7 +210,7 @@ router.post("/friends/accept", async (req, res) => {
         console.log(userWebId)
         await User.find(query, function (err, docs) {
             if (err) {
-                console.log("Error al encontrar los usuarios dados los amigos")
+                console.error("Error al encontrar los usuarios dados los amigos")
             } else {
                 var webIds = docs.map((doc) => { return doc.webId })
                
@@ -321,13 +320,12 @@ router.post("/friends/accept", async (req, res) => {
                 var users = docs.map(function (elem) {
                     return (elem.target == userWebId) ? elem.requester : elem.target;
                 }, this)
-                console.log(users)
 
                 Location.find({ 'user': { $in: users } }, function (err, docs) {
                     if (err) {
-                        console.log("Error al encontrar los usuarios dados los amigos")
+                        res.send({ error: "Error al encontrar los usuarios dados los amigos"})
+                        //console.log("Error al encontrar los usuarios dados los amigos")
                     } else {
-                        console.log(docs);
                         res.send({ "locs": docs });
                     }
                 })
@@ -351,10 +349,8 @@ router.post("/friends/accept", async (req, res) => {
 
         if (creator) {
             let newEntry = await Meet.findOne({ creator: creator._id, location: [location.lat, location.lng] })
-
-            console.log("Alla")
             if (!newEntry) {
-                console.log(creator._id)
+                console.log(creator._id);
                 newEntry = new Meet({
                     user: mongoose.Types.ObjectId(creator._id),
                     location: [location.lat, location.lng],

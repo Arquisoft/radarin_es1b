@@ -9,8 +9,6 @@ class AddUsersContainer extends React.Component{
       super(props);
       this.webId = props.webId;
       this.fullName = props.fullName;
-      console.log("WebId " + this.webId);
-      console.log("nombre " + this.fullName);
     }
 
     async fetchUsers(){
@@ -18,7 +16,7 @@ class AddUsersContainer extends React.Component{
               await addUser(this.webId,this.fullName);
 
           } catch (e) {
-              console.log("Error adding users to restapi.")
+              Console.log("Error adding users to restapi.")
            }
       }
 

@@ -38,7 +38,8 @@ export default class FriendList extends Component {
   }
 
   componentDidUpdate(){
-    if(true){
+    var aucx=true;
+    if(aucx){
       this.friendList=[]
       this.fetchData();
     }

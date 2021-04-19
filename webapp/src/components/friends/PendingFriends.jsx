@@ -36,7 +36,8 @@ export default class PendingFriends extends Component {
   }
 
   componentDidUpdate(){
-    if(true){
+    var aucx=true;
+    if(aucx){
       this.friendList=[]
       this.fetchData();
     }

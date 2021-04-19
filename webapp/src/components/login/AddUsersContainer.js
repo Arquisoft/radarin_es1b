@@ -16,7 +16,7 @@ class AddUsersContainer extends React.Component{
               await addUser(this.webId,this.fullName);
 
           } catch (e) {
-              Console.log("Error adding users to restapi.")
+              //console.log("Error adding users to restapi.")
            }
       }
 

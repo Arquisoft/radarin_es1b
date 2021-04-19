@@ -76,8 +76,8 @@ const Map = (props) => {
               }
             },
             (error) => {
-              Console.log("No se ha podido guardar la localización")
-              Console.error(error);
+              //console.log("No se ha podido guardar la localización")
+              console.error(error);
             }
         );
     }
@@ -135,7 +135,9 @@ const Map = (props) => {
     return (
         
         <div style={{ marginBottom: 10, position: 'relative' }}>
-            {Console.log("Rerenderizando")}
+            {
+            //console.log("Rerenderizando")
+          }
             <h1>Ubicación del usuario</h1>
             <div>
                 <MeetsMenu />
@@ -152,7 +154,9 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:Console.log("Amigos " + seeFriends)}
+                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:
+                    //console.log("Amigos " + seeFriends)
+                    null}
 
                 </MapContainer>
             </div>

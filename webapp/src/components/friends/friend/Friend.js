@@ -15,7 +15,8 @@ import { Button } from "@material-ui/core";
 import { acceptPendingFor } from '../../../api/api'
 
 function acceptfriends(loggedUserWebID,webId) {
-  acceptPendingFor(loggedUserWebID, webId).then(res=>{Console.log(res)})
+  acceptPendingFor(loggedUserWebID, webId)
+  //.then(res=>{console.log(res)})
 }
 
 

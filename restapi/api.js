@@ -50,9 +50,9 @@ router.post("/location/add", async (req, res) => {
         newEntry.fullName = fullName;
         await Location.findOneAndUpdate(query, newEntry, function (err, doc) {
             if (err) {
-                console.error("Something wrong when updating data!");
+                //console.error("Something wrong when updating data!");
             } else {
-                console.log(doc);
+               // console.log(doc);
             }
         });
     } else {
@@ -187,7 +187,7 @@ router.post("/friends/accept", async (req, res) => {
         };
         Friend.find().and(query).exec(function (err, docs) {
             if (err) {
-                console.log("Error al encontrar los amigos");
+               // console.log("Error al encontrar los amigos");
             } else {
                 var users = docs.map(function (elem) {
                     return  elem.target;
@@ -229,7 +229,7 @@ router.post("/friends/accept", async (req, res) => {
             ;
         await User.find(query, function (err, docs) {
             if (err) {
-                console.log("Error al encontrar los usuarios dados los amigos")
+                //console.log("Error al encontrar los usuarios dados los amigos")
             } else {
                 var webIds = docs.map((doc) => { return doc.webId })
                 

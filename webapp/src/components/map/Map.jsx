@@ -77,7 +77,7 @@ const Map = (props) => {
             },
             (error) => {
               //console.log("No se ha podido guardar la localización")
-              console.error(error);
+              //console.error(error);
             }
         );
     }
@@ -126,8 +126,8 @@ const Map = (props) => {
                   state, country);
             },
             (error) => {
-              console.log("No se ha podido guardar la localización")
-              console.error(error);
+              //console.log("No se ha podido guardar la localización")
+              //console.error(error);
             }
         );
     }

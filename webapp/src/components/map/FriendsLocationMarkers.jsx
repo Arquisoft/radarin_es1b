@@ -17,7 +17,6 @@ export default class FriendsLocationMarkers extends Component {
         var promise = getFriendsLocations(this.state.webId)
         
         promise.then((result) =>{
-            Console.log(result)
             result.locs.forEach((e)=>{
                 this.state.locs.push(e)
             })

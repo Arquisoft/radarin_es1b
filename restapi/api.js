@@ -135,9 +135,9 @@ router.post("/friends/remove", async (req, res) => {
 
     let friendship = await Friend.deleteMany(query, function (err) {
         if (err) {
-            console.log("Something wrong when deleting friendship!");
+            //console.log("Something wrong when deleting friendship!");
         } else {
-            console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
+            //console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
         }
     });
 
@@ -260,7 +260,7 @@ router.post("/friends/accept", async (req, res) => {
         };
         Friend.find().and(query).exec(function (err, docs) {
             if (err) {
-                console.log("Error al encontrar los amigos");
+                //console.log("Error al encontrar los amigos");
             } else {
                 var users = docs.map(function (elem) {
                     return (elem.target == userWebId) ? elem.requester : elem.target;

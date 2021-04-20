@@ -84,7 +84,7 @@ const Start = () => {
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" component="a" href="https://solid.mit.edu/">
-            Learn More
+            Aprender más
           </Button>
         </CardActions>
       </Card>

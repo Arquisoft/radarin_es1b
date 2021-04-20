@@ -24,7 +24,7 @@ const Container = ({fullName, imageSrc, webId}) => {
         {/* LoggedIn solo se muestra si el usuario esta logueado */}
         <LoggedIn>   
           
-            <LoginBadge webId={webId} fullName={fullName ? fullName.toString() : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
+            <LoginBadge webId={webId} fullName={fullName ? fullName.toString().split(" ")[0] : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
           
         {/* LoginnBadge es el boton de acceso al perfin de usuario una vez logueado el usuario , el componente  LoginBadge crea el boton que recibe como parametro webId,nombre y foto del usuario logueado */}
         

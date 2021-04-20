@@ -62,23 +62,6 @@ const Map = (props) => {
                                 </Marker>
                             :null}
                         </LayersControl.Overlay>
-                        <LayersControl.Overlay checked name="XDDDDDDDDDD">
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
-                            </Select>
-                            {position?
-                                <Marker position={position.latlng}>
-                                    <Popup>
-                                        Esta es tu posicion actual
-                                    </Popup>
-                                </Marker>
-                            :null}
-                        </LayersControl.Overlay>
                     </LayersControl>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

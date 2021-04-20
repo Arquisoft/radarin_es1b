@@ -15,18 +15,20 @@ const Map = (props) => {
         if (map) {
             console.log("Balllallalala")
             map.locate({
-                setView: true
+                setView: false
             })
             map.on('locationfound',handleOnLocationFound)
             
         }
-    },[])
+
+    },[map])
 
     function handleOnLocationFound(e) {
         const latlng = e.latlng;
         const radius = e.accuracy;
         setPosition(e)
     }
+
     
 
     return (  

@@ -14,7 +14,6 @@ const LoadingFriend = ({webId}) =>
       </ListItemIcon>
       <ListItemText
           primary="Cargando..."
-          secondary={webId}
       />
     </ListItem>
 

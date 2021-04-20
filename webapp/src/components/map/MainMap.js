@@ -5,6 +5,7 @@ import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import Friend from "./markers/FriendPopupManager"
 
 const Map = (props) => {
     const [map, setMap] = useState(null);
@@ -46,7 +47,7 @@ const Map = (props) => {
                             {position?
                                 <Marker position={position.latlng}>
                                     <Popup>
-                                        Esta es tu posicion actual
+                                        <Friend webId={props.webId}/>
                                     </Popup>
                                 </Marker>
                             :null}
@@ -57,11 +58,7 @@ const Map = (props) => {
                         </LayersControl.Overlay>
                         <LayersControl.Overlay checked name="Mostrar Meets">
                             {position?
-                                <Marker position={position.latlng}>
-                                    <Popup>
-                                        Esta es tu posicion actual
-                                    </Popup>
-                                </Marker>
+                                null
                             :null}
                         </LayersControl.Overlay>
                     </LayersControl>

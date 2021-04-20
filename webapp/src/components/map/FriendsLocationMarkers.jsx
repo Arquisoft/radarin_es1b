@@ -3,7 +3,7 @@ import { LayerGroup, Marker, Popup } from 'react-leaflet';
 import { getFriendsLocations } from '../../api/api';
 import { iconPerson } from "./markers/IconPerson"
 
-import Friend from "../friendList/friend/index"
+import Friend from "./markers/FriendPopupManager"
 
 export default class FriendsLocationMarkers extends Component {
     constructor(props){

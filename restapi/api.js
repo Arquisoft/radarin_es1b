@@ -17,6 +17,7 @@ router.post("/users/add", async (req, res) => {
 
     let nombre = req.body.nombre;
     let webId = req.body.webId;
+    let admin = req.body.admin;
 
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
@@ -25,7 +26,8 @@ router.post("/users/add", async (req, res) => {
     else {
         user = new User({
             webId: webId,
-            nombre: nombre
+            nombre: nombre,
+            admin: admin
         })
         await user.save()
         res.send(user)

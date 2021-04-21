@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
     webId: String,
-    nombre: String
+    nombre: String,
+    admin: String
 })
 
 

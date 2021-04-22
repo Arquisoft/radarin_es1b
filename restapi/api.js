@@ -124,6 +124,31 @@ router.post("/friends/check", async (req, res) => {
     
 })
 
+router.post("/admin/check", async (req, res) => {
+
+    let userWebId = req.body.webId
+
+    console.log("estoy llegando ? " + userWebId)
+
+    var query = {
+
+        "webId": userWebId
+    };
+
+
+    await User.find(query, function (err, docs) {
+        if (err) {
+             console.error("Error al encontrar el usuario")
+        } else {
+             var admin = docs.map((doc) => { return doc.admin })
+             console.log("Aqui envia esto -> " + admin)
+             res.send(admin);
+        }
+    })
+
+})
+
+
 router.post("/friends/remove", async (req, res) => {
     let userWebId = req.body.webId
     let friendWebId = req.body.friendwebId

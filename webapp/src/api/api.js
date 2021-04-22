@@ -205,6 +205,29 @@ export async function getFriendShip(userWebId, friendwebId){
     return  answer;
 }
 
+export async function getAdmin(userWebId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+
+    console.log("envio este webId " + userWebId)
+
+    let response = await fetch(apiEndPoint+'/admin/check', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            
+            'webId':userWebId 
+        })
+      })
+      let answer;
+    try{
+         answer= await response.json()
+    }
+    catch{
+         answer= null;
+    }
+    console.log("isAdmin devuelve " + answer)
+    return  answer;
+}
 
 
 // Meets ------------------------------------- /

@@ -54,13 +54,14 @@ function Messages(props) {
         fetchData()
     }, [update])
 
-    async function fetchData() {
-        var promise = getMessages(props.webId, props.target)
-    
-        .then((result) => {
+    async function fetchData() {       
+ 
+        getMessages(props.webId, props.target).then((result) => {
+            setMsgs([])
           result.forEach((e) => {
-            setMsgs([...msgs, e]);
-          })
+            setMsgs(msgs => [...msgs, e]);
+          })          
+          setUpdate(!update)
         })
         console.log(msgs)
       }
@@ -71,17 +72,17 @@ function Messages(props) {
         <div>
             <List >
                 <InfiniteScroll
-                    className={classes.messageArea}
+                    
                     dataLength={msgs.length}
                     loader={<h4>Cargando...</h4>}
                     height={20}
                     >
-
+                    </InfiniteScroll>
+                    
                     {msgs.map((msg, index) => {
                         return(<SingleMsg webId={props.webId} msg={msg} index={index} />)
                     })}
 
-                </InfiniteScroll>
             </List>
             <Divider />
             <Grid container style={{padding: '20px'}}>

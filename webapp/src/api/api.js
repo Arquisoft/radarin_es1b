@@ -242,14 +242,13 @@ export async function addMsg(from, to, msg){
 }
 
 export async function getMessages(from, to){
-    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/msg/list', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
-            'from':from, 
-            'to':to
+            'from': String(from), 
+            'to': String(to)
         })
       })
     return await response.json()

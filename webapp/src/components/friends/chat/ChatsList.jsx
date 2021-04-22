@@ -47,7 +47,6 @@ export default class ChatList extends Component {
 
   componentDidMount() {
     this.fetchData()
-
   }
 
 

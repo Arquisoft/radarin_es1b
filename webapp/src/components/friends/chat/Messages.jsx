@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
@@ -8,8 +8,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
-import ChatList from './ChatsList';
 import {addMsg, getMessages} from '../../../api/api'
+import SingleMsg from './SingleMsg';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const useStyles = makeStyles({
     table: {
@@ -26,63 +27,76 @@ const useStyles = makeStyles({
         borderRight: '1px solid #e0e0e0'
     },
     messageArea: {
-      height: '65vh',
+      height: '80vh',
       overflowY: 'auto'
     }
   });
 
-const Messages = (props) => {
+
+function Messages(props) {
     const classes = useStyles();
+    const msg = useRef()
+    const [msgs, setMsgs] = useState([])
+    const [update, setUpdate] = useState(false)
+
+    function SendMessage(){
+        if(props.target)
+            addMsg(
+                props.webId,
+                props.target,
+                msg.current.value
+            )
+            setUpdate(!update)
+        msg.current.value=""   
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [update])
+
+    async function fetchData() {
+        var promise = getMessages(props.webId, props.target)
     
-    return         
-        (
+        .then((result) => {
+          result.forEach((e) => {
+            setMsgs([...msgs, e]);
+          })
+        })
+        console.log(msgs)
+      }
+
+      
+    //<SingleMsg webId={props.webId} msg={msg} />
+    return (
         <div>
-            <List className={classes.messageArea}>
-            <ListItem key="1">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <ListItemText align="right" primary="Hey man, What's up ?"></ListItemText>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ListItemText align="right" secondary="09:30"></ListItemText>
-                    </Grid>
+            <List >
+                <InfiniteScroll
+                    className={classes.messageArea}
+                    dataLength={msgs.length}
+                    loader={<h4>Cargando...</h4>}
+                    height={20}
+                    >
+
+                    {msgs.map((msg, index) => {
+                        return(<SingleMsg webId={props.webId} msg={msg} index={index} />)
+                    })}
+
+                </InfiniteScroll>
+            </List>
+            <Divider />
+            <Grid container style={{padding: '20px'}}>
+                <Grid item xs={11}>
+                    <TextField 
+                        id="outlined-basic-email" 
+                        placeholder="Escribe el mensaje"
+                        inputRef={msg} fullWidth />
                 </Grid>
-            </ListItem>
-            <ListItem key="2">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <ListItemText align="left" primary="Hey, Iam Good! What about you ?"></ListItemText>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ListItemText align="left" secondary="09:31"></ListItemText>
-                    </Grid>
+                <Grid xs={1} align="right">
+                    <Fab onClick={SendMessage} color="primary" aria-label="add"><SendIcon /></Fab>
                 </Grid>
-            </ListItem>
-            <ListItem key="3">
-                <Grid container>
-                    <Grid item xs={12}>
-                        <ListItemText align="right" primary="Cool. i am good, let's catch up!"></ListItemText>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <ListItemText align="right" secondary="10:30"></ListItemText>
-                    </Grid>
-                </Grid>
-            </ListItem>
-        </List>
-        <Divider />
-        <Grid container style={{padding: '20px'}}>
-            <Grid item xs={11}>
-                <TextField 
-                    id="outlined-basic-email" 
-                    placeholder="Escribe el mensaje"
-                    inputRef={msg} fullWidth />
             </Grid>
-            <Grid xs={1} align="right">
-                <Fab onClick={SendMessage} color="primary" aria-label="add"><SendIcon /></Fab>
-            </Grid>
-        </Grid></div>
-        )
-    
+        </div>
+    )
 }
 
 export default Messages

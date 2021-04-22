@@ -34,28 +34,16 @@ const Chat = (props) => {
     const classes = useStyles();
 
     const [target, setTarget] = useState(null)
-    const msg = useRef()
     
 
     function Set(newWebId) {
-        console.log(newWebId)
         setTarget(newWebId)
         getMessages(props.webId, newWebId)
     }
 
     
 
-    function SendMessage(){
-        console.log(msg.current.value)
-        if(target)
-            addMsg(
-                props.webId,
-                target,
-                msg.current.value
-            )
-        console.log("Enviando" )
-        msg.current.value=""    
-    }
+
 
   return (
       <div>
@@ -76,7 +64,11 @@ const Chat = (props) => {
                             onClickFunction={Set}/>
             </Grid>
             <Grid item xs={9}>
-                <Messages />
+                {target?
+                <Messages 
+                    webId={props.webId}
+                    target={target}
+                    />:null}
             </Grid>
         </Grid>
       </div>

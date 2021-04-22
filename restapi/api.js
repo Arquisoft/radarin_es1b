@@ -389,7 +389,8 @@ router.post("/friends/accept", async (req, res) => {
     router.post("/msg/list", async (req, res) => {
         let from = req.body.from
         let to = req.body.to
-    
+        console.log(from)
+        console.log(to)
         var query = {
             $or: [
                 { "from": from, "to": to },
@@ -397,12 +398,13 @@ router.post("/friends/accept", async (req, res) => {
             ]
         }
     
-        await Friend.find(query, function (err, msgs) {
+        await Chat.find(query, function (err, msgs) {
             if (err) {
                 console.log("Error al obtener mensajes")
                 res.send(null)
             }
             else {
+                console.log(msgs)
                 res.send(msgs)
             }
         })  

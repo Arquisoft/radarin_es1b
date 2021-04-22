@@ -39,7 +39,7 @@ const Profile = ({ webId, fullName, imageSrc, loggedUser }) =>
     <Grid item xs={12} md={12}>
       <Typography variant="h6" component="h4">
         Lista de amigos de {fullName} :
-          </Typography>
+      </Typography>
       {/* Muestra la lista de amigos del usuario accediendo al index.js de /friendlist*/}
       <Paper className={styles.friendList} elevation={1}>
         <FriendList webId={webId} />

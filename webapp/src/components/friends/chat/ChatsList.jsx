@@ -73,7 +73,7 @@ export default class ChatList extends Component {
         >
          
           {this.friendList.map((webId) => (
-            <ChatFriend key={webId} webId={webId} logged={this.logged} onClickFunction={this.onClickFunction}/>
+            <ChatFriend key={webId} webId={webId} onClickFunction={this.onClickFunction}/>
 
           ))}
 

@@ -9,23 +9,29 @@ import styles from './Friend.module.css';
 import Image from "../../../profile/Image";
 
 
-//Amigo del usuario SOLID
-const Friend = ({ webId, fullName, imageSrc,onClickFunction }) =>
-  <div>
-    
-    <ListItem className={styles.friend} button onClick={onClickFunction(webId, fullName)}>
 
-      <ListItemIcon>
-        <Image className={styles.avatar} fullName={fullName} src={imageSrc} />
-      </ListItemIcon>
-      <ListItemText
-        primary={fullName}
-        secondary={webId}
-      >
+function ChatFriend({ webId, fullName, imageSrc, onClickFunction }) {
 
-      </ListItemText>
+  function ChangeTarget(){
+    onClickFunction(webId)
+  }
 
-    </ListItem>
-  </div>
+  return (
+    <div>
+      <ListItem className={styles.friend} button onClick={ChangeTarget}>
+        <ListItemIcon>
+          <Image className={styles.avatar} fullName={fullName} src={imageSrc} />
+        </ListItemIcon>
 
-export default Friend
+        <ListItemText
+          primary={fullName}
+          secondary={webId}
+          />
+      </ListItem>
+    </div>
+  )
+}
+
+export default ChatFriend
+
+

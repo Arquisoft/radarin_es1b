@@ -1,5 +1,6 @@
 import React from 'react'
 import Chat from './chat/Chat'
+import Messages from './chat/Messages'
 import FriendsTabs from './FriendsTabs'
 
 
@@ -26,7 +27,7 @@ class Friends extends React.Component{
             <div>
                 <h1>Amigos</h1>
                 {this.state.isToggled?
-                    <button onClick={this.handleClick} aria-label="CHAT" >CHAT</button>
+                    <button onClick={this.handleClick}  aria-label="CHAT" >CHAT</button>
                 :
                     <button onClick={this.handleClick} aria-label="ATRÁS" >ATRÁS</button>
                 }

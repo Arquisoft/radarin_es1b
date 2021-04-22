@@ -220,4 +220,37 @@ export async function addMeet(webId,location,state,country){
         })
       })
     return await response.json()
+    
+}
+
+
+
+// Menssages ----------------------------------- /msg
+export async function addMsg(from, to, msg){
+    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/msg/add', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'from':from, 
+            'to':to,
+            'msg': msg
+        })
+      })
+    return await response.json()
+}
+
+export async function getMessages(from, to){
+    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/msg/list', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'from':from, 
+            'to':to
+        })
+      })
+    return await response.json()
 }

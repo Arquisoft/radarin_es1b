@@ -50,8 +50,13 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    width: 500,
+    backgroundColor: "transparent",
+    [theme.breakpoints.down('sm')]: {
+      width: 300,
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 500,
+    },
   },
 }));
 
@@ -103,7 +108,7 @@ export default function FullWidthTabs(props) {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <NewRequest webId={webId}/>
-        </TabPanel>*
+        </TabPanel>
       </SwipeableViews>
     </div>
   ); 

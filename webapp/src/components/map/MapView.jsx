@@ -81,14 +81,14 @@ const Map = (props) => {
         );
     }
 
-    function CreateMeet() {
+    /* function CreateMeet() {
             const map = useMapEvents({
                 click(e) {
                     map.locate()
                     console.log(e.latlng)
                     if(createMeet){
                         setMeetPosition(e.latlng)  
-                        saveMeet(e.latlng)                     
+                        //saveMeet(e.latlng)                     
                     }
                     setCreateMeet(false)
                 }
@@ -101,36 +101,11 @@ const Map = (props) => {
                     </Popup>
                 </Marker>
             ):null    
-    }
+    } */
 
-    function saveMeet(latlng){
-        Geocode.fromLatLng(latlng.lat, latlng.lng).then(
-            (response) => {
-              let state, country;
-              for (let i = 0; i < response.results[0].address_components.length; i++) {
-                for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
-                  switch (response.results[0].address_components[i].types[j]) {
-                    case "administrative_area_level_1":
-                      state = response.results[0].address_components[i].long_name;
-                      break;
-                    case "country":
-                      country = response.results[0].address_components[i].long_name;
-                      break;
-                    default:
-                      break;
-                  }
-                }
-              }
-              addMeet(
-                  props.webId, latlng,
-                  state, country);
-            },
-            (error) => {
-              console.log("No se ha podido guardar la localización")
-              console.error(error);
-            }
-        );
-    }
+    
+
+   
  
 
     return (
@@ -138,12 +113,15 @@ const Map = (props) => {
         <div style={{ marginBottom: 10, position: 'relative' }}>
             {console.log("Rerenderizando")}
             <div>
-                <MainMap webId={props.webId}/>
+                <MainMap webId={props.webId} />
             </div>
         </div>
     )
 }
 
+
+
 export default Map
+
 
 

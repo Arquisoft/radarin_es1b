@@ -351,12 +351,10 @@ router.post("/friends/accept", async (req, res) => {
 
         if (creator) {
             let newEntry = await Meet.findOne({ creator: creator._id, location: [location.lat, location.lng] })
-
-            console.log("Alla")
             if (!newEntry) {
                 console.log(creator._id)
                 newEntry = new Meet({
-                    user: mongoose.Types.ObjectId(creator._id),
+                    creator: mongoose.Types.ObjectId(creator._id),
                     location: [location.lat, location.lng],
                     state: state,
                     country: country,

@@ -1,6 +1,7 @@
 import React from 'react';
 import {useWebId} from '@solid/react';
 import BottomNav from './BottomNav';
+import BottomNavAdmin from './BottomNavAdmin';
 import StartPageAdmin from '../routes/StartPageAdmin';
 import StartPage from '../routes/StartPage';
 import {getAdmin} from '../api/api'
@@ -44,7 +45,7 @@ import {getAdmin} from '../api/api'
 
         //return  (a == false ) ? <StartPageAdmin/> : <BottomNav webId={webId} />  
 
-        return  (webId=="https://asw2021es1b.solidcommunity.net/profile/card#me") ? <StartPageAdmin/> : <BottomNav webId={webId} />      
+        return  (webId=="https://asw2021es1b.solidcommunity.net/profile/card#me") ? <BottomNavAdmin webId={webId}/> : <BottomNav webId={webId} />      
     }
     else{
 

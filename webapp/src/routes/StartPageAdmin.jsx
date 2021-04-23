@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   media: {
     objectFit: 'contain'
-  },
+  }
 }));
 
 
@@ -26,13 +26,30 @@ const Start = () => {
           direction="column">
       <Card>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Bienvenido Admin !!!
+          <Typography gutterBottom variant="h2" component="h1">
+           Bienvenido a la pagina de Administrador
           </Typography>
         </CardContent>
       </Card>
     </Grid>
-  
+    <Grid container item xs={12} sm={9} md={6} spacing={0} justify="center"
+          alignItems="stretch"
+          direction="column">
+      <Card>
+        <CardMedia
+            component="img"
+            height="70"
+            className={classes.media}
+            alt="Solid Logo"
+            image="https://solid.mit.edu/assets/img/solid-logo.svg"
+        />
+        <CardContent>
+          <Typography component="p">
+            Como administrador puedes gestionar los usuarios de la aplicacion a la par que monitorizar el sistema
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   </Grid>;
 }
 

@@ -398,7 +398,7 @@ router.post("/friends/accept", async (req, res) => {
             ]
         }
     
-        await Chat.find(query, function (err, msgs) {
+        await Chat.find(query, null, {sort: 'time'}, function (err, msgs) {
             if (err) {
                 console.log("Error al obtener mensajes")
                 res.send(null)

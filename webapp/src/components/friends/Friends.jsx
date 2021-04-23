@@ -1,8 +1,7 @@
 import React from 'react'
 import Chat from './chat/Chat'
-import Messages from './chat/Messages'
 import FriendsTabs from './FriendsTabs'
-
+import ChatIcon from '@material-ui/icons/Chat';
 
 
 class Friends extends React.Component{
@@ -26,7 +25,7 @@ class Friends extends React.Component{
         return (
             <div>
                 {this.state.isToggled?
-                    <button onClick={this.handleClick}  aria-label="CHAT" >CHAT</button>
+                    <ChatIcon onClick={this.handleClick}  aria-label="CHAT"/>
                 :
                     null
                 }

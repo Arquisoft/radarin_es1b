@@ -1,9 +1,34 @@
 import React, { Component } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import List from "@material-ui/core/List";
+
 import ChatFriend from "./chatFriend";
+
 import { getFriends } from '../../../api/api';
+import { makeStyles } from '@material-ui/core/styles';
+import List from "@material-ui/core/List";
+
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+  chatSection: {
+    width: '100%',
+    height: '80vh'
+  },
+  headBG: {
+      backgroundColor: '#e0e0e0'
+  },
+  borderRight500: {
+      borderRight: '1px solid #e0e0e0'
+  },
+  messageArea: {
+    height: '80vh',
+    overflowY: 'auto'
+  }
+  
+});
 
 export default class ChatList extends Component {
 

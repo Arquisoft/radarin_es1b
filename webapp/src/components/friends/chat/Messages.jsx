@@ -8,7 +8,6 @@ import Fab from '@material-ui/core/Fab';
 import {addMsg, getMessages} from '../../../api/api'
 import SingleMsg from './SingleMsg';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Button } from '@material-ui/core';
 
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';

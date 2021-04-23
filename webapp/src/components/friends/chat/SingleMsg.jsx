@@ -8,10 +8,10 @@ function SingleMsg(props) {
             <ListItem key={props.index+1}>
                 <Grid container>
                     <Grid item xs={12}>
-                        <ListItemText align={props.msg.from==props.webId?"right":"left"} primary={props.msg.msg}></ListItemText>
+                        <ListItemText align={props.msg.from===props.webId?"right":"left"} primary={props.msg.msg}></ListItemText>
                     </Grid>
                     <Grid item xs={12}>
-                        <ListItemText align={props.msg.from==props.webId?"right":"left"} secondary={props.msg.time}></ListItemText>
+                        <ListItemText align={props.msg.from===props.webId?"right":"left"} secondary={props.msg.time}></ListItemText>
                     </Grid>
                 </Grid>
             </ListItem>   

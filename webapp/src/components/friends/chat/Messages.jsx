@@ -68,7 +68,7 @@ function Messages(props) {
           result.forEach((e) => {
             setMsgsList(msgsList => [...msgsList, e]);
           })          
-          //setUpdate(!update)
+          setUpdate(!update)
         })
         console.log(msgsList)
       }

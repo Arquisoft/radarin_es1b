@@ -13,7 +13,7 @@ import Image from "../../../profile/Image";
 function ChatFriend({ webId, fullName, imageSrc, onClickFunction }) {
 
   function ChangeTarget(){
-    onClickFunction(webId)
+    onClickFunction(webId, fullName, imageSrc)
   }
 
   return (
@@ -25,7 +25,6 @@ function ChatFriend({ webId, fullName, imageSrc, onClickFunction }) {
 
         <ListItemText
           primary={fullName}
-          secondary={webId}
           />
       </ListItem>
     </div>

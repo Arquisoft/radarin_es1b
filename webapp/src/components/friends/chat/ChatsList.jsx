@@ -3,12 +3,14 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import ChatFriend from "./chatFriend";
 import { getFriends } from '../../../api/api';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 export default class ChatList extends Component {
 
   constructor(props) {
     super(props)
     this.friendList = []
+    this.backFunc=props.backFunc
     this.onClickFunction=this.props.onClickFunction;
   }
 
@@ -63,21 +65,26 @@ export default class ChatList extends Component {
 
   render() {
     return (
-      <List dense>
-        <InfiniteScroll
-          dataLength={this.state.items.length} //tamaño de la lista de amigos
+      <div>
+        <div align="left">
+          <ArrowBackIcon align="left" onClick={this.backFunc} aria-label="ATRÁS" />
+        </div>
+        <List dense>
+          <InfiniteScroll
+            dataLength={this.state.items.length} //tamaño de la lista de amigos
+            
+            loader={<h4>Cargando...</h4>} //loader
+            height={this.props.height}
+          >
           
-          loader={<h4>Cargando...</h4>} //loader
-          height={this.props.height}
-        >
-         
-          {this.friendList.map((webId) => (
-            <ChatFriend key={webId} webId={webId} onClickFunction={this.onClickFunction}/>
+            {this.friendList.map((webId) => (
+              <ChatFriend key={webId} webId={webId} onClickFunction={this.onClickFunction}/>
 
-          ))}
+            ))}
 
-        </InfiniteScroll>        
-      </List>
+          </InfiniteScroll>        
+        </List>
+      </div>
     );
   }
 }

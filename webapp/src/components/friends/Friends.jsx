@@ -25,19 +25,21 @@ class Friends extends React.Component{
     render(){
         return (
             <div>
-                <h1>Amigos</h1>
                 {this.state.isToggled?
                     <button onClick={this.handleClick}  aria-label="CHAT" >CHAT</button>
                 :
-                    <button onClick={this.handleClick} aria-label="ATRÁS" >ATRÁS</button>
+                    null
                 }
                 {this.state.isToggled?
                     <div class="contenedorFriends">
                         <FriendsTabs webId={this.webId}/>
                     </div>
                 :
-                    <div >
-                        <Chat webId={this.webId}/>
+                    <div class="contenedorFriends">
+                        <Chat 
+                            webId={this.webId}
+                            backFunc={this.handleClick}
+                            />
                     </div>
                 }
             </div>

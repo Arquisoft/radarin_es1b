@@ -18,6 +18,10 @@ const useStyles = makeStyles({
     width: '100%',
     height: '80vh'
   },
+  chatContainer: {
+    width: '100%',
+    height: '80vh', 
+  },
   headBG: {
       backgroundColor: '#e0e0e0'
   },
@@ -34,11 +38,21 @@ const Chat = (props) => {
     const classes = useStyles();
 
     const [target, setTarget] = useState(null)
+    const [targetName, setTargetName] = useState(null)
+    const [targetImg, setTargetImg] = useState(null)
+    const [update, setUpdate] = useState(true)
     
 
-    function Set(newWebId) {
+    function Set(newWebId, name, img) {
         setTarget(newWebId)
+        setTargetName(name)
+        setTargetImg(img)
         getMessages(props.webId, newWebId)
+        setUpdate(!update)
+    }
+
+    function Back(){
+      setUpdate(!update)
     }
 
     
@@ -46,10 +60,30 @@ const Chat = (props) => {
 
 
   return (
-      <div>
+      <div className={classes.chatContainer}>
+      {update?
+        <ChatList webId={props.webId}
+                  onClickFunction={Set}
+                  backFunc={props.backFunc}
+                  />
+        :
+        target? <Messages 
+          webId={props.webId}
+          target={target}
+          fullName={targetName? targetName : undefined}
+          imageSrc={targetImg ? targetImg : undefined}
+          backFunc={Back}
+        />:null
+      }                  
+        
+      </div>
+  );
+}
 
-      {console.log("rendering amigossss")}
-        <Grid container>
+export default Chat;
+
+/*
+<Grid container>
             <Grid item xs={12} >
                 <Typography variant="h5" className="header-message">Chat</Typography>
             </Grid>
@@ -60,8 +94,7 @@ const Chat = (props) => {
                     <TextField id="outlined-basic-email" label="Search" variant="outlined" fullWidth />
                 </Grid>
                 <Divider />
-                <ChatList webId={props.webId}
-                            onClickFunction={Set}/>
+                
             </Grid>
             <Grid item xs={9}>
                 {target?
@@ -70,9 +103,4 @@ const Chat = (props) => {
                     target={target}
                     />:null}
             </Grid>
-        </Grid>
-      </div>
-  );
-}
-
-export default Chat;
+        </Grid>*/

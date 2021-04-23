@@ -4,13 +4,20 @@ import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Fab from '@material-ui/core/Fab';
-import SendIcon from '@material-ui/icons/Send';
 import {addMsg, getMessages} from '../../../api/api'
 import SingleMsg from './SingleMsg';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Button } from '@material-ui/core';
+
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import SendIcon from '@material-ui/icons/Send';
+
+import Image from "../../profile/Image";
 
 const useStyles = makeStyles({
     table: {
@@ -30,6 +37,7 @@ const useStyles = makeStyles({
       height: '80vh',
       overflowY: 'auto'
     }
+    
   });
 
 
@@ -70,6 +78,23 @@ function Messages(props) {
     //<SingleMsg webId={props.webId} msg={msg} />
     return (
         <div>
+            <Grid container style={{padding: '20px'}}>
+                <Grid xs={1} align="left">
+                    <ArrowBackIcon onClick={props.backFunc} color="black" aria-label="add"/>
+                </Grid>
+
+                <Grid item xs={11}>
+                    <ListItem>
+                        <ListItemIcon>
+                            <Image fullName={props.fullName} src={props.imageSrc} />
+                        </ListItemIcon>
+
+                        <ListItemText
+                            primary={props.fullName}
+                        />
+                    </ListItem>
+                </Grid>
+            </Grid>
             <List >
                 <InfiniteScroll
                     

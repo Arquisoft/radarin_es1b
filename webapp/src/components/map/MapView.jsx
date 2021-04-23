@@ -137,7 +137,6 @@ const Map = (props) => {
         
         <div style={{ marginBottom: 10, position: 'relative' }}>
             {console.log("Rerenderizando")}
-            <h1>Ubicación del usuario</h1>
             <div>
                 <MainMap webId={props.webId}/>
             </div>

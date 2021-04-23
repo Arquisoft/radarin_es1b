@@ -19,7 +19,9 @@ const Map = (props) => {
                 setView: false
             })
             map.on('locationfound',handleOnLocationFound)
-            
+            L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
+                alert("Botoncito");
+            }).addTo(map);
         }
 
     },[map])
@@ -43,7 +45,7 @@ const Map = (props) => {
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                     <LayersControl position='topleft'>
-                        <LayersControl.Overlay checked name="Posicion actual">
+                        <LayersControl.Overlay checked name="Posición actual">
                             {position?
                                 <Marker position={position.latlng}>
                                     <Popup>

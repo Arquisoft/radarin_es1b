@@ -43,7 +43,7 @@ const useStyles = makeStyles({
 function Messages(props) {
     const classes = useStyles();
     const msg = useRef()
-    const [msgs, setMsgs] = useState([])
+    const [msgsList, setMsgsList] = useState([])
     const [update, setUpdate] = useState(false)
 
     function SendMessage(){
@@ -64,14 +64,16 @@ function Messages(props) {
     async function fetchData() {       
  
         getMessages(props.webId, props.target).then((result) => {
-            setMsgs([])
+            setMsgsList([])
           result.forEach((e) => {
-            setMsgs(msgs => [...msgs, e]);
+            setMsgsList(msgsList => [...msgsList, e]);
           })          
-          setUpdate(!update)
+          //setUpdate(!update)
         })
-        console.log(msgs)
+        console.log(msgsList)
       }
+
+    
 
       
     //<SingleMsg webId={props.webId} msg={msg} />
@@ -94,18 +96,21 @@ function Messages(props) {
                     </ListItem>
                 </Grid>
             </Grid>
-            <List >
+            <List className={classes.chatList}>
                 <InfiniteScroll
-                    
-                    dataLength={msgs.length}
+                    style={{ display: 'flex', flexDirection: 'column-reverse' }}
+                    dataLength={msgsList.length}
                     loader={<h4>Cargando...</h4>}
-                    height={20}
+                    height={400}
+                    inverse={true}
                     >
-                    </InfiniteScroll>
                     
-                    {msgs.map((msg, index) => {
+                    {msgsList.map((msg, index) => {
                         return(<SingleMsg webId={props.webId} msg={msg} index={index} />)
                     })}
+
+
+                </InfiniteScroll>
 
             </List>
             <Divider />

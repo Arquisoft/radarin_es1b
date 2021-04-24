@@ -8,7 +8,21 @@ export async function addUser(webId, nombre){
         body: JSON.stringify({
             'webId':webId,
             'nombre': String(nombre),
-            'admin': "false"
+            'admin': "false",
+            "status": "online"
+        })
+      })
+    return await response.json()
+}
+
+export async function removeUser(userWebId){
+    //console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/remove', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':userWebId
         })
       })
     return await response.json()

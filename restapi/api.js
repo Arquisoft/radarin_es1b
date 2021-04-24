@@ -18,6 +18,7 @@ router.post("/users/add", async (req, res) => {
     let nombre = req.body.nombre;
     let webId = req.body.webId;
     let admin = req.body.admin;
+    let status = req.body.status;
 
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
@@ -28,7 +29,8 @@ router.post("/users/add", async (req, res) => {
         user = new User({
             webId: webId,
             nombre: nombre,
-            admin: admin
+            admin: admin,
+            status: status
         })
         await user.save()
         console.log("usuario añadido con exito")
@@ -63,6 +65,25 @@ router.post("/users/status/update" , async(req,res) =>{
     res.send(user2);
 
 })
+
+
+router.post("/users/remove", async (req, res) => {
+
+    let userWebId = req.body.webId
+
+    let deleted = await User.deleteOne({ webId: userWebId }, function (err) {
+        if (err) {
+            //console.log("Something wrong when deleting friendship!");
+        } else {
+            //console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
+        }
+    });
+
+    res.send(deleted)
+
+
+})
+
 
 // register a new location
 router.post("/location/add", async (req, res) => {

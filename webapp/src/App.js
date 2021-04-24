@@ -11,8 +11,6 @@ import Profile from './components/profile';
 import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
 
-
-
 class App extends React.Component {
   constructor() {
     super()
@@ -21,7 +19,9 @@ class App extends React.Component {
       users: []
 
     }
+
   }
+  
 
   render() {
 
@@ -36,7 +36,7 @@ class App extends React.Component {
             {/* <AppHeader/> */}
             {/* </header>  */}
             <AppBar />
-            <main>
+            <main>              
               {/*Route, enlace a la ruta indica que en StartPage en la direcion / se vera el contenido de la clase StartPage  */}
               {/* <Route exact path="/" component={StartPage}/>  */}
               {/* location es la localizacion donde se encuentra la app y sirve para almacenar donde quieras ir, en este caso si queremos ir a /profile le tenemos que pasar lo que quiere mostrar mediante la llamada a la IU Profile*/}

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import UsersTabs from './UsersTabs'
 
 
 
@@ -12,9 +12,9 @@ class Users extends React.Component{
     render(){
         return (
             <div>
-                <h1>To be done!</h1>
+                <h1>Gestión de usuarios</h1>
                 <div class="contenedorFriends">
-                    gestion de usuarios
+                    <UsersTabs webId={this.webId}/>
                 </div>
             </div>
         )

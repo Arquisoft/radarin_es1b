@@ -21,8 +21,9 @@ router.post("/users/add", async (req, res) => {
 
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
-    if (user)
-        res.send({ error: "Error: This user is already registered" + webId })
+    if (user){
+        console.log("usuario ya existe")
+        res.send({ error: "Error: This user is already registered" + webId })}
     else {
         user = new User({
             webId: webId,
@@ -30,8 +31,37 @@ router.post("/users/add", async (req, res) => {
             admin: admin
         })
         await user.save()
+        console.log("usuario añadido con exito")
         res.send(user)
     }
+})
+
+router.post("/users/status/update" , async(req,res) =>{
+
+    let webId = req.body.webId;
+
+    let status = req.body.status;
+
+    let user2 = await User.findOne({ webId: webId })
+
+    if(user2){
+        var query = { "_id": user2._id };
+        user2.status = status
+
+        await User.findOneAndUpdate(query, user2, function (err, doc) {
+            if (err) {
+                //console.error("Something wrong when updating data!");
+            } else {
+               // console.log(doc);
+            }
+        });
+    }
+
+    console.log("llega aqui " + status)
+
+    await user2.save();
+    res.send(user2);
+
 })
 
 // register a new location
@@ -128,7 +158,6 @@ router.post("/admin/check", async (req, res) => {
 
     let userWebId = req.body.webId
 
-    console.log("estoy llegando ? " + userWebId)
 
     var query = {
 
@@ -141,7 +170,6 @@ router.post("/admin/check", async (req, res) => {
              console.error("Error al encontrar el usuario")
         } else {
              var admin = docs.map((doc) => { return doc.admin })
-             console.log("Aqui envia esto -> " + admin)
              res.send(admin);
         }
     })

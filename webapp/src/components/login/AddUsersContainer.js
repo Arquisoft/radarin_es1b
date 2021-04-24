@@ -1,5 +1,5 @@
 import React from 'react';
-import {addUser} from "../../api/api";
+import {addUser, updateStatus} from "../../api/api";
 
 
 
@@ -16,13 +16,17 @@ class AddUsersContainer extends React.Component{
     async fetchUsers(){
           try {
               await addUser(this.webId,this.fullName);
+  
 
           } catch (e) {
               //console.log("Error adding users to restapi.")
            }
       }
 
-    componentDidMount(){this.fetchUsers()}
+    componentDidMount(){
+      this.fetchUsers()
+      //updateStatus(this.webId, "online")
+    }
   
     render(){
       return(

@@ -14,6 +14,23 @@ export async function addUser(webId, nombre){
     return await response.json()
 }
 
+export async function updateStatus(webId, status){
+
+    console.log("estoy llamando con webId " + webId )
+    console.log("El cual tiene un estado  " + status )
+
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/status/update', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId,
+            'status':String(status)
+        })
+      })
+    return await response.json()
+  }
+
 export async function getUsers(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/list')
@@ -214,7 +231,7 @@ export async function getAdmin(userWebId){
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
-            
+
             'webId':userWebId 
         })
       })

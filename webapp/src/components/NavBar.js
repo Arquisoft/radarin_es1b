@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useWebId} from '@solid/react';
 import BottomNav from './BottomNav';
 import BottomNavAdmin from './BottomNavAdmin';
-import StartPageAdmin from '../routes/StartPageAdmin';
 import StartPage from '../routes/StartPage';
 import {getAdmin} from '../api/api'
+
+
+
+  
+
+  function mostrarVistaAdmin(webId) {
+      
+    return <BottomNavAdmin webId={webId}/>
+      
+  }
+
+  function mostrarVistaNormal(webId) {
+
+    return <BottomNav webId={webId}/>
+      
+  }
 
   async function isAdmin(b,web) {
 
@@ -35,7 +50,13 @@ import {getAdmin} from '../api/api'
     
     const webId = useWebId()
 
+    const [admin, setAdmin]= useState(false)
+
     let a = false;
+
+    function change() {
+        setAdmin(!admin)
+      }
 
     if(webId!=null){
 
@@ -43,9 +64,20 @@ import {getAdmin} from '../api/api'
 
         console.log("QUE ESTA PASANDO AQUI " + a)
 
-        //return  (a == false ) ? <StartPageAdmin/> : <BottomNav webId={webId} />  
+        // return <div>
+        //     {admin?
+               
+        //           mostrarVistaAdmin(webId)
+               
+        //     :
+              
+        //           mostrarVistaNormal(webId)
+               
+        //     }
+        // </div>
 
         return  (webId=="https://asw2021es1b.solidcommunity.net/profile/card#me") ? <BottomNavAdmin webId={webId}/> : <BottomNav webId={webId} />      
+
     }
     else{
 

@@ -65,6 +65,16 @@ class OnlineUsers extends React.Component {
 		this.setState({ searchName: event.target.value });
 	}
 
+	componentDidUpdate(){
+		var aucx=true;
+		if(aucx){
+		  this.resultQuery=[]
+		  this.fetchData();
+		}
+	}
+
+	
+
 
 	handleClick(e) {
 		e.preventDefault();
@@ -74,9 +84,8 @@ class OnlineUsers extends React.Component {
 		else{
 			//console.error("No hay texto para buscar")
 		} 
+    }
 
-
-}
 
 	buscarAmigos() {
 		return (

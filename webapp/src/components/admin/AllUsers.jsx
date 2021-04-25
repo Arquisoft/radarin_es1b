@@ -76,6 +76,7 @@ class AllUsers extends React.Component {
 		}
 		else{
 			//console.error("No hay texto para buscar")
+			this.fetchData()
 		} 
 
 
@@ -114,8 +115,7 @@ class AllUsers extends React.Component {
 			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
-			 	<span>{this.state.searchName}</span>}
+			 
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null

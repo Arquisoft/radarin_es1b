@@ -60,6 +60,14 @@ class DeleteUsers extends React.Component {
 		})
 	  }
 
+	componentDidUpdate(){
+		var aucx=true;
+		if(aucx){
+		  this.resultQuery=[]
+		  this.fetchData();
+		}
+	}
+
 	handleChange(event) {
 		this.setState({ searchName: event.target.value });
 	}

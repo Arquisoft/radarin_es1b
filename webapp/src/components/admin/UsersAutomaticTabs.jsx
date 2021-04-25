@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AllUsers from '../admin/AllUsers';
 import OnlineUsers from '../admin/OnlineUsers';
+import DeleteUsers from '../admin/DeleteUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -45,7 +46,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '60%',
+    width: '65%',
     backgroundColor: theme.palette.info.paper,
   },
 }));
@@ -87,7 +88,7 @@ export default function ScrollableTabsButtonAuto(props) {
          <OnlineUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={2} >
-        to be done
+         <DeleteUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={3} >
         to be done

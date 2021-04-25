@@ -74,11 +74,13 @@ router.post("/users/remove", async (req, res) => {
 
     let userWebId = req.body.webId
 
+    console.log("usuario que se ve va a borrar " + userWebId)
+
     let deleted = await User.deleteOne({ webId: userWebId }, function (err) {
         if (err) {
-            //console.log("Something wrong when deleting friendship!");
+              console.log("Ese usuario no esta en el sistema compañero");
         } else {
-            //console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
+              console.log("Nah de locos , usuario borrado");
         }
     });
 

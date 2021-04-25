@@ -4,27 +4,16 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Link} from 'react-router-dom';
+import { Button } from '@material-ui/core';
 import styles from './Friend.module.css';
 
-import {toProfile} from '../../../routing';
+import {toDelete} from '../../../routing';
 import Image from "../../profile/Image";
 
-function handleClick(e) {
-
-    e.preventDefault();
-	
-		fetchData()      
-  
-}
-
-
-function fetchData() {
-   console.log("auxilio me desmayo, callese viejo lesbiano")
-  }
 
 //Amigo del usuario SOLID
 const Friend = ({webId, fullName, imageSrc}) =>
-  <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>
+  <ListItem className={styles.friend} button component={Link} to={toDelete(webId)} clickable>
     <ListItemIcon>
       <Image className={styles.avatar} fullName={fullName} src={imageSrc}/>
     </ListItemIcon>
@@ -32,6 +21,10 @@ const Friend = ({webId, fullName, imageSrc}) =>
         primary={fullName}
         secondary={webId}
     />
+   <Button id="searchFriends" type="button">
+							Eliminar
+	 </Button>
   </ListItem>
+  
 
 export default Friend 

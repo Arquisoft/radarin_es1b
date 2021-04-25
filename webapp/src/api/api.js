@@ -16,7 +16,7 @@ export async function addUser(webId, nombre){
 }
 
 export async function removeUser(userWebId){
-    //console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
+    console.log("Eliminando a el usuario : "+userWebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/remove', {
         method: 'POST',

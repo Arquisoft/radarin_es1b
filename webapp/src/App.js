@@ -8,6 +8,7 @@ import { LocationsContextProvider } from './context/LocationsContext';
 import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
+import Delete from './components/delete';
 import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
 
@@ -47,6 +48,12 @@ class App extends React.Component {
                   const params = qs.parse(location.search);
                   //SaveWebId(params.webId)
                   return <Profile webId={params.webId} />
+                }} />
+
+                <Route path="/delete/" render={({ location }) => {
+                  const params = qs.parse(location.search);
+                  //SaveWebId(params.webId)
+                  return <Delete webId={params.webId} />
                 }} />
 
               </LoggedIn> 

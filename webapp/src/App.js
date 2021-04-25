@@ -49,11 +49,8 @@ class App extends React.Component {
                   return <Profile webId={params.webId} />
                 }} />
 
-              </LoggedIn>
-              
+              </LoggedIn> 
             </main>
-
-
             <NavBar />
           </Router>
         </LocationsContextProvider>

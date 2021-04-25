@@ -43,6 +43,8 @@ router.post("/users/status/update" , async(req,res) =>{
 
     let webId = req.body.webId;
 
+    console.log("El usuario para cambiar estado es " + webId)
+
     let status = req.body.status;
 
     let user2 = await User.findOne({ webId: webId })
@@ -55,7 +57,7 @@ router.post("/users/status/update" , async(req,res) =>{
             if (err) {
                 //console.error("Something wrong when updating data!");
             } else {
-               // console.log(doc);
+               //console.log(doc);
             }
         });
     }
@@ -305,6 +307,22 @@ router.post("/friends/accept", async (req, res) => {
         var query =
             { "nombre": { '$regex': ""+str  } }
             ;
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })
+                
+                res.send(webIds);
+            }
+        })
+    });
+
+    //buscar si una persona es online
+    router.post("/users/search/status", async (req, res) => {
+        var query = {
+            "status": "online"
+        };
         await User.find(query, function (err, docs) {
             if (err) {
                 //console.log("Error al encontrar los usuarios dados los amigos")

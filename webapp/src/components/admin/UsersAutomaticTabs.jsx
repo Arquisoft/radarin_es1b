@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import AllUsers from '../admin/AllUsers';
+import OnlineUsers from '../admin/OnlineUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -70,7 +71,7 @@ export default function ScrollableTabsButtonAuto(props) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="Usuarios totales" {...a11yProps(0)} />
+          <Tab label="Usuarios sistema" {...a11yProps(0)} />
           <Tab label="Usuarios online" {...a11yProps(1)} />
           <Tab label="Eliminar usuarios" {...a11yProps(2)} />
           <Tab label="Usuarios inactivos" {...a11yProps(3)} />
@@ -80,11 +81,10 @@ export default function ScrollableTabsButtonAuto(props) {
       </AppBar>
 
       <TabPanel value={value} index={0} >
-          Numero de usuarios totales :
          <AllUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={1} >
-        to be done
+         <OnlineUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={2} >
         to be done

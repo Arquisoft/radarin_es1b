@@ -9,6 +9,7 @@ class ChangeStatusContainer extends React.Component{
       super(props);
       this.webId = props.webId;
       this.status = props.status;
+      console.log("Id del usuario a eliminar " + this.webId)
     }
 
 

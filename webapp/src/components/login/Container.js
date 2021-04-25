@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from "@material-ui/core/Button";
 
-import { LoggedIn, AuthButton,LoggedOut, LogoutButton} from '@solid/react';
+import { LoggedIn, AuthButton,LoggedOut, LogoutButton, useWebId} from '@solid/react';
 import LoginBadge from './LoginBadge';
 import { updateStatus } from '../../api/api';
+
 
 
 //Url que sirve para iniciar sesión en solid desde una APP 
@@ -14,6 +15,8 @@ function Cerrar(web) {
 
     let webId = web;
 
+    console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
+
     window.addEventListener("beforeunload", function (e) {
 
         ejecutar(webId);
@@ -22,9 +25,11 @@ function Cerrar(web) {
       function ejecutar(web) {
 
         let webId = web
-        
+
+        if(webId!==null && webId !==undefined){
+            updateStatus(webId, "offline")
+        }
         //addUser(webId, "paquirrin")
-        updateStatus(webId, "offline")
 
       } 
 

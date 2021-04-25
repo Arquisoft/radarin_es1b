@@ -161,6 +161,15 @@ export async function getSearcByName(str){
     return await response.json()
 }
 
+export async function getSearcByStatus(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/status', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
 
 
 /* export async function acceptFriend(webId,friendWebId){

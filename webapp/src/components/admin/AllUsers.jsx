@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
 
 
-class SearchFriends extends React.Component {
+class AllUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -128,4 +128,4 @@ class SearchFriends extends React.Component {
 	}
 
 
-	export default SearchFriends;
+	export default AllUsers;

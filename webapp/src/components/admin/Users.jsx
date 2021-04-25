@@ -1,5 +1,5 @@
 import React from 'react'
-import UsersTabs from './UsersTabs'
+import UsersAutomaticScrollButtons from './UsersAutomaticTabs'
 
 
 
@@ -14,7 +14,7 @@ class Users extends React.Component{
             <div>
                 <h1>Gestión de usuarios</h1>
                 <div class="contenedorFriends">
-                    <UsersTabs webId={this.webId}/>
+                    <UsersAutomaticScrollButtons webId={this.webId}/>
                 </div>
             </div>
         )

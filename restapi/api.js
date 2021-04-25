@@ -6,7 +6,7 @@ const Meet = require("./models/meets")
 const router = express.Router()
 const mongoose = require("mongoose")
 
-// Get all users
+// Devuelve la lista de usuarios
 router.get("/users/list", async (req, res) => {
     const users = await User.find({}).sort('-_id') //Inverse order
     res.send(users)
@@ -38,6 +38,7 @@ router.post("/users/add", async (req, res) => {
     }
 })
 
+//cambia el estado de una persona
 router.post("/users/status/update" , async(req,res) =>{
 
     let webId = req.body.webId;
@@ -66,7 +67,7 @@ router.post("/users/status/update" , async(req,res) =>{
 
 })
 
-
+//borra un usuario
 router.post("/users/remove", async (req, res) => {
 
     let userWebId = req.body.webId
@@ -175,6 +176,7 @@ router.post("/friends/check", async (req, res) => {
     
 })
 
+//comprueba si es admin
 router.post("/admin/check", async (req, res) => {
 
     let userWebId = req.body.webId

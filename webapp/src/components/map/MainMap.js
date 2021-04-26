@@ -14,7 +14,6 @@ const Map = (props) => {
 
     useEffect(() => {
         if (map) {
-            console.log("Balllallalala")
             map.locate({
                 setView: false
             })
@@ -23,6 +22,20 @@ const Map = (props) => {
         }
 
     },[map])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (map) {
+                map.locate({
+                    setView: false
+                })
+                map.on('locationfound',handleOnLocationFound)
+                console.log("pillando ubicación")
+                console.log(position)                
+            }
+        }, 1000);
+        return () => clearInterval(interval);
+      });
 
     function handleOnLocationFound(e) {
         const latlng = e.latlng;

@@ -28,14 +28,15 @@ const Map = (props) => {
     useEffect(() => {
         if (map) {
             map.locate({
-                setView: false
+                setView: false,
+                watch:true
             })
             map.on('locationfound',handleOnLocationFound)
             map.on('click', function(e) {
                 if(meetButtonAction){
                     alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
                     saveMeet(e.latlng)
-                    meetButtonAction = false;
+                    meetButtonAction = true;
                 }
                 
             });

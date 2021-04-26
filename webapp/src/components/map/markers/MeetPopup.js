@@ -16,27 +16,32 @@ import Image from "../../profile/Image";
 
 //Meets
 const Meet = ({ webId, fullName, imageSrc, meet }) =>
-    <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>
+    <div>
+        <strong>Meet Creado por</strong>
+        <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>
 
+                
+
+                <ListItemIcon>
+                    <Image className={styles.avatar} fullName={fullName} src={imageSrc} />
+                </ListItemIcon>
+                <div style={{ marginLeft: 10 }}>
+                    <ListItemText
+                        primary={fullName}
+                    />
+                </div>
+
+        </ListItem>
         <div>
-            <strong>Meet Creado por</strong>
-
-            <ListItemIcon>
-                <Image className={styles.avatar} fullName={fullName} src={imageSrc} />
-            </ListItemIcon>
-            <div style={{ marginLeft: 10 }}>
-                <ListItemText
-                    primary={fullName}
-                />
-            </div>
-        </div>
         <ListItemText
             primary={"Fecha: " + meet.date}
         />
         <ListItemText
-            primary={"hora: " + meet.time}
+            primary={"Hora: " + meet.time}
         />
+        </div>
+    </div>
 
-    </ListItem>
+
 
 export default Meet

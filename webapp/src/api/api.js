@@ -42,6 +42,20 @@ export async function banUser(userWebId, ban){
     return await response.json()
 }
 
+export async function makeAdmin(userWebId, admin){
+    console.log("baneando a el usuario : "+userWebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/add/admin', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':userWebId,
+            'admin':String(admin)
+        })
+      })
+    return await response.json()
+}
+
 
 
 export async function updateStatus(webId, status){
@@ -194,6 +208,16 @@ export async function getSearcByAdmin(){
       })
     return await response.json()
 }
+
+export async function getSearcByNoAdmin(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/admin/no', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
 
 export async function getSearcByBan(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

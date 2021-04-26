@@ -10,7 +10,9 @@ import AllUsers from '../admin/AllUsers';
 import OnlineUsers from '../admin/OnlineUsers';
 import DeleteUsers from '../admin/DeleteUsers';
 import BanUsers from '../admin/BanUsers';
-import BanedUsers from '../admin/BanedUsers';
+import BannedUsers from './BannedUsers';
+import AdminUsers from '../admin/AdminUsers';
+import AddAdminUsers from '../admin/AddAdminUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,7 +50,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '95%',
+    width: '98%',
     backgroundColor: theme.palette.info.paper,
   },
 }));
@@ -77,12 +79,13 @@ export default function ScrollableTabsButtonAuto(props) {
           <Tab label="Usuarios sistema" {...a11yProps(0)} />
           <Tab label="Usuarios online" {...a11yProps(1)} />
           <Tab label="Eliminar usuarios" {...a11yProps(2)} />
-          <Tab label="Usuarios inactivos" {...a11yProps(3)} />
-          <Tab label="Banear usuarios" {...a11yProps(4)} />
-          <Tab label="Usuarios baneados" {...a11yProps(5)} />
+          <Tab label="Banear usuarios" {...a11yProps(3)} />
+          <Tab label="Usuarios baneados" {...a11yProps(4)} />
+          <Tab label="Administradores" {...a11yProps(5)} />
           <Tab label="Añadir administradores" {...a11yProps(6)} />
-          <Tab label="Administradores" {...a11yProps(7)} />
+          <Tab label="Usuarios inactivos" {...a11yProps(7)} />
           <Tab label="Ultimos accesos" {...a11yProps(8)} />
+
         </Tabs>
       </AppBar>
 
@@ -96,16 +99,16 @@ export default function ScrollableTabsButtonAuto(props) {
          <DeleteUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={3} >
-        to be done
-      </TabPanel>
-      <TabPanel value={value} index={4} >
          <BanUsers webId={webId}/>
       </TabPanel>
+      <TabPanel value={value} index={4} >
+        <BannedUsers webId={webId}/>
+      </TabPanel>
       <TabPanel value={value} index={5} >
-        <BanedUsers webId={webId}/>
+         <AdminUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={6} >
-        to be done
+         <AddAdminUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={7} >
         to be done

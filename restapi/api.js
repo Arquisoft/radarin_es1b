@@ -121,6 +121,32 @@ router.post("/users/ban" , async(req,res) =>{
 
 })
 
+router.post("/users/add/admin" , async(req,res) =>{
+
+    let webId = req.body.webId;
+
+    let admin = req.body.admin;
+
+    let user2 = await User.findOne({ webId: webId })
+
+    if(user2){
+        var query = { "_id": user2._id };
+        user2.admin = admin
+
+        await User.findOneAndUpdate(query, user2, function (err, doc) {
+            if (err) {
+                //console.error("Something wrong when updating data!");
+            } else {
+               //console.log(doc);
+            }
+        });
+    }
+
+    await user2.save();
+    res.send(user2);
+
+})
+
 
 
 
@@ -359,6 +385,21 @@ router.post("/friends/accept", async (req, res) => {
 
                 console.log("ESTE ADMIN HA SIDO ENCONTRADO " + webIds)
                 
+                res.send(webIds);
+            }
+        })
+    });
+
+     //buscar si una persona no es admin
+     router.post("/users/search/admin/no", async (req, res) => {
+        var query = {
+            "admin": "false"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })                
                 res.send(webIds);
             }
         })

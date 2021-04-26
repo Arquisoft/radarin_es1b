@@ -27,7 +27,7 @@ function UserBan({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button">
+   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small">
 							Banear
 	 </Button>
   </ListItem>

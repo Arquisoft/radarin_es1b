@@ -3,10 +3,10 @@ import { Button } from '@material-ui/core';
 import { getSearcByBan, getSearcByStatus, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import User from "../admin/userBaned";
+import User from "./userBanned";
 
 
-class BanedUsers extends React.Component {
+class BannedUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -121,4 +121,4 @@ class BanedUsers extends React.Component {
 	}
 
 
-	export default BanedUsers;
+	export default BannedUsers;

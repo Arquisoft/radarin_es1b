@@ -10,7 +10,6 @@ import ChangeStatus from "./ChangeStatusContainer"
 const Index = () => {
     //useWebId() te devuelve el url del perfil logeado con una String , que cambia automaticamente cuando el usuario se deslogea o cambia de perfil 
     const webId = useWebId()
-
     const lastWebId = webId
     //console.log("WEBID REGISTRADO " + lastWebId)
     // almacena en profile las fotos, name , url ...

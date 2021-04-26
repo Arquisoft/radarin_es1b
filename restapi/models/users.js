@@ -5,7 +5,8 @@ const schema = mongoose.Schema({
     webId: String,
     nombre: String,
     admin: String,
-    status: String
+    status: String,
+    ban: String
 })
 
 

@@ -30,7 +30,8 @@ router.post("/users/add", async (req, res) => {
             webId: webId,
             nombre: nombre,
             admin: admin,
-            status: status
+            status: status,
+            ban:"false"
         })
         await user.save()
         console.log("usuario añadido con exito")
@@ -88,6 +89,37 @@ router.post("/users/remove", async (req, res) => {
 
 
 })
+
+//cambia el estado de una persona
+router.post("/users/ban" , async(req,res) =>{
+
+    let webId = req.body.webId;
+
+    console.log("El usuario que se va a banear es " + webId)
+
+    let user2 = await User.findOne({ webId: webId })
+
+    if(user2){
+        var query = { "_id": user2._id };
+        user2.ban = "true"
+
+        await User.findOneAndUpdate(query, user2, function (err, doc) {
+            if (err) {
+                //console.error("Something wrong when updating data!");
+            } else {
+               //console.log(doc);
+            }
+        });
+    }
+
+    console.log("llega aqui " + ban)
+
+    await user2.save();
+    res.send(user2);
+
+})
+
+
 
 
 // register a new location
@@ -179,30 +211,6 @@ router.post("/friends/check", async (req, res) => {
     
     
 })
-
-//comprueba si es admin
-router.post("/admin/check", async (req, res) => {
-
-    let userWebId = req.body.webId
-
-
-    var query = {
-
-        "webId": userWebId
-    };
-
-
-    await User.find(query, function (err, docs) {
-        if (err) {
-             console.error("Error al encontrar el usuario")
-        } else {
-             var admin = docs.map((doc) => { return doc.admin })
-             res.send(admin);
-        }
-    })
-
-})
-
 
 router.post("/friends/remove", async (req, res) => {
     let userWebId = req.body.webId
@@ -353,6 +361,37 @@ router.post("/friends/accept", async (req, res) => {
             }
         })
     });
+
+     //buscar si una persona es admin
+     router.post("/users/search/ban", async (req, res) => {
+        var query = {
+            "ban": "true"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })                
+                res.send(webIds);
+            }
+        })
+    });
+
+     //buscar si una persona es admin
+     router.post("/users/search/ban/no", async (req, res) => {
+        var query = {
+            "ban": "false"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })                
+                res.send(webIds);
+            }
+        })
+    });
+
 
     // get friends
     router.get("/friends/list/:id", async (req, res) => {

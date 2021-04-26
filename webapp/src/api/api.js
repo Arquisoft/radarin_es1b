@@ -28,6 +28,19 @@ export async function removeUser(userWebId){
     return await response.json()
 }
 
+export async function banUser(userWebId){
+    console.log("baneando a el usuario : "+userWebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/ban', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':userWebId
+        })
+      })
+    return await response.json()
+}
+
 export async function updateStatus(webId, status){
 
     //console.log("estoy llamando con webId " + webId )
@@ -179,6 +192,24 @@ export async function getSearcByAdmin(){
     return await response.json()
 }
 
+export async function getSearcByBan(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/ban', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+export async function getSearcByNoBan(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/ban/no', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
 
 
 /* export async function acceptFriend(webId,friendWebId){
@@ -251,30 +282,6 @@ export async function getFriendShip(userWebId, friendwebId){
     catch{
          answer= null;
     }
-    return  answer;
-}
-
-export async function getAdmin(userWebId){
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-
-    console.log("envio este webId " + userWebId)
-
-    let response = await fetch(apiEndPoint+'/admin/check', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-
-            'webId':userWebId 
-        })
-      })
-      let answer;
-    try{
-         answer= await response.json()
-    }
-    catch{
-         answer= null;
-    }
-    console.log("isAdmin devuelve " + answer)
     return  answer;
 }
 

@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import AllUsers from '../admin/AllUsers';
 import OnlineUsers from '../admin/OnlineUsers';
 import DeleteUsers from '../admin/DeleteUsers';
+import BanUsers from '../admin/BanUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,8 +78,9 @@ export default function ScrollableTabsButtonAuto(props) {
           <Tab label="Eliminar usuarios" {...a11yProps(2)} />
           <Tab label="Usuarios inactivos" {...a11yProps(3)} />
           <Tab label="Banear usuarios" {...a11yProps(4)} />
-          <Tab label="Añadir administradores" {...a11yProps(5)} />
-          <Tab label="Administradores" {...a11yProps(6)} />
+          <Tab label="Usuarios baneados" {...a11yProps(5)} />
+          <Tab label="Añadir administradores" {...a11yProps(6)} />
+          <Tab label="Administradores" {...a11yProps(7)} />
         </Tabs>
       </AppBar>
 
@@ -95,9 +97,12 @@ export default function ScrollableTabsButtonAuto(props) {
         to be done
       </TabPanel>
       <TabPanel value={value} index={4} >
-        to be done
+         <BanUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={5} >
+        to be done
+      </TabPanel>
+      <TabPanel value={value} index={6} >
         to be done
       </TabPanel>
       <TabPanel value={value} index={6} >

@@ -3,8 +3,9 @@ import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } 
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
+import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
-import { addLocation, addMeet } from '../../api/api';
+import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";    
 
 
@@ -14,10 +15,11 @@ const Map = (props) => {
     const [map, setMap] = useState(null);
     const { position, setPosition } = useContext(LocationsContext);
     const { seeFriends } = useContext(LocationsContext);
+    const { meetPosition } =useContext(LocationsContext);
 
     const [locateButtonAction, setLocateButtonAction]=useState(false);
 
-    //const [meetButtonAction, setMeetButtonAction]=useState(false);
+    let meetLocations=[]
 
     let meetButtonAction=false;
 
@@ -32,7 +34,7 @@ const Map = (props) => {
             map.on('click', function(e) {
                 if(meetButtonAction){
                     alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-                    saveMeet(e.latlng).then(render())
+                    saveMeet(e.latlng)
                 }
                 
             });
@@ -64,13 +66,20 @@ const Map = (props) => {
         return () => clearInterval(interval);
       });
 
+
     function handleOnLocationFound(e) {
         const latlng = e.latlng;
         const radius = e.accuracy;
         setPosition(e)
     }
 
+
+
     function saveMeet(latlng){
+
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         Geocode.fromLatLng(latlng.lat, latlng.lng).then(
             (response) => {
               let state, country;
@@ -90,7 +99,7 @@ const Map = (props) => {
               }
               addMeet(
                   propsAux.webId, latlng,
-                  state, country);
+                  state, country,date,time);
             },
             (error) => {
               console.log("No se ha podido guardar la localización")
@@ -128,9 +137,7 @@ const Map = (props) => {
                          <FriendsLocationMarkers webId={props.webId}/>
                         </LayersControl.Overlay>
                         <LayersControl.Overlay checked name="Mostrar Meets">
-                            {position?
-                                null
-                            :null}
+                              <MeetLocationMarkers webId={props.webId}/>
                         </LayersControl.Overlay>
                     </LayersControl>
                     <TileLayer

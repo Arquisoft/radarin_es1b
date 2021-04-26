@@ -35,6 +35,7 @@ const Map = (props) => {
                 if(meetButtonAction){
                     alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
                     saveMeet(e.latlng)
+                    meetButtonAction = false;
                 }
                 
             });

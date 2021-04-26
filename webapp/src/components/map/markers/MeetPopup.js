@@ -10,11 +10,9 @@ import styles from './Friend.module.css';
 import { toProfile } from '../../../routing';
 import Image from "../../profile/Image";
 
-
-import Button from '@material-ui/core/Button';
-
 import {assist} from "../../../api/api"
 
+import Button from '@material-ui/core/Button';
 
 
 
@@ -36,13 +34,23 @@ const Meet = ({ webId, fullName, imageSrc, meet }) =>
                 </div>
 
         </ListItem>
-        <div>
-        <ListItemText
-            primary={"Fecha: " + meet.date}
-        />
-        <ListItemText
-            primary={"Hora: " + meet.time}
-        />
+        <div style = {{ display: 'flex', flexDirection: 'column' }}>
+            <div style = {{ display: 'flex', flexDirection: 'row', marginBottom: '2em' }}>
+                <ListItemText
+                    primary={"Fecha: " + meet.date}
+                />
+                <ListItemText
+                    primary={"Hora: " + meet.time}
+                />
+            </div>
+            <div style = {{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                <div style = {{ marginRight: '1.5em', padding: '0.25em' }}>
+                    <Button color="primary" variant="contained">Lista de asistentes</Button>
+                </div>
+                <div style = {{ padding: '0.25em' }}>
+                    <Button color="primary" variant="contained">Asistir</Button>
+                </div>
+            </div>
         </div>
     </div>
 

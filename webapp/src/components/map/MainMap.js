@@ -43,13 +43,13 @@ const Map = (props) => {
             
             L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
                 meetButtonAction=!meetButtonAction;
-            }).addTo(map);
-            L.easyButton('<img src="'+ubicationIMG+' style="width:32px">', function(btn, map) {
+            }, "Crear una nueva reunión").addTo(map);
+            L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
                 map.locate({
                     setView: !locateButtonAction
                 })
                 setLocateButtonAction(!locateButtonAction)
-            }).addTo(map);
+            }, "Volver a mi ubicación").addTo(map);
         }
 
     },[map])

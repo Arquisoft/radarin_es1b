@@ -46,7 +46,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '65%',
+    width: '75%',
     backgroundColor: theme.palette.info.paper,
   },
 }));
@@ -78,6 +78,7 @@ export default function ScrollableTabsButtonAuto(props) {
           <Tab label="Usuarios inactivos" {...a11yProps(3)} />
           <Tab label="Banear usuarios" {...a11yProps(4)} />
           <Tab label="Añadir administradores" {...a11yProps(5)} />
+          <Tab label="Administradores" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
 
@@ -97,6 +98,9 @@ export default function ScrollableTabsButtonAuto(props) {
         to be done
       </TabPanel>
       <TabPanel value={value} index={5} >
+        to be done
+      </TabPanel>
+      <TabPanel value={value} index={6} >
         to be done
       </TabPanel>
     </div>

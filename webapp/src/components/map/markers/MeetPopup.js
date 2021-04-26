@@ -37,8 +37,6 @@ const Meet = ({ webId, fullName, imageSrc, meet }) =>
             primary={"hora: " + meet.time}
         />
 
-        <button>XD</button>
-
     </ListItem>
 
 export default Meet

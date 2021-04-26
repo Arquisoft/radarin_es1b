@@ -11,7 +11,7 @@ import Profile from './components/profile';
 import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
 
-
+require("leaflet-easybutton");
 
 class App extends React.Component {
   constructor() {

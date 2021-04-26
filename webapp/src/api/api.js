@@ -28,18 +28,21 @@ export async function removeUser(userWebId){
     return await response.json()
 }
 
-export async function banUser(userWebId){
+export async function banUser(userWebId, ban){
     console.log("baneando a el usuario : "+userWebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/ban', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
-            'webId':userWebId
+            'webId':userWebId,
+            'ban':String(ban)
         })
       })
     return await response.json()
 }
+
+
 
 export async function updateStatus(webId, status){
 

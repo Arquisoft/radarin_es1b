@@ -95,13 +95,15 @@ router.post("/users/ban" , async(req,res) =>{
 
     let webId = req.body.webId;
 
+    let baneable = req.body.ban;
+
     console.log("El usuario que se va a banear es " + webId)
 
     let user2 = await User.findOne({ webId: webId })
 
     if(user2){
         var query = { "_id": user2._id };
-        user2.ban = "true"
+        user2.ban = baneable
 
         await User.findOneAndUpdate(query, user2, function (err, doc) {
             if (err) {

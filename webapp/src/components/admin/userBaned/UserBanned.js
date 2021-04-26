@@ -14,7 +14,7 @@ function UserBan({ webId, fullName, imageSrc}) {
 
   function ChangeTarget(){
     console.log("baneadooo")
-    banUser(webId,"true")
+    banUser(webId, "false")
   }
 
   return (
@@ -28,7 +28,7 @@ function UserBan({ webId, fullName, imageSrc}) {
        
     />
    <Button onClick = {ChangeTarget} id="searchFriends" type="button">
-							Banear
+							Desbanear
 	 </Button>
   </ListItem>
     </div>

@@ -10,6 +10,7 @@ import AllUsers from '../admin/AllUsers';
 import OnlineUsers from '../admin/OnlineUsers';
 import DeleteUsers from '../admin/DeleteUsers';
 import BanUsers from '../admin/BanUsers';
+import BanedUsers from '../admin/BanedUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -81,6 +82,7 @@ export default function ScrollableTabsButtonAuto(props) {
           <Tab label="Usuarios baneados" {...a11yProps(5)} />
           <Tab label="Añadir administradores" {...a11yProps(6)} />
           <Tab label="Administradores" {...a11yProps(7)} />
+          <Tab label="Ultimos accesos" {...a11yProps(8)} />
         </Tabs>
       </AppBar>
 
@@ -100,12 +102,15 @@ export default function ScrollableTabsButtonAuto(props) {
          <BanUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={5} >
-        to be done
+        <BanedUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={6} >
         to be done
       </TabPanel>
-      <TabPanel value={value} index={6} >
+      <TabPanel value={value} index={7} >
+        to be done
+      </TabPanel>
+      <TabPanel value={value} index={8} >
         to be done
       </TabPanel>
     </div>

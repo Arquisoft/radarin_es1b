@@ -115,7 +115,7 @@ class DeleteUsers extends React.Component {
 			 	<span>{this.state.searchName}</span>}
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
-					<User key={webId} webId={webId} logged={this.logged}/>:null
+					<User key={webId} webId={webId}/>:null
 	
 			  ))}
 	

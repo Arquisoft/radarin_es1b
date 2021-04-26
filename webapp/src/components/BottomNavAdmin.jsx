@@ -40,9 +40,6 @@ const BottomNav = (props) => {
         <Route path="/users">
           <Users/>
         </Route>
-        <Route path="/delete*">
-          <Users/>
-        </Route>
         <Route path="/profile*">
            
         </Route>

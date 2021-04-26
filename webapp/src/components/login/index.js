@@ -12,7 +12,7 @@ const Index = () => {
     const webId = useWebId()
 
     const lastWebId = webId
-    console.log("WEBID REGISTRADO " + lastWebId)
+    //console.log("WEBID REGISTRADO " + lastWebId)
     // almacena en profile las fotos, name , url ...
     const profile = useProfile(webId)
     //<LoginContainer es un nombre cualquiera , lo que nos interesa es pasarle como parametro el ...profile a export default.. la funcion de la clase Container

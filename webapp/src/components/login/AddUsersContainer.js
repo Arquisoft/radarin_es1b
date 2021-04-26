@@ -1,5 +1,5 @@
 import React from 'react';
-import {addUser, updateStatus} from "../../api/api";
+import {addUser} from "../../api/api";
 
 
 

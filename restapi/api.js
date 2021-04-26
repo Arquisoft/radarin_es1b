@@ -336,6 +336,24 @@ router.post("/friends/accept", async (req, res) => {
         })
     });
 
+    //buscar si una persona es admin
+    router.post("/users/search/admin", async (req, res) => {
+        var query = {
+            "admin": "true"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })
+
+                console.log("ESTE ADMIN HA SIDO ENCONTRADO " + webIds)
+                
+                res.send(webIds);
+            }
+        })
+    });
+
     // get friends
     router.get("/friends/list/:id", async (req, res) => {
 

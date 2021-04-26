@@ -378,6 +378,35 @@ router.post("/friends/accept", async (req, res) => {
 
     });
 
+
+    router.post("/meets/assist", async(req,res)=>{
+        let user= req.body.asistenteWebId;
+        let meetId=req.body.meetId;
+
+        let meet= await Meet.findOne({meetId:meetId});
+
+        query={
+            meetId:meetId
+        }
+
+        if(meet){
+            meet.attendances.push(user)
+            
+            await Meet.findOneAndUpdate(query, meet, function (err, doc) {
+                if (err) {
+                    console.log("No se pudo actualizar la lista de asistentes!");
+                } else {
+                    //console.log(doc);
+                    res.send(meets)
+                }
+            });
+        }
+
+        res.send({ error: "Error: No se pudo crear el meet" + meetId })
+
+
+    })
+
     //busca entre los meets creados por el usuario + los meets creados por sus amigos
     router.post("/meets/find", async (req, res) => {
         let user = req.body.userWebId;

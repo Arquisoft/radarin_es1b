@@ -11,17 +11,17 @@ import { updateStatus } from '../../api/api';
 const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 
+
 function Cerrar(web) {
+
+    window.onunload = window.onbeforeunload = function(web) {
+		ejecutar(webId);
+	}
 
     let webId = web;
 
     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
 
-    window.addEventListener("unload", function (e) {
-
-        ejecutar(webId);
-        
-      });
       function ejecutar(web) {
 
         let webId = web

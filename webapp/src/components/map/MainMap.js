@@ -24,7 +24,6 @@ const Map = (props) => {
 
     let meetButtonAction=false;
 
-    let propsAux=props;
 
     useEffect(() => {
         if (map) {
@@ -39,11 +38,13 @@ const Map = (props) => {
                     saveMeet(e.latlng)
                     meetButtonAction = true;
                 }
+
+                
                 
             });
             
             L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
-                meetButtonAction=!meetButtonAction;
+                meetButtonAction?meetButtonAction=false: meetButtonAction=true;
             }, "Crear una nueva reunión").addTo(map);
             L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
                 map.locate({
@@ -64,7 +65,7 @@ const Map = (props) => {
                 map.on('locationfound',handleOnLocationFound)
                 saveLocation(position.latlng)               
             }
-        }, 1000);
+        }, 20000);
         return () => clearInterval(interval);
       });
 
@@ -72,7 +73,6 @@ const Map = (props) => {
     function handleOnLocationFound(e) {
         const latlng = e.latlng;
         const radius = e.accuracy;
-        //saveLocation(e.latlng)
         setPosition(e)
     }
 

@@ -28,6 +28,7 @@ function Cerrar(web) {
         let webId = web
 
         if(webId!==null && webId !==undefined){
+            
             updateStatus(webId, "offline")
         }
         //addUser(webId, "paquirrin")

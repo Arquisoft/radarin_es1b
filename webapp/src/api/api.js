@@ -60,7 +60,7 @@ export async function makeAdmin(userWebId, admin){
 
 export async function updateStatus(webId, status){
 
-
+    console.log("llega el web id para cambiar el estado " + webId)
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/status/update', {
         method: 'POST',

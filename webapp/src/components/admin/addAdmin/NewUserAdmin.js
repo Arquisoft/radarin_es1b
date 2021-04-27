@@ -7,6 +7,7 @@ import { Button } from '@material-ui/core';
 import styles from './Friend.module.css';
 import Image from "../../profile/Image";
 import {makeAdmin} from "../../../api/api";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 
 
 function NewUserAdmin({ webId, fullName, imageSrc}) {
@@ -25,8 +26,8 @@ function NewUserAdmin({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small">
-							Hacer admin
+   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small" startIcon={<PersonAddIcon />}>
+							new
 	 </Button>
   </ListItem>
     </div>

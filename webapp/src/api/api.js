@@ -28,6 +28,20 @@ export async function removeUser(userWebId){
     return await response.json()
 }
 
+export async function deleteAdmin(userWebId, admin){
+    //console.log("Eliminando a el usuario : "+userWebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/admin/delete', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':userWebId,
+            'admin': admin
+        })
+      })
+    return await response.json()
+}
+
 export async function banUser(userWebId, ban){
     console.log("baneando a el usuario : "+userWebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

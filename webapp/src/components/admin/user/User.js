@@ -9,6 +9,7 @@ import styles from './Friend.module.css';
 import {removeUser} from '../../../api/api'
 import {toDelete} from '../../../routing';
 import Image from "../../profile/Image";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 function User({ webId, fullName, imageSrc}) {
@@ -27,8 +28,8 @@ function User({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small">
-							Eliminar
+   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
+							delete
 	 </Button>
   </ListItem>
     </div>

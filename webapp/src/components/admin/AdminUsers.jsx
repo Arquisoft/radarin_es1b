@@ -1,9 +1,8 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
 import { getSearcByAdmin, getSearcByStatus, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import Friend from "../friendList/friend";
+import Friend from "../admin/deleteAdmin";
 
 
 class AdminUsers extends React.Component {
@@ -86,25 +85,10 @@ class AdminUsers extends React.Component {
 		} 
     }
 
-
-	buscarAmigos() {
-		return (
-			<div>
-				<form>
-					<label> 
-						Administradores:
-					</label>
-				</form>
-            </div>
-		);
-    }
-
-
 	  render() {
 		return (
 		  <List dense>
 			{/* Scroll con la lista de amigos  */}
-			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  loader={<h4>Cargando...</h4>} //loader
@@ -112,7 +96,6 @@ class AdminUsers extends React.Component {
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null
-	
 			  ))}
 	
 			</InfiniteScroll>

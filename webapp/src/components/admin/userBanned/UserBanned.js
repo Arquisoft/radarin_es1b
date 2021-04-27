@@ -8,6 +8,7 @@ import { Button } from '@material-ui/core';
 import styles from './Friend.module.css';
 import {banUser} from '../../../api/api'
 import Image from "../../profile/Image";
+import HowToRegIcon from '@material-ui/icons/HowToReg';
 
 
 function UserBan({ webId, fullName, imageSrc}) {
@@ -27,8 +28,8 @@ function UserBan({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small">
-							Desbanear
+   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<HowToRegIcon />}>
+							unban
 	 </Button>
   </ListItem>
     </div>

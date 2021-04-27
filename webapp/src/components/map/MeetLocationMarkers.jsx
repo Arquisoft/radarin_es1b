@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component,useEffect } from 'react'
 import { LayerGroup, Marker, Popup } from 'react-leaflet';
 import { getMeetsForUser } from '../../api/api';
 import { iconMeet } from "./markers/IconMeet"
 import { iconOwnMeet } from "./markers/IconOwnMeet"
 import Meet from "./markers/MeetPopupManager"
+
 
 
 export default class MeetLocationMarkers extends Component {
@@ -16,7 +17,26 @@ export default class MeetLocationMarkers extends Component {
         }
     }
 
-    componentDidMount() {
+
+    
+
+    async componentDidMount() {
+        this.updateMeets()
+    }
+
+    async componentDidUpdate(){
+        this.timeUpdateMeets()
+    }
+    
+
+    async timeUpdateMeets(){
+        const interval = setInterval(() => {
+            this.updateMeets()
+        }, 20000);
+        return () => clearInterval(interval);
+    }
+
+    async updateMeets(){
         var promise = getMeetsForUser(this.state.webId)
 
         promise.then((result) => {
@@ -25,6 +45,7 @@ export default class MeetLocationMarkers extends Component {
                 this.state.locs.push(e)
             })
         })
+
     }
 
     render() {

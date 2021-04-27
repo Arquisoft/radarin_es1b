@@ -17,8 +17,12 @@ const Map = (props) => {
     const { seeFriends } = useContext(LocationsContext);
     const { meetPosition } =useContext(LocationsContext);
 
+
+
     const [locateButtonAction, setLocateButtonAction]=useState(false);
     const profile = useProfile(props.webId)
+
+
 
     let meetLocations=[]
 

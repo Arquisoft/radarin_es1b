@@ -9,19 +9,6 @@ import styles from './Friend.module.css';
 import {toProfile} from '../../../routing';
 import Image from "../../profile/Image";
 
-function handleClick(e) {
-
-    e.preventDefault();
-	
-		fetchData()      
-  
-}
-
-
-function fetchData() {
-   console.log("auxilio me desmayo, callese viejo lesbiano")
-  }
-
 //Amigo del usuario SOLID
 const Friend = ({webId, fullName, imageSrc}) =>
   <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>

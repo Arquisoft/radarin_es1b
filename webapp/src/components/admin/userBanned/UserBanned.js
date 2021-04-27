@@ -3,17 +3,19 @@ import React from "react";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import {Link} from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import styles from './Friend.module.css';
-import {removeUser} from '../../../api/api'
+import {banUser} from '../../../api/api'
 import Image from "../../profile/Image";
-import DeleteIcon from '@material-ui/icons/Delete';
+import HowToRegIcon from '@material-ui/icons/HowToReg';
 
 
-function User({ webId, fullName, imageSrc}) {
+function UserBan({ webId, fullName, imageSrc}) {
 
   function ChangeTarget(){
-    removeUser(webId)
+    console.log("baneadooo")
+    banUser(webId, "false")
   }
 
   return (
@@ -26,12 +28,12 @@ function User({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
-							delete
+   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<HowToRegIcon />}>
+							unban
 	 </Button>
   </ListItem>
     </div>
   )
 }
 
-export default User 
+export default UserBan 

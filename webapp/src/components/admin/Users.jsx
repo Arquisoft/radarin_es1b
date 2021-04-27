@@ -12,7 +12,7 @@ class Users extends React.Component{
     render(){
         return (
             <div>
-                <h1>Gestión de usuarios</h1>
+                <h1></h1>
                 <div class="contenedorFriends">
                     <UsersAutomaticScrollButtons webId={this.webId}/>
                 </div>

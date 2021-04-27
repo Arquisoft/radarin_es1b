@@ -8,28 +8,19 @@ import { LocationsContextProvider } from './context/LocationsContext';
 import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
-import Delete from './components/delete';
 import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
-import {getSearcByAdmin} from './api/api'
+import {getSearcByAdmin, getSearcByBan} from './api/api'
 
 class App extends React.Component {
   constructor() {
     super()
     /* array para almacenar los usuarios conectados*/ 
     this.resultQuery = []
+    this.resultBan = []
     this.querySuccess=false;
-    this.state = {
-      users: []
-    }
    
   }
-  
-  static defaultProps = {
-    users: [], // Lista de todas los amigos que se mostrarán.
-    height: 300,
-    showInitially: 10, // Número de amigos para mostrar inicialmente
-  };
 
     async fetchData() {
       var promise = getSearcByAdmin()
@@ -47,9 +38,27 @@ class App extends React.Component {
       })
       }
 
+      async fetchBan() {
+        var promise = getSearcByBan()
+        this.querySuccess=false;
+        this.resultBan=[]
+        promise.then((result) => {
+          this.resultBan=[]
+          result.forEach((e) => {
+          this.resultBan.push(e)
+          console.log("ESTOY BANEADO AMIGO " + e)
+          })
+    
+          this.querySuccess=true;
+          this.forceUpdate()
+          this.render() 
+        })
+        }
+
       componentDidMount(){
 
         this.fetchData();
+        this.fetchBan();
 
       }
 
@@ -78,17 +87,10 @@ class App extends React.Component {
                   //SaveWebId(params.webId)
                   return <Profile webId={params.webId} />
                 }} />
-
-                <Route path="/delete/" render={({ location }) => {
-                  const params = qs.parse(location.search);
-                  //SaveWebId(params.webId)
-                  return <Delete webId={params.webId} />
-                }} />
-
               </LoggedIn> 
             </main>
             {console.log(this.resultQuery)}
-            {this.resultQuery.length>0 ?  <NavBar adminUser= {this.resultQuery}/>:  <NavBar adminUser= {this.resultQuery}/>}
+            <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
            
           </Router>
         </LocationsContextProvider>

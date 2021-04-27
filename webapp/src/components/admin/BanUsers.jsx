@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { getSearcByName, getUsers } from '../../api/api';
+import { getSearcByNoBan, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import User from "../admin/user";
+import User from "./userBan";
 
 
-class DeleteUsers extends React.Component {
+class BanUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -32,7 +32,7 @@ class DeleteUsers extends React.Component {
 
 
 	  async fetchData() {
-		var promise = getSearcByName(this.state.searchName)
+		var promise = getSearcByNoBan()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
@@ -128,4 +128,4 @@ class DeleteUsers extends React.Component {
 	}
 
 
-	export default DeleteUsers;
+	export default BanUsers;

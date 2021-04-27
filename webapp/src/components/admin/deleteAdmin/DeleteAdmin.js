@@ -5,16 +5,17 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Button } from '@material-ui/core';
 import styles from './Friend.module.css';
-import {removeUser} from '../../../api/api'
+import {makeAdmin} from '../../../api/api'
 import Image from "../../profile/Image";
 import DeleteIcon from '@material-ui/icons/Delete';
 
 
-function User({ webId, fullName, imageSrc}) {
+function DeleteAdmin({ webId, fullName, imageSrc}) {
 
   function ChangeTarget(){
-    removeUser(webId)
+    makeAdmin(webId,"true")
   }
+
 
   return (
     <div>
@@ -27,11 +28,11 @@ function User({ webId, fullName, imageSrc}) {
        
     />
    <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
-							delete
+		delete
 	 </Button>
   </ListItem>
     </div>
   )
 }
 
-export default User 
+export default DeleteAdmin 

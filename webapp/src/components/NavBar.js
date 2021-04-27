@@ -3,6 +3,7 @@ import {useWebId} from '@solid/react';
 import BottomNav from './BottomNav';
 import BottomNavAdmin from './BottomNavAdmin';
 import StartPage from '../routes/StartPage';
+import StartPageBan from '../routes/StartPageBaneado';
 
 
 
@@ -11,10 +12,12 @@ import StartPage from '../routes/StartPage';
     
     const webId = useWebId()
 
-    
     var adminUsers = props.adminUser;
 
-    console.log("String de usuaarios " + adminUsers.length)
+    var usersBan = props.banUser;
+
+    console.log("String de usuarios admin " + adminUsers.length)
+    console.log("String de usuarios baneados " + usersBan.length)
 
     for(var i = 0; i<adminUsers.length;i++){
 
@@ -25,6 +28,12 @@ import StartPage from '../routes/StartPage';
     if(webId!=null){
 
       for(var i = 0; i<adminUsers.length;i++){
+
+        if(webId==usersBan[i]){
+          
+          return  <StartPageBan />  
+
+        }
 
         if(webId==adminUsers[i]){
           
@@ -43,7 +52,7 @@ import StartPage from '../routes/StartPage';
     }
     else{
 
-        return (webId) ? <BottomNav webId={webId} /> : <StartPage />;  
+        return <StartPage />  
         
     }
 

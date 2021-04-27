@@ -1,21 +1,17 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
-import { getSearcByName, getUsers } from '../../api/api';
+import { getSearcByAdmin, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import User from "../admin/user";
+import Friend from "../admin/deleteAdmin";
 
 
-class DeleteUsers extends React.Component {
+class AdminUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
 		this.resultQuery = []
 		this.logged = this.props.webId;
 		this.querySuccess=false;
-		this.state = {
-			searchName: ""
-		};
 	}
 	
 	static defaultProps = {
@@ -30,9 +26,13 @@ class DeleteUsers extends React.Component {
 		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
 	  };
 
+	  componentDidMount(){
+		this.fetchData()
+	  }
+
 
 	  async fetchData() {
-		var promise = getSearcByName(this.state.searchName)
+		var promise = getSearcByAdmin()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
@@ -60,6 +60,10 @@ class DeleteUsers extends React.Component {
 		})
 	  }
 
+	handleChange(event) {
+		this.setState({ searchName: event.target.value });
+	}
+
 	componentDidUpdate(){
 		var aucx=true;
 		if(aucx){
@@ -68,13 +72,7 @@ class DeleteUsers extends React.Component {
 		}
 	}
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
-
-	componentDidMount(){
-		this.fetchData()
-	}
+	
 
 
 	handleClick(e) {
@@ -85,38 +83,19 @@ class DeleteUsers extends React.Component {
 		else{
 			//console.error("No hay texto para buscar")
 		} 
-
-
-}
-
-	buscarAmigos() {
-		return (
-			<div>
-				<form>
-					<label> 
-					</label>
-				</form>
-            </div>
-		);
     }
-
 
 	  render() {
 		return (
 		  <List dense>
 			{/* Scroll con la lista de amigos  */}
-			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
-			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
-			 	<span>{this.state.searchName}</span>}
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
-					<User key={webId} webId={webId}/>:null
-	
+					<Friend key={webId} webId={webId} logged={this.logged}/>:null
 			  ))}
 	
 			</InfiniteScroll>
@@ -128,4 +107,4 @@ class DeleteUsers extends React.Component {
 	}
 
 
-	export default DeleteUsers;
+	export default AdminUsers;

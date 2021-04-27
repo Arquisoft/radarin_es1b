@@ -240,14 +240,14 @@ export async function getMeetsForUser(webId,){
     return await response.json()
 }
 
-export async function asistir(meetId, asistenteWebId){
+export async function assist(meetId, asistenteWebId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/meets/assist', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
             'asistenteWebId': String(asistenteWebId),
-            'meetId': meetId
+            'meetId': String(meetId)
         })
       })
     return await response.json()

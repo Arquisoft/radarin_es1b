@@ -15,9 +15,14 @@ import {assist} from "../../../api/api"
 import Button from '@material-ui/core/Button';
 
 
+function assistToMeet(meetId, webId){
+    assist(meetId,webId) 
+}
+
+
 
 //Meets
-const Meet = ({ webId, fullName, imageSrc, meet }) =>
+const Meet = ({ webId, fullName, imageSrc, meet, loggedWebId }) =>
     <div>
         <strong>Meet Creado por</strong>
         <ListItem className={styles.friend} button component={Link} to={toProfile(webId)} clickable>
@@ -43,9 +48,9 @@ const Meet = ({ webId, fullName, imageSrc, meet }) =>
                     primary={"Hora: " + meet.time}
                 />
             </div>
-            <div style = {{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+            <div style = {{ display: 'flex', flexDirection: 'row',justifyContent:'center', flexWrap: 'wrap' }}>
                 <div style = {{ marginRight: '1.5em', padding: '0.25em' }}>
-                    <Button color="primary" variant="contained">Lista de asistentes</Button>
+                    <Button color="primary" variant="contained" onClick={ assistToMeet(meet._id,loggedWebId) }>Asistentes</Button>
                 </div>
                 <div style = {{ padding: '0.25em' }}>
                     <Button color="primary" variant="contained">Asistir</Button>

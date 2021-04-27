@@ -383,26 +383,39 @@ router.post("/friends/accept", async (req, res) => {
         let user= req.body.asistenteWebId;
         let meetId=req.body.meetId;
 
-        let meet= await Meet.findOne({meetId:meetId});
+        console.log(meetId)
 
         query={
-            meetId:meetId
+            _id:mongoose.Types.ObjectId(meetId)
         }
+        let meet= await Meet.findOne(query);
 
-        if(meet){
-            meet.attendances.push(user)
+        if(meet){            
+            let asiste=false;
+            meet.attendances.map((asistente)=>{
+                if(asistente==user){
+                    asiste=true
+                }
+            })
+
+            if(!asiste){
+                meet.attendances.push(user)
+            }
+            
             
             await Meet.findOneAndUpdate(query, meet, function (err, doc) {
                 if (err) {
                     console.log("No se pudo actualizar la lista de asistentes!");
                 } else {
                     //console.log(doc);
-                    res.send(meets)
+                    res.send(meet)
                 }
             });
+        }else{
+            res.send({ error: "Error: No se pudo crear el meet" + meetId })
+
         }
 
-        res.send({ error: "Error: No se pudo crear el meet" + meetId })
 
 
     })

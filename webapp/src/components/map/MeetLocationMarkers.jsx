@@ -40,13 +40,13 @@ export default class MeetLocationMarkers extends Component {
                         return loc.creator != this.state.webId ? <Marker position={[loc.location[0], loc.location[1]]} icon={iconMeet}>
 
                             <Popup>
-                                <Meet meet={loc} />
+                                <Meet meet={loc}  loggedWebId={this.state.webId}/>
                             </Popup>
                         </Marker> :
                             <Marker position={[loc.location[0], loc.location[1]]} icon={iconOwnMeet}>
 
                                 <Popup>
-                                    <Meet meet={loc} />
+                                    <Meet meet={loc} loggedWebId={this.state.webId} />
                                 </Popup>
                             </Marker>
 

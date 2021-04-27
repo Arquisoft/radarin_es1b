@@ -8,10 +8,7 @@ const schema = mongoose.Schema({
     date: String,
     time: String,
     country: String,
-    attendances: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }]
+    attendances: [String]
 })
 
 module.exports = mongoose.model("Meet", schema)

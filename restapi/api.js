@@ -509,13 +509,13 @@ router.post("/friends/accept", async (req, res) => {
                 var users = docs.map(function (elem) {
                     return (elem.target == userWebId) ? elem.requester : elem.target;
                 }, this)
-                console.log(users)
+                //console.log(users)
 
                 Location.find({ 'user': { $in: users } }, function (err, docs) {
                     if (err) {
                         console.log("Error al encontrar los usuarios dados los amigos")
                     } else {
-                        console.log(docs);
+                        //console.log(docs);
                         res.send({ "locs": docs });
                     }
                 })
@@ -530,26 +530,30 @@ router.post("/friends/accept", async (req, res) => {
         let location = req.body.location;
         let state = req.body.state;
         let country = req.body.country;
+        let date = req.body.date;
+        let time = req.body.time;
         // Check if the user is already in the db
+        console.log("Añadiendo meet")
         let creator = await User.findOne({ webId: creator_webid });
         // If it exists, then we'll update it
 
-
         if (creator) {
-            let newEntry = await Meet.findOne({ creator: creator._id, location: [location.lat, location.lng] })
-
-            console.log("Alla")
+            console.log("Comprobado si existe...")
+            let newEntry = await Meet.findOne({ creator: creator_webid, location: [location.lat, location.lng] })
             if (!newEntry) {
                 console.log(creator._id)
                 newEntry = new Meet({
-                    user: mongoose.Types.ObjectId(creator._id),
+                    creator: creator_webid,
                     location: [location.lat, location.lng],
                     state: state,
                     country: country,
-                    attendances: []
+                    attendances: [],
+                    date:date,
+                    time:time
                 });
 
                 await newEntry.save();
+                console.log("Meet Nuevo: "+ newEntry)
                 res.send(newEntry);
             } else {
                 res.send({ error: "Error: Ya existe esta reunioni" })
@@ -600,5 +604,119 @@ router.post("/friends/accept", async (req, res) => {
         })  
         
     })
+    router.post("/meets/assist", async(req,res)=>{
+        let user= req.body.asistenteWebId;
+        let meetId=req.body.meetId;
+
+        console.log(meetId)
+
+        query={
+            _id:mongoose.Types.ObjectId(meetId)
+        }
+        let meet= await Meet.findOne(query);
+
+        if(meet){            
+            let asiste=false;
+            meet.attendances.map((asistente)=>{
+                if(asistente==user){
+                    asiste=true
+                }
+            })
+
+            if(!asiste){
+                meet.attendances.push(user)
+            }
+            
+            
+            await Meet.findOneAndUpdate(query, meet, function (err, doc) {
+                if (err) {
+                    console.log("No se pudo actualizar la lista de asistentes!");
+                } else {
+                    //console.log(doc);
+                    res.send(meet)
+                }
+            });
+        }else{
+            res.send({ error: "Error: No se pudo crear el meet" + meetId })
+
+        }
+
+
+
+    })
+
+    //busca entre los meets creados por el usuario + los meets creados por sus amigos
+    router.post("/meets/find", async (req, res) => {
+        let user = req.body.userWebId;
+        // Check if the user is already in the db
+        let creator = await User.findOne({ webId: user });
+
+        let meets=[]
+
+        queryForUser={
+            creator: (user)
+        }
+        Meet.find().and(queryForUser).exec(function(err, meetsUser){
+            if(err){
+                console.log("No se ha podido procesar la peticion de los meets para el usuairo")
+            }
+            else{
+                meetsUser.map(function(meet){
+                    meets.push(meet)
+                })
+
+                var queryForFriends = {
+                    $and: [
+                        {
+                            $or: [
+                                { "requester": user },
+                                { "target": user }
+                            ]
+                        },
+                        { "status": "accepted" }
+                    ]
+                };
+
+                 //Encuentra los amigos
+                Friend.find().and(queryForFriends).exec(function (err, docs) {
+                    if (err) {
+                        console.log("Error al encontrar los amigos");
+                    } else {
+                        var friends = docs.map(function (elem) {
+                            return (elem.target == user) ? elem.requester : elem.target;
+                        }, this)
+                    //buscar meets creados por esos amigos:
+                    
+                        let queryForFirends={
+                        creator: friends
+                        }
+
+                        Meet.find().and(queryForFirends).exec(function(err,meetsFriends){
+                            if(err){
+                                console.log("No se han podido procesar los meets para los amigos")
+                            }
+                            else{
+                                meetsFriends.map(function(meet){
+                                    meets.push(meet)
+                                })
+
+                                res.send(meets)
+                            }
+                        })
+                    }
+                })
+
+                //res.send(meets)
+                
+                
+            }
+        })
+
+       
+    });
+
+
+    
+
 
     module.exports = router

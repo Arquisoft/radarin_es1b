@@ -12,7 +12,7 @@ const LoadingFriend = ({webId}) =>
         <CircularProgress/>
       </ListItemIcon>
       <ListItemText
-          primary="Loading..."
+          primary="Cargando..."
           secondary={webId}
       />
     </ListItem>

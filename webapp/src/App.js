@@ -12,6 +12,8 @@ import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
 import {getSearcByAdmin, getSearcByBan} from './api/api'
 
+require("leaflet-easybutton");
+
 class App extends React.Component {
   constructor() {
     super()

@@ -50,12 +50,12 @@ const Start = () => {
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Don't have a profile, yet? 
+            ¿Aún no tienes un perfil? 
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" component="a" href="https://solidcommunity.net/register">
-            Get a profile
+            Conseguir un perfil
           </Button>
         </CardActions>
       </Card>
@@ -73,18 +73,18 @@ const Start = () => {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            What is Solid?
+            ¿Qué es Solid?
           </Typography>
           <Typography component="p">
-            Solid is an exciting new project led by Prof. Tim Berners-Lee,
-            inventor of the World Wide Web, taking place at MIT. The project
-            aims to radically change the way Web applications work today,
-            resulting in true data ownership as well as improved privacy.
+            Solid es un nuevo proyecto dirigido por Tim Berners-Lee,
+            el inventor de la World Wide Web. El proyecto trata de cambiar
+            radicalmente cómo las aplicaciones Web funcionan a día de hoy,
+            basándose en la auténtica propiedad de datos y una mayor privacidad.
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" color="primary" component="a" href="https://solid.mit.edu/">
-            Learn More
+            Aprender más
           </Button>
         </CardActions>
       </Card>

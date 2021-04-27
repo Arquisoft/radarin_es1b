@@ -81,7 +81,6 @@ export async function getUsers(){
 
 export async function addLocation(webId,location,state,country,fullName){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    //console.log("Que fullName llega " + fullName);
     let response = await fetch(apiEndPoint+'/location/add', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
@@ -321,12 +320,28 @@ export async function addMeet(webId,location,state,country){
             'creator_webId': String(webId), 
             'location':location,
             'state':state,
-            'country':country
+            'country':country,
+            'date':date,
+            'time':time
         })
       })
     return await response.json()
-    
 }
+
+// Meets ------------------------------------- /
+export async function getMeetsForUser(webId,){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/find', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'userWebId': String(webId)
+        })
+      })
+    return await response.json()
+}
+    
+
 
 
 
@@ -341,6 +356,19 @@ export async function addMsg(from, to, msg){
             'from':from, 
             'to':to,
             'msg': msg
+        })
+      })
+    return await response.json()
+}
+
+export async function assist(meetId, asistenteWebId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/assist', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'asistenteWebId': String(asistenteWebId),
+            'meetId': String(meetId)
         })
       })
     return await response.json()

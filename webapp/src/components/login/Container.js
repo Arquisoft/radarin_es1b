@@ -11,22 +11,24 @@ import { updateStatus } from '../../api/api';
 const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 
+
 function Cerrar(web) {
 
     let webId = web;
 
+    window.onunload = window.onbeforeunload = function(web) {
+		ejecutar(webId);
+        return null;
+	}
+
     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
 
-    window.addEventListener("beforeunload", function (e) {
-
-        ejecutar(webId);
-        
-      });
       function ejecutar(web) {
 
         let webId = web
 
         if(webId!==null && webId !==undefined){
+            
             updateStatus(webId, "offline")
         }
         //addUser(webId, "paquirrin")

@@ -60,6 +60,8 @@ class SearchFriends extends React.Component {
 		})
 	  }
 
+	
+
 	handleChange(event) {
 		this.setState({ searchName: event.target.value });
 	}

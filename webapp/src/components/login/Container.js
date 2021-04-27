@@ -14,11 +14,12 @@ const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 function Cerrar(web) {
 
+    let webId = web;
+
     window.onunload = window.onbeforeunload = function(web) {
 		ejecutar(webId);
+        return null;
 	}
-
-    let webId = web;
 
     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
 

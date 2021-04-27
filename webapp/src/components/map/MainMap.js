@@ -165,7 +165,9 @@ const Map = (props) => {
                             scrollWheelZoom={true}>
                     <TileLayer
                                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                maxNativeZoom="19"
+                                maxZoom="19"/>
                     <LayersControl position='topleft'>
                         <LayersControl.Overlay checked name="Posición actual">
                             {position?

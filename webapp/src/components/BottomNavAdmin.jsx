@@ -7,7 +7,7 @@ import DvrIcon from '@material-ui/icons/Dvr';
 import MapIcon from '@material-ui/icons/Map';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleIcon from '@material-ui/icons/People';
-import Map from './map/Map';
+import Map from './map/MainMap';
 import Monitor from './admin/Monitor';
 import Settings from './admin/Settings';
 import Users from './admin/Users';

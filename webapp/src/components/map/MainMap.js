@@ -24,7 +24,7 @@ const Map = (props) => {
 
     let meetButtonAction=false;
 
-
+    let propsAux=props;
     useEffect(() => {
         if (map) {
             map.locate({

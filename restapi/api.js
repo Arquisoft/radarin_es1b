@@ -525,44 +525,7 @@ router.post("/friends/accept", async (req, res) => {
     })
 
 
-    // Meets ------------------------------------------------------------------------/
-    router.post("/meets/add", async (req, res) => {
-        let creator_webid = req.body.creator_webId;
-        let location = req.body.location;
-        let state = req.body.state;
-        let country = req.body.country;
-        let date = req.body.date;
-        let time = req.body.time;
-        // Check if the user is already in the db
-        console.log("Añadiendo meet")
-        let creator = await User.findOne({ webId: creator_webid });
-        // If it exists, then we'll update it
-
-        if (creator) {
-            console.log("Comprobado si existe...")
-            let newEntry = await Meet.findOne({ creator: creator_webid, location: [location.lat, location.lng] })
-            if (!newEntry) {
-                console.log(creator._id)
-                newEntry = new Meet({
-                    creator: creator_webid,
-                    location: [location.lat, location.lng],
-                    state: state,
-                    country: country,
-                    attendances: [],
-                    date:date,
-                    time:time
-                });
-
-                await newEntry.save();
-                console.log("Meet Nuevo: "+ newEntry)
-                res.send(newEntry);
-            } else {
-                res.send({ error: "Error: Ya existe esta reunioni" })
-            }
-        } else {
-            res.send({ error: "Error: Este usuario no existe" + creator_webid })
-        }
-    });
+    
 
 
     // Mensajes ------------------------------------------------ /msg
@@ -605,12 +568,49 @@ router.post("/friends/accept", async (req, res) => {
         })  
         
     })
+
+    // Meets ------------------------------------------------------------------------/
+    router.post("/meets/add", async (req, res) => {
+        let creator_webid = req.body.creator_webId;
+        let location = req.body.location;
+        let state = req.body.state;
+        let country = req.body.country;
+        let date = req.body.date;
+        let time = req.body.time;
+        // Check if the user is already in the db
+        console.log("Añadiendo meet")
+        let creator = await User.findOne({ webId: creator_webid });
+        // If it exists, then we'll update it
+
+        if (creator) {
+            console.log("Comprobado si existe...")
+            let newEntry = await Meet.findOne({ creator: creator_webid, location: [location.lat, location.lng] })
+            if (!newEntry) {
+                console.log(creator._id)
+                newEntry = new Meet({
+                    creator: creator_webid,
+                    location: [location.lat, location.lng],
+                    state: state,
+                    country: country,
+                    attendances: [],
+                    date:date,
+                    time:time
+                });
+
+                await newEntry.save();
+                console.log("Meet Nuevo: "+ newEntry)
+                res.send(newEntry);
+            } else {
+                res.send({ error: "Error: Ya existe esta reunioni" })
+            }
+        } else {
+            res.send({ error: "Error: Este usuario no existe" + creator_webid })
+        }
+    });
+    
     router.post("/meets/assist", async(req,res)=>{
         let user= req.body.asistenteWebId;
         let meetId=req.body.meetId;
-
-        console.log(meetId)
-
         query={
             _id:mongoose.Types.ObjectId(meetId)
         }

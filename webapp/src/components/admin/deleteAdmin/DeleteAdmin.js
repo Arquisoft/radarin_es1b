@@ -13,7 +13,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 function DeleteAdmin({ webId, fullName, imageSrc}) {
 
   function ChangeTarget(){
-    makeAdmin(webId,"true")
+    makeAdmin(webId,"false")
   }
 
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
 import { getSearcByStatus, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";

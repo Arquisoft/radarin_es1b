@@ -1,5 +1,5 @@
 import React from 'react'
-import { getSearcByAdmin, getSearcByStatus, getUsers } from '../../api/api';
+import { getSearcByAdmin, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import Friend from "../admin/deleteAdmin";

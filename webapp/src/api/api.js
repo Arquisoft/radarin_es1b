@@ -16,7 +16,6 @@ export async function addUser(webId, nombre){
 }
 
 export async function removeUser(userWebId){
-    //console.log("Eliminando a el usuario : "+userWebId);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/remove', {
         method: 'POST',
@@ -28,22 +27,9 @@ export async function removeUser(userWebId){
     return await response.json()
 }
 
-export async function deleteAdmin(userWebId, admin){
-    //console.log("Eliminando a el usuario : "+userWebId);
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint+'/admin/delete', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            'webId':userWebId,
-            'admin': admin
-        })
-      })
-    return await response.json()
-}
 
 export async function banUser(userWebId, ban){
-    console.log("baneando a el usuario : "+userWebId);
+
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/ban', {
         method: 'POST',
@@ -57,7 +43,7 @@ export async function banUser(userWebId, ban){
 }
 
 export async function makeAdmin(userWebId, admin){
-    console.log("baneando a el usuario : "+userWebId);
+
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/add/admin', {
         method: 'POST',
@@ -74,8 +60,6 @@ export async function makeAdmin(userWebId, admin){
 
 export async function updateStatus(webId, status){
 
-    //console.log("estoy llamando con webId " + webId )
-    //console.log("El cual tiene un estado  " + status )
 
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/status/update', {

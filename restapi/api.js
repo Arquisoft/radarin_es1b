@@ -23,7 +23,6 @@ router.post("/users/add", async (req, res) => {
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
     if (user){
-        console.log("usuario ya existe")
         res.send({ error: "Error: This user is already registered" + webId })}
     else {
         user = new User({
@@ -63,7 +62,6 @@ router.post("/users/status/update" , async(req,res) =>{
         });
     }
 
-    console.log("llega aqui " + status)
 
     await user2.save();
     res.send(user2);
@@ -75,20 +73,18 @@ router.post("/users/remove", async (req, res) => {
 
     let userWebId = req.body.webId
 
-    console.log("usuario que se ve va a borrar " + userWebId)
-
     let deleted = await User.deleteOne({ webId: userWebId }, function (err) {
         if (err) {
-              console.log("Ese usuario no esta en el sistema compañero");
+              
         } else {
-              console.log("Nah de locos , usuario borrado");
+              
         }
     });
 
     res.send(deleted)
 
-
 })
+
 
 //cambia el estado de una persona
 router.post("/users/ban" , async(req,res) =>{
@@ -96,8 +92,6 @@ router.post("/users/ban" , async(req,res) =>{
     let webId = req.body.webId;
 
     let baneable = req.body.ban;
-
-    console.log("El usuario que se va a banear es " + webId)
 
     let user2 = await User.findOne({ webId: webId })
 
@@ -113,8 +107,6 @@ router.post("/users/ban" , async(req,res) =>{
             }
         });
     }
-
-    console.log("llega aqui " + ban)
 
     await user2.save();
     res.send(user2);

@@ -85,7 +85,7 @@ export async function addLocation(webId,location,state,country,fullName){
         method: 'POST',
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
-            'user':webId, 
+            'user': String(webId), 
             'location':location,
             'state':state,
             'country':country,

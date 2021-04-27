@@ -23,18 +23,6 @@ const Map = (props) => {
     const profile = useProfile(props.webId)
 
     function UpdateUserLocation() {
-       /* const map = useMapEvents({
-            click() {
-                //console.log("NOMBRE EN EL MAP" + profile.fullName);
-                map.locate()
-            },
-            locationfound(e) {
-                saveLocation(e.latlng)
-                setPosition(e.latlng)
-                map.flyTo(e.latlng, map.getZoom())
-            },
-        })*/
-
         if(position){
             return (
                 <Marker position={position}>
@@ -47,64 +35,7 @@ const Map = (props) => {
             return null;
         }
     }
-    
-    function saveLocation(latlng) {
-        Geocode.fromLatLng(latlng.lat, latlng.lng).then(
-            (response) => {
-              let state, country;
-              for (let i = 0; i < response.results[0].address_components.length; i++) {
-                for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
-                  switch (response.results[0].address_components[i].types[j]) {
-                    case "administrative_area_level_1":
-                      state = response.results[0].address_components[i].long_name;
-                      break;
-                    case "country":
-                      country = response.results[0].address_components[i].long_name;
-                      break;
-                    default:
-                        break;
-                  }
-                }
-              }
-              if (profile.fullName!==undefined) {
-
-                addLocation(
-                    props.webId, [latlng.lat, latlng.lng],
-                    state, country, profile.fullName);
-                  
-              }
-            },
-            (error) => {
-              //console.log("No se ha podido guardar la localización")
-              //console.error(error);
-            }
-        );
-    }
-
-    /* function CreateMeet() {
-            const map = useMapEvents({
-                click(e) {
-                    map.locate()
-                    if(createMeet){
-                        setMeetPosition(e.latlng)  
-                        //saveMeet(e.latlng)                     
-                    }
-                    setCreateMeet(false)
-                }
-            })
-
-              return meetPosition!==undefined?(
-                <Marker position={meetPosition} icon={iconMeet}>
-                    <Popup>
-                        Ubicación del nuevo meet <br />
-                    </Popup>
-                </Marker>
-            ):null    
-    } */
-
-    
-
-   
+     
  
 
     return (

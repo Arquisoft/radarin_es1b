@@ -7,7 +7,7 @@ import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
 import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";    
-
+import useProfile from "../profile/useProfile";
 
 import ubicationIMG from "./img/ubication.svg";
 
@@ -18,6 +18,7 @@ const Map = (props) => {
     const { meetPosition } =useContext(LocationsContext);
 
     const [locateButtonAction, setLocateButtonAction]=useState(false);
+    const profile = useProfile(props.webId)
 
     let meetLocations=[]
 
@@ -46,7 +47,7 @@ const Map = (props) => {
             }, "Crear una nueva reunión").addTo(map);
             L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
                 map.locate({
-                    setView: !locateButtonAction
+                    setView: true
                 })
                 setLocateButtonAction(!locateButtonAction)
             }, "Volver a mi ubicación").addTo(map);
@@ -61,8 +62,7 @@ const Map = (props) => {
                     setView: false
                 })
                 map.on('locationfound',handleOnLocationFound)
-                console.log("pillando ubicación")
-                console.log(position)                
+                saveLocation(position.latlng)               
             }
         }, 1000);
         return () => clearInterval(interval);
@@ -72,6 +72,7 @@ const Map = (props) => {
     function handleOnLocationFound(e) {
         const latlng = e.latlng;
         const radius = e.accuracy;
+        //saveLocation(e.latlng)
         setPosition(e)
     }
 
@@ -110,6 +111,39 @@ const Map = (props) => {
         );
       }
 
+      function saveLocation(latlng) {
+        Geocode.fromLatLng(latlng.lat, latlng.lng).then(
+            (response) => {
+              let state, country;
+              for (let i = 0; i < response.results[0].address_components.length; i++) {
+                for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+                  switch (response.results[0].address_components[i].types[j]) {
+                    case "administrative_area_level_1":
+                      state = response.results[0].address_components[i].long_name;
+                      break;
+                    case "country":
+                      country = response.results[0].address_components[i].long_name;
+                      break;
+                    default:
+                        break;
+                  }
+                }
+              }
+              if (profile.fullName!==undefined) {
+
+                addLocation(
+                    props.webId, [latlng.lat, latlng.lng],
+                    state, country, profile.fullName);
+                  
+              }
+            },
+            (error) => {
+              //console.log("No se ha podido guardar la localización")
+              //console.error(error);
+            }
+        );
+    }
+
     
 
     
@@ -147,7 +181,7 @@ const Map = (props) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    {seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)}
+                    {/*seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)*/}
 
                 </MapContainer>
             </div>

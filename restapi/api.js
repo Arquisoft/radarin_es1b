@@ -159,6 +159,7 @@ router.post("/location/add", async (req, res) => {
         newEntry.state = state;
         newEntry.country = country;
         newEntry.fullName = fullName;
+        console.log("Actualizada ubicacion del usuario")
         await Location.findOneAndUpdate(query, newEntry, function (err, doc) {
             if (err) {
                 console.log("Something wrong when updating data!");

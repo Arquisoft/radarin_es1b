@@ -17,7 +17,7 @@ function Cerrar(web) {
 
     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
 
-    window.addEventListener("beforeunload", function (e) {
+    window.addEventListener("unload", function (e) {
 
         ejecutar(webId);
         

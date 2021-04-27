@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
 import { getSearcByNoAdmin } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
@@ -67,33 +66,15 @@ class AddAdminUsers extends React.Component {
 
 	handleClick(e) {
 		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
+		this.fetchData()      	
     }
 
-
-	buscarAmigos() {
-		return (
-			<div>
-				<form>
-					<label> 
-						
-					</label>
-				</form>
-            </div>
-		);
-    }
 
 
 	  render() {
 		return (
 		  <List dense>
 			{/* Scroll con la lista de amigos  */}
-			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  loader={<h4>Cargando...</h4>} //loader

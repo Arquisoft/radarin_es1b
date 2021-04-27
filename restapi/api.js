@@ -7,7 +7,7 @@ const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
 
-// Get all users
+// Devuelve la lista de usuarios
 router.get("/users/list", async (req, res) => {
     const users = await User.find({}).sort('-_id') //Inverse order
     res.send(users)
@@ -18,20 +18,78 @@ router.post("/users/add", async (req, res) => {
 
     let nombre = req.body.nombre;
     let webId = req.body.webId;
+    let admin = req.body.admin;
+    let status = req.body.status;
 
     //Check if the device is already in the db
     let user = await User.findOne({ webId: webId })
-    if (user)
-        res.send({ error: "Error: This user is already registered" + webId })
+    if (user){
+        console.log("usuario ya existe")
+        res.send({ error: "Error: This user is already registered" + webId })}
     else {
         user = new User({
             webId: webId,
-            nombre: nombre
+            nombre: nombre,
+            admin: admin,
+            status: status
         })
         await user.save()
+        console.log("usuario añadido con exito")
         res.send(user)
     }
 })
+
+//cambia el estado de una persona
+router.post("/users/status/update" , async(req,res) =>{
+
+    let webId = req.body.webId;
+
+    console.log("El usuario para cambiar estado es " + webId)
+
+    let status = req.body.status;
+
+    let user2 = await User.findOne({ webId: webId })
+
+    if(user2){
+        var query = { "_id": user2._id };
+        user2.status = status
+
+        await User.findOneAndUpdate(query, user2, function (err, doc) {
+            if (err) {
+                //console.error("Something wrong when updating data!");
+            } else {
+               //console.log(doc);
+            }
+        });
+    }
+
+    console.log("llega aqui " + status)
+
+    await user2.save();
+    res.send(user2);
+
+})
+
+//borra un usuario
+router.post("/users/remove", async (req, res) => {
+
+    let userWebId = req.body.webId
+
+    console.log("usuario que se ve va a borrar " + userWebId)
+
+    let deleted = await User.deleteOne({ webId: userWebId }, function (err) {
+        if (err) {
+              console.log("Ese usuario no esta en el sistema compañero");
+        } else {
+              console.log("Nah de locos , usuario borrado");
+        }
+    });
+
+    res.send(deleted)
+
+
+})
+
 
 // register a new location
 router.post("/location/add", async (req, res) => {
@@ -122,6 +180,30 @@ router.post("/friends/check", async (req, res) => {
     })  
     
 })
+
+//comprueba si es admin
+router.post("/admin/check", async (req, res) => {
+
+    let userWebId = req.body.webId
+
+
+    var query = {
+
+        "webId": userWebId
+    };
+
+
+    await User.find(query, function (err, docs) {
+        if (err) {
+             console.error("Error al encontrar el usuario")
+        } else {
+             var admin = docs.map((doc) => { return doc.admin })
+             res.send(admin);
+        }
+    })
+
+})
+
 
 router.post("/friends/remove", async (req, res) => {
     let userWebId = req.body.webId
@@ -231,6 +313,40 @@ router.post("/friends/accept", async (req, res) => {
                 console.log("Error al encontrar los usuarios dados los amigos")
             } else {
                 var webIds = docs.map((doc) => { return doc.webId })
+                
+                res.send(webIds);
+            }
+        })
+    });
+
+    //buscar si una persona es online
+    router.post("/users/search/status", async (req, res) => {
+        var query = {
+            "status": "online"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })
+                
+                res.send(webIds);
+            }
+        })
+    });
+
+    //buscar si una persona es admin
+    router.post("/users/search/admin", async (req, res) => {
+        var query = {
+            "admin": "true"
+        };
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })
+
+                console.log("ESTE ADMIN HA SIDO ENCONTRADO " + webIds)
                 
                 res.send(webIds);
             }

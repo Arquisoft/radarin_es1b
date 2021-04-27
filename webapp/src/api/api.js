@@ -7,11 +7,43 @@ export async function addUser(webId, nombre){
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
             'webId':webId,
-            'nombre': String(nombre)
+            'nombre': String(nombre),
+            'admin': "false",
+            "status": "online"
         })
       })
     return await response.json()
 }
+
+export async function removeUser(userWebId){
+    //console.log("Eliminando a el usuario : "+userWebId);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/remove', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':userWebId
+        })
+      })
+    return await response.json()
+}
+
+export async function updateStatus(webId, status){
+
+    //console.log("estoy llamando con webId " + webId )
+    //console.log("El cual tiene un estado  " + status )
+
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/status/update', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId,
+            'status':String(status)
+        })
+      })
+    return await response.json()
+  }
 
 export async function getUsers(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
@@ -129,6 +161,24 @@ export async function getSearcByName(str){
     return await response.json()
 }
 
+export async function getSearcByStatus(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/status', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+export async function getSearcByAdmin(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/admin', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
 
 
 /* export async function acceptFriend(webId,friendWebId){
@@ -204,6 +254,29 @@ export async function getFriendShip(userWebId, friendwebId){
     return  answer;
 }
 
+export async function getAdmin(userWebId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+
+    console.log("envio este webId " + userWebId)
+
+    let response = await fetch(apiEndPoint+'/admin/check', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+
+            'webId':userWebId 
+        })
+      })
+      let answer;
+    try{
+         answer= await response.json()
+    }
+    catch{
+         answer= null;
+    }
+    console.log("isAdmin devuelve " + answer)
+    return  answer;
+}
 
 
 // Meets ------------------------------------- /

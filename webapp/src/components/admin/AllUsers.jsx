@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
 
 
-class SearchFriends extends React.Component {
+class AllUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -64,6 +64,10 @@ class SearchFriends extends React.Component {
 		this.setState({ searchName: event.target.value });
 	}
 
+	componentDidMount(){
+		this.fetchData()
+	}
+
 
 	handleClick(e) {
 		e.preventDefault();
@@ -72,6 +76,7 @@ class SearchFriends extends React.Component {
 		}
 		else{
 			//console.error("No hay texto para buscar")
+			this.fetchData()
 		} 
 
 
@@ -81,8 +86,7 @@ class SearchFriends extends React.Component {
 		return (
 			<div>
 				<form>
-					<label>
-                        Busca un amigo:
+					<label> 
 						<input 
 							id="friendID"
 							type="text"
@@ -111,8 +115,7 @@ class SearchFriends extends React.Component {
 			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
-			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
+			 
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null
@@ -128,4 +131,4 @@ class SearchFriends extends React.Component {
 	}
 
 
-	export default SearchFriends;
+	export default AllUsers;

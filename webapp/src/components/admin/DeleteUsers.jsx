@@ -3,10 +3,10 @@ import { Button } from '@material-ui/core';
 import { getSearcByName, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import Friend from "../friendList/friend";
+import User from "../admin/user";
 
 
-class SearchFriends extends React.Component {
+class DeleteUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -60,8 +60,20 @@ class SearchFriends extends React.Component {
 		})
 	  }
 
+	componentDidUpdate(){
+		var aucx=true;
+		if(aucx){
+		  this.resultQuery=[]
+		  this.fetchData();
+		}
+	}
+
 	handleChange(event) {
 		this.setState({ searchName: event.target.value });
+	}
+
+	componentDidMount(){
+		this.fetchData()
 	}
 
 
@@ -81,19 +93,7 @@ class SearchFriends extends React.Component {
 		return (
 			<div>
 				<form>
-					<label>
-                        Busca un amigo:
-						<input 
-							id="friendID"
-							type="text"
-							name="searchArea"
-							onSubmit={ (e)=>this.handleChange(e)}
-							onChange={(e)=>this.handleChange(e)}
-						/>
-
-						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
-							Buscar
-						</Button>
+					<label> 
 					</label>
 				</form>
             </div>
@@ -112,10 +112,10 @@ class SearchFriends extends React.Component {
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
 			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
-			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
+			 	<span>{this.state.searchName}</span>}
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
-					<Friend key={webId} webId={webId} logged={this.logged}/>:null
+					<User key={webId} webId={webId} logged={this.logged}/>:null
 	
 			  ))}
 	
@@ -128,4 +128,4 @@ class SearchFriends extends React.Component {
 	}
 
 
-	export default SearchFriends;
+	export default DeleteUsers;

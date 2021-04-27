@@ -1,21 +1,18 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { getSearcByName, getUsers } from '../../api/api';
+import { getSearcByStatus, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
 
 
-class SearchFriends extends React.Component {
+class OnlineUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
 		this.resultQuery = []
 		this.logged = this.props.webId;
 		this.querySuccess=false;
-		this.state = {
-			searchName: ""
-		};
 	}
 	
 	static defaultProps = {
@@ -30,9 +27,13 @@ class SearchFriends extends React.Component {
 		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
 	  };
 
+	  componentDidMount(){
+		this.fetchData()
+	  }
+
 
 	  async fetchData() {
-		var promise = getSearcByName(this.state.searchName)
+		var promise = getSearcByStatus()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
@@ -64,6 +65,16 @@ class SearchFriends extends React.Component {
 		this.setState({ searchName: event.target.value });
 	}
 
+	componentDidUpdate(){
+		var aucx=true;
+		if(aucx){
+		  this.resultQuery=[]
+		  this.fetchData();
+		}
+	}
+
+	
+
 
 	handleClick(e) {
 		e.preventDefault();
@@ -73,27 +84,15 @@ class SearchFriends extends React.Component {
 		else{
 			//console.error("No hay texto para buscar")
 		} 
+    }
 
-
-}
 
 	buscarAmigos() {
 		return (
 			<div>
 				<form>
-					<label>
-                        Busca un amigo:
-						<input 
-							id="friendID"
-							type="text"
-							name="searchArea"
-							onSubmit={ (e)=>this.handleChange(e)}
-							onChange={(e)=>this.handleChange(e)}
-						/>
-
-						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
-							Buscar
-						</Button>
+					<label> 
+						Usuarios en linea : 
 					</label>
 				</form>
             </div>
@@ -108,11 +107,8 @@ class SearchFriends extends React.Component {
 			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
-			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
-			 	<span>Usuarios para la búsqueda "{this.state.searchName}"</span>}
 			  {this.resultQuery.map((webId) => (
 				     webId!==this.logged?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null
@@ -128,4 +124,4 @@ class SearchFriends extends React.Component {
 	}
 
 
-	export default SearchFriends;
+	export default OnlineUsers;

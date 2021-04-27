@@ -11,16 +11,22 @@ class AddUsersContainer extends React.Component{
       this.fullName = props.fullName;
     }
 
+    
+
     async fetchUsers(){
           try {
               await addUser(this.webId,this.fullName);
+  
 
           } catch (e) {
               //console.log("Error adding users to restapi.")
            }
       }
 
-    componentDidMount(){this.fetchUsers()}
+    componentDidMount(){
+      this.fetchUsers()
+      //updateStatus(this.webId, "online")
+    }
   
     render(){
       return(

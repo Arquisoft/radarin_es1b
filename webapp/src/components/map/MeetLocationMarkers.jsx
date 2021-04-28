@@ -32,7 +32,8 @@ export default class MeetLocationMarkers extends Component {
     async timeUpdateMeets(){
         const interval = setInterval(() => {
             this.updateMeets()
-        }, 20000);
+            
+        }, 200);
         return () => clearInterval(interval);
     }
 
@@ -40,10 +41,11 @@ export default class MeetLocationMarkers extends Component {
         var promise = getMeetsForUser(this.state.webId)
 
         promise.then((result) => {
-
+            this.state.locs=[]
             result.forEach((e) => {
                 this.state.locs.push(e)
             })
+            //this.forceUpdate()
         })
 
     }

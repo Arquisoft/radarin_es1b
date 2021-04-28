@@ -40,11 +40,8 @@ const Map = (props) => {
                 if(meetButtonAction){
                     alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
                     saveMeet(e.latlng)
-                    meetButtonAction = true;
-                }
-
-                
-                
+                    meetButtonAction = false;
+                }                
             });
             
             L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {

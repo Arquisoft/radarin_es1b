@@ -374,6 +374,19 @@ export async function assist(meetId, asistenteWebId){
     return await response.json()
 }
 
+export async function removeAttendance(meetId, asistenteWebId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/remove/attendance', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'asistenteWebId': String(asistenteWebId),
+            'meetId': String(meetId)
+        })
+      })
+    return await response.json()
+}
+
 export async function getMessages(from, to){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/msg/list', {

@@ -11,6 +11,7 @@ import { toProfile } from '../../../routing';
 import Image from "../../profile/Image";
 
 import { assist, removeAttendance } from "../../../api/api"
+import { getMeet } from "../../../api/api";
 
 import Button from '@material-ui/core/Button';
 
@@ -43,7 +44,15 @@ function checkMeetText(meet, loggedWebId) {
 
 }
 
+function showAttendantsList(meet) {
+    var promise = getMeet(meet._id);
 
+    promise.then((result) => {
+        console.log("OBTUVE MEET");
+        meet = result;
+        console.log(result);
+    });
+}
 
 //Meets
 const Meet = ({ webId, fullName, imageSrc, meet, loggedWebId }) =>(
@@ -75,7 +84,7 @@ const Meet = ({ webId, fullName, imageSrc, meet, loggedWebId }) =>(
                     <Button color="primary" variant="contained" onClick={() => { checkInMeet(meet, loggedWebId).bind(meet) }}>  {checkMeetText(meet, loggedWebId)}   </Button>
                 </div>
                 <div style={{ padding: '0.25em' }}>
-                    <Button color="primary" variant="contained">Lista de Usuarios</Button>
+                    <Button color="primary" variant="contained" onClick={() => { showAttendantsList(meet) }}>Lista de Usuarios</Button>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ export default class MeetLocationMarkers extends Component {
         const interval = setInterval(() => {
             this.updateMeets()
             
-        }, 200);
+        }, 20000);
         return () => clearInterval(interval);
     }
 

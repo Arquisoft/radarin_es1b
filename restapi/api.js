@@ -751,8 +751,21 @@ router.post("/meets/find", async (req, res) => {
 
 });
 
+// Obtener toda la información de un meet
+router.post("/meets/details", async (req, res) => {
+    let id = mongoose.Types.ObjectId(req.body.meetId);
 
+    let meet = await Meet.findOne({
+        "_id" : id
+    });
 
-
+    if (meet) {
+        res.send(meet);
+    } else {
+        res.send({
+            "error" : "No se ha podido obtener el meet"
+        });
+    }
+});
 
 module.exports = router

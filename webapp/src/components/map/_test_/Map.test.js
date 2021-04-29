@@ -1,7 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import Map from "./MAinMap";
 import MapView from '../MapView';
 
   

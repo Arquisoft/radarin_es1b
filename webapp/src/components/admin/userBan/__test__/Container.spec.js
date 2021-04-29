@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import FriendContainer from '../Container';
 
-import Friend from '../Friend';
+import Friend from '../UserBan';
 import LoadingFriend from "../LoadingFriend";
 
 const literal = value => ({

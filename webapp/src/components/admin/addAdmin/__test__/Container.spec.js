@@ -21,7 +21,7 @@ describe('friend container', function () {
         fullName={literal('John Doe')}
         imageSrc={literal('https://image.example/me.png')}
     />);
-    expect(result).toContainReact(<Friend
+    expect(result).toContain(<Friend
         webId="https://webid.example/#me"
         fullName="John Doe"
         imageSrc="https://image.example/me.png"

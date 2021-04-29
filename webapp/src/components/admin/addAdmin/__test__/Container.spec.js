@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import FriendContainer from '../Container';
 
-import Friend from '../Friend';
+import Friend from '../Container';
 import LoadingFriend from "../LoadingFriend";
 
 const literal = value => ({
@@ -13,7 +13,7 @@ const literal = value => ({
 describe('friend container', function () {
   it('renders a loading friend component while pending', () => {
     const result = shallow(<FriendContainer webId={literal('https://webid.example/#me')} pending/>);
-    expect(result).toContainReact(<LoadingFriend webId="https://webid.example/#me"/>);
+    expect(result).toContain(<LoadingFriend webId="https://webid.example/#me"/>);
   });
   it('renders a friend', () => {
     const result = shallow(<FriendContainer

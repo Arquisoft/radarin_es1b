@@ -5,6 +5,7 @@ import Profile from '../Profile';
 import Image from '../Image';
 import Typography from "@material-ui/core/Typography";
 import FriendList from '../../friendList';
+import ButtonFriendship from './ButtonFriendship';w
 
 describe('Profile', () => {
 
@@ -14,11 +15,9 @@ describe('Profile', () => {
         webId="https://webid.example/#me"
         fullName="John Doe"
         imageSrc="https://img.example/me.png"
-<<<<<<< Updated upstream
         loggedUser="https://webid.example/#loger"
-=======
         loggedUser="https://img.example/me.png"
->>>>>>> Stashed changes
+
     />);
   });
 
@@ -40,7 +39,7 @@ describe('Profile', () => {
     expect(result).toContain(<FriendList webId="https://webid.example/#me"/>)
   });
   it ('should render the biton to add or delete', () => {
-    expect(result).toContainReact(<ButtonFriendship webId="https://webid.example/#me" loggedUser="https://webid.example/#loger" /> )
+    expect(result).toContain(<ButtonFriendship webId="https://webid.example/#me" loggedUser="https://webid.example/#loger" /> )
   });
 
 });

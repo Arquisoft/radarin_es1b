@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L, { marker } from 'leaflet';
-import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
@@ -13,11 +12,7 @@ import ubicationIMG from "./img/ubication.svg";
 
 const Map = (props) => {
     const [map, setMap] = useState(null);
-    const { position, setPosition } = useContext(LocationsContext);
-    const { seeFriends } = useContext(LocationsContext);
-    const { meetPosition } =useContext(LocationsContext);
-
-
+    const [position, setPosition] = useState();
 
     const [locateButtonAction, setLocateButtonAction]=useState(false);
     const profile = useProfile(props.webId)

@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppBar from './components/AppBar';
-import { LocationsContextProvider } from './context/LocationsContext';
 
 import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -70,7 +69,6 @@ class App extends React.Component {
     return (
 
       <div className="App">
-        <LocationsContextProvider>
           <CssBaseline />
           <Router>
             {/*Router conjunto de componentes de navegación  */}
@@ -88,13 +86,12 @@ class App extends React.Component {
                   const params = qs.parse(location.search);
                   //SaveWebId(params.webId)
                   return <Profile webId={params.webId} />
-                }} />
-              </LoggedIn> 
-            </main>
-            <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
+              }} />
+            </LoggedIn> 
+          </main>
+          <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
            
-          </Router>
-        </LocationsContextProvider>
+        </Router>
       </div>
 
     )

@@ -10,7 +10,7 @@ import styles from './Friend.module.css';
 import { toProfile } from '../../../routing';
 import Image from "../../profile/Image";
 
-import { assist, removeAttendance } from "../../../api/api"
+import { assist, getMeet, removeAttendance } from "../../../api/api"
 
 import Button from '@material-ui/core/Button';
 
@@ -36,22 +36,31 @@ class MeetPopup extends React.Component {
 
     checkInMeet() {
 
-        if (!this.meet.attendances.includes(this.loggedWebId)) {
-            assist(this.meet._id, this.loggedWebId)
-            this.meet.attendances.push(this.loggedWebId)
-            this.setState({
-                toShow: "No asistir",
-            })
-        } else {
-            removeAttendance(this.meet._id, this.loggedWebId)
-            const index = this.meet.attendances.indexOf(this.loggedWebId);
-            if (index > -1) {
-                this.meet.attendances.splice(index, 1);
+        var promise = getMeet(this.meet._id)
+
+        promise.then((result)=>{
+            this.meet=result
+
+            if (!this.meet.attendances.includes(this.loggedWebId)) {
+                assist(this.meet._id, this.loggedWebId)
+                this.meet.attendances.push(this.loggedWebId)
+                this.setState({
+                    toShow: "No asistir",
+                })
+            } else {
+                removeAttendance(this.meet._id, this.loggedWebId)
+                const index = this.meet.attendances.indexOf(this.loggedWebId);
+                if (index > -1) {
+                    this.meet.attendances.splice(index, 1);
+                }
+                this.setState({
+                    toShow: "Asistir",
+                })
             }
-            this.setState({
-                toShow: "Asistir",
-            })
-        }
+
+        })
+
+        
 
     }
 

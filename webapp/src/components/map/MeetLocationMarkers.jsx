@@ -1,4 +1,4 @@
-import React, { Component,useEffect } from 'react'
+import React, { Component, useEffect } from 'react'
 import { LayerGroup, Marker, Popup } from 'react-leaflet';
 import { getMeetsForUser } from '../../api/api';
 import { iconMeet } from "./markers/IconMeet"
@@ -18,34 +18,32 @@ export default class MeetLocationMarkers extends Component {
     }
 
 
-    
+
 
     async componentDidMount() {
         this.updateMeets()
     }
 
-    async componentDidUpdate(){
+    async componentDidUpdate() {
         this.timeUpdateMeets()
     }
-    
 
-    async timeUpdateMeets(){
+
+    async timeUpdateMeets() {
         const interval = setInterval(() => {
             this.updateMeets()
-            
+
         }, 20000);
         return () => clearInterval(interval);
     }
 
-    async updateMeets(){
+    async updateMeets() {
         var promise = getMeetsForUser(this.state.webId)
 
         promise.then((result) => {
-            this.state.locs=[]
-            result.forEach((e) => {
-                this.state.locs.push(e)
+            this.setState({
+                locs: result
             })
-            //this.forceUpdate()
         })
 
     }
@@ -57,13 +55,10 @@ export default class MeetLocationMarkers extends Component {
 
                 <LayerGroup >
                     {this.state.locs.map((loc) => {
-
-
-
                         return loc.creator != this.state.webId ? <Marker position={[loc.location[0], loc.location[1]]} icon={iconMeet}>
 
                             <Popup>
-                                <Meet meet={loc}  loggedWebId={this.state.webId}/>
+                                <Meet meet={loc} loggedWebId={this.state.webId} />
                             </Popup>
                         </Marker> :
                             <Marker position={[loc.location[0], loc.location[1]]} icon={iconOwnMeet}>

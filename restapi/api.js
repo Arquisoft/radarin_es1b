@@ -103,6 +103,8 @@ router.post("/users/ban" , async(req,res) =>{
             if (err) {
                 //console.error("Something wrong when updating data!");
             } else {
+
+                
                //console.log(doc);
             }
         });
@@ -412,17 +414,23 @@ router.post("/friends/accept", async (req, res) => {
         })
     });
 
-     //buscar si una persona es admin
+     //buscar si una persona no esta baneada
      router.post("/users/search/ban/no", async (req, res) => {
         var query = {
-            "ban": "false"
+            "ban": "false",
+            "admin": "false"
         };
+
         await User.find(query, function (err, docs) {
             if (err) {
                 //console.log("Error al encontrar los usuarios dados los amigos")
             } else {
-                var webIds = docs.map((doc) => { return doc.webId })                
+                var webIds = docs.map((doc) => {
+                        return doc.webId 
+                    })    
+                
                 res.send(webIds);
+                      
             }
         })
     });

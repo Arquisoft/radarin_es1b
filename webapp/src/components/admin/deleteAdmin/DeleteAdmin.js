@@ -16,7 +16,6 @@ function DeleteAdmin({ webId, fullName, imageSrc}) {
     makeAdmin(webId,"true")
   }
 
-
   return (
     <div>
       <ListItem className={styles.friend} button>
@@ -27,7 +26,7 @@ function DeleteAdmin({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-    {(fullName=="es1b")?"":  <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
+    {(fullName=="es1b") ? "" :  <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
 		delete
 	 </Button>}
   

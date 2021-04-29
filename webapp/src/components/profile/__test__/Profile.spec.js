@@ -5,7 +5,7 @@ import Profile from '../Profile';
 import Image from '../Image';
 import Typography from "@material-ui/core/Typography";
 import FriendList from '../../friendList';
-import ButtonFriendship from '../ButtonFriendship';w
+import ButtonFriendship from '../ButtonFriendship';
 
 describe('Profile', () => {
 

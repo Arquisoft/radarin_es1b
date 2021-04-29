@@ -15,6 +15,8 @@ import { getMeet } from "../../../api/api";
 
 import Button from '@material-ui/core/Button';
 
+import AttendancesDialog from "./dialog/AttendancesDialog"
+
 class MeetPopup extends React.Component {
 
     constructor({ webId, fullName, imageSrc, meet, loggedWebId }) {
@@ -24,47 +26,68 @@ class MeetPopup extends React.Component {
         this.imageSrc = imageSrc;
         this.meet = meet;
         this.loggedWebId = loggedWebId;
+        this.toShow=false;
+        this.showText="Asistir"
     }
 
     checkInMeet() {
 
         if (!this.meet.attendances.includes(this.loggedWebId)) {
             assist(this.meet._id, this.loggedWebId)
+            this.showText=" NO Asistir"
         } else {
             removeAttendance(this.meet._id, this.loggedWebId)
+            this.showText="Asistir"
     
         }
+        
+        
+        this.render()
+
+        console.log("ACTUALIZANDO TEXTO")
+
+        
     
     }
     
     
     checkMeetText() {
         if (this.meet.attendances.includes(this.loggedWebId)) {
-            this.meet.attendances.push(this.loggedWebId)
-            return "No asistir"
-        } else {
+           
+
             const index = this.meet.attendances.indexOf(this.loggedWebId);
+            
             if (index > -1) {
                 this.meet.attendances.splice(index, 1);
             }
+            
+            return "No asistir"
+        } else {
+
+            this.meet.attendances.push(this.loggedWebId)
+            
             return "Asistir"
         }
     
     }
     
     showAttendantsList() {
-        var promise = getMeet(this.meet._id);
-    
-        promise.then((result) => {
-            console.log("OBTUVE MEET");
-            this.meet = result;
-            console.log(result);
-        });
+        this.toShow=true;
+        this.forceUpdate()
+    }
+
+
+
+    displayDialog(){
+        this.toShow=false;
+        return ( <AttendancesDialog meet={this.meet}/>)
     }
 
     render() {
         return (
             <div>
+                {this.toShow?this.displayDialog(): null}
+                
             <strong>Meet Creado por</strong>
             <ListItem className={styles.friend} button component={Link} to={toProfile(this.webId)} clickable>
                 <ListItemIcon>
@@ -88,7 +111,7 @@ class MeetPopup extends React.Component {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <div style={{ marginRight: '1.5em', padding: '0.25em' }}>
-                        <Button color="primary" variant="contained" onClick={() => { this.checkInMeet() }}>  {this.checkMeetText()}   </Button>
+                        <Button color="primary" variant="contained" onClick={() => { this.checkInMeet() }}>  {this.showText } </Button>
                     </div>
                     <div style={{ padding: '0.25em' }}>
                         <Button color="primary" variant="contained" onClick={() => { this.showAttendantsList() }}>Lista de Usuarios</Button>

@@ -42,7 +42,7 @@ describe('user ', () => {
         email = 'pablo@uniovi.es'
         const response = await request(app).post('/api/users/add').send({name: username,email: email}).set('Accept', 'application/json')
         expect(response.statusCode).toBe(200);
-        expect(response.body.name).toBe(username);
-        expect(response.body.email).toBe(email);
+        expect(response.body.name).toBe('Pablo');
+        expect(response.body.email).toBe('pablo@uniovi.es');
     });
 });

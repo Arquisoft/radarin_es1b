@@ -14,6 +14,7 @@ describe('Profile', () => {
         webId="https://webid.example/#me"
         fullName="John Doe"
         imageSrc="https://img.example/me.png"
+        loggedUser="https://webid.example/#loger"
     />);
   });
 
@@ -31,6 +32,9 @@ describe('Profile', () => {
 
   it('should render the friend list', () => {
     expect(result).toContainReact(<FriendList webId="https://webid.example/#me"/>)
+  });
+  it ('should render the biton to add or delete', () => {
+    expect(result).toContainReact(<ButtonFriendship webId="https://webid.example/#me" loggedUser="https://webid.example/#loger" /> )
   });
 
 });

@@ -91,7 +91,6 @@ class App extends React.Component {
                 }} />
               </LoggedIn> 
             </main>
-            {console.log(this.resultQuery)}
             <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
            
           </Router>

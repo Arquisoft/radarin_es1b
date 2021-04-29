@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 
 import Friend from '../Friend';
 import Image from "../../../profile/Image";
+import { Button } from '@material-ui/core';
 
 describe('Friend in friend list', function () {
   it('shows name and webId', () => {
@@ -30,5 +31,12 @@ describe('Friend in friend list', function () {
     expect(image).toHaveProp('src', 'https://image.example/me.png');
     expect(image).toHaveProp('fullName', 'John Doe');
   });
-
+  
+  it('renders the buton', () => {
+    const result = shallow(<Friend fullName="John Doe"
+                                   imageSrc="https://image.example/me.png"
+                                   webId="https://webid.example/#me"/>);
+    const botton = result.find(Button);
+    expect(botton).toExist();
+  });
 });

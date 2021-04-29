@@ -17,8 +17,8 @@ describe('Login container', () => {
         imageSrc="https://image.example/me.png"
     />);
     const loggedIn = result.find(LoggedIn);
-    expect(loggedIn).toExist();
-    expect(loggedIn).toContainReact(<LoginBadge
+    expect(loggedIn).toBeTruthy();
+    expect(loggedIn).toContainEqual(<LoginBadge
         webId="https://webid.example/#me" fullName="John Doe"
         imageSrc={"https://image.example/me.png"}/>)
   });
@@ -29,7 +29,7 @@ describe('Login container', () => {
         fullName="John Doe"
         imageSrc="https://image.example/me.png"
     />);
-    expect(result).toContainReact(<Button variant="contained" color="primary" component={AuthButtonComponent}
+    expect(result).toContainEqual(<Button variant="contained" color="primary" component={AuthButtonComponent}
                                           popup="https://solidcommunity.net/common/popup.html">...</Button>)
   });
 });

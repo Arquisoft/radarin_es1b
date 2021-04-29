@@ -22,7 +22,7 @@ describe('Profile container', () => {
         imageSrc="https://image.example/me.png"        
         loggedUser="https://webid.example/#me"
     />);
-    expect(result).toContain(<Profile
+    expect(result).toContainEqual(<Profile
         webId="https://webid.example/#me"
         fullName="John Doe"
         imageSrc="https://image.example/me.png"        

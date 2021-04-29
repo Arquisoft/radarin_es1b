@@ -27,9 +27,10 @@ function DeleteAdmin({ webId, fullName, imageSrc}) {
         primary={fullName}
        
     />
-   <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
+    {(fullName=="es1b")?"":  <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small"  startIcon={<DeleteIcon />}>
 		delete
-	 </Button>
+	 </Button>}
+  
   </ListItem>
     </div>
   )

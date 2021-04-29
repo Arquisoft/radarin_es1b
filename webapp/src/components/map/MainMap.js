@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } f
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
-import MeetLocationMarkers from "./MeetLocationMarkers";
+import MeetLocationMarkersFunc from "./MeetLocationMarkersFunc";
 import Friend from "./markers/FriendPopupManager"
 import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";
@@ -25,37 +25,41 @@ const Map = (props) => {
   let meetButtonAction = false;
 
   let propsAux = props;
-  useEffect(() => {
-    if (map) {
-      map.locate({
-        setView: false,
-        watch: true
-      })
-      map.on('locationfound', handleOnLocationFound)
-      map.on('click', function (e) {
-        if (meetButtonAction) {
-          meetButtonAction = false;
-          alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-          saveMeet(e.latlng)
-        }
-      });
 
-      L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function (btn, map) {
-        if (meetButtonAction) {
-          meetButtonAction = false;
-        } else {
-          meetButtonAction = true;
-        }
-      }, "Crear una nueva reunión").addTo(map);
-      L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function (btn, map) {
+  function useInitialice() {
+
+    useEffect(() => {
+      if (map) {
         map.locate({
-          setView: true
+          setView: false,
+          watch: true
         })
-        setLocateButtonAction(!locateButtonAction)
-      }, "Volver a mi ubicación").addTo(map);
-    }
+        map.on('locationfound', handleOnLocationFound)
+        map.on('click', function (e) {
+          if (meetButtonAction) {
+            meetButtonAction = false;
+            alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+            saveMeet(e.latlng)
+          }
+        });
 
-  }, [map])
+        L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function (btn, map) {
+          if (meetButtonAction) {
+            meetButtonAction = false;
+          } else {
+            meetButtonAction = true;
+          }
+        }, "Crear una nueva reunión").addTo(map);
+        L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function (btn, map) {
+          map.locate({
+            setView: true
+          })
+          setLocateButtonAction(!locateButtonAction)
+        }, "Volver a mi ubicación").addTo(map);
+      }
+
+    }, [map])
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -64,7 +68,7 @@ const Map = (props) => {
           setView: false
         })
         map.on('locationfound', handleOnLocationFound)
-        saveLocation(position.latlng)
+
       }
     }, 20000);
     return () => clearInterval(interval);
@@ -74,7 +78,9 @@ const Map = (props) => {
   function handleOnLocationFound(e) {
     const latlng = e.latlng;
     const radius = e.accuracy;
+
     setPosition(e)
+    saveLocation(latlng)
   }
 
 
@@ -143,7 +149,7 @@ const Map = (props) => {
     );
   }
 
-
+useInitialice()
   return (
     <div>
       <MapContainer
@@ -171,7 +177,7 @@ const Map = (props) => {
             <FriendsLocationMarkers webId={props.webId} />
           </LayersControl.Overlay>
           <LayersControl.Overlay checked name="Mostrar Meets">
-            <MeetLocationMarkers webId={props.webId} /> 
+            <MeetLocationMarkersFunc webId={props.webId} />
           </LayersControl.Overlay>
         </LayersControl>
         <TileLayer

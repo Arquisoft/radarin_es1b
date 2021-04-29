@@ -60,17 +60,23 @@ class AttendancesDialog extends React.Component {
         super();
         this.attendances = []
         this.meet=props.meet
-        this.meet.attendances=[]
-        this.isOpen = false;
+        this.open = props.open;
+        this.handleClose=props.handleClose
     }
+
+    state = {
+        meets:[]  //crea un array de amigos de 0 a el valor de showInitiall
+      };
 
 
     showAttendantsList() {
         var promise = getMeet(this.meet._id);
     
         promise.then((result) => {
-            this.meet = result;        
-            this.forceUpdate()
+
+            this.setState({
+                meets : result, 
+            })
         });
     }
 
@@ -79,26 +85,23 @@ class AttendancesDialog extends React.Component {
             <div>
 
                 <Dialog
-                    onClose={this.isOpen = false}
                     aria-labelledby="customized-dialog-title"
-                    open={true}
+                    open={this.open}
                 >
                     <DialogTitle id="customized-dialog-title" >
                         Lista de asistentes
                        
-                                <IconButton
-                                    aria-label="close"
-                                    onClick={this.isOpen=false}>
-                                    <CloseIcon />
-                                </IconButton>
+                            <IconButton
+                                aria-label="close"
+                                onClick={()=>{this.handleClose()}}>
+                                <CloseIcon />
+                            </IconButton>
                             
                     </DialogTitle>
                     <DialogContent dividers>
                     {this.showAttendantsList()}
-                        {this.meet.attendances.map((webId) => (
-                            <Friend key={webId} webId={webId}  />
-
-                        ))}
+                    {this.state.meets.attendances!=undefined?this.state.meets.attendances.map((webId) => (
+                        <Friend key={webId} webId={webId}  />)):null}
 
                     </DialogContent>
                 </Dialog>

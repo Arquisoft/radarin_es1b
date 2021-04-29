@@ -1,10 +1,10 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import ButtonAddDelete from './ButtonAddDelete';
+import ButtonAddDelete from '../ButtonAddDelete';
 import FaceIcon from '@material-ui/icons/Face';
 
-import ButtonFriendship from './ButtonFriendship'
+import ButtonFriendship from '../ButtonFriendship'
 
 describe('ButtonFriendship', () => {
 

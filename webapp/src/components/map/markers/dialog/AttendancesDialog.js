@@ -65,7 +65,7 @@ class AttendancesDialog extends React.Component {
     }
 
     state = {
-        meets:[]  //crea un array de amigos de 0 a el valor de showInitiall
+        meets:[]  
       };
 
 

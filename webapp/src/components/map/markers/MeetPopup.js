@@ -21,7 +21,6 @@ class MeetPopup extends React.Component {
     state = {
         open: false,
         toShow: "Asistir"
-
     };
 
     constructor({ webId, fullName, imageSrc, meet, loggedWebId }) {

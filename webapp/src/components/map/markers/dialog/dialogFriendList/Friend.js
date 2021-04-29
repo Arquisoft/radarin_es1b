@@ -21,11 +21,11 @@ const Friend = ({ webId, fullName, imageSrc }) =>
       <ListItemIcon>
         <Image className={styles.avatar} fullName={fullName} src={imageSrc} />
       </ListItemIcon>
-      <ListItemText
-        primary={fullName}
-      >
-
-      </ListItemText>
+      <div style={{ marginLeft: 10 }}>
+        <ListItemText
+          primary={fullName}
+        ></ListItemText>
+      </div>
 
     </ListItem>
   </div>

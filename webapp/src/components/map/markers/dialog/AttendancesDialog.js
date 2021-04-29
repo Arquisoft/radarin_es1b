@@ -58,7 +58,6 @@ class AttendancesDialog extends React.Component {
 
     constructor(props) {
         super();
-        this.attendances = []
         this.meet=props.meet
         this.open = props.open;
         this.handleClose=props.handleClose
@@ -100,8 +99,9 @@ class AttendancesDialog extends React.Component {
                     </DialogTitle>
                     <DialogContent dividers>
                     {this.showAttendantsList()}
-                    {this.state.meets.attendances!=undefined?this.state.meets.attendances.map((webId) => (
-                        <Friend key={webId} webId={webId}  />)):null}
+                    {(this.state.meets.attendances!=undefined&& this.state.meets.attendances.length>0)?this.state.meets.attendances.map((webId) => (
+                        <Friend key={webId} webId={webId}  />)):
+                        <p>No hay asistentes</p>}
 
                     </DialogContent>
                 </Dialog>

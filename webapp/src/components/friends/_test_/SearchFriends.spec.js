@@ -23,6 +23,4 @@ describe('Friends', function () {
         const friends=result.find(Button);
         expect(friends).toBeTruthy();
       }); 
-
-
 });

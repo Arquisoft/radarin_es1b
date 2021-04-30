@@ -350,6 +350,25 @@ router.post("/friends/accept", async (req, res) => {
         })
     });
 
+    //buscar a una persona 
+    router.post("/users/search/delete", async (req, res) => {
+        var query =
+            { 
+                "admin" : "false" 
+            }
+            ;
+        await User.find(query, function (err, docs) {
+            if (err) {
+                //console.log("Error al encontrar los usuarios dados los amigos")
+            } else {
+                var webIds = docs.map((doc) => { return doc.webId })
+                
+                res.send(webIds);
+            }
+        })
+    });
+
+
     //buscar si una persona es online
     router.post("/users/search/status", async (req, res) => {
         var query = {

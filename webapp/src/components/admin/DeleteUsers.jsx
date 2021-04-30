@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { getSearcByName, getUsers } from '../../api/api';
+import { getSearcToDelete, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import User from "../admin/user";
@@ -32,7 +32,7 @@ class DeleteUsers extends React.Component {
 
 
 	  async fetchData() {
-		var promise = getSearcByName(this.state.searchName)
+		var promise = getSearcToDelete()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {

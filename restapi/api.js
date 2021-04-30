@@ -54,16 +54,7 @@ router.post("/users/status/update", async (req, res) => {
     if (user2) {
         var query = { "_id": user2._id };
         user2.status = status
-
-        await User.findOneAndUpdate(query, user2, function (err, doc) {
-            if (err) {
-                //console.error("Something wrong when updating data!");
-            } else {
-                //console.log(doc);
-            }
-        });
     }
-
 
     await user2.save();
     res.send(user2);
@@ -100,14 +91,6 @@ router.post("/users/ban", async (req, res) => {
     if (user2) {
         var query = { "_id": user2._id };
         user2.ban = baneable
-
-        await User.findOneAndUpdate(query, user2, function (err, doc) {
-            if (err) {
-                //console.error("Something wrong when updating data!");
-            } else {
-                //console.log(doc);
-            }
-        });
     }
 
     await user2.save();
@@ -177,7 +160,7 @@ router.post("/location/add", async (req, res) => {
             fullName: fullName
         });
 
-        await newEntry.save();
+        //await newEntry.save();
         res.send(newEntry);
     }
 });

@@ -9,16 +9,24 @@ export default class MeetLocationMarkers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            webId: props.webId,
-            locs: props.meets,
+            webId: this.props.webId,
+            locs: this.props.meets,
             updated: false
         }
-
 
     }
 
 
-   
+    componentDidUpdate() {
+        if (this.state.locs.length !== this.props.meets.length) {
+            this.setState({
+                locs: this.props.meets
+            })
+        }
+    }
+
+
+
     render() {
         return (
 

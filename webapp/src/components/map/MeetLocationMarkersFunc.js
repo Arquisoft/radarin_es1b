@@ -35,27 +35,32 @@ function MeetLocationMarkersFunc(props) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetchData()
       setUpdate(!update)
+      fetchData()
+
     }, 3000);
     return () => clearInterval(interval);
-  }, [update]);
+  }, [meets, update]);
 
   async function fetchData() {
     getMeetsForUser(props.webId).then((result) => {
-      setMeets([])
-      console.log("Update MeetsFunc")
-      result.forEach((e) => {
-        setMeets(meets => [...meets, e]);
+
+      if (meets.length !== result.length) {
+        setMeets([])
+        console.log("Update MeetsFunc")
+        result.forEach((e) => {
+          setMeets(meets => [...meets, e]);
+        })
+      }
       })
-    })
   }
 
 
 
-  return (<div>
-    <MeetLocationMarkers webId={props.webId} meets={meets}></MeetLocationMarkers>
-  </div>)
+
+return (<div>
+  <MeetLocationMarkers webId={props.webId} meets={meets}></MeetLocationMarkers>
+</div>)
 }
 
 export default MeetLocationMarkersFunc

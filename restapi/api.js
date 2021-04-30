@@ -60,13 +60,16 @@ router.post("/users/status/update", async (req, res) => {
                 //console.error("Something wrong when updating data!");
             } else {
                 //console.log(doc);
+                
             }
         });
     }
 
 
-    await user2.save();
-    res.send(user2);
+    if(user2!=null){
+        await user2.save();
+        res.send(user2);
+    }
 
 })
 

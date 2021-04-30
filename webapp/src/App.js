@@ -68,12 +68,13 @@ class App extends React.Component {
           function yourFunction() {
               // your function for too long inactivity goes here
               // e.g. window.location.href = 'logout.php';
-              console.log("CERRANDO SESION")
+              alert("¿ Sigue usted ahi ?, refresque su página para continuar")
+              console.log()
           }
       
           function resetTimer() {
               clearTimeout(t);
-              t = setTimeout(yourFunction, 10000);  // time is in milliseconds
+              t = setTimeout(yourFunction, 30000);  // time is in milliseconds
               console.log("TIEMPO " + t)
           }
       }

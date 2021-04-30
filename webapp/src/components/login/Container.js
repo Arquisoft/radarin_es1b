@@ -44,7 +44,7 @@ const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 //AuthButtonComponent usa React.forwardRef para obtener la ref que le pasaron, y luego reenviarla al span que renderiza:
 export const AuthButtonComponent = React.forwardRef((props, ref) => 
-<span  ref={ref}><AuthButton {...props} />
+<span  ref={ref}><AuthButton login="Iniciar sesión" logout="Salir" {...props} />
     <div 
         style={{display: 'none'}}>{props.children}
     </div>

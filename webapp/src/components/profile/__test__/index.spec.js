@@ -10,7 +10,7 @@ const literal = value => ({
 describe('Profile container', () => {
 
     it('should not render profile while pending', () => {
-      const result = shallow(<Index pending/>);
+      const result = shallow(<Index  webId="https://uo225211.solidcommunity.net/profile/card#me"/>);
       expect(result.find(ProfileContainer)).toEqual({});
     });
   

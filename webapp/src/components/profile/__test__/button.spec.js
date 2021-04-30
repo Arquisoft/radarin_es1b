@@ -2,13 +2,12 @@ import React from 'react';
 import {shallow, isEmpty} from 'enzyme';
 
 import ButtonAddDelete from '../ButtonAddDelete';
-import FaceIcon from '@material-ui/icons/Face';
-
+import { Button } from '@material-ui/core';
 import ButtonFriendship from '../ButtonFriendship'
 
 describe('ButtonFriendship', () => {
 
-  describe('logger distint webid', function () {
+  describe('logger distint webid and pending friend', function () {
     let result;
     beforeEach(() => {
       result = shallow(<ButtonFriendship webId="https://webid.example/#me" loggedUser="https://webid.example/#loger" />);

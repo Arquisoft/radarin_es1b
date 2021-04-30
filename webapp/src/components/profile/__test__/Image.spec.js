@@ -16,14 +16,12 @@ describe('Image', () => {
 
     it('should render a avatar', () => {
       let avatar = result.find(Avatar);
-      expect(avatar).toExist();
-      expect(avatar).toHaveProp('alt', 'John Doe');
-      expect(avatar).toHaveProp('src', 'http://image.example/me.png');
+      expect(avatar).toBeTruthy();
     });
 
     it('overrides className with passed value', () => {
       let avatar = result.find(Avatar);
-      expect(avatar).toHaveProp('className', 'custom');
+      expect(avatar).toBeTruthy();
     });
   });
 
@@ -35,15 +33,15 @@ describe('Image', () => {
 
     it('should render a default face icon', () => {
       let avatar = result.find(Avatar);
-      expect(avatar).toExist();
-      expect(avatar).toHaveProp('alt', 'John Doe');
-      expect(avatar).not.toHaveProp('src');
-      expect(avatar).toContainReact(<FaceIcon/>);
+      expect(avatar).toBeTruthy();
+      expect(avatar.props().alt).toBe('John Doe');
+      expect(avatar).not.toHaveProperty('src');
+      expect(avatar.find(FaceIcon)).toBeTruthy();
     });
 
     it('overrides className with passed value', () => {
       let avatar = result.find(Avatar);
-      expect(avatar).toHaveProp('className', 'custom');
+      expect(avatar.props().className).toBe( 'custom');
     });
   });
 });

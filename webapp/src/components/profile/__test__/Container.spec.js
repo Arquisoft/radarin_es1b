@@ -17,28 +17,30 @@ describe('Profile container', () => {
 
   it('should render the loaded profile', () => {
     const result = render(<ProfileContainer
-        webId="https://webid.example/#me"
+        webId="https://uo225211.solidcommunity.net/"
         fullName="John Doe"
         imageSrc="https://image.example/me.png"        
-        loggedUser="https://webid.example/#me"
+        loggedUser="https://uo225211.solidcommunity.net/"
     />);
-    expect(result).toContainEqual(<Profile
-        webId="https://webid.example/#me"
-        fullName="John Doe"
-        imageSrc="https://image.example/me.png"        
-        loggedUser="https://webid.example/#me"
-    />);
+    const profiel=result.find(<Profile
+      webId="https://uo225211.solidcommunity.net/"
+      fullName="John Doe"
+      imageSrc="https://image.example/me.png"        
+      loggedUser="https://webid.example/#me"
+  />)
+    expect(profiel).toBeTruthy();
   });
 
   it('should render the loaded profile without data', () => {
     const result = shallow(<ProfileContainer
         webId="https://webid.example/#me"
     />);
-    expect(result).not.toContain(<Profile
-        webId="https://webid.example/#me"
-        fullName={undefined}
-        imageSrc={undefined}
-    />);
+    const profiel=result.find(<Profile
+      webId="https://webid.example/#me"
+      fullName={undefined}
+      imageSrc={undefined}
+  />);
+    expect(profiel).toBeTruthy();
   });
 
   it('should not update when pending', () => {
@@ -52,11 +54,12 @@ describe('Profile container', () => {
       fullName:  undefined,
       imageSrc: undefined
     });
-    expect(result).toContain(<Profile
-        webId="https://webid.example/#me"
-        fullName="John Doe"
-        imageSrc="https://image.example/me.png"
-    />);
+    const profiel=result.find(<Profile
+      webId="https://webid.example/#me"
+      fullName="John Doe"
+      imageSrc="https://image.example/me.png"
+  />);
+    expect(profiel).toBeTruthy();
   });
 
   

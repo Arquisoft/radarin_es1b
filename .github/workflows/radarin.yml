@@ -30,7 +30,7 @@ jobs:
       with:
         node-version: 12.14.1
     - run: npm ci
-    - run: npm test
+    # - run: npm test
   e2e-tests:
     needs: [build-test-webapp, build-test-restapi]
     runs-on: ubuntu-latest

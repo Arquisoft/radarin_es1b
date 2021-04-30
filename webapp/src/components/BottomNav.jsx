@@ -6,12 +6,11 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import MapIcon from '@material-ui/icons/Map';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import Map from './map/Map';
+import MapView from './map/MapView';
 import Friends from './friends/Friends';
 import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
-
 
 const useStyles = makeStyles({
   root: {
@@ -21,10 +20,11 @@ const useStyles = makeStyles({
   }
 });
 
+
+
 const BottomNav = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState('recents');
-
   const handleChange = async (event, newValue) => {
     setValue(newValue);
   };
@@ -33,16 +33,19 @@ const BottomNav = (props) => {
     <div>
       <Switch>
         <Route path="/map">
-          <Map webId={props.webId}/>
+          <MapView webId={props.webId}/>
+        </Route>
+        <Route path="/profile*">
+         
         </Route>
         <Route path="/friends">
-          <Friends />
+          <Friends webId={props.webId}/>
         </Route>
         <Route path="/me">
           <Profile webId={props.webId} />
         </Route>
         <Route path="/">
-          <Start />
+          <Start/>
         </Route>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

@@ -7,13 +7,12 @@ import FriendList from '../friendList';
 import Image from './Image';
 import ButtonFriendship from './ButtonFriendship'
 import Paper from "@material-ui/core/Paper";
-
 import styles from "./Profile.module.css";
 
 
 //default inicializa a default los valores de los parametros si no se los has pasado explicitamente
 // Este componente corresponde a la parte de la interfaz grafica del perfil
-export default ({ webId, fullName, imageSrc, loggedUser }) =>
+const Profile = ({ webId, fullName, imageSrc, loggedUser }) =>
   <Grid container
     spacing={2}
     direction="row"
@@ -31,18 +30,21 @@ export default ({ webId, fullName, imageSrc, loggedUser }) =>
           Perfil de solid : {webId}
         </Typography>
         
+        <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
       </Paper>
-       
-      <ButtonFriendship webId={webId} loggedUser={loggedUser}/>
+      
+      
        
     </Grid>
     <Grid item xs={12} md={12}>
       <Typography variant="h6" component="h4">
         Lista de amigos de {fullName} :
-          </Typography>
+      </Typography>
       {/* Muestra la lista de amigos del usuario accediendo al index.js de /friendlist*/}
       <Paper className={styles.friendList} elevation={1}>
         <FriendList webId={webId} />
       </Paper>
     </Grid>
   </Grid>
+
+export default Profile

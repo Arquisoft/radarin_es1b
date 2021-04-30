@@ -6,14 +6,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from './Friend.module.css';
-
-export default ({webId}) =>
+const LoadingFriend = ({webId}) =>
     <ListItem className={styles.friend}>
       <ListItemIcon>
         <CircularProgress/>
       </ListItemIcon>
       <ListItemText
-          primary="Loading..."
+          primary="Cargando..."
           secondary={webId}
       />
     </ListItem>
+export default LoadingFriend 

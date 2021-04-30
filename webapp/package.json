@@ -13,6 +13,7 @@
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "leaflet": "^1.7.1",
+    "leaflet-easybutton": "^2.4.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-browser-notifications": "^1.0.14",

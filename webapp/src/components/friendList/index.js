@@ -1,12 +1,9 @@
 import React from 'react';
 
-import { evaluateList } from '@solid/react';
+import FriendList from './FriendList';
 
-import FriendListContainer from './Container';
-
-//EvaluateList sirve para construir listas de cosas, en este caso la lista de amigos
-const FriendListEvaluation = evaluateList('friends', FriendListContainer);
-
-export default ({webId}) => {
-    return <FriendListEvaluation friends={`[${webId}].knows`}/>;
+const Index = ({webId}) => {
+    return <FriendList webId={webId}/>; 
 };
+
+export default Index

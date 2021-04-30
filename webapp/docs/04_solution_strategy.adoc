@@ -14,6 +14,7 @@ Las principales librerías a usar son las siguientes:
 * Node.js: Se usa para crear la parte del servidor de la aplicación.
 * MongoDB: Es usado a modo de base de datos.
 * Leaflet: Se usan los componentes que nos proporciona React-Leaflet para implementar los mapas de la aplicación.
+* MaterialUI: Se usa para los aspectos gráfico de la aplicación en lugar de bootstrap.
 
 ==== Estructura
 Para conseguir que el proyecto sea mantenible su estructura estará basada en contenedores, que serán implementados usando la herramienta Docker.

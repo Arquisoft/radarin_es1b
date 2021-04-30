@@ -5,9 +5,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 //CircularProgress hace que se mantenga cargando hasta que cargen los datos
 
-const Container = ({pending, friends}) => {
+const Container = ({pending, webId}) => {
     return (
-        pending ? <CircularProgress/> :<FriendList friends={friends}/>
+        pending ? <CircularProgress/> :<FriendList webId={webId}/>
     )
 }
 

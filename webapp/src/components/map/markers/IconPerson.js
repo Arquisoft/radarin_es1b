@@ -1,16 +1,14 @@
 import L from 'leaflet';
-
+import friendPNG from './placeholder.png';
 
 const iconPerson = new L.Icon({
-    iconUrl: require('./friend-icon.svg'),
-    iconRetinaUrl: require('./friend-icon.svg'),
+    iconUrl: friendPNG,
     iconAnchor: null,
-    popupAnchor: null,
+    popupAnchor: [0, -15],
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(60, 75),
-    className: 'leaflet-div-icon'
-});
+    iconSize: new L.Point(50, 50),
+})
 
 export { iconPerson };

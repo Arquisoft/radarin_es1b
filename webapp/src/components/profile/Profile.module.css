@@ -1,3 +1,4 @@
+
 .profile {
   padding: 1rem;
   height: 100%;
@@ -11,6 +12,7 @@
 .profile .header {
   padding: 1rem;
 }
+
 .profile .friendList {
   max-height: 30rem;
   overflow: auto;

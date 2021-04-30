@@ -12,4 +12,4 @@
 
 === Deudas técnicas
 - Lentitud de respuesta al utilizar Heroku para alojar nuestra aplicación.
-- Al utilizar SOLID ganamos en privacidad, sin embargo su rendimiento es bastante pobre.
+- Al utilizar SOLID ganamos en privacidad, sin embargo su rendimiento es bastante pobre, su documentación es escasa lo que hace que desarrollar codigo para Solid sea muy complicado para un equipo completamente junior.

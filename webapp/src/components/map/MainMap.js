@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
-import FriendsLocationMarkers from './FriendsLocationMarkers';
+import FriendsLocationMarkersFunc from './FriendsLocationMarkersFunc';
 import MeetLocationMarkersFunc from "./MeetLocationMarkersFunc";
 import Friend from "./markers/FriendPopupManager"
 import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
@@ -174,7 +174,7 @@ useInitialice()
           </LayersControl.Overlay>
           <LayersControl.Overlay checked name="Mostrar Amigos">
 
-            <FriendsLocationMarkers webId={props.webId} />
+            <FriendsLocationMarkersFunc webId={props.webId} />
           </LayersControl.Overlay>
           <LayersControl.Overlay checked name="Mostrar Meets">
             <MeetLocationMarkersFunc webId={props.webId} />

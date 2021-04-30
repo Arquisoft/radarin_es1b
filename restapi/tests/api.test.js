@@ -44,12 +44,7 @@ describe('user ', () => {
         status = 'offline';
         const response = await request(app).post('/api/users/add').send({nombre: username,webId: email})
         expect(response.statusCode).toBe(200);
-<<<<<<< Updated upstream
-        expect(response.body.name).toBe(username);
-        expect(response.body.email).toBe(email);
-=======
         expect(response.body.nombre).toBe(username);
         expect(response.body.webId).toBe(email);
->>>>>>> Stashed changes
     });
 });

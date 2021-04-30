@@ -7,13 +7,8 @@ const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
 
-<<<<<<< HEAD
 
-
-// Get all users
-=======
 // Devuelve la lista de usuarios
->>>>>>> 4ce71dd43fd61abe375d65537d59872c98507278
 router.get("/users/list", async (req, res) => {
     const users = await User.find({}).sort('-_id') //Inverse order
     res.send(users)
@@ -191,8 +186,7 @@ router.post("/location/add", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
+
 //Solicitud de amistad
 router.post("/friends/add", async (req, res) => {
     console.log("Añadiendo amigos desde restApi")
@@ -498,7 +492,6 @@ router.post("/friends/list/pending", async (req, res) => {
 
 
 
->>>>>>> 4ce71dd43fd61abe375d65537d59872c98507278
 
 // get friends locations
 router.post("/friends/locations/", async (req, res) => {
@@ -696,34 +689,6 @@ router.post("/meets/assist", async (req, res) => {
 
 })
 
-<<<<<<< HEAD
-router.post("/users/location/near", async (req, res) => {
-    let userLocation = req.body.userLocation;
-    let userFriends = req.body.friends; 
-    let userNearByFriends = [];
-        
-    async.each(userFriends, async function(friend) {
-                        const near = friend.location.country == userLocation;
-                                                        
-                        if(near != null){
-                            console.log(near);
-                            userNearByFriends.push(near);
-                        }
-                        
-                    }, async function(err) {
-                        if(err) {
-                            console.log("A element failed to process", err);
-                            res.status(500).json(err);
-                        } else {
-                            console.log("All elements have been processed successfully");
-                            res.status(200).json(userNearByFriends);
-                        }
-
-                })
-});
-
-
-=======
 //busca entre los meets creados por el usuario + los meets creados por sus amigos
 router.post("/meets/find", async (req, res) => {
     let user = req.body.userWebId;
@@ -810,6 +775,5 @@ router.post("/meets/details", async (req, res) => {
         });
     }
 });
->>>>>>> 4ce71dd43fd61abe375d65537d59872c98507278
 
 module.exports = router

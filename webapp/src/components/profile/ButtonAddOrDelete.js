@@ -36,5 +36,3 @@ export default function Prueba(props){
 
 
 
-
->>>>>>> 4ce71dd43fd61abe375d65537d59872c98507278

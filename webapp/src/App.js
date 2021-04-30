@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppBar from './components/AppBar';
-
 import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
@@ -20,6 +19,7 @@ class App extends React.Component {
     this.resultQuery = []
     this.resultBan = []
     this.querySuccess=false;
+    this.status = false;
    
   }
 
@@ -55,36 +55,11 @@ class App extends React.Component {
         })
         }
 
-        idleLogout() {
-          var t;
-          window.onload = resetTimer;
-          window.onmousemove = resetTimer;
-          window.onmousedown = resetTimer;  // catches touchscreen presses as well      
-          window.ontouchstart = resetTimer; // catches touchscreen swipes as well 
-          window.onclick = resetTimer;      // catches touchpad clicks as well
-          window.onkeypress = resetTimer;   
-          window.addEventListener('scroll', resetTimer, true); // improved; see comments
-      
-          function yourFunction() {
-              // your function for too long inactivity goes here
-              // e.g. window.location.href = 'logout.php';
-              alert("¿ Sigue usted ahi ?, refresque su página para continuar")
-              console.log()
-          }
-      
-          function resetTimer() {
-              clearTimeout(t);
-              t = setTimeout(yourFunction, 30000);  // time is in milliseconds
-              console.log("TIEMPO " + t)
-          }
-      }
-      
 
       componentDidMount(){
 
         this.fetchData();
         this.fetchBan();
-        this.idleLogout();
 
       }
 

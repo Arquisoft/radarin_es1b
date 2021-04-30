@@ -45,7 +45,7 @@ router.post("/users/status/update", async (req, res) => {
 
     let webId = req.body.webId;
 
-    //console.log("El usuario para cambiar estado es " + webId)
+    console.log("EL USUARIO PARA CAMBIAR ESTADO ES " + webId)
 
     let status = req.body.status;
 

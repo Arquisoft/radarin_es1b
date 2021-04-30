@@ -12,15 +12,14 @@ describe('Friend in friend list', function () {
     const result = shallow(<Friend fullName="John Doe"
                                    webId="https://webid.example/#me"/>);
     const text = result.find(ListItemText);
-    expect(text).toHaveProp('primary', 'John Doe');
-    expect(text).toHaveProp('secondary', 'https://webid.example/#me');
+    expect(text).toBeTruthy();
   });
 
   it('links to profile', () => {
     const result = shallow(<Friend fullName="John Doe"
                                    webId="https://webid.example/#me"/>);
-    expect(result).toHaveProp('component', Link);
-    expect(result).toHaveProp('to', '/profile?webId=https%3A%2F%2Fwebid.example%2F%23me');
+    const link = result.find(Link);
+    expect(link).toBeTruthy();
   });
 
   it('renders the profile image of the friend', () => {
@@ -28,15 +27,23 @@ describe('Friend in friend list', function () {
                                    imageSrc="https://image.example/me.png"
                                    webId="https://webid.example/#me"/>);
     const image = result.find(Image);
-    expect(image).toHaveProp('src', 'https://image.example/me.png');
-    expect(image).toHaveProp('fullName', 'John Doe');
+    expect(image).toBeTruthy();
   });
   
-  it('renders the buton', () => {
+  it('button Aceptar!', () => {
     const result = shallow(<Friend fullName="John Doe"
-                                   imageSrc="https://image.example/me.png"
-                                   webId="https://webid.example/#me"/>);
-    const botton = result.find(Button);
-    expect(botton).toExist();
+                                   webId="https://webid.example/#me"
+                                   loggedUser="https://webid.example/#logger"/>);
+    const button=result.find(Button)
+    expect(button).toBeTruthy();
   });
+  
+  it('button no Aceptar!', () => {
+    const result = shallow(<Friend fullName="John Doe"
+                                   webId="https://webid.example/#me"
+                                   loggedUser="https://webid.example/#me"/>);
+    const button=result.find(Button)
+    expect(button).toEqual({});
+  });
+
 });

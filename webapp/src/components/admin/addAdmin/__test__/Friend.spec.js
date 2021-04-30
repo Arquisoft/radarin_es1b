@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import ListItemText from '@material-ui/core/ListItemText';
-import {Link} from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 import Friend from '../NewUserAdmin';
 import Image from "../../../profile/Image";
@@ -22,5 +22,7 @@ describe('Friend in friend list', function () {
     const image = result.find(Image);
     expect(image).toBeTruthy();
   });
+
+ 
 
 });

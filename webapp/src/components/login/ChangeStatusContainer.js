@@ -27,16 +27,18 @@ class ChangeStatusContainer extends React.Component{
           // e.g. window.location.href = 'logout.php';
           //alert("¿ Sigue usted ahi ?, refresque su página para continuar")
           console.log("actualizo a offline el usuario " + web)
-          window.onbeforeunload = function(e) {
-            return 'Texto de aviso';
+          window.onpageshow = function() {
+            updateStatus(web, "offline")
           };
-          updateStatus(web, "offline")
+          window.onunload = window.onbeforeunload = function(e) {
+            updateStatus(web, "offline")
+          };
          
       }
   
       function resetTimer() {
           clearTimeout(t);
-          t = setTimeout(yourFunction, 40000);  // time is in milliseconds
+          t = setTimeout(yourFunction, 10000);  // time is in milliseconds
           console.log("TIEMPO " + t)
       }
   }

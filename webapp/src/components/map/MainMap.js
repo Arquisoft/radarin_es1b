@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L, { marker } from 'leaflet';
+import L, { easyButton, marker } from 'leaflet';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"

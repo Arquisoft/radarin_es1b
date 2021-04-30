@@ -47,7 +47,6 @@ class App extends React.Component {
           this.resultBan=[]
           result.forEach((e) => {
           this.resultBan.push(e)
-          console.log("ESTOY BANEADO AMIGO " + e)
           })
     
           this.querySuccess=true;

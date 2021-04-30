@@ -46,5 +46,6 @@ describe('user ', () => {
         expect(response.statusCode).toBe(200);
         expect(response.body.nombre).toBe(username);
         expect(response.body.webId).toBe(email);
+
     });
 });

@@ -27,13 +27,8 @@ class ChangeStatusContainer extends React.Component{
           // e.g. window.location.href = 'logout.php';
           //alert("¿ Sigue usted ahi ?, refresque su página para continuar")
           console.log("actualizo a offline el usuario " + web)
+
           
-          window.onpagehide = function() {
-            updateStatus(web, "offline")
-          };
-         window.onbeforeunload = function(e) {
-            updateStatus(web, "offline")
-          };
           window.onunload = function(e) {
             updateStatus(web, "offline")
           };

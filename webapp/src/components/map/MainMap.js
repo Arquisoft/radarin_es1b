@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L, { easyButton, marker } from 'leaflet';
+import L, { easyButton } from 'leaflet';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
@@ -39,14 +39,14 @@ const Map = (props) => {
                 }                
             });
             
-            L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
+            easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
               if(meetButtonAction){
                 meetButtonAction=false;
               }else{
                 meetButtonAction=true;
               }
             }, "Crear una nueva reunión").addTo(map);
-            L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
+            easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
                 map.locate({
                     setView: true
                 })

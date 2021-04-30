@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import ListItemText from '@material-ui/core/ListItemText';
 import {Link} from 'react-router-dom';
 
-import Friend from '../Friend';
+import Friend from '../DeleteAdmin';
 import Image from "../../../profile/Image";
 
 describe('Friend in friend list', function () {

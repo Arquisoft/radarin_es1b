@@ -39,4 +39,4 @@ describe('ButtonFriendship', () => {
     });
   });
   
-});w
+});

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -12,9 +12,14 @@ import Popover from '@material-ui/core/Popover';
 import Button from "react-bootstrap/Button";
 import NotificationContainer from './notifications/NotificationContainer';
 
+
+import { nearFriends, getFriends } from '../api/api';
+import { useWebId } from "@solid/react";
+
+
 toast.configure();
 
-const mensaje = "Wow so easy!";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: "auto",
@@ -29,20 +34,45 @@ const useStyles = makeStyles((theme) => ({
 export default function RadarinAppBar() {
   const classes = useStyles();
 
-  const [amigo] = React.useState([])
+  const [amigo, setAmigo] = React.useState([])
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const loggedUserId = useWebId();
   const handleClick = (event) => {
-    amigo.push(mensaje);
-    toast(mensaje);
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setAmigo([]);
   };
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nearbyFriends();
+    }, 10000);
+    return () => clearInterval(interval);
+  })
+
+  async function nearbyFriends() {
+    let friends = []
+    await getFriends(loggedUserId).then((result) => {
+      result.forEach((e) => {
+        friends.push(e)
+        console.log("Amigo " + e)
+      })
+    })
+    console.log("Amigos " + friends)
+    var msg = await nearFriends(friends, loggedUserId)
+    if (msg !== "No nearby user") {
+      amigo.push(msg);
+      toast(msg);
+    }
+    console.log("Mensaje" + msg)
+  }
+
   return (
     <header className={classes.root}>
       <AppBar position="static">

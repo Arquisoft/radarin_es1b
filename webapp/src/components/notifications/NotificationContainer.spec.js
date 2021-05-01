@@ -1,9 +1,7 @@
 import React from 'react';
 import {shallow, render} from 'enzyme';
 
-import NotificationContainer from './NotificationContainer'
-import FriendList from '../FriendList';
-import CircularProgress from "@material-ui/core/CircularProgress";
+import NotificationContainer from './NotificationContainer';
 
 const literal = value => ({
   toString: () => value

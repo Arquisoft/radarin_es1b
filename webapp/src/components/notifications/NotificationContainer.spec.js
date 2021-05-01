@@ -11,15 +11,12 @@ const literal = value => ({
 
 describe('Friend list container', function () {
   
+  const muensaje="No nearby user";
+  const amigo=[];
+  amigo.push(muensaje);
   it('indicates loading', () => {
-    const result = shallow(NotificationContainer);
-    expect(result).toBetruthy();;
-  });
-
-  it('shows friend list after loading', () => {
-    const result = shallow(<FriendListContainer
-      webId={literal('https://uo225211.solidcommunity.net/')}/>).find(<FriendList webId={literal('https://uo225211.solidcommunity.net/')}/>);
-    expect(result).toBeTruthy();
+    const result = shallow( <NotificationContainer notif={amigo} />);
+    expect(result.find('li')).toBeTruthy();;
   });
 
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppBar from './components/AppBar';
@@ -70,7 +70,7 @@ class App extends React.Component {
 
       <div className="App">
           <CssBaseline />
-          <Router>
+          <Router paht="/#/*">
             {/*Router conjunto de componentes de navegación  */}
             {/* <header className="App-header">  */}
             {/* <AppHeader/> */}

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
-import { getSearcByName, getUsers } from '../../api/api';
+import { getSearcByStatus, getUsers, getLastTime } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
 import Friend from "../friendList/friend";
@@ -13,9 +12,6 @@ class InactiveUsers extends React.Component {
 		this.resultQuery = []
 		this.logged = this.props.webId;
 		this.querySuccess=false;
-		this.state = {
-			searchName: ""
-		};
 	}
 	
 	static defaultProps = {
@@ -30,15 +26,18 @@ class InactiveUsers extends React.Component {
 		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
 	  };
 
+	  componentDidMount(){
+		this.fetchData()
+	  }
+
 
 	  async fetchData() {
-		var promise = getSearcByName(this.state.searchName)
+		var promise = getLastTime()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
 			this.resultQuery=[]
 		  result.forEach((e) => {
-			  console.log(e);
 			this.resultQuery.push(e)
 		  })
 		  if(result.length===0){
@@ -65,9 +64,15 @@ class InactiveUsers extends React.Component {
 		this.setState({ searchName: event.target.value });
 	}
 
-	componentDidMount(){
-		this.fetchData()
+	componentDidUpdate(){
+		var aucx=true;
+		if(aucx){
+		  this.resultQuery=[]
+		  this.fetchData();
+		}
 	}
+
+	
 
 
 	handleClick(e) {
@@ -77,28 +82,16 @@ class InactiveUsers extends React.Component {
 		}
 		else{
 			//console.error("No hay texto para buscar")
-			this.fetchData()
 		} 
+    }
 
-
-}
 
 	buscarAmigos() {
 		return (
 			<div>
 				<form>
 					<label> 
-						<input 
-							id="friendID"
-							type="text"
-							name="searchArea"
-							onSubmit={ (e)=>this.handleChange(e)}
-							onChange={(e)=>this.handleChange(e)}
-						/>
-
-						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
-							Buscar
-						</Button>
+						Usuarios en linea : 
 					</label>
 				</form>
             </div>
@@ -113,12 +106,10 @@ class InactiveUsers extends React.Component {
 			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
-			  
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			 
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
+				     webId!==null?
 					<Friend key={webId} webId={webId} logged={this.logged}/>:null
 	
 			  ))}
@@ -129,7 +120,9 @@ class InactiveUsers extends React.Component {
 		  </List>
 		);
 	  }
-	}
+
+
+}
 
 
 	export default InactiveUsers;

@@ -38,7 +38,6 @@ class AllUsers extends React.Component {
 		promise.then((result) => {
 			this.resultQuery=[]
 		  result.forEach((e) => {
-			  console.log(e);
 			this.resultQuery.push(e)
 		  })
 		  if(result.length===0){

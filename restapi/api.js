@@ -366,22 +366,29 @@ router.post("/users/search/", async (req, res) => {
 //buscar a una persona 
 router.post("/users/lastTime/get/", async (req, res) => {
 
-    const userWebId = req.body.webID
-
-    console.log("me  llega este webId bontos " +  userWebId)
-
-    var query = {
-
-        "webId": userWebId
-    };
-    
-    await User.find(query, function (err, docs) {
+    await User.find(function (err, docs) {
         if (err) {
             console.log("Error al encontrar los usuarios dados los amigos")
         } else {
-            var date = docs.map((doc) => { return doc.time })
+            const tiempoTranscurrido = Date.now();
 
-            res.send(date);
+            const hoy = new Date(tiempoTranscurrido);
+
+            var webIds = docs.map((doc) => { 
+
+                const fechaUsuario = doc.time.toUTCString()
+                const currDate = new Date(hoy)
+                const oldDate  = new Date(fechaUsuario)
+
+                const diferenciaDias = (currDate - oldDate) / 60000;
+
+                if( diferenciaDias > 43200){
+                    return doc.webId 
+                }
+
+            })
+
+            res.send(webIds);
         }
     })
 });

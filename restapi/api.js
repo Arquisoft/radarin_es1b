@@ -143,8 +143,6 @@ router.post("/users/add/admin", async (req, res) => {
 })
 
 
-
-
 // register a new location
 router.post("/location/add", async (req, res) => {
     let user = req.body.user;
@@ -311,6 +309,31 @@ router.post("/friends/pending/target", async (req, res) => {
     })
 });
 
+// Encontrar amigos cercanos
+router.post("/friends/findNearest", async (req, res) => {
+    let friendId = req.body.friend;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        if (friend.status != 'online') {
+            res.send("No nearby user");
+        } else {
+            res.send(friend.nombre + " está cerca de ti!");
+        }
+    } else {
+        res.send("No nearby user");
+    }
+});
+
+// Notificar Peticiones
+router.post("/friends/notify", async (req, res) => {
+    let friendId = req.body.friend;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        res.send(friend.nombre + " te ha enviado una solicitud de amistad!");
+    } else {
+        res.send("No hay nuevas solicitudes");
+    }
+});
 
 //buscar a una persona 
 router.post("/users/search/", async (req, res) => {
@@ -750,22 +773,6 @@ router.post("/meets/find", async (req, res) => {
     })
 
 
-});
-
-
-
-router.post("/users/findNearest", async (req, res) => {
-    let friendId = req.body.friend;
-    let friend = await User.findOne({ webId: friendId })
-    if (friend != null) {
-        if (friend.status != 'online') {
-            res.send("No nearby user");
-        } else {
-            res.send(friend.nombre + " está cerca de ti!");
-        }
-    } else {
-        res.send("No nearby user");
-    }
 });
 
 module.exports = router

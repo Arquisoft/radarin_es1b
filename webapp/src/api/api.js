@@ -400,12 +400,22 @@ export async function getMessages(from, to) {
     return await response.json()
 }
 
-
-
-
 export async function nearFriends(friend, id) {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/findNearest', {
+    let response = await fetch(apiEndPoint + '/friends/findNearest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            'friend': friend,
+            'webId': id
+        })
+    })
+    return await response.text();
+}
+
+export async function notifyPetition(friend, id) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint + '/friends/notify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

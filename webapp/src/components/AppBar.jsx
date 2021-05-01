@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 import NotificationContainer from './notifications/NotificationContainer';
 
 
-import { nearFriends, getFriends } from '../api/api';
+import { notifyPetition, getPendingFriends, nearFriends, getFriends } from '../api/api';
 import { useWebId } from "@solid/react";
 //import { notify } from '../../../restapi/api';
 
@@ -39,6 +39,7 @@ export default function RadarinAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const loggedUserId = useWebId();
   const [amigosNotificados, setAmigosNotificados] = useState([]);
+  const [notIcon, setNotIcon] = useState("noti.png");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -46,6 +47,7 @@ export default function RadarinAppBar() {
   const handleClose = () => {
     setAnchorEl(null);
     setAmigo([]);
+    setNotIcon("noti.png")
   };
 
   const open = Boolean(anchorEl);
@@ -54,6 +56,7 @@ export default function RadarinAppBar() {
   useEffect(() => {
     const interval = setInterval(() => {
       nearbyFriends();
+      notifyFriendPetition();
     }, 5000);
     return () => clearInterval(interval);
   })
@@ -71,7 +74,25 @@ export default function RadarinAppBar() {
             amigo.push(msg);
             toast.info(msg);
             amigosNotificados.push(f);
+            setNotIcon("notified.png")
           }
+        }
+      })
+    })
+  }
+
+  async function notifyFriendPetition() {
+    let friends = []
+    getPendingFriends(loggedUserId).then((result) => {
+      result.forEach((e) => {
+        friends.push(e)
+      })
+      friends.forEach(async (f) => {
+        var msg = await notifyPetition(f, loggedUserId)
+        if (msg !== "No hay nuevas solicitudes") {
+          amigo.push(msg);
+          toast.info(msg);
+          setNotIcon("notified.png")
         }
       })
     })
@@ -86,7 +107,7 @@ export default function RadarinAppBar() {
             <Typography align="left" className={classes.title} variant="h5" color="inherit" noWrap> Radarin </Typography>
           </div>
           <Button className="notification-button" onClick={handleClick}><img
-            src="noti.png"
+            src={notIcon}
             width="25"
             height="25"
             className="d-inline-block align-top"
@@ -107,7 +128,7 @@ export default function RadarinAppBar() {
               horizontal: 'center',
             }}
           >
-            <ul style={{ listStyleType: 'none', display: 'block' }}>
+            <ul style={{ listStyleType: 'none' }}>
               <NotificationContainer notif={amigo} />
             </ul>
           </Popover>

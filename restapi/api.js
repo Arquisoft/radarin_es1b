@@ -393,6 +393,56 @@ router.post("/users/lastTime/get/", async (req, res) => {
     })
 });
 
+router.post("/users/lastUsers", async (req, res) => {
+
+    await User.find(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            const tiempoTranscurrido = Date.now();
+
+            const hoy = new Date(tiempoTranscurrido);
+
+            var webIds = docs.map((doc) => { 
+
+                const fechaUsuario = doc.time.toUTCString()
+                const currDate = new Date(hoy)
+                const oldDate  = new Date(fechaUsuario)
+
+                const diferenciaDias = (currDate - oldDate) / 60000;
+
+                if( diferenciaDias < 1440){
+                    return doc.webId 
+                }
+
+            })
+
+            res.send(webIds);
+        }
+    })
+});
+
+//buscar a una persona 
+router.post("/users/lastTime/get/user/", async (req, res) => {
+    
+    const web = req.body.webId;
+
+    var query = {
+        "webId": web
+    };
+    await User.find(query, function (err, docs) {
+        if (err) {
+            //console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            var webIds = docs.map((doc) => { return doc.time.toUTCString() })
+
+
+            res.send(webIds[0]);
+        }
+    })
+
+});
+
 
 
 //buscar a una persona 

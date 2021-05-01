@@ -28,20 +28,6 @@ class ChangeStatusContainer extends React.Component{
      
   }
 
-  sacarHoraActual(){
-
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
-
-    console.log(hoy.toUTCString())
-
-    const currDate = new Date('Sat, 01 May 2021 12:19:41 GMT')
-    const oldDate  = new Date('Sat, 01 May 2021 12:10:41 GMT')
-
-
-    console.log((currDate - oldDate) / 60000 ) // 64
-
-  }
   
     componentDidMount(){
        //EXTRAER LA HORA ACTUAL

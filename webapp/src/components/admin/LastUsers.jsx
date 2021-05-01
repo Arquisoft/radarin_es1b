@@ -1,11 +1,11 @@
 import React from 'react'
-import { getSearcByStatus, getUsers, getLastTime } from '../../api/api';
+import { getUsers, getLastUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import User from "../admin/inactiveUser";
+import User from "./inactiveUser";
 
 
-class InactiveUsers extends React.Component {
+class LastUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -32,7 +32,7 @@ class InactiveUsers extends React.Component {
 
 
 	  async fetchData() {
-		var promise = getLastTime()
+		var promise = getLastUsers()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
@@ -91,7 +91,7 @@ class InactiveUsers extends React.Component {
 			<div>
 				<form>
 					<label> 
-						Usuarios que llevan un mes sin entrar : 
+						 Usuarios en el último dia : 
 					</label>
 				</form>
             </div>
@@ -124,4 +124,4 @@ class InactiveUsers extends React.Component {
 }
 
 
-	export default InactiveUsers;
+	export default LastUsers;

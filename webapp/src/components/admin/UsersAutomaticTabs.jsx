@@ -14,6 +14,7 @@ import BannedUsers from './BannedUsers';
 import AdminUsers from '../admin/AdminUsers';
 import AddAdminUsers from '../admin/AddAdminUsers';
 import InactiveUsers from '../admin/InactiveUsers';
+import LastUsers from '../admin/LastUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -115,7 +116,7 @@ export default function ScrollableTabsButtonAuto(props) {
         <InactiveUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={8} >
-        to be done
+        <LastUsers webId={webId}/>
       </TabPanel>
     </div>
   );

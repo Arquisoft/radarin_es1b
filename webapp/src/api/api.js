@@ -199,6 +199,29 @@ export async function getLastTime(){
     return await response.json()
 }
 
+export async function getLastUsers(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastUsers', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+
+export async function getLastTimeUser(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastTime/get/user/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId
+        })
+      })
+    return await response.json()
+}
+
+
 export async function getSearcByName(str){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/search/name', {

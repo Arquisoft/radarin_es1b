@@ -96,7 +96,7 @@ class App extends React.Component {
             <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
            
           </Router>
-          <MeetCreationDialog/>
+          {/*<MeetCreationDialog/>*/}
         </LocationsContextProvider>
       </div>
 

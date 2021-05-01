@@ -754,36 +754,18 @@ router.post("/meets/find", async (req, res) => {
 
 
 
-router.post("/users/findNearest", async(req, res) => {
-    let friends = req.body.friends;
-    let nearUser = null;
-    console.log(friends);
-    async.each(friends, async function(nearFriend){
-        console.log("Near friend "+nearFriend);
-        const friend = await User.findOne({webId: nearFriend});
-        console.log("Friend "+friend);
-        if(friend != null){
-            
-            console.log("User " + nearFriend + " is this distance away: ");
-            if(nearUser == null){
-                nearUser = friend;
-            }else if(nearUser.status!= 'online'){
-                    nearUser = friend;
-            }
+router.post("/users/findNearest", async (req, res) => {
+    let friendId = req.body.friend;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        if (friend.status != 'online') {
+            res.send("No nearby user");
+        } else {
+            res.send(friend.nombre + " está cerca de ti!");
         }
-    }, async function(err){
-        if(err){
-            res.status(500).send(err);
-        }else{
-            if(nearUser == null){
-                res.send("No nearby user");
-            }else{
-                res.send(nearUser.nombre + " is near you");
-            }
-        }
-    });
-    
-
+    } else {
+        res.send("No nearby user");
+    }
 });
 
 module.exports = router

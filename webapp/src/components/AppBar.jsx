@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -15,6 +15,7 @@ import NotificationContainer from './notifications/NotificationContainer';
 
 import { nearFriends, getFriends } from '../api/api';
 import { useWebId } from "@solid/react";
+//import { notify } from '../../../restapi/api';
 
 
 toast.configure();
@@ -34,9 +35,10 @@ const useStyles = makeStyles((theme) => ({
 export default function RadarinAppBar() {
   const classes = useStyles();
 
-  const [amigo, setAmigo] = React.useState([])
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [amigo, setAmigo] = useState([])
+  const [anchorEl, setAnchorEl] = useState(null);
   const loggedUserId = useWebId();
+  const [amigosNotificados, setAmigosNotificados] = useState([]);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -52,25 +54,27 @@ export default function RadarinAppBar() {
   useEffect(() => {
     const interval = setInterval(() => {
       nearbyFriends();
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   })
 
   async function nearbyFriends() {
     let friends = []
-    await getFriends(loggedUserId).then((result) => {
+    getFriends(loggedUserId).then((result) => {
       result.forEach((e) => {
         friends.push(e)
-        console.log("Amigo " + e)
+      })
+      friends.forEach(async (f) => {
+        if (!amigosNotificados.includes(f)) {
+          var msg = await nearFriends(f, loggedUserId)
+          if (msg !== "No nearby user") {
+            amigo.push(msg);
+            toast.info(msg);
+            amigosNotificados.push(f);
+          }
+        }
       })
     })
-    console.log("Amigos " + friends)
-    var msg = await nearFriends(friends, loggedUserId)
-    if (msg !== "No nearby user") {
-      amigo.push(msg);
-      toast(msg);
-    }
-    console.log("Mensaje" + msg)
   }
 
   return (
@@ -103,7 +107,7 @@ export default function RadarinAppBar() {
               horizontal: 'center',
             }}
           >
-            <ul>
+            <ul style={{ listStyleType: 'none', display: 'block' }}>
               <NotificationContainer notif={amigo} />
             </ul>
           </Popover>

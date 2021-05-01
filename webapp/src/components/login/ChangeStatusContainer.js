@@ -14,7 +14,7 @@ class ChangeStatusContainer extends React.Component{
 
 
     componentDidMount(){
-      updateStatus(this.webId, this.status)
+     
     }
   
     render(){

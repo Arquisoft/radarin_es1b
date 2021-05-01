@@ -651,6 +651,22 @@ router.post("/meets/assist", async (req, res) => {
 
 })
 
+router.post("/meets/details", async (req, res) => {
+    let id = mongoose.Types.ObjectId(req.body.meetId);
+
+    let meet = await Meet.findOne({
+        "_id" : id
+    });
+
+    if (meet) {
+        res.send(meet);
+    } else {
+        res.send({
+            "error" : "No se ha podido obtener el meet"
+        });
+    }
+});
+
 //busca entre los meets creados por el usuario + los meets creados por sus amigos
 router.post("/meets/find", async (req, res) => {
     let user = req.body.userWebId;

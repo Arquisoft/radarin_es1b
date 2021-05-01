@@ -70,7 +70,7 @@
     "jsdom": "^16.5.3",
     "jsdom-global": "^3.0.2",
     "puppeteer": "^5.5.0",
-    "react-test-renderer": "^15.7.0",
+    "react-test-renderer": "^16.14.0",
     "shx": "^0.3.3"
   }
 }

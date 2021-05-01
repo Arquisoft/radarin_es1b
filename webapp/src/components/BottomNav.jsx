@@ -45,7 +45,7 @@ const BottomNav = (props) => {
         <Router path="/me">
           <Profile webId={props.webId} />
         </Router>
-        <Router path="/#">
+        <Router path="/">
           <Start />
         </Router>
       </Switch>

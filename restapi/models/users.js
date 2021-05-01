@@ -6,7 +6,8 @@ const schema = mongoose.Schema({
     nombre: String,
     admin: String,
     status: String,
-    ban: String
+    ban: String,
+    time : { type : Date, default: Date.now }
 })
 
 

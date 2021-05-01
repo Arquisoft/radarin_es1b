@@ -19,10 +19,10 @@ const Index = () => {
         <LoginContainer {...profile} />  
         <LoggedIn> 
             {webId!==null && profile.fullName!==undefined ?  <AddUsersContainer webId = {webId} fullName={profile.fullName}/> : null}
-            {webId!==null ?  <ChangeStatus webId = {webId} status={"online"}/> : null}
+            {webId!==null ?  <ChangeStatus webId = {webId} status={"online"} hora ={"true"}/> : null}
         </LoggedIn> 
         <LoggedOut>
-            <ChangeStatus webId = {lastWebId} status={"offline"}/> 
+            <ChangeStatus webId = {lastWebId} status={"offline"} hora ={"false"}/> 
         </LoggedOut>
     </span> 
     ;

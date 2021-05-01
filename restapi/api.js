@@ -74,6 +74,41 @@ router.post("/users/status/update", async (req, res) => {
 
 })
 
+//cambia el estado de una persona
+router.post("/users/lastTime/update", async (req, res) => {
+
+    let webId = req.body.webId;
+
+    let date = req.body.time;
+
+    console.log("EL USUARIO AL QUE ACTUALIZAR LA FECHA " + webId)
+    console.log("LA FECHA A ACTUALIZAR " + date)
+
+    let user = await User.findOne({ webId: webId })
+
+    if (user) {
+       var query = { "_id": user._id };
+         user.time = date
+
+         await User.findOneAndUpdate(query, user, function (err, doc) {
+             if (err) {
+                 //console.error("Something wrong when updating data!");
+             } else {
+                 //console.log(doc);
+                
+             }
+         });
+    }
+
+
+     if(user!=null){
+         await user.save();
+         res.send(user);
+     }
+
+
+})
+
 //borra un usuario
 router.post("/users/remove", async (req, res) => {
 

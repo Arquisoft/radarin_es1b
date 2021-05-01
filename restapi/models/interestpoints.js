@@ -1,13 +1,11 @@
-
 const mongoose = require("mongoose")
 
-
 const schema = mongoose.Schema({
-    user: String,
+    creator: String,
+    name: String,
     location: [Number],
-    state: String,
     country: String,
-    fullName: String
+    label: String
 })
 
-module.exports = mongoose.model("Location", schema)
+module.exports = mongoose.model("InterestPoint", schema)

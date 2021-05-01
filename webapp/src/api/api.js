@@ -355,6 +355,19 @@ export async function getMeet(meetId) {
     return await response.json()
 }
 
+// Interest Points ---------------------------------- /
+export async function getInterestPointsForUser(webId) {
+    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/interestpoints/find', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'userWebId': String(webId)
+        })
+      })
+    return await response.json()
+}
+
 
 
 // Menssages ----------------------------------- /msg

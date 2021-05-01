@@ -4,6 +4,7 @@ import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from "./MeetLocationMarkers";
+import InterestPointMarker from "./InterestPointLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
 import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";
@@ -172,6 +173,9 @@ const Map = (props) => {
           </LayersControl.Overlay>
           <LayersControl.Overlay checked name="Mostrar Meets">
             <MeetLocationMarkers webId={props.webId} /> 
+          </LayersControl.Overlay>
+          <LayersControl.Overlay checked name="Mostrar Puntos de Interés">
+            <InterestPointMarker webId={props.webId} />
           </LayersControl.Overlay>
         </LayersControl>
         <TileLayer

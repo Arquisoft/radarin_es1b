@@ -3,6 +3,7 @@ const User = require("./models/users")
 const Location = require("./models/locations")
 const Friend = require("./models/friends")
 const Meet = require("./models/meets")
+const InterestPoint = require("./models/interestpoints")
 const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
@@ -775,5 +776,76 @@ router.post("/meets/details", async (req, res) => {
         });
     }
 });
+
+// Interest Points ---------------------------- /
+// Buscar los puntos de interes de un usuario
+router.post("/interestpoints/find", async (req, res) => {
+    let user = req.body.userWebId;
+    // Check if the user is already in the db
+    let creator = await User.findOne({ webId: user });
+
+    let points = []
+
+    queryForUser = {
+        creator: (user)
+    }
+    InterestPoint.find().and(queryForUser).exec(function (err, pointsUser) {
+        if (err) {
+            console.log("No se ha podido procesar la peticion de los puntos de interes para el usuairo")
+        }
+        else {
+            pointsUser.map(function (point) {
+                points.push(point)
+            })
+
+            var queryForFriends = {
+                $and: [
+                    {
+                        $or: [
+                            { "requester": user },
+                            { "target": user }
+                        ]
+                    },
+                    { "status": "accepted" }
+                ]
+            };
+
+            //Encuentra los amigos
+            Friend.find().and(queryForFriends).exec(function (err, docs) {
+                if (err) {
+                    console.log("Error al encontrar los amigos");
+                } else {
+                    var friends = docs.map(function (elem) {
+                        return (elem.target == user) ? elem.requester : elem.target;
+                    }, this)
+                    //buscar puntos de interes creados por esos amigos:
+
+                    let queryForFirends = {
+                        creator: friends
+                    }
+
+                    InterestPoint.find().and(queryForFirends).exec(function (err, pointsUser) {
+                        if (err) {
+                            console.log("No se han podido procesar los puntos de interes para los amigos")
+                        }
+                        else {
+                            pointsUser.map(function (point) {
+                                points.push(point)
+                            })
+
+                            res.send(points)
+                        }
+                    })
+                }
+            })
+
+
+
+        }
+    })
+
+
+});
+
 
 module.exports = router

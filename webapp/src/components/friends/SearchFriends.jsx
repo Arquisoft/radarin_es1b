@@ -97,7 +97,7 @@ class SearchFriends extends React.Component {
 							onChange={(e)=>this.handleChange(e)}
 						/>
 
-						<Button className="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
+						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
 							Buscar
 						</Button>
 					</label>

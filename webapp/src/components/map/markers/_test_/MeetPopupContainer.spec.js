@@ -25,7 +25,7 @@ describe('MeetContainer', () => {
 
         const result = shallow(<MeetContainer
           webId={literal('https://uo225211.solidcommunity.net/profile/card#me')}
-          meet={meetA} loggedWebId={literal('https://uo225211.solidcommunity.net/profile/card#me')} pending/>);
+          meet={meetA} loggedWebId={literal('https://uo225211.solidcommunity.net/profile/card#me')}/>);
         expect(result.find(Meet)).toBeTruthy();
         
        

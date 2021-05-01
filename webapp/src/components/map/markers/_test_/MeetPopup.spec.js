@@ -1,8 +1,7 @@
 import React from "react";
 import {render, shallow} from 'enzyme';
 import Meet from "../MeetPopup"
-import { getMeetsForUser } from '../../../../api/api';
-
+import Button from '@material-ui/core/Button';
 const literal = value => ({
     toString: () => value
   });
@@ -22,6 +21,7 @@ describe('MeetPOpup', () => {
       meet={meetA}/>
     );
     expect(result).toBeTruthy();
+    expect(result.find(Button)).toBeTruthy();
   });
 });
 

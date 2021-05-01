@@ -190,6 +190,18 @@ export async function getSearcUser(webId){
     return await response.json()
 }
 
+export async function getLastTime(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastTime/get/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webID':webId, 
+        })
+      })
+    return await response.json()
+}
+
 export async function getSearcByName(str){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/search/name', {

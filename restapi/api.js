@@ -109,6 +109,7 @@ router.post("/users/lastTime/update", async (req, res) => {
 
 })
 
+
 //borra un usuario
 router.post("/users/remove", async (req, res) => {
 
@@ -357,6 +358,30 @@ router.post("/users/search/", async (req, res) => {
             var webIds = docs.map((doc) => { return doc.webId })
 
             res.send(webIds);
+        }
+    })
+});
+
+
+//buscar a una persona 
+router.post("/users/lastTime/get/", async (req, res) => {
+
+    const userWebId = req.body.webID
+
+    console.log("me  llega este webId bontos " +  userWebId)
+
+    var query = {
+
+        "webId": userWebId
+    };
+    
+    await User.find(query, function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            var date = docs.map((doc) => { return doc.time })
+
+            res.send(date);
         }
     })
 });

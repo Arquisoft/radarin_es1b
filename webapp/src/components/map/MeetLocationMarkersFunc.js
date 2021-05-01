@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { getMeetsForUser } from '../../api/api';
+import { getMeetsForUser, deleteMeets } from '../../api/api';
 
 
 import MeetLocationMarkers from "./MeetLocationMarkers"
@@ -47,10 +47,22 @@ function MeetLocationMarkersFunc(props) {
 
       if (meets.length !== result.length) {
         setMeets([])
+        let meetsToDelete = []
+        let fechaActual = Date.now()
         console.log("Update MeetsFunc")
         result.forEach((e) => {
-          setMeets(meets => [...meets, e]);
+          let meetDate = new Date(e.date)
+          let diffTime = Math.abs(meetDate - fechaActual);
+          let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          
+          if(diffDays > 1){
+            meetsToDelete.push(e._id)
+          }else{
+            setMeets(meets => [...meets, e]);
+          }
         })
+        if(meetsToDelete.length > 0)
+          deleteMeets(meetsToDelete)
       }
       })
   }

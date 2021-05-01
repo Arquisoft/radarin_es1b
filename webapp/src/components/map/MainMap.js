@@ -185,7 +185,6 @@ useInitialice()
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/*seeFriends?<FriendsLocationMarkers webId={props.webId}/>:console.log("Amigos " + seeFriends)*/}
 
       </MapContainer>
     </div>

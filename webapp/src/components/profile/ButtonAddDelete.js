@@ -94,6 +94,7 @@ class ButtonAddDelete extends React.Component {
                 this.forceUpdate();
                 //this.toUpdate=true;
             }
+            
         )
 
     }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Switch, Link } from "react-router-dom";
+import {  Switch, Link } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -32,24 +33,24 @@ const BottomNav = (props) => {
   return (
     <div>
       <Switch>
-        <Route path="/map">
-          <MapView webId={props.webId}/>
-        </Route>
-        <Route path="/profile*">
-         
-        </Route>
-        <Route path="/friends">
-          <Friends webId={props.webId}/>
-        </Route>
-        <Route path="/me">
+        <Router path="/map">
+          <MapView webId={props.webId} />
+        </Router>
+        <Router path="/profile*">
+
+        </Router>
+        <Router path="/friends">
+          <Friends webId={props.webId} />
+        </Router>
+        <Router path="/me">
           <Profile webId={props.webId} />
-        </Route>
-        <Route path="/">
-          <Start/>
-        </Route>
+        </Router>
+        <Router path="/">
+          <Start />
+        </Router>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>
-        <BottomNavigationAction component={Link} to="/" label="Inicio" value="" icon={<Home/>}/>
+        <BottomNavigationAction component={Link} to="/" label="Inicio" value="" icon={<Home />} />
         <BottomNavigationAction component={Link} to="/map" label="Mapa" value="map" icon={<MapIcon />} />
         <BottomNavigationAction component={Link} to="/friends" label="Amigos" value="friends" icon={<EmojiPeopleIcon />} />
         <BottomNavigationAction component={Link} to="/me" label="Perfil" value="profile" icon={<AccountCircleIcon />} />

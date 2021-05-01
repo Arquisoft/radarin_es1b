@@ -7,6 +7,7 @@ const InterestPoint = require("./models/interestpoints")
 const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
+const async = require("async");
 
 
 // Devuelve la lista de usuarios
@@ -47,7 +48,7 @@ router.post("/users/status/update", async (req, res) => {
 
     let webId = req.body.webId;
 
-    //console.log("El usuario para cambiar estado es " + webId)
+    console.log("EL USUARIO PARA CAMBIAR ESTADO ES " + webId)
 
     let status = req.body.status;
 
@@ -62,13 +63,17 @@ router.post("/users/status/update", async (req, res) => {
                 //console.error("Something wrong when updating data!");
             } else {
                 //console.log(doc);
+                
             }
         });
     }
 
 
-    await user2.save();
-    res.send(user2);
+    if(user2!=null){
+        await user2.save();
+        res.send(user2);
+    }
+
 
 })
 
@@ -102,14 +107,6 @@ router.post("/users/ban", async (req, res) => {
     if (user2) {
         var query = { "_id": user2._id };
         user2.ban = baneable
-
-        await User.findOneAndUpdate(query, user2, function (err, doc) {
-            if (err) {
-                //console.error("Something wrong when updating data!");
-            } else {
-                //console.log(doc);
-            }
-        });
     }
 
     await user2.save();
@@ -183,6 +180,7 @@ router.post("/location/add", async (req, res) => {
 
 
         await newEntry.save();
+
         res.send(newEntry);
     }
 });
@@ -844,8 +842,24 @@ router.post("/interestpoints/find", async (req, res) => {
         }
     })
 
+<<<<<<< HEAD
 
 });
 
+=======
+router.post("/users/findNearest", async (req, res) => {
+    let friendId = req.body.friend;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        if (friend.status != 'online') {
+            res.send("No nearby user");
+        } else {
+            res.send(friend.nombre + " está cerca de ti!");
+        }
+    } else {
+        res.send("No nearby user");
+    }
+});
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
 
 module.exports = router

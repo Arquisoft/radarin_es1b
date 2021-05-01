@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useContext } from 'react'
 import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
+=======
+import React, { useEffect, useState } from 'react'
+import {  MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
+import L, { easyButton } from 'leaflet';
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from "./MeetLocationMarkers";
 import InterestPointMarker from "./InterestPointLocationMarkers";
@@ -13,6 +19,7 @@ import useProfile from "../profile/useProfile";
 
 
 const Map = (props) => {
+<<<<<<< HEAD
   const [map, setMap] = useState(null);
   const { position, setPosition } = useContext(LocationsContext);
   const { seeFriends } = useContext(LocationsContext);
@@ -38,6 +45,49 @@ const Map = (props) => {
           meetButtonAction = false;
           alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
           saveMeet(e.latlng)
+=======
+    const [map, setMap] = useState(null);
+    const [position, setPosition] = useState();
+
+    const [locateButtonAction, setLocateButtonAction]=useState(false);
+    const profile = useProfile(props.webId)
+
+
+
+    let meetLocations=[]
+
+    let meetButtonAction=false;
+
+    let propsAux=props;
+    useEffect(() => {
+        if (map) {
+            map.locate({
+                setView: false,
+                watch:true
+            })
+            map.on('locationfound',handleOnLocationFound)
+            map.on('click', function(e) {
+                if(meetButtonAction){
+                    alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+                    saveMeet(e.latlng)
+                    meetButtonAction = false;
+                }                
+            });
+            
+            easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function(btn, map) {
+              if(meetButtonAction){
+                meetButtonAction=false;
+              }else{
+                meetButtonAction=true;
+              }
+            }, "Crear una nueva reunión").addTo(map);
+            easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function(btn, map) {
+                map.locate({
+                    setView: true
+                })
+                setLocateButtonAction(!locateButtonAction)
+            }, "Volver a mi ubicación").addTo(map);
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
         }
       });
 
@@ -110,6 +160,7 @@ const Map = (props) => {
         console.log("No se ha podido guardar la localización")
         console.error(error);
       }
+<<<<<<< HEAD
     );
   }
 
@@ -132,6 +183,37 @@ const Map = (props) => {
           }
         }
         if (profile.fullName !== undefined) {
+=======
+
+      function saveLocation(latlng) {
+        Geocode.fromLatLng(latlng.lat, latlng.lng).then(
+            (response) => {
+              let state, country;
+              for (let i = 0; i < response.results[0].address_components.length; i++) {
+                for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+                  switch (response.results[0].address_components[i].types[j]) {
+                    case "administrative_area_level_1":
+                      state = response.results[0].address_components[i].long_name;
+                      break;
+                    case "country":
+                      country = response.results[0].address_components[i].long_name;
+                      break;
+                    default:
+                        break;
+                  }
+                }
+              }
+              if (profile.fullName!==undefined) {
+
+                addLocation(
+                    props.webId, [latlng.lat, latlng.lng],
+                    state, country, profile.fullName);
+                  
+              }
+            },
+        );
+    }
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
 
           addLocation(
             props.webId, [latlng.lat, latlng.lng],

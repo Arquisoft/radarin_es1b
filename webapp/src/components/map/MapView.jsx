@@ -1,9 +1,11 @@
+<<<<<<< HEAD
 import React, { useContext } from 'react'
 
+=======
+import React from 'react'
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
 import Geocode from "react-geocode";
-import {iconMeet} from "./markers/IconMeet"
 import MainMap from "./MainMap"
-import useProfile from "../profile/useProfile";
 
 Geocode.setApiKey("AIzaSyC6fKABMEcc3viILCEmzr9Uy7pToGhbVv0");
 Geocode.setLanguage("en");
@@ -12,9 +14,13 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Map = (props) => {
+<<<<<<< HEAD
 
     return (
         
+=======
+    return (        
+>>>>>>> 9bbaef16b8353f8114ae1491b06bcd839c4d6452
         <div style={{ marginBottom: 10, position: 'relative' }}>
             {console.log("Rerenderizando")}
             <div>

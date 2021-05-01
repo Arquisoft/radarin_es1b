@@ -1,8 +1,8 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-
+import {shallow, render} from 'enzyme';
 import ProfileContainer from '../Container';
 import Profile from '../Profile';
+import useProfile from "../useProfile";
 
 const literal = value => ({
   toString: () => value
@@ -12,31 +12,35 @@ describe('Profile container', () => {
 
   it('should not render profile while pending', () => {
     const result = shallow(<ProfileContainer pending/>);
-    expect(result.find(Profile)).not.toExist()
+    expect(result.find(Profile)).toEqual({});
   });
 
   it('should render the loaded profile', () => {
-    const result = shallow(<ProfileContainer
-        webId="https://webid.example/#me"
-        fullName={literal("John Doe")}
-        imageSrc={literal("https://image.example/me.png")}
-    />);
-    expect(result).toContainReact(<Profile
-        webId="https://webid.example/#me"
+    const result = render(<ProfileContainer
+        webId="https://uo225211.solidcommunity.net/"
         fullName="John Doe"
-        imageSrc="https://image.example/me.png"
+        imageSrc="https://image.example/me.png"        
+        loggedUser="https://uo225211.solidcommunity.net/"
     />);
+    const profiel=result.find(<Profile
+      webId="https://uo225211.solidcommunity.net/"
+      fullName="John Doe"
+      imageSrc="https://image.example/me.png"        
+      loggedUser="https://webid.example/#me"
+  />)
+    expect(profiel).toBeTruthy();
   });
 
   it('should render the loaded profile without data', () => {
     const result = shallow(<ProfileContainer
         webId="https://webid.example/#me"
     />);
-    expect(result).toContainReact(<Profile
-        webId="https://webid.example/#me"
-        fullName={undefined}
-        imageSrc={undefined}
-    />);
+    const profiel=result.find(<Profile
+      webId="https://webid.example/#me"
+      fullName={undefined}
+      imageSrc={undefined}
+  />);
+    expect(profiel).toBeTruthy();
   });
 
   it('should not update when pending', () => {
@@ -50,25 +54,13 @@ describe('Profile container', () => {
       fullName:  undefined,
       imageSrc: undefined
     });
-    expect(result).toContainReact(<Profile
-        webId="https://webid.example/#me"
-        fullName="John Doe"
-        imageSrc="https://image.example/me.png"
-    />);
+    const profiel=result.find(<Profile
+      webId="https://webid.example/#me"
+      fullName="John Doe"
+      imageSrc="https://image.example/me.png"
+  />);
+    expect(profiel).toBeTruthy();
   });
 
-  it('should update when not pending anymore', () => {
-    const result = shallow(<ProfileContainer pending />);
-    result.setProps({
-      pending: false,
-      webId: "https://webid.example/#me",
-      fullName:  literal("John Doe"),
-      imageSrc: literal("https://image.example/me.png")
-    });
-    expect(result).toContainReact(<Profile
-        webId="https://webid.example/#me"
-        fullName="John Doe"
-        imageSrc="https://image.example/me.png"
-    />);
-  });
+  
 });

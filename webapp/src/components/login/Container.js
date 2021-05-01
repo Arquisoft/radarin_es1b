@@ -12,39 +12,39 @@ const popupUri = 'https://solidcommunity.net/common/popup.html';
 
 
 
-function Cerrar(web) {
+// function Cerrar(web) {
 
-    let webId = web;
+//     let webId = web;
 
-    window.onunload = window.onbeforeunload = function(web) {
-		ejecutar(webId);
-        return null;
-	}
+//     window.onunload = window.onbeforeunload = function(web) {
+// 		ejecutar(webId);
+//         return null;
+// 	}
 
-    //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
+//     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
 
-      function ejecutar(web) {
+//       function ejecutar(web) {
 
-        let webId = web
+//         let webId = web
 
-        if(webId!==null && webId !==undefined){
+//         if(webId!==null && webId !==undefined){
             
-            updateStatus(webId, "offline")
-        }
-        //addUser(webId, "paquirrin")
+//             updateStatus(webId, "offline")
+//         }
+//         //addUser(webId, "paquirrin")
 
-      } 
+//       } 
 
-   return ""
+//    return ""
     
-}
+// }
 
 
 // see https://material-ui.com/guides/composition/#caveat-with-refs
 
 //AuthButtonComponent usa React.forwardRef para obtener la ref que le pasaron, y luego reenviarla al span que renderiza:
 export const AuthButtonComponent = React.forwardRef((props, ref) => 
-<span  ref={ref}><AuthButton {...props} />
+<span  ref={ref}><AuthButton login="Iniciar sesión" logout="Salir" {...props} />
     <div 
         style={{display: 'none'}}>{props.children}
     </div>
@@ -58,7 +58,7 @@ const Container = ({fullName, imageSrc, webId}) => {
           
             <LoginBadge webId={webId} fullName={fullName ? fullName.toString().split(" ")[0] : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
           
-            {Cerrar(webId)}
+            {/* {Cerrar(webId)} */}
 
     
           

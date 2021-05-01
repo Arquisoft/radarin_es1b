@@ -17,7 +17,7 @@ import {
 
 export default function MeetCreationDialog() {
   const [open, setOpen] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [selectedDate, setSelectedDate] = React.useState(Date.now());
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +33,9 @@ export default function MeetCreationDialog() {
 
   return (
     <div>
+      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Open form dialog
+      </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Crear un nuevo Meet</DialogTitle>
         <DialogContent>
@@ -43,18 +46,19 @@ export default function MeetCreationDialog() {
             autoFocus
             margin="dense"
             id="name"
-            label="Email Address"
-            type="email"
+            label="Nombre"
+            type="text"
             fullWidth
             required
           />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
                     <KeyboardDatePicker
+                    required
                     margin="normal"
                     id="date-picker-dialog"
-                    label="Date picker dialog"
-                    format="MM/dd/yyyy"
+                    label="Fecha"
+                    format="dd/MM/yyyy"
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
@@ -62,9 +66,11 @@ export default function MeetCreationDialog() {
                     }}
                     />
                     <KeyboardTimePicker
+                    required
+                    ampm={false}
                     margin="normal"
                     id="time-picker"
-                    label="Time picker"
+                    label="Hora"
                     value={selectedDate}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{

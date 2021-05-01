@@ -83,7 +83,7 @@ export default class FriendList extends Component {
         </InfiniteScroll>
         {/* Si tiene mas amigos indica un mensaje si no , el otro */}
         <Typography variant="caption" style={{ margin: 10 }}>
-          {this.state.items.length} / {this.props.friends.length} shown. {this.state.hasMore ? 'Desplazate para abajo para cargar mas amigos.' : "Estos son todos tus amigos."}
+         {"Estos son todos tus amigos: "} {this.friendList.length} / {this.friendList.length} {"Cargados"}
         </Typography>
       </List>
     );

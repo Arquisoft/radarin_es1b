@@ -141,7 +141,7 @@ class MeetPopup extends React.Component {
                             <Button color="primary" variant="contained" onClick={() => { this.checkInMeet() }}>  {this.state.toShow} </Button>
                         </div>
                         <div style={{ padding: '0.25em' }}>
-                            <Button color="primary" variant="contained" onClick={()=>{this.showAttendantsList() }}>Lista de Usuarios</Button>
+                            <Button color="primary" variant="contained" onClick={()=>{this.showAttendantsList() }}>Asistentes</Button>
                         </div>
                     </div>
                 </div>

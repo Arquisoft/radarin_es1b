@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import List from "@material-ui/core/List";
 import ChatList from './ChatsList';
-import ChatFriend from "./ChatFriend";
+import ChatFriend from "./chatFriend";
 
 describe('Chat list', function () {
   it('shows an empty list', () => {

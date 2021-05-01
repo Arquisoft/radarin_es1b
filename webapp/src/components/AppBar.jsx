@@ -71,8 +71,8 @@ export default function RadarinAppBar() {
         if (!amigosNotificados.includes(f)) {
           var msg = await nearFriends(f, loggedUserId)
           if (msg !== "No nearby user") {
-            amigo.push(msg);
-            toast.info(msg);
+            amigo.push(msg + " está cerca de ti!");
+            toast.info(msg + " está cerca de ti!");
             amigosNotificados.push(f);
             setNotIcon("notified.png")
           }
@@ -90,8 +90,8 @@ export default function RadarinAppBar() {
       friends.forEach(async (f) => {
         var msg = await notifyPetition(f, loggedUserId)
         if (msg !== "No hay nuevas solicitudes") {
-          amigo.push(msg);
-          toast.info(msg);
+          amigo.push(msg + " te ha enviado una solicitud de amistad!");
+          toast.info(msg + " te ha enviado una solicitud de amistad!");
           setNotIcon("notified.png")
         }
       })
@@ -106,7 +106,7 @@ export default function RadarinAppBar() {
             {/* Typography da formato al texto*/}
             <Typography align="left" className={classes.title} variant="h5" color="inherit" noWrap> Radarin </Typography>
           </div>
-          <Button className="notification-button" onClick={handleClick}><img
+          <Button className="notification-button" onClick={handleClick} color="primary" variant="contained"><img
             src={notIcon}
             width="25"
             height="25"

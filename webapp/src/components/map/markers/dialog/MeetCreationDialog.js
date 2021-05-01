@@ -15,7 +15,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-export default function FormDialog() {
+export default function MeetCreationDialog() {
   const [open, setOpen] = React.useState(false);
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 

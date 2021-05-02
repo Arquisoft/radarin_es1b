@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import  AppBar from './AppBAr';
+import  AppBar from './AppBar';
 import InfiniteScroll from "react-infinite-scroll-component";
 import Toolbar from '@material-ui/core/Toolbar';
 import ReactDOM from 'react-dom';

@@ -18,7 +18,7 @@ function UserBan({ webId, fullName, imageSrc}) {
 
 
   return (
-    <div>
+    <div >
       <ListItem className={styles.friend} button>
     <ListItemIcon>
       <Image className={styles.avatar} fullName={fullName} src={imageSrc}/>

@@ -2,8 +2,8 @@ import React from 'react';
 import {render, shallow} from 'enzyme';
 import Friend from "../markers/FriendPopupManager"
 import Map from '../MainMap';
-import FriendsLocationMarkers from '../FriendsLocationMarkers';
-import MeetLocationMarkers from"../MeetLocationMarkers";
+import FriendsLocationMarkersFunc from '../FriendsLocationMarkersFunc';
+import MeetLocationMarkersFunc from"../MeetLocationMarkersFunc";
 const literal = value => ({
   toString: () => value
 });
@@ -24,13 +24,13 @@ it('Searchfriens', () => {
 });
 
 it('PendingFriends', () => {
-  const meet=result.find(MeetLocationMarkers);
+  const meet=result.find(MeetLocationMarkersFunc);
   expect(meet).toBeTruthy();
   
 });
 
 it('NewRequest', () => {
-  const loc=result.find(FriendsLocationMarkers);
+  const loc=result.find(FriendsLocationMarkersFunc);
   expect(loc).toBeTruthy();
 });
 });

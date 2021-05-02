@@ -41,7 +41,6 @@ class DeleteUsers extends React.Component {
 		}
 	}
 
-
 	componentDidMount(){
 		this.fetchData()
 	}

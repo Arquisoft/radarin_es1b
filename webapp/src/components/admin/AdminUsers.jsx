@@ -48,7 +48,6 @@ class AdminUsers extends React.Component {
 		})
 	  }
 
-
 	componentDidUpdate(){
 		var aucx=true;
 		if(aucx){
@@ -56,6 +55,8 @@ class AdminUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
+
+
 
 	  render() {
 		return (

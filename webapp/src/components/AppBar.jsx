@@ -5,18 +5,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from './login';
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popover from '@material-ui/core/Popover';
 import Button from "react-bootstrap/Button";
 import NotificationContainer from './notifications/NotificationContainer';
-
-
 import { notifyPetition, getPendingFriends, nearFriends, getFriends } from '../api/api';
-import { useWebId } from "@solid/react";
-import useProfile from './profile/useProfile';
-//import { notify } from '../../../restapi/api';
+import { useWebId, LoggedIn } from "@solid/react";
 
 
 toast.configure();
@@ -138,14 +133,16 @@ export default function RadarinAppBar() {
             {/* Typography da formato al texto*/}
             <Typography align="left" className={classes.title} variant="h5" color="inherit" noWrap> Radarin </Typography>
           </div>
-          <Button className="notification-button" onClick={handleClick} color="primary" variant="contained"><img
-            src={notIcon}
-            width="25"
-            height="25"
-            className="d-inline-block align-top"
-            alt="notificacion"
-          />
-          </Button>
+          <LoggedIn>
+            <Button className="notification-button" onClick={handleClick} color="primary" variant="contained"><img
+              src={notIcon}
+              width="25"
+              height="25"
+              className="d-inline-block align-top"
+              alt="notificacion"
+            />
+            </Button>
+          </LoggedIn>
           <Popover
             id={id}
             open={open}

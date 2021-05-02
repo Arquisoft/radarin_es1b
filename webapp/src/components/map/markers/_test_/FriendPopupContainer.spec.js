@@ -2,7 +2,7 @@ import React from "react";
 import { shallow} from 'enzyme';
 import FriendPopupContainer from '../FriendPopupContainer';
 import LoadingFriend from "../LoadingPopup";
-import Friend from "../MeetPopup"
+import Friend from "../FriendPopup"
   
 const profile =
 {

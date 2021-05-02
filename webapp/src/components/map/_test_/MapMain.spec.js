@@ -18,19 +18,27 @@ describe('Friend tabs container', function () {
    
   const result = shallow(<Map  webId={literal('https://uo225211.solidcommunity.net/profile/card#me')}/>);
 
-it('Searchfriens', () => {
+it('Friend', () => {
     const friend=result.find(Friend);
   expect(friend).toBeTruthy();
 });
 
-it('PendingFriends', () => {
+it('MeetLocationMarkersFunc', () => {
   const meet=result.find(MeetLocationMarkersFunc);
   expect(meet).toBeTruthy();
   
 });
 
-it('NewRequest', () => {
+it('FriendsLocationMarkersFunc', () => {
   const loc=result.find(FriendsLocationMarkersFunc);
   expect(loc).toBeTruthy();
 });
+
+it('FriendsLocationMarkersFunc', () => {
+  const loc=result.find(FriendsLocationMarkersFunc);
+  expect(loc).toBeTruthy();
+});
+
+
+
 });

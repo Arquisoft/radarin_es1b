@@ -72,7 +72,7 @@ export default function RadarinAppBar() {
     const interval = setInterval(() => {
       nearbyFriends();
       notifyFriendPetition();
-    }, 5000);
+    }, 60000);
     return () => clearInterval(interval);
   })
 
@@ -80,7 +80,7 @@ export default function RadarinAppBar() {
     const interval = setInterval(() => {
       setAmigosNotificados([]);
       setAmigosPendientesNotificados([]);
-    }, 600000);
+    }, 900000);
     return () => clearInterval(interval);
   })
 

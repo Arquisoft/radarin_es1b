@@ -79,7 +79,7 @@ defineFeature(feature, test => {
 
     then('An error message should be shown in the screen', async () => {
     });
-    await expect(page.url()).toBe("https://radarines1bwebapp.herokuapp.com/");
+    expect(await page.url()).toBe("https://radarines1bwebapp.herokuapp.com/");
   });
 });
 

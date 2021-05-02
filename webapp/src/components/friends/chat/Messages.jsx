@@ -116,10 +116,10 @@ function Messages(props) {
                 </InfiniteScroll>
 
             </List>
-            <Divider />
-            <Grid container style={{padding: '20px'}}>
+            {/* <Divider /> */}
+            <Grid container spacing="5" style={{padding: '20px', position: 'absolute', bottom: 0 }}>
                 <Grid item xs={11}>
-                    <TextField 
+                    <TextField
                         id="outlined-basic-email" 
                         placeholder="Escribe el mensaje"
                         inputRef={msg} fullWidth />

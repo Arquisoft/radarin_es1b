@@ -27,7 +27,7 @@ defineFeature(feature, test => {
     then('A welcome message should be shown in the screen', async () => {
       const pages = (await browser.pages());
       await expect(pages.length).toBe(3);
-      await expect(await solidPage.url()).toBe("https://solidcommunity.net/register");
+      await expect(await podSolidPage.url()).toBe("https://solidcommunity.net/register");
       await expect(await pages[2].url()).toBe("https://solidcommunity.net/register");
       await pages[2].close();
     });
@@ -53,7 +53,7 @@ defineFeature(feature, test => {
     then('A welcome message should be shown in the screen', async () => {
       const pages = (await browser.pages());
       await expect(pages.length).toBe(3);
-      await expect(await solidPage.url()).toBe("https://solid.mit.edu/");
+      await expect(await podSolidPage.url()).toBe("https://solid.mit.edu/");
       await expect(await pages[2].url()).toBe("https://solid.mit.edu/");
       await pages[2].close();
     });
@@ -61,7 +61,6 @@ defineFeature(feature, test => {
   
 
   test('The user is already registered in the site', ({ given, when, then }) => {
-    await global.page.goto('https://radarines1bwebapp.herokuapp.com/')
     given('An already registered user', () => {
       placeholder="https://uo225211.solidcommunity.net/"
     });

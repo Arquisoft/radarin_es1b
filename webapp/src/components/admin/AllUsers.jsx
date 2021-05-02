@@ -18,19 +18,6 @@ class AllUsers extends React.Component {
 		};
 	}
 	
-	static defaultProps = {
-		friends: [], // Lista de todas los amigos que se mostrarán.
-		height: 300,
-		showInitially: 10, // Número de amigos para mostrar inicialmente
-		fetchCount: 5 // número de amigos para buscar a la vez, al desplazarse por la lista
-	  };
-	
-	  state = {
-		items: this.props.friends.slice(0, this.props.showInitially), //crea un array de amigos de 0 a el valor de showInitially
-		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
-	  };
-
-
 	  async fetchData() {
 		var promise = getSearcByName(this.state.searchName)
 		this.querySuccess=false;

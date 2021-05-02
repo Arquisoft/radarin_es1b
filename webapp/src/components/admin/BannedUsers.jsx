@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from '@material-ui/core';
 import { getSearcByBan, getSearcByStatus, getUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
@@ -15,18 +14,6 @@ class BannedUsers extends React.Component {
 		this.querySuccess=false;
 	}
 	
-	static defaultProps = {
-		friends: [], // Lista de todas los amigos que se mostrarán.
-		height: 300,
-		showInitially: 10, // Número de amigos para mostrar inicialmente
-		fetchCount: 5 // número de amigos para buscar a la vez, al desplazarse por la lista
-	  };
-	
-	  state = {
-		items: this.props.friends.slice(0, this.props.showInitially), //crea un array de amigos de 0 a el valor de showInitially
-		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
-	  };
-
 	  componentDidMount(){
 		this.fetchData()
 	  }
@@ -46,15 +33,10 @@ class BannedUsers extends React.Component {
 		  this.querySuccess=true;
 		  this.forceUpdate()
 		  this.render()
-		
-		  
-		  
+
 		})
 	  }
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
 
 	componentDidUpdate(){
 		var aucx=true;
@@ -63,19 +45,6 @@ class BannedUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
-
-	
-
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-    }
 
 	buscarAmigos() {
 		return (
@@ -103,15 +72,13 @@ class BannedUsers extends React.Component {
 			  height={this.props.height}>
 			  
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
-					<User key={webId} webId={webId} logged={this.logged}/>:null
+				    
+					<User key={webId} webId={webId} logged={this.logged}/>
 	
 			  ))}
 
 				{this.resultQuery.length<1 ? this.buscarAmigos() : ""}
 				
-			
-	
 			</InfiniteScroll>
 			{/* Si tiene mas amigos indica un mensaje si no , el otro */}
 			

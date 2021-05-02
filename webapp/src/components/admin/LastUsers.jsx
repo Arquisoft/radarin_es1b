@@ -14,18 +14,6 @@ class LastUsers extends React.Component {
 		this.querySuccess=false;
 	}
 	
-	static defaultProps = {
-		friends: [], // Lista de todas los amigos que se mostrarán.
-		height: 300,
-		showInitially: 10, // Número de amigos para mostrar inicialmente
-		fetchCount: 5 // número de amigos para buscar a la vez, al desplazarse por la lista
-	  };
-	
-	  state = {
-		items: this.props.friends.slice(0, this.props.showInitially), //crea un array de amigos de 0 a el valor de showInitially
-		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
-	  };
-
 	  componentDidMount(){
 		this.fetchData()
 	  }
@@ -40,29 +28,15 @@ class LastUsers extends React.Component {
 		  result.forEach((e) => {
 			this.resultQuery.push(e)
 		  })
-		  if(result.length===0){
-			  var promise2= getUsers()
-			  promise2.then((result2)=>{
-				result2.forEach((user)=>{
-					this.resultQuery.push(user.webId)
-				})
-				this.forceUpdate()
-		  		this.render()
-			  })
-		  }
-		  else{
-			  this.querySuccess=true;
-		  this.forceUpdate()
-		  this.render()
-		  }
 		  
-		  
+		this.querySuccess=true;
+		this.forceUpdate()
+		this.render()
+
 		})
 	  }
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
+
 
 	componentDidUpdate(){
 		var aucx=true;
@@ -71,19 +45,6 @@ class LastUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
-
-	
-
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-    }
 
 
 	buscarAmigos() {
@@ -109,8 +70,8 @@ class LastUsers extends React.Component {
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
 			  {this.resultQuery.map((webId) => (
-				     webId!==null?
-					<User key={webId} webId={webId} logged={this.logged}/>:null
+				    
+					<User key={webId} webId={webId} logged={this.logged}/>
 			  ))}
 	
 			</InfiniteScroll>

@@ -64,3 +64,28 @@ describe('AppBar ', function () {
   });
 
 });
+
+describe('AppBar ', function () {
+  let container;
+  var index=0;
+  var msg={
+    time:  new Date()
+  };
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+  
+  afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
+  });
+  
+  it('can render and update a counter', () => {
+    // Prueba la primer renderización y componentDidMount
+    act(() => {    ReactDOM.render(<AppBar/>, container)});
+
+    expect(container).toBeTruthy();
+  });
+
+});

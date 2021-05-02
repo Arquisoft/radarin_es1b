@@ -5,7 +5,9 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import Messages from'./Messages';
 
 import SingleMsg from'./SingleMsg';
-import { ExpansionPanelActions } from '@material-ui/core';
+
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 describe('Chat', () => {
         let result;
@@ -26,4 +28,26 @@ describe('Chat', () => {
         const scrooll = result.find(InfiniteScroll);
         expect(scrooll).toBeTruthy();
       });
+    });
+
+    describe('Messages ', function () {
+      let container;
+    
+      beforeEach(() => {
+        container = document.createElement('div');
+        document.body.appendChild(container);
+      });
+      
+      afterEach(() => {
+        document.body.removeChild(container);
+        container = null;
+      });
+      
+      it('can render and update a counter', () => {
+        // Prueba la primer renderización y componentDidMount
+        act(() => {    ReactDOM.render(<Messages webId="https://webid.example/#me"/>, container)});
+    
+        expect(container).toBeTruthy();
+      });
+    
     });

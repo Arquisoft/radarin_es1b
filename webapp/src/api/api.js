@@ -181,18 +181,6 @@ export async function getTargetFriends(logged) {
     return await response.json()
 }
 
-export async function getSearcUser(webId) {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/search/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            'webID': webId,
-        })
-    })
-    return await response.json()
-}
-
 export async function getLastTime(){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/lastTime/get/', {
@@ -216,19 +204,6 @@ export async function getLastOnlineUsers(){
     let response = await fetch(apiEndPoint+'/users/lastOnlineUsers', {
         method: 'POST',
         headers: {'Content-Type':'application/json'},
-      })
-    return await response.json()
-}
-
-
-export async function getLastTimeUser(webId){
-    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint+'/users/lastTime/get/user/', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            'webId':webId
-        })
       })
     return await response.json()
 }

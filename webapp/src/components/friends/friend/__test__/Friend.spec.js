@@ -35,6 +35,7 @@ describe('Friend in friend list', function () {
                                    webId="https://webid.example/#me"
                                    loggedUser="https://webid.example/#logger"/>);
     const button=result.find(Button)
+    button.simulate('click')
     expect(button).toBeTruthy();
   });
   

@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react';
 import MeetLocationMarkers from '../MeetLocationMarkers';
 import { getMeetsForUser, deleteMeets } from '../../../api/api';
 import { MapContainer } from 'react-leaflet';
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 const literal = value => ({
     toString: () => value
   });
@@ -37,4 +39,26 @@ const meets=[];
     var result=render(<MapContainer><MeetLocationMarkers webId={literal('https://uo225211.solidcommunity.net/profile/card#me')} meets={meets}/></MapContainer>);
     expect(result).toBeTruthy();
      
+  });
+
+  describe('MeetLocationMarkers ', function () {
+    let container;
+  
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
+    });
+    
+    afterEach(() => {
+      document.body.removeChild(container);
+      container = null;
+    });
+    
+    it('can render and update a counter', () => {
+      // Prueba la primer renderización y componentDidMount
+      act(() => {    ReactDOM.render(<MapContainer><MeetLocationMarkers webId={literal('https://uo225211.solidcommunity.net/profile/card#me')} meets={meets}/></MapContainer>, container)});
+  
+      expect(container).toBeTruthy();
+    });
+  
   });

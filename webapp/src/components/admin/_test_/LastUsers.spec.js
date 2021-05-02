@@ -1,6 +1,6 @@
 import React from 'react';
 import {shallow, mount} from 'enzyme';
-import LastUsers from '../InactiveUsers';
+import LastUsers from '../LastUsers';
 import User from "../inactiveUser";
 import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';

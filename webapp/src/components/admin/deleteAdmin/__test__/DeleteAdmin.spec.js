@@ -29,4 +29,13 @@ describe('Friend in friend list', function () {
     expect(image).toBeTruthy();
   });
 
+  it('renders the profile image of the friend', () => {
+    const result = shallow(<Friend fullName="John Doe"
+                                   imageSrc="https://image.example/me.png"
+                                   webId="https://asw2021es1b.solidcommunity.net/profile/card#me"/>);
+    const image = result.find(Image);
+    expect(image).toBeTruthy();
+  });
+
+
 });

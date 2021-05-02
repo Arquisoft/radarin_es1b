@@ -342,6 +342,29 @@ export async function getMeetsForUser(webId,) {
 }
 
 
+export async function getMeet(meetId) {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/details', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'meetId': String(meetId)
+        })
+      })
+    return await response.json()
+}
+
+export async function deleteMeets(meetsIds) {
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/delete', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'meetsIds': meetsIds
+        })
+      })
+    return await response.json()
+}
 
 
 

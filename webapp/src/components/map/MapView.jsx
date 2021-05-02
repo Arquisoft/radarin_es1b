@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
 import Geocode from "react-geocode";
 import MainMap from "./MainMap"
 
@@ -9,7 +10,9 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Map = (props) => {
-    return (        
+
+    return (
+        
         <div style={{ marginBottom: 10, position: 'relative' }}>
             {console.log("Rerenderizando")}
             <div>

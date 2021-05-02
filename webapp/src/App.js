@@ -9,6 +9,7 @@ import Profile from './components/profile';
 import NavBar from './components/NavBar';
 import { LoggedIn } from '@solid/react';
 import {getSearcByAdmin, getSearcByBan} from './api/api'
+import MeetCreationDialog from './components/map/markers/dialog/MeetCreationDialog';
 
 require("leaflet-easybutton");
 
@@ -92,6 +93,8 @@ class App extends React.Component {
           <NavBar adminUser= {this.resultQuery} banUser = {this.resultBan}/>
            
         </Router>
+
+        {/*<MeetCreationDialog/>*/}
       </div>
 
     )

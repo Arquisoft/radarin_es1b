@@ -6,45 +6,34 @@ import { iconPerson } from "./markers/IconPerson"
 import Friend from "./markers/FriendPopupManager"
 
 export default class FriendsLocationMarkers extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             webId: props.webId,
-            locs: [],
+            locs: this.props.locs,
             updated: false
         }
     }
 
-    componentDidMount() {
-        var promise = getFriendsLocations(this.state.webId)
-
-        promise.then((result) =>{
-            this.state.locs=[]
-            result.locs.forEach((e)=>{
-                this.state.locs.push(e)
+    componentDidUpdate() {
+        if (this.state.locs.length !== this.props.locs.length) {
+            this.setState({
+                locs: this.props.locs
             })
-        })
+        }
     }
 
     render() {
-        if(this.state.locs.length > 0){
-            
-            return(
-                
-                <LayerGroup >
+        return (
+            <LayerGroup >
                 {this.state.locs.map((loc) => {
-                    return (<Marker position={[loc.location[0],loc.location[1]]} icon={ iconPerson }>
-                        
+                    return (<Marker position={[loc.location[0], loc.location[1]]} icon={iconPerson}>
                         <Popup>
-                            <Friend webId={loc.user}/>
+                            <Friend webId={loc.user} />
                         </Popup>
                     </Marker>)
                 })}
-                </LayerGroup>
-            )
-        }
-        return (
-            null
+            </LayerGroup>
         )
     }
 }

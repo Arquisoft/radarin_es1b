@@ -44,11 +44,7 @@ class ChangeStatusContainer extends React.Component{
 
 
     componentDidMount(){
-      updateStatus(this.webId, this.status)
-      if(this.status=="online"){
-        console.log("WEBID " + this.webId)
-        this.idleLogout(this.webId);
-      }
+     
     }
   
     render(){

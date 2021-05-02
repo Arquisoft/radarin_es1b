@@ -52,9 +52,6 @@ class BannedUsers extends React.Component {
 		})
 	  }
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
 
 	componentDidUpdate(){
 		var aucx=true;
@@ -63,19 +60,6 @@ class BannedUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
-
-	
-
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-    }
 
 	buscarAmigos() {
 		return (

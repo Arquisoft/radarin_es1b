@@ -48,11 +48,6 @@ class AddAdminUsers extends React.Component {
 		  
 		})
 	  }
-
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
-
 	componentDidUpdate(){
 		var aucx=true;
 		if(aucx){
@@ -60,15 +55,6 @@ class AddAdminUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
-
-	
-
-
-	handleClick(e) {
-		e.preventDefault();
-		this.fetchData()      	
-    }
-
 
 
 	  render() {

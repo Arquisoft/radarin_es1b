@@ -60,10 +60,6 @@ class AdminUsers extends React.Component {
 		})
 	  }
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
-
 	componentDidUpdate(){
 		var aucx=true;
 		if(aucx){
@@ -72,18 +68,7 @@ class AdminUsers extends React.Component {
 		}
 	}
 
-	
 
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-    }
 
 	  render() {
 		return (

@@ -68,26 +68,9 @@ class DeleteUsers extends React.Component {
 		}
 	}
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
-
 	componentDidMount(){
 		this.fetchData()
 	}
-
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-
-
-}
 
 	buscarAmigos() {
 		return (

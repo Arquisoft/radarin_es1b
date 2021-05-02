@@ -4,10 +4,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import ChatFriend from "./chatFriend";
 
 import { getFriends } from '../../../api/api';
-import { makeStyles } from '@material-ui/core/styles';
 import List from "@material-ui/core/List";
 
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 
 
@@ -73,9 +71,6 @@ export default class ChatList extends Component {
   render() {
     return (
       <div>
-        <div align="left">
-          <ArrowBackIcon align="left" onClick={this.backFunc} aria-label="ATRÁS" />
-        </div>
         <List dense>
           <InfiniteScroll
             dataLength={this.state.items.length} //tamaño de la lista de amigos

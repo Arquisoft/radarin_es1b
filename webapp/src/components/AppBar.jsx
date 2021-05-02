@@ -13,6 +13,9 @@ import NotificationContainer from './notifications/NotificationContainer';
 import { notifyPetition, getPendingFriends, nearFriends, getFriends } from '../api/api';
 import { useWebId, LoggedIn } from "@solid/react";
 
+// Chat imports
+import TelegramIcon from '@material-ui/icons/Telegram';
+import {Link} from "react-router-dom";
 
 toast.configure();
 
@@ -142,6 +145,7 @@ export default function RadarinAppBar() {
               alt="notificacion"
             />
             </Button>
+            <TelegramIcon component={Link} to="/chat" />
           </LoggedIn>
           <Popover
             id={id}

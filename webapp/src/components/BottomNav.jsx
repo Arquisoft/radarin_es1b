@@ -13,6 +13,7 @@ import Friends from './friends/Friends';
 import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
+import Chat from './friends/chat/Chat';
 
 
 const useStyles = makeStyles({
@@ -38,8 +39,8 @@ const BottomNav = (props) => {
         <Router path="/map">
           <MapView webId={props.webId} />
         </Router>
-        <Router path="/profile*">
-
+        <Router path="/chat">
+        <Chat webId={props.webId} />
         </Router>
         <Router path="/friends">
           <Friends webId={props.webId} />

@@ -1,8 +1,9 @@
 import React from 'react';
 import {shallow, instance} from 'enzyme';
-import { render, find } from '@testing-library/react';
 import ButtonAddDelete from '../ButtonAddDelete';
 import { Button } from '@material-ui/core';
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 
 describe('ButtonFriendship', () => {
 
@@ -39,4 +40,27 @@ describe('ButtonFriendship', () => {
     });
   });
   
+});
+
+
+describe('ButtonAddDelete ', function () {
+  let container;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+  
+  afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
+  });
+  
+  it('can render and update a counter', () => {
+    // Prueba la primer renderización y componentDidMount
+    act(() => {    ReactDOM.render(<ButtonAddDelete webId="https://webid.example/#me" loggedUser="https://webid.example/#me" />, container)});
+
+    expect(container).toBeTruthy();
+  });
+
 });

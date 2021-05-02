@@ -6,7 +6,6 @@ const Meet = require("./models/meets")
 const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
-const async = require("async");
 
 // Devuelve la lista de usuarios
 router.get("/users/list", async (req, res) => {
@@ -142,8 +141,6 @@ router.post("/users/add/admin", async (req, res) => {
     res.send(user2);
 
 })
-
-
 
 
 // register a new location
@@ -304,6 +301,49 @@ router.post("/friends/pending/target", async (req, res) => {
     })
 });
 
+// Encontrar amigos cercanos
+router.post("/friends/findNearest", async (req, res) => {
+    let friendId = req.body.friend;
+    let myId = req.body.webId;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        if (friend.status != 'online') {
+            res.send("No nearby user");
+        } else {
+            let friendLoc = await Location.findOne({ user: friendId })
+            let myLoc = await Location.findOne({ user: myId })
+            if (friendLoc != null && myLoc != null) {
+                let d = distance(friendLoc.location, myLoc.location)
+                if (d < 0.3)
+                    res.send(friend.nombre);
+                else
+                    res.send("No nearby user");
+            }
+            else
+                res.send("No nearby user");
+        }
+    } else {
+        res.send("No nearby user");
+    }
+});
+
+function distance(friendLoc, myLoc) {
+    var dx = friendLoc[1] - myLoc[1],
+        dy = friendLoc[0] - myLoc[0];
+
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Notificar Peticiones de amistad
+router.post("/friends/notify", async (req, res) => {
+    let friendId = req.body.friend;
+    let friend = await User.findOne({ webId: friendId })
+    if (friend != null) {
+        res.send(friend);
+    } else {
+        res.send("No hay nuevas solicitudes");
+    }
+});
 
 //buscar a una persona 
 router.post("/users/search/", async (req, res) => {
@@ -758,20 +798,6 @@ router.post("/meets/delete", async (req, res) => {
             res.send(result)
         }
     });
-});
-
-router.post("/users/findNearest", async (req, res) => {
-    let friendId = req.body.friend;
-    let friend = await User.findOne({ webId: friendId })
-    if (friend != null) {
-        if (friend.status != 'online') {
-            res.send("No nearby user");
-        } else {
-            res.send(friend.nombre + " está cerca de ti!");
-        }
-    } else {
-        res.send("No nearby user");
-    }
 });
 
 module.exports = router

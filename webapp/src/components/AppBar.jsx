@@ -145,7 +145,9 @@ export default function RadarinAppBar() {
               alt="notificacion"
             />
             </Button>
-            <TelegramIcon component={Link} to="/chat" />
+            <IconButton component={Link} to="/chat">
+              <TelegramIcon style = {{ color: 'white' }}/>
+            </IconButton>
           </LoggedIn>
           <Popover
             id={id}

@@ -65,7 +65,7 @@ describe('AppBar ', function () {
 
 });
 
-describe('SingleMsg ', function () {
+describe('AppBar ', function () {
   let container;
   var index=0;
   var msg={
@@ -83,7 +83,7 @@ describe('SingleMsg ', function () {
   
   it('can render and update a counter', () => {
     // Prueba la primer renderización y componentDidMount
-    act(() => {    ReactDOM.render(<SingleMsg webId="https://webid.example/#me" msg={msg} index={index}/>, container)});
+    act(() => {    ReactDOM.render(<AppBar/>, container)});
 
     expect(container).toBeTruthy();
   });

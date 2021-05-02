@@ -28,14 +28,13 @@ class LastUsers extends React.Component {
 		  result.forEach((e) => {
 			this.resultQuery.push(e)
 		  })
-		  
-		this.querySuccess=true;
-		this.forceUpdate()
-		this.render()
+
+		  this.querySuccess=true;
+		  this.forceUpdate()
+		  this.render()
 
 		})
 	  }
-
 
 
 	componentDidUpdate(){
@@ -45,6 +44,7 @@ class LastUsers extends React.Component {
 		  this.fetchData();
 		}
 	}
+
 
 
 	buscarAmigos() {
@@ -70,8 +70,8 @@ class LastUsers extends React.Component {
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
 			  {this.resultQuery.map((webId) => (
-				    
-					<User key={webId} webId={webId} logged={this.logged}/>
+				     webId!==null?
+					<User key={webId} webId={webId} logged={this.logged}/>:null
 			  ))}
 	
 			</InfiniteScroll>

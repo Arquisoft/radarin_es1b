@@ -15,6 +15,7 @@ import NotificationContainer from './notifications/NotificationContainer';
 
 import { notifyPetition, getPendingFriends, nearFriends, getFriends } from '../api/api';
 import { useWebId } from "@solid/react";
+import useProfile from './profile/useProfile';
 //import { notify } from '../../../restapi/api';
 
 
@@ -38,7 +39,8 @@ export default function RadarinAppBar() {
   const [amigo, setAmigo] = useState([])
   const [anchorEl, setAnchorEl] = useState(null);
   const loggedUserId = useWebId();
-  const [amigosNotificados, setAmigosNotificados] = useState([]);
+  const [amigosNotificados] = useState([]);
+  const [amigosPendientesNotificados] = useState([]);
   const [notIcon, setNotIcon] = useState("noti.png");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -88,11 +90,14 @@ export default function RadarinAppBar() {
         friends.push(e)
       })
       friends.forEach(async (f) => {
-        var msg = await notifyPetition(f, loggedUserId)
-        if (msg !== "No hay nuevas solicitudes") {
-          amigo.push(msg + " te ha enviado una solicitud de amistad!");
-          toast.info(msg + " te ha enviado una solicitud de amistad!");
-          setNotIcon("notified.png")
+        if (!amigosPendientesNotificados.includes(f)) {
+          var friend = await notifyPetition(f, loggedUserId)
+          if (friend !== "No hay nuevas solicitudes") {
+            amigo.push(<div><a href={'/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
+            toast.info(friend.nombre + " te ha enviado una solicitud de amistad!");
+            amigosPendientesNotificados.push(f);
+            setNotIcon("notified.png")
+          }
         }
       })
     })

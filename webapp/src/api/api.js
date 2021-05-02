@@ -423,5 +423,5 @@ export async function notifyPetition(friend, id) {
             'webId': id
         })
     })
-    return await response.text();
+    return await response.json();
 }

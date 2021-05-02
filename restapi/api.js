@@ -6,7 +6,6 @@ const Meet = require("./models/meets")
 const Chat = require("./models/chats")
 const router = express.Router()
 const mongoose = require("mongoose")
-const async = require("async");
 
 // Devuelve la lista de usuarios
 router.get("/users/list", async (req, res) => {
@@ -347,7 +346,7 @@ router.post("/friends/notify", async (req, res) => {
     let friendId = req.body.friend;
     let friend = await User.findOne({ webId: friendId })
     if (friend != null) {
-        res.send(friend.nombre);
+        res.send(friend);
     } else {
         res.send("No hay nuevas solicitudes");
     }

@@ -8,7 +8,8 @@ import BanUsers from '../BanUsers';
 import BannedUsers from '../BannedUsers';
 import AdminUsers from '../AdminUsers';
 import AddAdminUsers from '../AddAdminUsers';
-import UsersAutomaticTabs from '../UsersAutomaticTabs'
+import UsersAutomaticTabs from '../UsersAutomaticTabs';
+import TabPanel from '../UsersAutomaticTabs'
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const literal = value => ({
@@ -18,6 +19,11 @@ const literal = value => ({
 describe('UsersAutomaticTabs', function () {
    
     const result = shallow(<UsersAutomaticTabs webId='https://asw2021es1b.solidcommunity.net/profile/card#me'/>);
+
+    it('TabPanel', () => {
+      const all=result.find(TabPanel);
+    expect(all).toBeTruthy();
+  });
 
   it('AllUsers', () => {
       const all=result.find(AllUsers);

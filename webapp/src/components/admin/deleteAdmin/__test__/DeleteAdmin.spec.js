@@ -16,7 +16,8 @@ describe('Friend in friend list', function () {
   it('button delete', () => {
     const result = shallow(<Friend fullName="John Doe"
                                    webId="https://webid.example/#me"/>);
-    const button=result.find(Button)
+    const button=result.find(Button);
+    button.simulate('click');
     expect(button).toBeTruthy();
   });
 

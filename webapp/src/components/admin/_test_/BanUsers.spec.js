@@ -2,7 +2,8 @@ import React from 'react';
 import {shallow, mount} from 'enzyme';
 import BanUsers from '../BanUsers';
 import User from "../userBan";
-
+import ReactDOM from 'react-dom';
+import { act } from 'react-dom/test-utils';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import List from "@material-ui/core/List";
@@ -32,5 +33,27 @@ describe('BanUsers ', function () {
     expect(searchname).not.toBeTruthy();
   });
   
+});
+
+describe('BanUsers ', function () {
+  let container;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+    document.body.appendChild(container);
+  });
+  
+  afterEach(() => {
+    document.body.removeChild(container);
+    container = null;
+  });
+  
+  it('can render and update a counter', () => {
+    // Prueba la primer renderización y componentDidMount
+    act(() => {    ReactDOM.render(<BanUsers webId={literal('https://asw2021es1b.solidcommunity.net/profile/card#me')}/>, container)});
+
+    expect(container).toBeTruthy();
+  });
+
 });
 

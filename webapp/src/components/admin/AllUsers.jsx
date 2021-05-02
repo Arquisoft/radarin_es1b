@@ -70,7 +70,7 @@ class AllUsers extends React.Component {
 
 
 	handleClick(e) {
-		e.preventDefault();
+		//e.preventDefault();
 		if (this.state.searchName !== "") {
 			this.fetchData()      
 		}
@@ -92,7 +92,7 @@ class AllUsers extends React.Component {
 							type="text"
 							name="searchArea"
 							onSubmit={ (e)=>this.handleChange(e)}
-							onChange={(e)=>this.handleChange(e)}
+							onChange={(e)=>this.handleChange()}
 						/>
 
 						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>

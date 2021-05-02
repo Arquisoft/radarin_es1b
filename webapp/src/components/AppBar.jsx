@@ -30,17 +30,22 @@ const useStyles = makeStyles((theme) => ({
 
   title: {
     flexGrow: 1
+  },
+
+  toast: {
+    background: "#3f51b5",
+    border: "0.25em solid black"
   }
 }));
 
 export default function RadarinAppBar() {
   const classes = useStyles();
-
+  const toastCloseTime = 2000;
   const [amigo, setAmigo] = useState([])
   const [anchorEl, setAnchorEl] = useState(null);
   const loggedUserId = useWebId();
-  const [amigosNotificados] = useState([]);
-  const [amigosPendientesNotificados] = useState([]);
+  const [amigosNotificados, setAmigosNotificados] = useState([]);
+  const [amigosPendientesNotificados, setAmigosPendientesNotificados] = useState([]);
   const [notIcon, setNotIcon] = useState("noti.png");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -59,7 +64,15 @@ export default function RadarinAppBar() {
     const interval = setInterval(() => {
       nearbyFriends();
       notifyFriendPetition();
-    }, 5000);
+    }, 60000);
+    return () => clearInterval(interval);
+  })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAmigosNotificados([]);
+      setAmigosPendientesNotificados([]);
+    }, 600000);
     return () => clearInterval(interval);
   })
 
@@ -74,7 +87,10 @@ export default function RadarinAppBar() {
           var msg = await nearFriends(f, loggedUserId)
           if (msg !== "No nearby user") {
             amigo.push(msg + " está cerca de ti!");
-            toast.info(msg + " está cerca de ti!");
+            toast.info(msg + " está cerca de ti!", {
+              autoClose: toastCloseTime,
+              className: classes.toast
+            });
             amigosNotificados.push(f);
             setNotIcon("notified.png")
           }
@@ -94,7 +110,10 @@ export default function RadarinAppBar() {
           var friend = await notifyPetition(f, loggedUserId)
           if (friend !== "No hay nuevas solicitudes") {
             amigo.push(<div><a href={'/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
-            toast.info(friend.nombre + " te ha enviado una solicitud de amistad!");
+            toast.info(friend.nombre + " te ha enviado una solicitud de amistad!", {
+              autoClose: toastCloseTime,
+              className: classes.toast
+            });
             amigosPendientesNotificados.push(f);
             setNotIcon("notified.png")
           }

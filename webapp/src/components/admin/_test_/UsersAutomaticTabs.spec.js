@@ -10,7 +10,7 @@ import AdminUsers from '../AdminUsers';
 import AddAdminUsers from '../AddAdminUsers';
 import UsersAutomaticTabs from '../UsersAutomaticTabs';
 import TabPanel from '../UsersAutomaticTabs'
-import CircularProgress from "@material-ui/core/CircularProgress";
+import InactiveUsers from '../InactiveUsers';
 
 const literal = value => ({
   toString: () => value
@@ -58,6 +58,11 @@ describe('UsersAutomaticTabs', function () {
 
   it('AddAdminUsers', () => {
     const add=result.find(AddAdminUsers);
+    expect(add).toBeTruthy();
+  });
+
+  it('InactiveUsers', () => {
+    const add=result.find(InactiveUsers);
     expect(add).toBeTruthy();
   });
 });

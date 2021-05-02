@@ -1,9 +1,9 @@
 import React from 'react';
-import {shallow, toContainReact} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import FriendContainer from '../Container';
 
-import Friend from '../NewUserAdmin';
+import Friend from '../InactiveUser';
 import LoadingFriend from "../LoadingFriend";
 
 const literal = value => ({

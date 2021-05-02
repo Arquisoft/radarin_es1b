@@ -57,7 +57,7 @@ class AllUsers extends React.Component {
 
 
 	handleClick(e) {
-		e.preventDefault();
+		//e.preventDefault();
 		if (this.state.searchName !== "") {
 			this.fetchData()      
 		}

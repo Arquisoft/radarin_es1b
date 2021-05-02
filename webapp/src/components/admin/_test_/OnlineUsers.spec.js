@@ -27,11 +27,6 @@ describe('OnlineUsers ', function () {
 
   it('shows the given maximum of friends initially', () => {
     const result = shallow(<OnlineUsers webId={literal('https://uo225211.solidcommunity.net//profile/card#me')}/>);
-
-    const query= result.prop('querySuccess');
-    //expect(query).toBe(false);
-    const searchname=result.state('hasMore');
-    expect(searchname).not.toBeTruthy();
   });
   
 });

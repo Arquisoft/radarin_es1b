@@ -4,12 +4,12 @@ import React from "react";
 function NotificationContainer(props) {
     const amigo = props.notif;
 
-    if (amigo.length === 0) { return <li>No tienes notificaciones nuevas.</li> }
+    if (amigo.length === 0) { return <div class="notification-list">No tienes notificaciones nuevas.</div> }
     return amigo.map(function (not, index) {
         return (
-            <li key={index}>
+            <div class="notification-list" key={index}>
                 {not}
-            </li>
+            </div>
         )
     });
 }

@@ -35,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
   toast: {
     background: "#3f51b5",
     border: "0.25em solid black"
+  },
+
+  links: {
+    color: "#80aaff",
+    "&:hover": {
+      textDecoration: "none",
+      color: "#80aaff"
+    }
   }
 }));
 
@@ -64,7 +72,7 @@ export default function RadarinAppBar() {
     const interval = setInterval(() => {
       nearbyFriends();
       notifyFriendPetition();
-    }, 60000);
+    }, 5000);
     return () => clearInterval(interval);
   })
 
@@ -109,7 +117,7 @@ export default function RadarinAppBar() {
         if (!amigosPendientesNotificados.includes(f)) {
           var friend = await notifyPetition(f, loggedUserId)
           if (friend !== "No hay nuevas solicitudes") {
-            amigo.push(<div><a href={'/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
+            amigo.push(<div><a className={classes.links} href={'/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
             toast.info(friend.nombre + " te ha enviado una solicitud de amistad!", {
               autoClose: toastCloseTime,
               className: classes.toast
@@ -152,9 +160,9 @@ export default function RadarinAppBar() {
               horizontal: 'center',
             }}
           >
-            <ul style={{ listStyleType: 'none' }}>
+            <div class="notfications-container">
               <NotificationContainer notif={amigo} />
-            </ul>
+            </div>
           </Popover>
           <IconButton aria-label="display more actions" edge="end" color="inherit">
             <Login />

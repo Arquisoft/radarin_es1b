@@ -14,28 +14,51 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function MeetCreationDialog() {
-  const [open, setOpen] = React.useState(false);
+toast.configure();
+
+export default function MeetCreationDialog(props) {
+  const [open, setOpen] = React.useState(props.open);
+  const [name, setName] = React.useState("");
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [handleCancel, setHandleCancel] = React.useState(props.handleCancel);
+  const [handleCreate, setHandleCreate] = React.useState(props.handleCreate);
 
   const handleClose = () => {
     setOpen(false);
+    handleCancel();
   };
+
+  const handleNameChange = (name) => {
+    setName(name);
+};
 
   const handleDateChange = (date) => {
       setSelectedDate(date);
   };
 
+  const handleInput = () => {
+    let check = true;
+
+    if (name.trim().length == 0) {
+      check = false;
+      toast.error("Introduce un nombre para el Meet.", { position : "top-center"});
+    }
+
+    let now = Date.now();
+    if (selectedDate < now) {
+      check = false;
+      toast.error("Introduce una fecha y hora posteriores a la actual.", { position : "top-center"});
+    }
+
+    if (check)
+      handleCreate();
+  }
+
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Crear un nuevo Meet</DialogTitle>
         <DialogContent>
@@ -50,6 +73,8 @@ export default function MeetCreationDialog() {
             type="text"
             fullWidth
             required
+            value={name}
+            onChange={handleNameChange}
           />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container justify="space-around">
@@ -84,7 +109,7 @@ export default function MeetCreationDialog() {
           <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleInput} color="primary">
             Seleccionar ubicación
           </Button>
         </DialogActions>

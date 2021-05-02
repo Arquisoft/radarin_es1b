@@ -8,11 +8,15 @@ import Friend from "./markers/FriendPopupManager"
 import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";
 import useProfile from "../profile/useProfile";
+import MeetCreationDialog from './markers/dialog/MeetCreationDialog';
 
 
 
 const Map = (props) => {
   const [map, setMap] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [meetName, setMeetName] = useState(null);
+  const [meetDate, setMeetDate] = useState(null);
   const { position, setPosition } = useContext(LocationsContext);
   const { seeFriends } = useContext(LocationsContext);
   const { meetPosition } = useContext(LocationsContext);
@@ -21,8 +25,6 @@ const Map = (props) => {
 
   const [locateButtonAction, setLocateButtonAction] = useState(false);
   const profile = useProfile(props.webId)
-
-  let meetButtonAction = false;
 
   let propsAux = props;
 
@@ -36,18 +38,18 @@ const Map = (props) => {
         })
         map.on('locationfound', handleOnLocationFound)
         map.on('click', function (e) {
-          if (meetButtonAction) {
-            meetButtonAction = false;
+          if (showDialog) {
+            setShowDialog(false);
             alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
             saveMeet(e.latlng)
           }
         });
 
         L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function (btn, map) {
-          if (meetButtonAction) {
-            meetButtonAction = false;
+          if (showDialog) {
+            setShowDialog(false);
           } else {
-            meetButtonAction = true;
+            setShowDialog(true);
           }
         }, "Crear una nueva reunión").addTo(map);
         L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function (btn, map) {
@@ -74,7 +76,6 @@ const Map = (props) => {
     return () => clearInterval(interval);
   });
 
-
   function handleOnLocationFound(e) {
     const latlng = e.latlng;
     const radius = e.accuracy;
@@ -83,13 +84,14 @@ const Map = (props) => {
     saveLocation(latlng)
   }
 
-
+  function setMeetData(name, date) {
+    setMeetName(name);
+    setMeetDate(date);
+  }
 
   function saveMeet(latlng) {
-
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var date = meetDate.getFullYear() + '-' + (meetDate.getMonth() + 1) + '-' + meetDate.getDate();
+    var time = meetDate.getHours() + ":" + meetDate.getMinutes() + ":" + meetDate.getSeconds();
     Geocode.fromLatLng(latlng.lat, latlng.lng).then(
       (response) => {
         let state, country;
@@ -109,7 +111,7 @@ const Map = (props) => {
         }
         addMeet(
           propsAux.webId, latlng,
-          state, country, date, time);
+          state, country, date, time, meetName);
       },
       (error) => {
         console.log("No se ha podido guardar la localización")
@@ -149,9 +151,16 @@ const Map = (props) => {
     );
   }
 
+  function cancelMeetCreation() {
+    setShowDialog(false);
+    setMeetName(null);
+    setMeetDate(null);
+  }
+
 useInitialice()
   return (
     <div>
+      { showDialog ? <MeetCreationDialog open={showDialog} handleCreate={setMeetData} handleCancel={cancelMeetCreation}/> : null}
       <MapContainer
         whenCreated={(map => setMap(map))}
         center={[43.36, -5.90]}
@@ -184,8 +193,6 @@ useInitialice()
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
-
       </MapContainer>
     </div>
   )

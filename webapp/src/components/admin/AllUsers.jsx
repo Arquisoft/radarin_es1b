@@ -117,8 +117,8 @@ class AllUsers extends React.Component {
 			  height={this.props.height}>
 			 
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
-					<Friend key={webId} webId={webId} logged={this.logged}/>:null
+				    
+					<Friend key={webId} webId={webId} logged={this.logged}/>
 	
 			  ))}
 	

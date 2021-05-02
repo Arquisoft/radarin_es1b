@@ -1,6 +1,8 @@
 
 //REACT_APP_API_URI is an enviroment variable defined in the file .env.development or .env.production
 export async function addUser(webId, nombre){
+    const tiempoTranscurrido = Date.now();
+    const hoy = new Date(tiempoTranscurrido);
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/add', {
         method: 'POST',
@@ -9,7 +11,8 @@ export async function addUser(webId, nombre){
             'webId':webId,
             'nombre': String(nombre),
             'admin': "false",
-            "status": "online"
+            "status": "online",
+             "time" : hoy
         })
       })
     return await response.json()
@@ -60,7 +63,7 @@ export async function makeAdmin(userWebId, admin){
 
 export async function updateStatus(webId, status){
 
-    console.log("llega el web id para cambiar el estado " + webId)
+    
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint+'/users/status/update', {
         method: 'POST',
@@ -208,6 +211,15 @@ export async function getLastUsers(){
     return await response.json()
 }
 
+export async function getLastOnlineUsers(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastOnlineUsers', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
 
 export async function getLastTimeUser(webId){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
@@ -220,7 +232,6 @@ export async function getLastTimeUser(webId){
       })
     return await response.json()
 }
-
 
 export async function getSearcByName(str){
     const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'

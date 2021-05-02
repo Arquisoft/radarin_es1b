@@ -94,8 +94,8 @@ class AdminUsers extends React.Component {
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
-					<Friend key={webId} webId={webId} logged={this.logged}/>:null
+				     
+					<Friend key={webId} webId={webId} logged={this.logged}/>
 			  ))}
 	
 			</InfiniteScroll>

@@ -1,12 +1,11 @@
 import React from 'react'
 import UsersAutomaticScrollButtons from './UsersAutomaticTabs'
 
-
-
 class Users extends React.Component{
 
     constructor(props){
         super(props)
+        this.webId = this.props.webId;
     }
 
     render(){

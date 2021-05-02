@@ -2,6 +2,7 @@ import React from 'react'
 import Chat from './chat/Chat'
 import FriendsTabs from './FriendsTabs'
 import ChatIcon from '@material-ui/icons/Chat';
+import {updateLastTime} from '../../api/api'
 
 
 class Friends extends React.Component{
@@ -13,6 +14,14 @@ class Friends extends React.Component{
             isToggled: true
         }
         this.handleClick = this.handleClick.bind(this)
+    }
+
+    componentDidMount(){
+
+        const tiempoTranscurrido = Date.now();
+        const hoy = new Date(tiempoTranscurrido);
+    
+        updateLastTime(this.webId, hoy );
     }
 
     handleClick() {

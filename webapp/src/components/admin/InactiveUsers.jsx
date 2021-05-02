@@ -72,9 +72,6 @@ class InactiveUsers extends React.Component {
 		}
 	}
 
-	
-
-
 	handleClick(e) {
 		e.preventDefault();
 		if (this.state.searchName !== "") {

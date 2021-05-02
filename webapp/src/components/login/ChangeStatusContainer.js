@@ -10,7 +10,6 @@ class ChangeStatusContainer extends React.Component{
       this.webId = props.webId;
       this.status = props.status;
       this.hora = props.hora;
-      console.log("uskdnjsad " + this.hola)
     }
 
     idleLogout(webId) {
@@ -25,13 +24,11 @@ class ChangeStatusContainer extends React.Component{
           };
          
       }
-     
+    
   }
-
   
     componentDidMount(){
-       //EXTRAER LA HORA ACTUAL
-      
+       
        const tiempoTranscurrido = Date.now();
        const hoy = new Date(tiempoTranscurrido);
 

@@ -91,7 +91,7 @@ class LastUsers extends React.Component {
 			<div>
 				<form>
 					<label> 
-						 Usuarios en el último dia : 
+						 Usuarios que han entrado en las ultimas 24 horas : 
 					</label>
 				</form>
             </div>

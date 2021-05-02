@@ -12,6 +12,7 @@ import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
 
+
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -45,7 +46,7 @@ const BottomNav = (props) => {
           <Profile webId={props.webId} />
         </Route>
         <Route path="/">
-          <Start/>
+          <Start />
         </Route>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

@@ -4,7 +4,7 @@ import L, { easyButton } from 'leaflet';
 import FriendsLocationMarkers from './FriendsLocationMarkers';
 import MeetLocationMarkers from"./MeetLocationMarkers";
 import Friend from "./markers/FriendPopupManager"
-import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
+import { addLocation, addMeet, getMeetsForUser, updateLastTime } from '../../api/api';
 import Geocode from "react-geocode";    
 import useProfile from "../profile/useProfile";
 
@@ -16,7 +16,7 @@ const Map = (props) => {
 
     const [locateButtonAction, setLocateButtonAction]=useState(false);
     const profile = useProfile(props.webId)
-
+    const webId = props.webId
 
 
     let meetLocations=[]
@@ -24,7 +24,14 @@ const Map = (props) => {
     let meetButtonAction=false;
 
     let propsAux=props;
+    
     useEffect(() => {
+
+      const tiempoTranscurrido = Date.now();
+      const hoy = new Date(tiempoTranscurrido);
+  
+      updateLastTime(webId, hoy );
+
         if (map) {
             map.locate({
                 setView: false,
@@ -57,7 +64,8 @@ const Map = (props) => {
     },[map])
 
     useEffect(() => {
-        const interval = setInterval(() => {
+    
+      const interval = setInterval(() => {
             if (map) {
                 map.locate({
                     setView: false

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
 import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L, { marker } from 'leaflet';
 import { LocationsContext } from '../../context/LocationsContext';
@@ -9,26 +9,40 @@ import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";
 import useProfile from "../profile/useProfile";
 import MeetCreationDialog from './markers/dialog/MeetCreationDialog';
+import isThisHour from 'date-fns/isThisHour/index.js';
 
 
 
 const Map = (props) => {
   const [map, setMap] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
+  const [createMeet, setCreateMeet] = useState(false);
   const [meetName, setMeetName] = useState(null);
   const [meetDate, setMeetDate] = useState(null);
   const { position, setPosition } = useContext(LocationsContext);
-  const { seeFriends } = useContext(LocationsContext);
-  const { meetPosition } = useContext(LocationsContext);
-
-
-
   const [locateButtonAction, setLocateButtonAction] = useState(false);
   const profile = useProfile(props.webId)
 
   let propsAux = props;
 
+  const createMeetFunct =  useCallback((e)=> {
+    
+    if (createMeet) {
+      
+      alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+      saveMeet(e.latlng)
+      setCreateMeet(false)
+      cancelMeetCreation()
+    }
+
+  },[createMeet])
+  
   function useInitialice() {
+
+    if(map){
+      map.on('click', createMeetFunct/*.bind(this)*/);
+      
+    }
 
     useEffect(() => {
       if (map) {
@@ -36,14 +50,9 @@ const Map = (props) => {
           setView: false,
           watch: true
         })
-        map.on('locationfound', handleOnLocationFound)
-        map.on('click', function (e) {
-          if (showDialog) {
-            setShowDialog(false);
-            alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-            saveMeet(e.latlng)
-          }
-        });
+        map.on('locationfound', handleOnLocationFound)    
+        
+        
 
         L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function (btn, map) {
           if (showDialog) {
@@ -51,7 +60,11 @@ const Map = (props) => {
           } else {
             setShowDialog(true);
           }
-        }, "Crear una nueva reunión").addTo(map);
+        },"Añadir meet").addTo(map);
+
+        
+
+        
         L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function (btn, map) {
           map.locate({
             setView: true
@@ -63,6 +76,8 @@ const Map = (props) => {
     }, [map])
   }
 
+
+  //Locate
   useEffect(() => {
     const interval = setInterval(() => {
       if (map) {
@@ -70,6 +85,7 @@ const Map = (props) => {
           setView: false
         })
         map.on('locationfound', handleOnLocationFound)
+        
 
       }
     }, 20000);
@@ -84,14 +100,10 @@ const Map = (props) => {
     saveLocation(latlng)
   }
 
-  function setMeetData(name, date) {
-    setMeetName(name);
-    setMeetDate(date);
-  }
-
   function saveMeet(latlng) {
     var date = meetDate.getFullYear() + '-' + (meetDate.getMonth() + 1) + '-' + meetDate.getDate();
     var time = meetDate.getHours() + ":" + meetDate.getMinutes() + ":" + meetDate.getSeconds();
+    //setCreateMeet(false)
     Geocode.fromLatLng(latlng.lat, latlng.lng).then(
       (response) => {
         let state, country;
@@ -151,16 +163,26 @@ const Map = (props) => {
     );
   }
 
-  function cancelMeetCreation() {
-    setShowDialog(false);
+  const cancelMeetCreation= useCallback(()=> {
+    setCreateMeet(false);
     setMeetName(null);
     setMeetDate(null);
-  }
+    
+  });
 
-useInitialice()
+  const setMeetData = useCallback((name, date) => {
+    setMeetName(name);
+    setMeetDate(date);
+    setCreateMeet(true);
+    setShowDialog(false);
+  });
+
+
+
+    useInitialice()
   return (
     <div>
-      { showDialog ? <MeetCreationDialog open={showDialog} handleCreate={setMeetData} handleCancel={cancelMeetCreation}/> : null}
+      { showDialog ? <MeetCreationDialog open={showDialog} handleCreate={setMeetData} handleCancel={cancelMeetCreation} /> : null}
       <MapContainer
         whenCreated={(map => setMap(map))}
         center={[43.36, -5.90]}

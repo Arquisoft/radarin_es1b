@@ -114,7 +114,9 @@ class MeetPopup extends React.Component {
         return (
             <div>
                 {this.state.open ? this.displayDialog() : null}
-                
+                <ListItemText
+                            primary={this.meet.name}
+                        />
                 <strong>Meet Creado por</strong>
                 <ListItem className={styles.friend} button component={Link} to={toProfile(this.webId)} clickable>
                     <ListItemIcon>

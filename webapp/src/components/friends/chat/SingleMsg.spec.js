@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils';
 import SingleMsg from'./SingleMsg';
 
 
-    describe('SingleMsg ', function () {
+
       let container;
       var index=0;
       var msg={
@@ -27,4 +27,3 @@ import SingleMsg from'./SingleMsg';
         expect(container).toBeTruthy();
       });
     
-    });

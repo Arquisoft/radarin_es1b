@@ -27,7 +27,7 @@ const Start = () => {
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h2" component="h1">
-           Bienvenido a la pagina de Administrador
+           Bienvenido a la página de Administrador
           </Typography>
         </CardContent>
       </Card>

@@ -13,6 +13,8 @@ import BanUsers from '../admin/BanUsers';
 import BannedUsers from './BannedUsers';
 import AdminUsers from '../admin/AdminUsers';
 import AddAdminUsers from '../admin/AddAdminUsers';
+import InactiveUsers from '../admin/InactiveUsers';
+import LastUsers from '../admin/LastUsers';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,10 +61,12 @@ export default function ScrollableTabsButtonAuto(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const webId= props.webId;
-
+ 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  
 
   return (
     <div className={classes.root}>
@@ -84,7 +88,7 @@ export default function ScrollableTabsButtonAuto(props) {
           <Tab label="Administradores" {...a11yProps(5)} />
           <Tab label="Añadir administradores" {...a11yProps(6)} />
           <Tab label="Usuarios inactivos" {...a11yProps(7)} />
-          <Tab label="Ultimos accesos" {...a11yProps(8)} />
+          <Tab label="Últimos accesos" {...a11yProps(8)} />
 
         </Tabs>
       </AppBar>
@@ -111,10 +115,10 @@ export default function ScrollableTabsButtonAuto(props) {
          <AddAdminUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={7} >
-        to be done
+        <InactiveUsers webId={webId}/>
       </TabPanel>
       <TabPanel value={value} index={8} >
-        to be done
+        <LastUsers webId={webId}/>
       </TabPanel>
     </div>
   );

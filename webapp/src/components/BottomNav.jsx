@@ -13,6 +13,7 @@ import Start from '../routes/StartPage';
 import Home from '@material-ui/icons/Home'
 import Profile from './profile';
 
+
 const useStyles = makeStyles({
   root: {
     width: '100%',

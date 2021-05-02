@@ -18,19 +18,6 @@ class BanUsers extends React.Component {
 		};
 	}
 	
-	static defaultProps = {
-		friends: [], // Lista de todas los amigos que se mostrarán.
-		height: 300,
-		showInitially: 10, // Número de amigos para mostrar inicialmente
-		fetchCount: 5 // número de amigos para buscar a la vez, al desplazarse por la lista
-	  };
-	
-	  state = {
-		items: this.props.friends.slice(0, this.props.showInitially), //crea un array de amigos de 0 a el valor de showInitially
-		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
-	  };
-
-
 	  async fetchData() {
 		var promise = getSearcByNoBan()
 		this.querySuccess=false;
@@ -68,54 +55,24 @@ class BanUsers extends React.Component {
 		}
 	}
 
-	handleChange(event) {
-		this.setState({ searchName: event.target.value });
-	}
-
 	componentDidMount(){
 		this.fetchData()
 	}
-
-
-	handleClick(e) {
-		e.preventDefault();
-		if (this.state.searchName !== "") {
-			this.fetchData()      
-		}
-		else{
-			//console.error("No hay texto para buscar")
-		} 
-
-
-}
-
-	buscarAmigos() {
-		return (
-			<div>
-				<form>
-					<label> 
-					</label>
-				</form>
-            </div>
-		);
-    }
-
 
 	  render() {
 		return (
 		  <List dense>
 			{/* Scroll con la lista de amigos  */}
-			{this.buscarAmigos()}
 			<InfiniteScroll
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  
 			  loader={<h4>Cargando...</h4>} //loader
-			  height={this.props.height}>
+			  height={'60vh'}>
 			 {!this.querySuccess? <span>No se encontraron usuarios, mostrando usuarios del sistema</span>: 
 			 	<span>{this.state.searchName}</span>}
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
-					<User key={webId} webId={webId}/>:null
+				    
+					<User key={webId} webId={webId}/>
 	
 			  ))}
 	

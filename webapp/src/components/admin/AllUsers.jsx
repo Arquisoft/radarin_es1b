@@ -18,19 +18,6 @@ class AllUsers extends React.Component {
 		};
 	}
 	
-	static defaultProps = {
-		friends: [], // Lista de todas los amigos que se mostrarán.
-		height: 300,
-		showInitially: 10, // Número de amigos para mostrar inicialmente
-		fetchCount: 5 // número de amigos para buscar a la vez, al desplazarse por la lista
-	  };
-	
-	  state = {
-		items: this.props.friends.slice(0, this.props.showInitially), //crea un array de amigos de 0 a el valor de showInitially
-		hasMore: this.props.friends.length > this.props.showInitially // Indica que tenemos mas amigos de los que se pueden monstrar inicialmente
-	  };
-
-
 	  async fetchData() {
 		var promise = getSearcByName(this.state.searchName)
 		this.querySuccess=false;
@@ -70,7 +57,7 @@ class AllUsers extends React.Component {
 
 
 	handleClick(e) {
-		//e.preventDefault();
+		e.preventDefault();
 		if (this.state.searchName !== "") {
 			this.fetchData()      
 		}
@@ -92,7 +79,7 @@ class AllUsers extends React.Component {
 							type="text"
 							name="searchArea"
 							onSubmit={ (e)=>this.handleChange(e)}
-							onChange={(e)=>this.handleChange()}
+							onChange={(e)=>this.handleChange(e)}
 						/>
 
 						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
@@ -117,8 +104,8 @@ class AllUsers extends React.Component {
 			  height={this.props.height}>
 			 
 			  {this.resultQuery.map((webId) => (
-				     webId!==this.logged?
-					<Friend key={webId} webId={webId} logged={this.logged}/>:null
+				    
+					<Friend key={webId} webId={webId} logged={this.logged}/>
 	
 			  ))}
 	

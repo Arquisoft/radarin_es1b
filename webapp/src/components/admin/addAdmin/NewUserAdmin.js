@@ -27,7 +27,7 @@ function NewUserAdmin({ webId, fullName, imageSrc}) {
        
     />
    <Button onClick = {ChangeTarget} id="searchFriends" type="button" color="primary" variant="outlined" size="small" startIcon={<PersonAddIcon />}>
-							new
+							add
 	 </Button>
   </ListItem>
     </div>

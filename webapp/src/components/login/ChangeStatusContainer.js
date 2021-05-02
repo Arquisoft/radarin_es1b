@@ -1,5 +1,5 @@
 import React from 'react';
-import {addUser, updateStatus} from "../../api/api";
+import {updateLastTime, updateStatus} from "../../api/api";
 
 
 
@@ -9,42 +9,38 @@ class ChangeStatusContainer extends React.Component{
       super(props);
       this.webId = props.webId;
       this.status = props.status;
+      this.hora = props.hora;
     }
 
     idleLogout(webId) {
-      var t;
+    
       var web = webId
-      window.onload = resetTimer;
-      window.onmousemove = resetTimer;
-      window.onmousedown = resetTimer;  // catches touchscreen presses as well      
-      window.ontouchstart = resetTimer; // catches touchscreen swipes as well 
-      window.onclick = resetTimer;      // catches touchpad clicks as well
-      window.onkeypress = resetTimer;   
-      window.addEventListener('scroll', resetTimer, true); // improved; see comments
+      yourFunction();
   
       function yourFunction() {
-          // your function for too long inactivity goes here
-          // e.g. window.location.href = 'logout.php';
-          //alert("¿ Sigue usted ahi ?, refresque su página para continuar")
-          console.log("actualizo a offline el usuario " + web)
 
-          
-          window.onunload = function(e) {
+          window.beforeUnload = function(e) {
             updateStatus(web, "offline")
           };
          
       }
-  
-      function resetTimer() {
-          clearTimeout(t);
-          t = setTimeout(yourFunction, 10000);  // time is in milliseconds
-          console.log("TIEMPO " + t)
-      }
+    
   }
-
-
+  
     componentDidMount(){
-     
+       
+       const tiempoTranscurrido = Date.now();
+       const hoy = new Date(tiempoTranscurrido);
+
+       if(this.hora == "true"){
+          updateLastTime(this.webId, hoy );
+       }
+      updateStatus(this.webId, this.status)
+      if(this.status=="online"){
+        console.log("WEBID " + this.webId)
+        this.idleLogout(this.webId);
+       
+      }
     }
   
     render(){

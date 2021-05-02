@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {useWebId} from '@solid/react';
 import BottomNav from './BottomNav';
 import BottomNavAdmin from './BottomNavAdmin';
 import StartPage from '../routes/StartPage';
 import StartPageBan from '../routes/StartPageBaneado';
-
-
-
 
  const NavBar = (props) => {
     
@@ -15,15 +12,6 @@ import StartPageBan from '../routes/StartPageBaneado';
     var adminUsers = props.adminUser;
 
     var usersBan = props.banUser;
-
-    console.log("String de usuarios admin " + adminUsers.length)
-    console.log("String de usuarios baneados " + usersBan.length)
-
-    for(var i = 0; i<adminUsers.length;i++){
-
-      console.log("Usuario  " + i + " es " + adminUsers[i])
-
-    }
 
     if(webId!=null){
 

@@ -1,15 +1,18 @@
 
 //REACT_APP_API_URI is an enviroment variable defined in the file .env.development or .env.production
-export async function addUser(webId, nombre) {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/add', {
+export async function addUser(webId, nombre){
+    const tiempoTranscurrido = Date.now();
+    const hoy = new Date(tiempoTranscurrido);
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             'webId': webId,
             'nombre': String(nombre),
             'admin': "false",
-            "status": "online"
+            "status": "online",
+             "time" : hoy
         })
     })
     return await response.json()
@@ -60,9 +63,9 @@ export async function makeAdmin(userWebId, admin) {
 
 export async function updateStatus(webId, status) {
 
-    console.log("llega el web id para cambiar el estado " + webId)
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/status/update', {
+    
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/status/update', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -73,9 +76,23 @@ export async function updateStatus(webId, status) {
     return await response.json()
 }
 
-export async function getUsers() {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/list')
+  export async function updateLastTime(webId, date){
+
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastTime/update', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId,
+             'time': date
+        })
+      })
+    return await response.json()
+  }
+
+export async function getUsers(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/list')
     return await response.json()
 }
 
@@ -176,9 +193,49 @@ export async function getSearcUser(webId) {
     return await response.json()
 }
 
-export async function getSearcByName(str) {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/users/search/name', {
+export async function getLastTime(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastTime/get/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+export async function getLastUsers(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastUsers', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+export async function getLastOnlineUsers(){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastOnlineUsers', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+      })
+    return await response.json()
+}
+
+
+export async function getLastTimeUser(webId){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/lastTime/get/user/', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({
+            'webId':webId
+        })
+      })
+    return await response.json()
+}
+
+export async function getSearcByName(str){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/users/search/name', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

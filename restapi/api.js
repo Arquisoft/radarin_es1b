@@ -71,6 +71,39 @@ router.post("/users/status/update", async (req, res) => {
 
 })
 
+//cambia el estado de una persona
+router.post("/users/lastTime/update", async (req, res) => {
+
+    let webId = req.body.webId;
+
+    let date = req.body.time;
+
+    let user = await User.findOne({ webId: webId })
+
+    if (user) {
+       var query = { "_id": user._id };
+         user.time = date
+
+         await User.findOneAndUpdate(query, user, function (err, doc) {
+             if (err) {
+                 //console.error("Something wrong when updating data!");
+             } else {
+                 //console.log(doc);
+                
+             }
+         });
+    }
+
+
+     if(user!=null){
+         await user.save();
+         res.send(user);
+     }
+
+
+})
+
+
 //borra un usuario
 router.post("/users/remove", async (req, res) => {
 
@@ -364,6 +397,119 @@ router.post("/users/search/", async (req, res) => {
 });
 
 
+//buscar a una persona 
+router.post("/users/lastTime/get/", async (req, res) => {
+
+    await User.find(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            const tiempoTranscurrido = Date.now();
+
+            const hoy = new Date(tiempoTranscurrido);
+
+            var webIds = docs.map((doc) => { 
+
+                const fechaUsuario = doc.time.toUTCString()
+                const currDate = new Date(hoy)
+                const oldDate  = new Date(fechaUsuario)
+
+                const diferenciaDias = (currDate - oldDate) / 60000;
+
+                if( diferenciaDias > 43200){
+                    return doc.webId 
+                }
+
+            })
+
+            res.send(webIds);
+        }
+    })
+});
+
+router.post("/users/lastUsers", async (req, res) => {
+
+    await User.find(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            const tiempoTranscurrido = Date.now();
+
+            const hoy = new Date(tiempoTranscurrido);
+
+            var webIds = docs.map((doc) => { 
+
+                const fechaUsuario = doc.time.toUTCString()
+                const currDate = new Date(hoy)
+                const oldDate  = new Date(fechaUsuario)
+
+                const diferenciaDias = (currDate - oldDate) / 60000;
+
+                if( diferenciaDias < 1440){
+                    return doc.webId 
+                }
+
+            })
+
+            res.send(webIds);
+        }
+    })
+});
+
+router.post("/users/lastOnlineUsers", async (req, res) => {
+
+    console.log("ACTUALIZATE ILLO")
+
+    await User.find(function (err, docs) {
+        if (err) {
+            console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            const tiempoTranscurrido = Date.now();
+
+            const hoy = new Date(tiempoTranscurrido);
+
+            var webIds = docs.map((doc) => { 
+
+                const fechaUsuario = doc.time.toUTCString()
+                const currDate = new Date(hoy)
+                const oldDate  = new Date(fechaUsuario)
+
+                const diferenciaDias = (currDate - oldDate) / 60000;
+
+                if( diferenciaDias > 10){
+                    return doc.webId 
+                }
+
+            })
+
+            res.send(webIds);
+        }
+    })
+});
+
+
+
+//buscar a una persona 
+router.post("/users/lastTime/get/user/", async (req, res) => {
+    
+    const web = req.body.webId;
+
+    var query = {
+        "webId": web
+    };
+    await User.find(query, function (err, docs) {
+        if (err) {
+            //console.log("Error al encontrar los usuarios dados los amigos")
+        } else {
+            var webIds = docs.map((doc) => { return doc.time.toUTCString() })
+
+            res.send(webIds[0]);
+        }
+    })
+
+});
+
+
 
 //buscar a una persona 
 router.post("/users/search/name", async (req, res) => {
@@ -408,7 +554,6 @@ router.post("/users/search/admin", async (req, res) => {
             //console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             var webIds = docs.map((doc) => { return doc.webId })
-
             res.send(webIds);
         }
     })
@@ -447,7 +592,8 @@ router.post("/users/search/ban", async (req, res) => {
 //buscar si una persona es admin
 router.post("/users/search/ban/no", async (req, res) => {
     var query = {
-        "ban": "false"
+        "ban": "false",
+        "admin": "false"
     };
     await User.find(query, function (err, docs) {
         if (err) {

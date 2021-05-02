@@ -1,11 +1,11 @@
 import React from 'react'
-import { getSearcByBan, getSearcByStatus, getUsers } from '../../api/api';
+import { getUsers, getLastUsers } from '../../api/api';
 import InfiniteScroll from "react-infinite-scroll-component";
 import List from "@material-ui/core/List";
-import User from "./userBanned";
+import User from "./inactiveUser";
 
 
-class BannedUsers extends React.Component {
+class LastUsers extends React.Component {
 
 	constructor(props) {
 		super(props)
@@ -20,7 +20,7 @@ class BannedUsers extends React.Component {
 
 
 	  async fetchData() {
-		var promise = getSearcByBan()
+		var promise = getLastUsers()
 		this.querySuccess=false;
 		this.resultQuery=[]
 		promise.then((result) => {
@@ -28,8 +28,7 @@ class BannedUsers extends React.Component {
 		  result.forEach((e) => {
 			this.resultQuery.push(e)
 		  })
-		 
-	
+
 		  this.querySuccess=true;
 		  this.forceUpdate()
 		  this.render()
@@ -46,46 +45,44 @@ class BannedUsers extends React.Component {
 		}
 	}
 
+
+
 	buscarAmigos() {
 		return (
 			<div>
 				<form>
 					<label> 
-						No hay usuarios baneados
+						 Usuarios que han entrado en las últimas 24 horas: 
 					</label>
 				</form>
             </div>
 		);
     }
-	
 
 
 	  render() {
 		return (
 		  <List dense>
 			{/* Scroll con la lista de amigos  */}
-		
+			{this.buscarAmigos()}
 			<InfiniteScroll
-			
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  loader={<h4>Cargando...</h4>} //loader
-			  height={this.props.height}>
-			  
+			  height={'60vh'}>
 			  {this.resultQuery.map((webId) => (
-				    
-					<User key={webId} webId={webId} logged={this.logged}/>
-	
+				     webId!==null?
+					<User key={webId} webId={webId} logged={this.logged}/>:null
 			  ))}
-
-				{this.resultQuery.length<1 ? this.buscarAmigos() : ""}
-				
+	
 			</InfiniteScroll>
 			{/* Si tiene mas amigos indica un mensaje si no , el otro */}
 			
 		  </List>
 		);
 	  }
-	}
 
 
-	export default BannedUsers;
+}
+
+
+	export default LastUsers;

@@ -1,14 +1,6 @@
-import Friend from "./Friend";
+import Friend from "./InactiveUser";
 import LoadingFriend from "./LoadingFriend";
 import React from "react";
-
-function sacarFecha(webId) {
-
-    const web = webId;
-    //llamada a la funcion
-    
-    
-}
 
 //recibe los parametros y si no estan cargando los añade al componente amigo
 const Container =  ({webId, fullName, imageSrc, pending}) => (

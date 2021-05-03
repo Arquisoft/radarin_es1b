@@ -340,18 +340,19 @@ export async function getFriendShip(userWebId, friendwebId) {
 
 
 // Meets ------------------------------------- /
-export async function addMeet(webId, location, state, country, date, time) {
-    const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    let response = await fetch(apiEndPoint + '/meets/add', {
+export async function addMeet(webId,location,state,country,date,time,meetName){
+    const apiEndPoint= process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
+    let response = await fetch(apiEndPoint+'/meets/add', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            'creator_webId': String(webId),
-            'location': location,
-            'state': state,
-            'country': country,
-            'date': date,
-            'time': time
+            'creator_webId': String(webId), 
+            'location':location,
+            'state':state,
+            'country':country,
+            'date':date,
+            'time':time,
+            'name':meetName
         })
     })
     return await response.json()

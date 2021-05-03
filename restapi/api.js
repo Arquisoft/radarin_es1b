@@ -734,6 +734,8 @@ router.post("/meets/add", async (req, res) => {
     let country = req.body.country;
     let date = req.body.date;
     let time = req.body.time;
+    let meetName = req.body.name;
+
     // Check if the user is already in the db
     let creator = await User.findOne({ webId: creator_webid });
     // If it exists, then we'll update it
@@ -748,7 +750,8 @@ router.post("/meets/add", async (req, res) => {
                 country: country,
                 attendances: [],
                 date: date,
-                time: time
+                time: time,
+                name: meetName,
             });
 
             await newEntry.save();

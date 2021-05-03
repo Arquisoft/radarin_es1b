@@ -20,6 +20,7 @@
     "leaflet-easybutton": "^2.4.0",
     "moment": "^2.29.1",
     "node": "^16.0.0",
+    "puppeteer": "^8.0.0",
     "react": "^16.14.0",
     "react-bootstrap": "^1.4.3",
     "react-dedux": "^0.4.0-beta.4",
@@ -76,7 +77,6 @@
     "jest-puppeteer": "^4.4.0",
     "jsdom": "^16.5.3",
     "jsdom-global": "^3.0.2",
-    "puppeteer": "^5.5.0",
     "react-test-renderer": "^16.14.0",
     "shx": "^0.3.3"
   }

@@ -1,8 +1,7 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import NewRequest from '../NewRequest';
-import { Button } from '@material-ui/core';
 import Friend from "../../friendList/friend";
 
 

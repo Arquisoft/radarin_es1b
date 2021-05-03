@@ -1,11 +1,8 @@
 import React from 'react';
-import {shallow, render} from 'enzyme';
+import {shallow} from 'enzyme';
 import Index from '../index';
 import FriendContainer from '../Container'
 
-const literal = value => ({
-  toString: () => value
-});
 describe('Profile index', () => {
 
     it('should not render profile while pending', () => {

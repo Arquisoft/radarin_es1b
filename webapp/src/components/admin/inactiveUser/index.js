@@ -1,5 +1,4 @@
 import React from "react";
-
 import Friend from './Container'
 import useProfile from "../../profile/useProfile";
 

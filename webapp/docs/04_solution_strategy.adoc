@@ -2,8 +2,9 @@
 
 == Descripción de la estrategia del problema
 Una de las piedras angulares sobre la que esta basada la aplicación es el almacenamiento descentralizado de la información del usuario. SOLID nos permite llevar a cabo esta administración de datos así que la estructura del proyecto girará en torno a él.
+Las características en las que nos centramos para desarrollar la aplicación han la agilidez y la usabildad. Para ello nos centramos en desarrollar una aplicación rápida, intuitiva que ofrezca al usuario una applicación web agradable de utilizar.  
 
-Para desarrollar este proyecto hemos decidido usar React Native que, además de funcionar perfectamente con SOLID, permite desplegar la aplicación fácilmente tanto en Android como en iOS.
+Para ello hemos decido desarrollar este proyecto hemos decidido usar React Native que, además de funcionar perfectamente con SOLID, permite desplegar la aplicación fácilmente tanto en Android como en iOS, permite actualizar componentes rapidamente ante cambios y permite crear aplicaciones muy flexibles.
 
 
 === Decisiones tecnológicas

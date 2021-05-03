@@ -18,7 +18,6 @@ describe('AppBar ', function () {
 
   it('shows an empty list', () => {
     const result = shallow(<AppBar/>);
-    console.log(result.debug())
     const not = result.find(Toolbar).find(Login);
     expect(not).toBeTruthy();
   });
@@ -59,8 +58,6 @@ describe('AppBar ', function () {
     act(() => {    ReactDOM.render(<AppBar/>, container)});
 
     expect(container).toBeTruthy();
-    const button = container.querySelector('button');
-    act(() => {    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));  })
   });
 
 });

@@ -5,7 +5,7 @@
 [options="header", width="100%"]
 |===
 |Restricción|Explicación
-|SOLID|Se seguirán las especificaciones SOLID durante el desarrollo del proyecto
+|SOLID|Se compatibilizará el desarrollo con la tecnología SOLID
 |Docker|Se utilizará la herramienta Docker para desplegar la aplicación
 |===
 

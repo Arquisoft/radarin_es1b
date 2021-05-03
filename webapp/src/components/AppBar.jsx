@@ -137,7 +137,7 @@ export default function RadarinAppBar() {
             <Typography align="left" className={classes.title} variant="h5" color="inherit" noWrap> Radarin </Typography>
           </div>
           <LoggedIn>
-            <Button className="notification-button" onClick={handleClick} color="primary" variant="contained"><img
+            <Button name="notification-button" onClick={handleClick} color="primary" variant="contained"><img
               src={notIcon}
               width="25"
               height="25"

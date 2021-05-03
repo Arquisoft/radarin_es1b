@@ -16,6 +16,8 @@ class SearchFriends extends React.Component {
 		this.state = {
 			searchName: ""
 		};
+
+		this.fetchData()
 	}
 	
 	static defaultProps = {
@@ -64,12 +66,11 @@ class SearchFriends extends React.Component {
 
 	handleChange(event) {
 		this.setState({ searchName: event.target.value });
+		this.handleClick(event)
+
 	}
 
-	componentDidMount(){
-		this.fetchData()
-	}
-
+	
 
 	handleClick(e) {
 		e.preventDefault();
@@ -77,7 +78,6 @@ class SearchFriends extends React.Component {
 			this.fetchData()      
 		}
 		else{
-			//console.error("No hay texto para buscar")
 			this.fetchData()
 		} 
 
@@ -96,7 +96,6 @@ class SearchFriends extends React.Component {
 							onSubmit={ (e)=>this.handleChange(e)}
 							onChange={(e)=>this.handleChange(e)}
 						/>
-
 						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
 							Buscar
 						</Button>

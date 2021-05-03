@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Button } from '@material-ui/core';
-
 import Friend from '../User';
 import Image from "../../../profile/Image";
 

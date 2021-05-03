@@ -49,7 +49,7 @@ const BottomNav = (props) => {
           <Profile webId={props.webId} />
         </Router>
         <Router path="/">
-          <Start />
+           <Start webId={props.webId} />
         </Router>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

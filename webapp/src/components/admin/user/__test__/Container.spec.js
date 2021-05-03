@@ -1,8 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-
 import FriendContainer from '../Container';
-
 import Friend from '../User';
 import LoadingFriend from "../LoadingFriend";
 

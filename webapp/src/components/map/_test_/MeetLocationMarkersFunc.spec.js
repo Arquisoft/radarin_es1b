@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MeetLocationMarkersFunc from '../MeetLocationMarkersFunc';
-import MeetLocationMarkers from '../MeetLocationMarkers';
 import { MapContainer } from 'react-leaflet';
 
 

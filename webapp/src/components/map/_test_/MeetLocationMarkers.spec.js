@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render} from '@testing-library/react';
 import MeetLocationMarkers from '../MeetLocationMarkers';
 import { getMeetsForUser, deleteMeets } from '../../../api/api';
 import { MapContainer } from 'react-leaflet';
@@ -15,7 +15,6 @@ const meets=[];
       setMeets([])
       let meetsToDelete = []
       let fechaActual = Date.now()
-      console.log("Update MeetsFunc")
       result.forEach((e) => {
         let meetDate = new Date(e.date)
         let diffTime = Math.abs(meetDate - fechaActual);

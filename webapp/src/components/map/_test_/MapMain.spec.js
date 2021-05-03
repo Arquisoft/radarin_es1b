@@ -4,9 +4,9 @@ import Friend from "../markers/FriendPopupManager"
 import Map from '../MainMap';
 import FriendsLocationMarkersFunc from '../FriendsLocationMarkersFunc';
 import MeetLocationMarkersFunc from"../MeetLocationMarkersFunc";
-import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
-
+import  { marker } from 'leaflet';
+import IconButton from '@material-ui/core/IconButton';
 const literal = value => ({
   toString: () => value
 });
@@ -37,12 +37,17 @@ it('FriendsLocationMarkersFunc', () => {
   expect(loc).toBeTruthy();
 });
 
-it('FriendsLocationMarkersFunc', () => {
-  const loc=result.find(FriendsLocationMarkersFunc);
-  expect(loc).toBeTruthy();
+it('maker', () => {
+  const maker=result.find(marker);
+  expect(maker).toBeTruthy();
 });
 
+it('button', () => {
+  const icon=result.find(IconButton);
+  expect(icon).toBeTruthy();
 
+
+});
 
 });
 
@@ -65,6 +70,7 @@ describe('Map ', function () {
     act(() => { container=render(<Map webId={literal('https://asw2021es1b.solidcommunity.net/profile/card#me')}/>)});
 
     expect(container).toBeTruthy();
+    
   });
 
 });

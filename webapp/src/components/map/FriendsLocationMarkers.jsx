@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { LayerGroup, Marker, Popup } from 'react-leaflet';
-import { getFriendsLocations } from '../../api/api';
 import { iconPerson } from "./markers/IconPerson"
 
 import Friend from "./markers/FriendPopupManager"

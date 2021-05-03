@@ -2,7 +2,6 @@ import React from 'react';
 import {shallow, render} from 'enzyme';
 import ProfileContainer from '../Container';
 import Profile from '../Profile';
-import useProfile from "../useProfile";
 
 const literal = value => ({
   toString: () => value

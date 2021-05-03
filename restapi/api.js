@@ -83,15 +83,6 @@ router.post("/users/lastTime/update", async (req, res) => {
     if (user) {
        var query = { "_id": user._id };
          user.time = date
-
-         await User.findOneAndUpdate(query, user, function (err, doc) {
-             if (err) {
-                 //console.error("Something wrong when updating data!");
-             } else {
-                 //console.log(doc);
-                
-             }
-         });
     }
 
 
@@ -274,9 +265,9 @@ router.post("/friends/remove", async (req, res) => {
 
     let friendship = await Friend.deleteMany(query, function (err) {
         if (err) {
-            console.log("Something wrong when deleting friendship!");
+            //console.log("Something wrong when deleting friendship!");
         } else {
-            console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
+            //console.log("Amistad eliminada!: " + userWebId + "; " + friendWebId);
         }
     });
 
@@ -298,16 +289,13 @@ router.post("/friends/accept", async (req, res) => {
         oldFriendship.status = "accepted"
         let friendship = await Friend.findOneAndUpdate(query, oldFriendship, function (err) {
             if (err) {
-                console.log("Something wrong when accepting friendship!");
+                //console.log("Something wrong when accepting friendship!");
             } else {
-                console.log("Amistad acceptada!: " + userWebId + "; " + target);
+                //console.log("Amistad acceptada!: " + userWebId + "; " + target);
 
             }
         });
-    } else {
-        console.log("No existe esa peticion")
-    }
-
+    } 
     res.send(friendship)
 
 });
@@ -387,7 +375,7 @@ router.post("/users/search/", async (req, res) => {
     };
     await User.find(query, function (err, docs) {
         if (err) {
-            console.log("Error al encontrar los usuarios dados los amigos")
+            //console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             var webIds = docs.map((doc) => { return doc.webId })
 
@@ -402,7 +390,7 @@ router.post("/users/lastTime/get/", async (req, res) => {
 
     await User.find(function (err, docs) {
         if (err) {
-            console.log("Error al encontrar los usuarios dados los amigos")
+            //console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             const tiempoTranscurrido = Date.now();
 
@@ -431,7 +419,7 @@ router.post("/users/lastUsers", async (req, res) => {
 
     await User.find(function (err, docs) {
         if (err) {
-            console.log("Error al encontrar los usuarios dados los amigos")
+           // console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             const tiempoTranscurrido = Date.now();
 
@@ -458,11 +446,9 @@ router.post("/users/lastUsers", async (req, res) => {
 
 router.post("/users/lastOnlineUsers", async (req, res) => {
 
-    console.log("ACTUALIZATE ILLO")
-
     await User.find(function (err, docs) {
         if (err) {
-            console.log("Error al encontrar los usuarios dados los amigos")
+           // console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             const tiempoTranscurrido = Date.now();
 
@@ -519,7 +505,7 @@ router.post("/users/search/name", async (req, res) => {
         ;
     await User.find(query, function (err, docs) {
         if (err) {
-            console.log("Error al encontrar los usuarios dados los amigos")
+            //console.log("Error al encontrar los usuarios dados los amigos")
         } else {
             var webIds = docs.map((doc) => { return doc.webId })
 
@@ -691,7 +677,7 @@ router.post("/friends/locations/", async (req, res) => {
 
             Location.find({ 'user': { $in: users } }, function (err, docs) {
                 if (err) {
-                    console.log("Error al encontrar los usuarios dados los amigos")
+                   // console.log("Error al encontrar los usuarios dados los amigos")
                 } else {
                     res.send({ "locs": docs });
                 }
@@ -748,6 +734,8 @@ router.post("/meets/add", async (req, res) => {
     let country = req.body.country;
     let date = req.body.date;
     let time = req.body.time;
+    let meetName = req.body.name;
+
     // Check if the user is already in the db
     let creator = await User.findOne({ webId: creator_webid });
     // If it exists, then we'll update it
@@ -762,7 +750,8 @@ router.post("/meets/add", async (req, res) => {
                 country: country,
                 attendances: [],
                 date: date,
-                time: time
+                time: time,
+                name: meetName,
             });
 
             await newEntry.save();
@@ -790,7 +779,7 @@ router.post("/meets/remove/attendance", async (req, res) => {
 
         await Meet.findOneAndUpdate(query, meet, function (err, doc) {
             if (err) {
-                console.log("No se pudo actualizar la lista de asistentes!");
+               // console.log("No se pudo actualizar la lista de asistentes!");
             } else {
                 res.send(meet)
             }
@@ -827,7 +816,7 @@ router.post("/meets/assist", async (req, res) => {
 
         await Meet.findOneAndUpdate(query, meet, function (err, doc) {
             if (err) {
-                console.log("No se pudo actualizar la lista de asistentes!");
+                //console.log("No se pudo actualizar la lista de asistentes!");
             } else {
                 //console.log(doc);
                 res.send(meet)
@@ -871,7 +860,7 @@ router.post("/meets/find", async (req, res) => {
     }
     Meet.find().and(queryForUser).exec(function (err, meetsUser) {
         if (err) {
-            console.log("No se ha podido procesar la peticion de los meets para el usuairo")
+            //console.log("No se ha podido procesar la peticion de los meets para el usuairo")
         }
         else {
             meetsUser.map(function (meet) {
@@ -893,7 +882,7 @@ router.post("/meets/find", async (req, res) => {
             //Encuentra los amigos
             Friend.find().and(queryForFriends).exec(function (err, docs) {
                 if (err) {
-                    console.log("Error al encontrar los amigos");
+                    //console.log("Error al encontrar los amigos");
                 } else {
                     var friends = docs.map(function (elem) {
                         return (elem.target == user) ? elem.requester : elem.target;
@@ -906,7 +895,7 @@ router.post("/meets/find", async (req, res) => {
 
                     Meet.find().and(queryForFirends).exec(function (err, meetsFriends) {
                         if (err) {
-                            console.log("No se han podido procesar los meets para los amigos")
+                            //console.log("No se han podido procesar los meets para los amigos")
                         }
                         else {
                             meetsFriends.map(function (meet) {

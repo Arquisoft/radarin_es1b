@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render} from '@testing-library/react';
 import FriendsLocationMarkers from '../FriendsLocationMarkers';
 import { getFriendsLocations } from '../../../api/api';
 import { MapContainer } from 'react-leaflet';
@@ -12,7 +12,6 @@ const literal = value => ({
     getFriendsLocations('https://uo225211.solidcommunity.net/profile/card#me').then((result) => {
   
       if (friends.length !== result.locs.length) {
-        console.log("Update FriendsFunc")
         result.locs.forEach((e) => {
           friends.push(e);
         })

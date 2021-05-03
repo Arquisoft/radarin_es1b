@@ -21,7 +21,6 @@ function FriendsLocationMarkersFunc(props) {
   
         if (friends.length !== result.locs.length) {
           setFriends([])
-          console.log("Update FriendsFunc")
           result.locs.forEach((e) => {
             setFriends(friends => [...friends, e]);
           })

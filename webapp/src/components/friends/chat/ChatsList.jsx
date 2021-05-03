@@ -34,7 +34,6 @@ export default class ChatList extends Component {
     var promise = getFriends(this.props.webId)
 
     promise.then((result) => {
-      console.log("CHAT")
       result.forEach((e) => {
         this.friendList.push(e)
       })

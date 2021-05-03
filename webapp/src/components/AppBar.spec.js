@@ -58,8 +58,6 @@ describe('AppBar ', function () {
     act(() => {    ReactDOM.render(<AppBar/>, container)});
 
     expect(container).toBeTruthy();
-    const button = container.querySelector('button');
-    act(() => {    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));  })
   });
 
 });

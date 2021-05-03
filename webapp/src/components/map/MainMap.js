@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
 import L, { marker } from 'leaflet';
 import FriendsLocationMarkersFunc from './FriendsLocationMarkersFunc';

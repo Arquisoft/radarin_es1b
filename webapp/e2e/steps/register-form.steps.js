@@ -35,6 +35,7 @@ defineFeature(feature, test => {
       await expect(await podSolidPage.url()).toBe("https://solidcommunity.net/register");
       await expect(await pages[2].url()).toBe("https://solidcommunity.net/register");
       await pages[2].close();
+      browser.close();
     });
   });
 
@@ -57,31 +58,30 @@ defineFeature(feature, test => {
       await expect(await podSolidPage.url()).toBe("https://solid.mit.edu/");
       await expect(await pages[2].url()).toBe("https://solid.mit.edu/");
       await pages[2].close();
+      browser.close();
     });
   });
   
 
   test('The user is already registered in the site', ({ given, when, then }) => {
 
-    let placeholder;
+    let webId;
 
     given('An already registered user', () => {
-      placeholder="https://uo225211.solidcommunity.net/"
+      webId="https://uo225211.solidcommunity.net/"
     });
 
     when('Boton iniciarsesión', async () => {
-      await expect(page).toClick('button')
-      const [popup] = Promise.all([
-        new Promise((x) => page.once('popup', x)),
-        page.evaluate(() => window.open('about:blank')),
-      ]);
-      await expect(pop).toFillForm("form[class='custom-idp']", {
-        placeholder: placeholder,
-      });
-      await expect(page).toClick('button', { text: 'Go' })
+      //await page.goto("https://radarines1bwebapp.herokuapp.com/#/friends");
+      await page.goto("http://localhost:3000/#/friends");
     });
 
     then('An error message should be shown in the screen', async () => {
+      await expect(page).toMatch("Radarin");
+      await expect(page).toMatch("Inicio");
+      await expect(page).toMatch("Mapa");
+      await expect(page).toMatch("Amigos");
+      await expect(page).toMatch("Perfil");
     });
     
   });

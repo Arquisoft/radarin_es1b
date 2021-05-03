@@ -167,9 +167,9 @@ export default function RadarinAppBar() {
               <NotificationContainer notif={amigo} />
             </div>
           </Popover>
-          {/* <IconButton aria-label="display more actions" edge="end" color="inherit">
+          <IconButton aria-label="display more actions" edge="end" color="inherit">
             <Login />
-          </IconButton> */}
+          </IconButton>
         </Toolbar>
       </AppBar>
     </header>

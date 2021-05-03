@@ -54,7 +54,7 @@ const Container = ({fullName, imageSrc, webId}) => {
         {/* LoggedIn solo se muestra si el usuario esta logueado */}
         <LoggedIn>   
           
-            <LoginBadge webId={webId} fullName={fullName ? fullName.toString().split(" ")[0] : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} />
+            {/* <LoginBadge webId={webId} fullName={fullName ? fullName.toString().split(" ")[0] : undefined} imageSrc={imageSrc ? imageSrc.toString() : undefined} /> */}
           
             {Cerrar(webId)}
 

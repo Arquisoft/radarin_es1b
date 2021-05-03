@@ -6,7 +6,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PeopleIcon from '@material-ui/icons/People';
 import Users from './admin/Users';
 import Home from '@material-ui/icons/Home'
-import StartPageAdmin from '../routes/StartPageAdmin';
+import StartPage from '../routes/StartPage';
 
 
 const useStyles = makeStyles({
@@ -35,7 +35,7 @@ const BottomNav = (props) => {
         <Route path="/profile*">
         </Route>
         <Route path="/">
-          <StartPageAdmin/>
+          <StartPage webId = {props.webId} usuario ={props.user} />
         </Route>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

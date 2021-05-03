@@ -25,14 +25,14 @@ import MainPage from '../routes/MainPage';
 
         if(webId==adminUsers[i]){
           
-          return  <BottomNavAdmin webId={webId}/>     
+          return  <BottomNavAdmin webId={webId} usuario = {"admin"}/>     
 
         }
   
       }
 
      
-        return <BottomNav webId={webId} /> 
+        return <BottomNav webId={webId} usuario = {"user"} /> 
      
 
         //return  (webId=="https://asw2021es1b.solidcommunity.net/profile/card#me") ? <BottomNavAdmin webId={webId}/> : <BottomNav webId={webId} />      

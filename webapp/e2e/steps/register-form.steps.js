@@ -4,13 +4,13 @@ const feature = loadFeature('./features/register-form.feature');
 defineFeature(feature, test => {
   
   beforeEach(async () => {
-    await page.setDefaultNavigationTimeout(0);
+    //await page.setDefaultNavigationTimeout(0);
     await global.page.goto('http://localhost:3000/'
-   /**  , {
+  , {
     waitUntil: 'load',
         // Remove the timeout
-        timeout: 0
-    }*/
+        timeout: 60000
+    }
     );
   })
 
@@ -72,7 +72,7 @@ defineFeature(feature, test => {
     when('Boton iniciarsesión', async () => {
       await expect(page).toClick('button')
       const [popup] = Promise.all([
-        new Promise<Page>((x) => page.once('popup', x)),
+        new Promise((x) => page.once('popup', x)),
         page.evaluate(() => window.open('about:blank')),
       ]);
       await expect(pop).toFillForm("form[class='custom-idp']", {

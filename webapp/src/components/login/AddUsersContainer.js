@@ -16,11 +16,12 @@ class AddUsersContainer extends React.Component{
     async fetchUsers(){
           try {
               await addUser(this.webId,this.fullName);
-  
-
           } catch (e) {
               
            }
+          finally {
+
+          }
       }
 
     componentDidMount(){

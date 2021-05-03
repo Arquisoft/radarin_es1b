@@ -14,7 +14,8 @@ describe('Friend list container', function () {
   amigo.push(muensaje);
   it('indicates loading', () => {
     const result = shallow( <NotificationContainer notif={amigo} />);
-    expect(result.find('li')).toBeTruthy();;
+    const li=result.find('li');
+    expect(li).toBeTruthy();
   });
 
 });

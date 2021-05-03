@@ -97,8 +97,8 @@ export default function MeetCreationDialog(props) {
           state, country, date, time, name);
       },
       (error) => {
-        console.log("No se ha podido guardar la localización")
-        console.error(error);
+        //console.log("No se ha podido guardar la localización")
+        //console.error(error);
       }
     );
   }

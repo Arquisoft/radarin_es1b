@@ -1,18 +1,17 @@
-const express = require("express")
-const User = require("./models/users")
-const Location = require("./models/locations")
-const Friend = require("./models/friends")
-const Meet = require("./models/meets")
-const Chat = require("./models/chats")
-const router = express.Router()
-const mongoose = require("mongoose")
+const express = require("express");
+const User = require("./models/users");
+const Location = require("./models/locations");
+const Friend = require("./models/friends");
+const Meet = require("./models/meets");
+const Chat = require("./models/chats");
+const router = express.Router();
+const mongoose = require("mongoose");
 
 // Devuelve la lista de usuarios
 router.get("/users/list", async (req, res) => {
-    const users = await User.find({}).sort('-_id') //Inverse order
-    res.send(users)
-})
-
+    const users = await User.find({}).sort('-_id');//Inverse order
+    res.send(users);
+});
 //register a new user
 router.post("/users/add", async (req, res) => {
 
@@ -22,9 +21,11 @@ router.post("/users/add", async (req, res) => {
     let status = req.body.status;
 
     //Check if the device is already in the db
-    let user = await User.findOne({ webId: webId })
+    let user = await User.findOne(
+        { webId: webId }
+    );
     if (user) {
-        res.send({ error: "Error: This user is already registered" + webId })
+        res.send({ error: "Error: This user is already registered" + webId });
     }
     else {
         user = new User({
@@ -33,11 +34,11 @@ router.post("/users/add", async (req, res) => {
             admin: admin,
             status: status,
             ban: "false"
-        })
-        await user.save()
-        res.send(user)
+        });
+        await user.save();
+        res.send(user);
     }
-})
+});
 
 //cambia el estado de una persona
 router.post("/users/status/update", async (req, res) => {
@@ -46,18 +47,20 @@ router.post("/users/status/update", async (req, res) => {
 
     let status = req.body.status;
 
-    let user2 = await User.findOne({ webId: webId })
+    let user2 = await User.findOne(
+        { webId: webId }
+    );
 
     if (user2) {
         var query = { "_id": user2._id };
-        user2.status = status
+        user2.status = status;
 
         await User.findOneAndUpdate(query, user2, function (err, doc) {
             if (err) {
-                res.send(err)
+                res.send(err);
             } else {
 
-                res.send(doc)
+                res.send(doc);
             }
         });
     }
@@ -66,7 +69,7 @@ router.post("/users/status/update", async (req, res) => {
     if (user2 != null) {
         await user2.save();
         res.send(user2);
-    }
+    };
 
 
 })
@@ -78,11 +81,13 @@ router.post("/users/lastTime/update", async (req, res) => {
 
     let date = req.body.time;
 
-    let user = await User.findOne({ webId: webId })
+    let user = await User.findOne(
+        { webId: webId }
+    );
 
     if (user) {
        var query = { "_id": user._id };
-         user.time = date
+         user.time = date;
     }
 
 
@@ -98,17 +103,19 @@ router.post("/users/lastTime/update", async (req, res) => {
 //borra un usuario
 router.post("/users/remove", async (req, res) => {
 
-    let userWebId = req.body.webId
+    let userWebId = req.body.webId;
 
-    let deleted = await User.deleteOne({ webId: userWebId }, function (err) {
-        if (err) {
+    let deleted = await User.deleteOne(
+        { webId: userWebId },
+            function (err) {
+            if (err) {
 
-        } else {
+            } else {
 
-        }
+            }
     });
 
-    res.send(deleted)
+    res.send(deleted);
 
 })
 
@@ -120,17 +127,19 @@ router.post("/users/ban", async (req, res) => {
 
     let baneable = req.body.ban;
 
-    let user2 = await User.findOne({ webId: webId })
+    let user2 = await User.findOne(
+        { webId: webId }
+        );
 
     if (user2) {
         var query = { "_id": user2._id };
-        user2.ban = baneable
+        user2.ban = baneable;
 
         await User.findOneAndUpdate(query, user2, function (err, doc) {
             if (err) {
-                res.send(err)
+                res.send(err);
             } else {
-                res.send(doc)
+                res.send(doc);
             }
         });
     }
@@ -146,7 +155,9 @@ router.post("/users/add/admin", async (req, res) => {
 
     let admin = req.body.admin;
 
-    let user2 = await User.findOne({ webId: webId })
+    let user2 = await User.findOne(
+        { webId: webId }
+        )
 
     if (user2) {
         var query = { "_id": user2._id };

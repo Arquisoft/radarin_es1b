@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StickyFooter(props) {
   const web = props.webId
-  console.log(web + "eee")
+  //console.log(web + "eee")
   const classes = useStyles();
   const profile = useProfile(web);
 

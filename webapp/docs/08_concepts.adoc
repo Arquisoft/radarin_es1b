@@ -13,25 +13,38 @@ image:08-Crosscutting-Concepts-Structure-EN.png["Example Diagram"]
 El usuario tendrá un grupo de amigos. 
 Podrá compartir su ubicación con el fin de saber qué amigos se encuentran cerca de él.
 El usuario aparte de su ubicación podrá ver la de sus amigos para ver si alguno se encuentra cerca. 
-En las localizaciones se podrá compartir imágenes o videos y comentarios. 
+El usuario podrá chatear con sus amistades
 El usuario podrá crear, ver y decir que asistirá a reuniones.
 
 image:8.1DomainModel.png["Domain Model"]
 
 === Experiencia de usuario
 
-El objetivo de esta aplicación es proporcionarle al usuario una forma facil e intiutiva para relacionarse con sus amigos y hacer reuniones. De esta forma podrá compartir sus fotos y entrar en contacto con amigos cercanos. 
-A su vez proporcionarles una aplicación con una interfaz similar a la de otras redes sociales a las que estén familiarizados.
+El objetivo de esta aplicación es proporcionarle al usuario una forma facil e intiutiva para relacionarse con sus amigos y hacer reuniones, en una interfaz similar a la de otras redes sociales a las que estén familiarizados.
 
 === Conceptos de seguridad y protección
 
-Toda la información del usuario se encuentra almacenada en la BBDD, de manera que nadie excepto quien este autorizado por el mismo pueda acceder a sus datos.
+Los datos personales del usuario como el nombre o su foto estan almacenadas en su POD , otros datos como las localizaciones se guardan en la BBDD MongoDB, de manera que nadie excepto quien este autorizado por el mismo pueda acceder a sus datos.
 
 === Patrones de diseño y Arquitectura
 
-La arquitectura que se empleará es MVC (Modelo Vista Controlador). 
+React maneja una arquitectura Llamada Flux, que es similar en a MVC ya que también contiene , su modelo, vista y controladores pero esta pensada en un flujo de datos unidireccional.
 Para la aplicación creada en con React sera adaptable a dispositivos moviles.
 
+=== Decisiones técnicas
+
+Almacenar las ubicaciones, los chats entre usuarios y las reuniones creadas en MongoDB con el fin de mejorar la velocidad de la aplicación.
+Obtener solo los datos personales como el nombre y la foto de perfil de un usuario en SOLID.
+Es condición necesaria tener una cuenta en SOLID para acceder a Radarin.
+Hemos decidido que el perfil de Radarin y sus amigos se almacenen en MongoDB y no es SOLID pues nos parece intrusivo el echo de que tus amigos de SOLID sean tus amigos de Radarin.
+Para obtener a los amigos mas cercanos cogemos las coordenadas del usuario logueado y cogemos las coordenadas de sus amigos, hacemos el modulo para calcular la distancia y si supera un cierto limite arbitrario no notifica.
+Hemos desarrollado todo basado en una aplicación web adaptativa a vista movil. 
+
+=== Notificaciones
+
+Para que el usuario logueado sepa sin acceder al mapa si alguno de sus amigos esta cerca de el se ha creado un sistema de notificaciones , estas miran la distancia con sus amigos y si estan online, si es asi notifica. 
+Tambien notifican las solicitudes de amistades.
+Se intento hacer que notificase en segundo plano y no lo logramos por lo que decidimos notificar mediante ToastNotification dentro de la web.
 
 
 

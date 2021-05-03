@@ -47,7 +47,7 @@ image:3-1-Diagram.PNG["Example Diagram"]
 
 Radarin es un sistema descentralizado basado en la arquitectura SOLID; esta arquitectura fue creada por el padre de la web, Tim Berners-Lee. 
 Un sistema descentralizado es aquel donde el usuario posee sus propios datos y no son las empresas quienes comercian con estos. 
-Cada usuario tendrá un SOLID POD vinculado a su cuenta. Este POD será la unidad principal de almacenamiento donde el usuario almacenará todos sus datos. De esta forma, el usuario podrá decidir con quién comparte esa información, qué datos son públicos, cuáles son privados y negar el acceso a sus datos a quien sea y cuando quiera.  
+Cada usuario tendrá un SOLID POD vinculado a su cuenta. Este POD será la unidad principal de almacenamiento desde donde se extraigan los datos personales del usuario a exception de las localizaciones, el resto de datos se almacenara en MongoDB. De esta forma, el usuario podrá decidir con quién comparte esa información personal, qué datos son públicos, cuáles son privados y negar el acceso a sus datos a quien sea y cuando quiera.  
 En Radarin empleamos esta tecnología con el fin de proteger a nuestros usuarios.
 La aplicación web será escrita en JavaScript utilizando React, una biblioteca que facilitará la configuración de una interfaz de usuario. 
 Se espera que la aplicación funcione en todo tipo de dispositivos: tanto a nivel web como en dispositivos móviles.

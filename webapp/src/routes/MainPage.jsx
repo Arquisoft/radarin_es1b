@@ -1,14 +1,9 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -62,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7];
 const nombres = ["Alberto Freije", "Manuel Arroyo", "Samuel Rodríguez", "Beatriz Arbizu", "Guillermo Astorga", "Alejandro Álvarez ", "Xurde García"];
-const fotos = ["https://i.ibb.co/4RyrNRm/fotita.jpg","https://i.ibb.co/85kNKtx/avatar.jpg","https://i.ibb.co/85kNKtx/avatar.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg"]
+const fotos = ["https://i.ibb.co/4RyrNRm/fotita.jpg","https://i.ibb.co/0fh4JCk/Whats-App-Image-2021-05-03-at-15-58-47.jpg","https://i.ibb.co/85kNKtx/avatar.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/dQRKVGY/Whats-App-Image-2021-05-03-at-16-51-03.jpg","https://i.ibb.co/MpKW3Nm/IMG-20210503-165633.jpg","https://i.ibb.co/By37bRD/IMG1-0001.jpg"]
 
 export default function Album() {
   const classes = useStyles();
@@ -160,7 +155,7 @@ export default function Album() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" style={{ fontWeight: 800, fontFamily: 'sans-serif' , marginBottom: "0.5em"}}>
-              ¿QUIENES SOMOS?
+              ¿QUÍENES SOMOS?
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph style={{ marginBottom: "1em"}}>
              Somos el grupo ES1B de la asignatura de Arquitectura Software para la web del curso 2021 de la Universidad de Oviedo. 

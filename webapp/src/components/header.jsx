@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Header = (props) => {
+export const Header = () => {
   const classes = useStyles();
   return (
     <header id='header'>
@@ -73,31 +73,20 @@ export const Header = (props) => {
           <div className={classes.container}>
             <div className={classes.row}>
               <div className={classes.col ,classes.md ,classes.introtext}>
-                <Typography  variant="h3" align="center"  style={{fontWeight: 900, marginBottom: "5px",  fontFamily: 'sans-serif'}} >
-                  {props.data ? props.data.title : 'Loading'}
+                <Typography  variant="h2" align="center"  style={{fontWeight: 900, marginBottom: "5px",  fontFamily: 'sans-serif'}} >
+                  RADARIN
                   <span></span>
                </Typography>
                <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap" , justifyContent: "center"}}>
-                 <Typography  variant="p" align="center"  style={{fontWeight: 900, marginBottom: "5px", fontSize: "1em", fontFamily: 'sans-serif'}} >
+                 <Typography  variant="p" align="center"  style={{fontWeight: 900, marginBottom: "5px", fontSize: "1em", fontFamily: 'cursive'}} >
                   ENCONTRAR A TUS AMIGOS  
                   <span></span>
                </Typography>
-               <Typography  variant="p" align="center"  style={{fontWeight: 900, marginBottom: "5px", fontSize: "1em", fontFamily: 'sans-serif', paddingLeft: "0.5em"}} >
-                  NUNCA FUE TAN FACIL
+               <Typography  variant="p" align="center"  style={{fontWeight: 900, marginBottom: "5px", fontSize: "1em", fontFamily: 'cursive', paddingLeft: "0.5em"}} >
+                  NUNCA FUE TAN FÁCIL
                   <span></span>
                </Typography>
                </div>
-                {/* <a style={{fontFamily: 'sans-serif', textTransform: "uppercase", color: "#FFF", backgroundColor: "#5ca9fb",  backgroundImage: "linear-gradient(to right, #5ca9fb 0%, #6372ff 100%)", padding: "14px 34px", letterSpacing: "1px",margin: 0, 
-                fontSize: "15px",
-                fontWeight: 500,
-                borderRadius: "25px",
-                transition: "all 0.5s linear",
-                border: 0}}
-                  href="https://solidcommunity.net/register"
-                  className='btn btn-custom btn-lg page-scroll'
-                >
-                  Crear cuenta SOLID
-                </a>{' '} */}
               </div>
             </div>
           </div>

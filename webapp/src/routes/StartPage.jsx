@@ -1,97 +1,54 @@
-import React from 'react'
-import{updateLastTime} from '../api/api'
-import Button from "@material-ui/core/Button";
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import useProfile from '../components/profile/useProfile';
 
 
-const useStyles = makeStyles(() => ({
-  media: {
-    objectFit: 'contain'
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+    backgroundColor: "#6DDFE7"
+  },
+  main: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+  },
+  footer: {
+    padding: theme.spacing(3, 2),
+    marginTop: 'auto',
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
 }));
 
-
-
-const Start = () => {
+export default function StickyFooter(props) {
+  const web = props.webId
+  console.log(web + "eee")
   const classes = useStyles();
- 
+  const profile = useProfile(web);
 
-  return  <Grid container spacing={3} alignItems="center" justify="center" direction="column">
-    <Grid container item xs={12} sm={9} md={6} spacing={0} justify="center"
-          alignItems="stretch"
-          direction="column">
-		  {/*<Card>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            View & browse Solid profiles
-          </Typography>
-          <Typography component="p">
-            This app allows to view and browse through Solid WebID Profiles.
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button
-              size="small" color="primary"
-              component={Link}
-              variant={"contained"}
-              to={toProfile('https://angelo.veltens.org/profile/card#me')}>
-            Show example profile
-          </Button>
-        </CardActions>
-		  </Card>*/}
-    </Grid>
-    <Grid container item xs={12} sm={9} md={6} spacing={0} justify="center"
-          alignItems="stretch"
-          direction="column">
-      <Card>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            ¿Aún no tienes un perfil? 
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" component="a" href="https://solidcommunity.net/register">
-            Conseguir un perfil
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
-    <Grid container item xs={12} sm={9} md={6} spacing={0} justify="center"
-          alignItems="stretch"
-          direction="column">
-      <Card>
-        <CardMedia
-            component="img"
-            height="70"
-            className={classes.media}
-            alt="Solid Logo"
-            image="https://solid.mit.edu/assets/img/solid-logo.svg"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            ¿Qué es Solid?
-          </Typography>
-          <Typography component="p">
-            Solid es un nuevo proyecto dirigido por Tim Berners-Lee,
-            el inventor de la World Wide Web. El proyecto trata de cambiar
-            radicalmente cómo las aplicaciones Web funcionan a día de hoy,
-            basándose en la auténtica propiedad de datos y una mayor privacidad.
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" component="a" href="https://solid.mit.edu/">
-            Aprender más
-          </Button>
-        </CardActions>
-      </Card>
-    </Grid>
-  </Grid>;
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <Container component="main" className={classes.main} maxWidth="sm">
+         
+         <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap" , justifyContent: "center"}}>
+         
+         <img src="/img/about.png" alt="logo"  style={{marginBottom: "1em"}}/>
+
+         <Typography variant="h4" component="h1" style={{marginBottom: "0.5em" , fontFamily: 'sans-serif', fontWeight: 800}}>
+          BIENVENIDO A RADARIN
+        </Typography>
+        <Typography variant="h5" component="h3" style={{textTransform: "uppercase" , fontFamily: 'sans-serif', fontWeight: 700}}>
+         {(profile.fullName!=undefined) ? ""+profile.fullName : "Cargando..."}
+        </Typography>
+         
+        </div>
+      </Container>
+    </div>
+  );
 }
-
-export default Start

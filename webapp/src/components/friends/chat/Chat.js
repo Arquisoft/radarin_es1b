@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {getMessages} from '../../../api/api'
 import Messages from './Messages';
+import  ChatList from './ChatsList';
 
 const useStyles = makeStyles({
   table: {

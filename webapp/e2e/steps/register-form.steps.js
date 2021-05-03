@@ -5,7 +5,7 @@ defineFeature(feature, test => {
   
   beforeEach(async () => {
     //await page.setDefaultNavigationTimeout(0);
-    await global.page.goto('http://localhost:3000/', {waitUntil: 'load',
+    await global.page.goto('https://radarines1bwebapp.herokuapp.com/', {waitUntil: 'load',
         // Remove the timeout
         timeout: 60000 });
   })
@@ -64,15 +64,14 @@ defineFeature(feature, test => {
 
     when('Boton iniciarsesión', async () => {
       //await page.goto("https://radarines1bwebapp.herokuapp.com/#/friends");
-      await page.goto("http://localhost:3000/#/friends");
+      await page.goto("https://radarines1bwebapp.herokuapp.com/#/me");
     });
 
     then('An error message should be shown in the screen', async () => {
       await expect(page).toMatch("Radarin");
-      await expect(page).toMatch("Inicio");
-      await expect(page).toMatch("Mapa");
-      await expect(page).toMatch("Amigos");
-      await expect(page).toMatch("Perfil");
+      await expect(page).toMatch("Perfil de Beatriz");
+      await expect(page).toMatch("Perfil de solid : https://uo225211.solidcommunity.net/profile/card#me");
+      await expect(page).toMatch("Lista de amigos de Beatriz :");
     });
     
   });

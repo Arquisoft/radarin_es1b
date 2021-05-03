@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 const BottomNav = (props) => {
   const classes = useStyles();
   const usuario = props.usuario;
-  console.log("USUARIOO " + props.usuario)
+  //console.log("USUARIOO " + props.usuario)
   const [value, setValue] = React.useState('recents');
   const handleChange = async (event, newValue) => {
     setValue(newValue);

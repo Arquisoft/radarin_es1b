@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import Popover from '@material-ui/core/Popover';
 import Button from "react-bootstrap/Button";
 import NotificationContainer from './notifications/NotificationContainer';
-import { notifyPetition, getPendingFriends, nearFriends, getFriends } from '../api/api';
+import { notifyPetition, getPendingFriends, nearFriends, getFriends, getSearcByBan } from '../api/api';
 import { useWebId, LoggedIn } from "@solid/react";
 
 // Chat imports
 import TelegramIcon from '@material-ui/icons/Telegram';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 toast.configure();
 
@@ -53,6 +53,7 @@ export default function RadarinAppBar() {
   const [amigosNotificados, setAmigosNotificados] = useState([]);
   const [amigosPendientesNotificados, setAmigosPendientesNotificados] = useState([]);
   const [notIcon, setNotIcon] = useState("noti.png");
+  const [userIsBanned, setUserIsBanned] = useState("false");
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -83,49 +84,69 @@ export default function RadarinAppBar() {
   })
 
   async function nearbyFriends() {
-    let friends = []
-    getFriends(loggedUserId).then((result) => {
+    await getSearcByBan().then((result) => {
       result.forEach((e) => {
-        friends.push(e)
-      })
-      friends.forEach(async (f) => {
-        if (!amigosNotificados.includes(f)) {
-          var msg = await nearFriends(f, loggedUserId)
-          if (msg !== "No nearby user") {
-            amigo.push(msg + " está cerca de ti!");
-            toast.info(msg + " está cerca de ti!", {
-              autoClose: toastCloseTime,
-              className: classes.toast
-            });
-            amigosNotificados.push(f);
-            setNotIcon("notified.png")
-          }
+        if (loggedUserId == e) {
+          console.log("aqui")
+          setUserIsBanned('true')
         }
       })
     })
+    console.log(userIsBanned)
+    if (userIsBanned == 'false') {
+      let friends = []
+      getFriends(loggedUserId).then((result) => {
+        result.forEach((e) => {
+          friends.push(e)
+        })
+        friends.forEach(async (f) => {
+          if (!amigosNotificados.includes(f)) {
+            var msg = await nearFriends(f, loggedUserId)
+            if (msg !== "No nearby user") {
+              amigo.push(msg + " está cerca de ti!");
+              toast.info(msg + " está cerca de ti!", {
+                autoClose: toastCloseTime,
+                className: classes.toast
+              });
+              amigosNotificados.push(f);
+              setNotIcon("notified.png")
+            }
+          }
+        })
+      })
+    }
   }
 
   async function notifyFriendPetition() {
-    let friends = []
-    getPendingFriends(loggedUserId).then((result) => {
+    getSearcByBan().then((result) => {
       result.forEach((e) => {
-        friends.push(e)
-      })
-      friends.forEach(async (f) => {
-        if (!amigosPendientesNotificados.includes(f)) {
-          var friend = await notifyPetition(f, loggedUserId)
-          if (friend !== "No hay nuevas solicitudes") {
-            amigo.push(<div><a className={classes.links} href={'/#/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
-            toast.info(friend.nombre + " te ha enviado una solicitud de amistad!", {
-              autoClose: toastCloseTime,
-              className: classes.toast
-            });
-            amigosPendientesNotificados.push(f);
-            setNotIcon("notified.png")
-          }
+        if (loggedUserId == e) {
+          setUserIsBanned('true')
         }
       })
     })
+    if (userIsBanned == 'false') {
+      let friends = []
+      getPendingFriends(loggedUserId).then((result) => {
+        result.forEach((e) => {
+          friends.push(e)
+        })
+        friends.forEach(async (f) => {
+          if (!amigosPendientesNotificados.includes(f)) {
+            var friend = await notifyPetition(f, loggedUserId)
+            if (friend !== "No hay nuevas solicitudes") {
+              amigo.push(<div><a className={classes.links} href={'/#/profile?webId=' + encodeURIComponent(friend.webId)}> {friend.nombre}</a> te ha enviado una solicitud de amistad!</div>)
+              toast.info(friend.nombre + " te ha enviado una solicitud de amistad!", {
+                autoClose: toastCloseTime,
+                className: classes.toast
+              });
+              amigosPendientesNotificados.push(f);
+              setNotIcon("notified.png")
+            }
+          }
+        })
+      })
+    }
   }
 
   return (
@@ -146,7 +167,7 @@ export default function RadarinAppBar() {
             />
             </Button>
             <IconButton component={Link} to="/chat">
-              <TelegramIcon style = {{ color: 'white' }}/>
+              <TelegramIcon style={{ color: 'white' }} />
             </IconButton>
           </LoggedIn>
           <Popover

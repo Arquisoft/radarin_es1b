@@ -66,7 +66,7 @@ defineFeature(feature, test => {
     });
 
     when('I fill the data in the form and press submit', async () => {
-      await expect(page).toClick('button', { text: 'Iniciar Sesión' })
+      await expect(page).toClick('button')
       const [popup] = await Promise.all([
         new Promise<Page>((x) => page.once('popup', x)),
         page.evaluate(() => window.open('about:blank')),

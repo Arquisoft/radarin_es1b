@@ -15,8 +15,8 @@ import MainPage from '../routes/MainPage';
 
     if(webId!=null){
 
-      for(var i = 0; i<adminUsers.length;i++){
-
+      for(var i = 0; i<usersBan.length;i++){
+        
         if(webId==usersBan[i]){
           
           return  <StartPageBan />  

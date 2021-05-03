@@ -5,13 +5,9 @@ defineFeature(feature, test => {
   
   beforeEach(async () => {
     //await page.setDefaultNavigationTimeout(0);
-    await global.page.goto('http://localhost:3000/'
-  , {
-    waitUntil: 'load',
+    await global.page.goto('http://localhost:3000/', {waitUntil: 'load',
         // Remove the timeout
-        timeout: 60000
-    }
-    );
+        timeout: 60000 });
   })
 
   test('The user does not have a solid pod and will have a new pos', ({given,when,then}) => {
@@ -54,6 +50,7 @@ defineFeature(feature, test => {
 
     then('I should be redirected to the link', async () => {
       await expect(await page.url()).toBe("https://solid.mit.edu/");
+    });
   });
   
 
@@ -80,24 +77,4 @@ defineFeature(feature, test => {
     
   });
 });
-
-// FROM https://github.com/puppeteer/puppeteer/issues/3718 and radarin_en2b
-getNewPageWhenLoaded =  async () => {
-  return new Promise(x =>
-      browser.on('targetcreated', async target => {
-          if (target.type() === 'page') {
-              const newPage = await target.page();
-              const newPagePromise = new Promise(y =>
-                  newPage.once('domcontentloaded', () => y(newPage))
-              );
-              const isPageLoaded = await newPage.evaluate(
-                  () => document.readyState
-              );
-              return isPageLoaded.match('complete|interactive')
-                  ? x(newPage)
-                  : x(newPagePromise);
-          }
-      })
-  );
-};
 

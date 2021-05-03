@@ -17,7 +17,7 @@ defineFeature(feature, test => {
       
     });
 
-    when('Conseguir nuevo pod  ', async () => {
+    when('Conseguir nuevo pod', async () => {
       await page.click("a[href='https://solidcommunity.net/register']");
      
       const newPagePromise = getNewPageWhenLoaded();
@@ -43,7 +43,7 @@ defineFeature(feature, test => {
       
     });
 
-    when('Conseguir nuevo pod  ', async () => {
+    when('Conseguir nuevo pod', async () => {
       await page.click("a[href='https://solid.mit.edu/']");
      
       const newPagePromise = getNewPageWhenLoaded();

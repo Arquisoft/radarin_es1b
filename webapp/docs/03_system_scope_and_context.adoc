@@ -62,4 +62,6 @@ Se espera que la aplicación funcione en todo tipo de dispositivos: tanto a nive
 |React|Biblioteca de JavaScript de codigo abierto empleada para construir interfaces gráficas. 
 |Leaflet|Una biblioteca JavaScript de código abierto para mapas interactivos compatibles con dispositivos móviles.
 |Docker|Es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software.
+|Postman|Es una herramienta para hacer pruebas de peticiones REST.
+|Gatling|Es un marco de pruebas de rendimiento y carga de código abierto.
 |===

@@ -12,8 +12,8 @@ defineFeature(feature, test => {
     let email;
     let username;
 
-    given('An unregistered user', () => {
-      searchname="Irene"
+    given( 'A user without a pod', () => {
+      
       
     });
 
@@ -24,7 +24,7 @@ defineFeature(feature, test => {
       podSolidPage = await newPagePromise;
     });
 
-    then('A welcome message should be shown in the screen', async () => {
+    then('I should be redirected to https://solidcommunity.net/register', async () => {
       const pages = (await browser.pages());
       await expect(pages.length).toBe(3);
       await expect(await podSolidPage.url()).toBe("https://solidcommunity.net/register");
@@ -50,7 +50,7 @@ defineFeature(feature, test => {
       podSolidPage = await newPagePromise;
     });
 
-    then('A welcome message should be shown in the screen', async () => {
+    then('I should be redirected to the link', async () => {
       const pages = (await browser.pages());
       await expect(pages.length).toBe(3);
       await expect(await podSolidPage.url()).toBe("https://solid.mit.edu/");
@@ -65,7 +65,7 @@ defineFeature(feature, test => {
       placeholder="https://uo225211.solidcommunity.net/"
     });
 
-    when('I fill the data in the form and press submit', async () => {
+    when('Boton iniciarsesión', async () => {
       await expect(page).toClick('button')
       const [popup] = await Promise.all([
         new Promise<Page>((x) => page.once('popup', x)),

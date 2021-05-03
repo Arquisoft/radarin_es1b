@@ -28,6 +28,8 @@ const useStyles = makeStyles({
 
 const BottomNav = (props) => {
   const classes = useStyles();
+  const usuario = props.usuario;
+  console.log("USUARIOO " + props.usuario)
   const [value, setValue] = React.useState('recents');
   const handleChange = async (event, newValue) => {
     setValue(newValue);
@@ -51,7 +53,7 @@ const BottomNav = (props) => {
           <Profile webId={props.webId} />
         </Router>
         <Router path="/">
-           <Start webId={props.webId} />
+           <Start webId={props.webId} usuario = {usuario}/>
         </Router>
       </Switch>
       <BottomNavigation value={value} onChange={handleChange} showLabels className={classes.root} style={{ width: '100%', height: 'auto' }}>

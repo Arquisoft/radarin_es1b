@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 export default function StickyFooter(props) {
   const web = props.webId
   const usuario = props.usuario
-  //console.log(web + "eee")
   const classes = useStyles();
   const profile = useProfile(web);
 
@@ -40,7 +39,8 @@ export default function StickyFooter(props) {
          <div style={{display: "flex", flexDirection: "row", flexWrap: "wrap" , justifyContent: "center"}}>
          
          <img src="/img/about.png" alt="logo"  style={{marginBottom: "1em"}}/>
-         {(usuario=="user") ? <Typography variant="h4" component="h1" style={{marginBottom: "0.5em" , fontFamily: 'sans-serif', fontWeight: 800}}>
+         {(usuario==="1") ? 
+         <Typography variant="h4" component="h1" style={{marginBottom: "0.5em" , fontFamily: 'sans-serif', fontWeight: 800}}>
           BIENVENIDO A RADARIN
         </Typography> :  <Typography variant="h4" component="h1" style={{marginBottom: "0.5em" , fontFamily: 'sans-serif', fontWeight: 800}}>
           BIENVENIDO ADMINISTRADOR

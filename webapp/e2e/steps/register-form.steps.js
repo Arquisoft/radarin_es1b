@@ -25,17 +25,19 @@ defineFeature(feature, test => {
 
     when('Conseguir nuevo pod', async () => {
       await page.click("a[href='https://solidcommunity.net/register']");     
-      const newPagePromise = getNewPageWhenLoaded();
-      podSolidPage = await newPagePromise;
+      //const newPagePromise = getNewPageWhenLoaded();
+      //podSolidPage = await newPagePromise;
     });
 
     then('I should be redirected to https://solidcommunity.net/register', async () => {
-      const pages = (await browser.pages());
+      /**const pages = (await browser.pages());
       await expect(pages.length).toBe(3);
       await expect(await podSolidPage.url()).toBe("https://solidcommunity.net/register");
       await expect(await pages[2].url()).toBe("https://solidcommunity.net/register");
       await pages[2].close();
       browser.close();
+      */
+      await expect(await page.url()).toBe("https://solidcommunity.net/register");
     });
   });
 
@@ -48,18 +50,10 @@ defineFeature(feature, test => {
 
     when('Conseguir nuevo pod', async () => {
       await page.click("a[href='https://solid.mit.edu/']");     
-      const newPagePromise = getNewPageWhenLoaded();
-      podSolidPage = await newPagePromise;
     });
 
     then('I should be redirected to the link', async () => {
-      const pages = (await browser.pages());
-      await expect(pages.length).toBe(3);
-      await expect(await podSolidPage.url()).toBe("https://solid.mit.edu/");
-      await expect(await pages[2].url()).toBe("https://solid.mit.edu/");
-      await pages[2].close();
-      browser.close();
-    });
+      await expect(await page.url()).toBe("https://solid.mit.edu/");
   });
   
 

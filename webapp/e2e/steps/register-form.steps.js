@@ -9,8 +9,7 @@ defineFeature(feature, test => {
 
   test('The user does not have a solid pod and will have a new pos', ({given,when,then}) => {
     
-    let email;
-    let username;
+    let podSolidPage;
 
     given( 'A user without a pod', () => {
       
@@ -34,8 +33,7 @@ defineFeature(feature, test => {
 
   test('The user will know about solid', ({given,when,then}) => {
     
-    let email;
-    let username;
+    let podSolidPage;
 
     given('An unregistered user', () => {      
     });
@@ -57,6 +55,9 @@ defineFeature(feature, test => {
   
 
   test('The user is already registered in the site', ({ given, when, then }) => {
+
+    let placeholder;
+
     given('An already registered user', () => {
       placeholder="https://uo225211.solidcommunity.net/"
     });

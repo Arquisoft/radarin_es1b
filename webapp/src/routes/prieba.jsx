@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '100%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -62,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7];
 const nombres = ["Alberto Freije", "Manuel Arroyo", "Samuel Rodríguez", "Beatriz Arbizu", "Guillermo Astorga", "Alejandro Álvarez ", "Xurde García"];
+const fotos = ["https://i.ibb.co/4RyrNRm/fotita.jpg","https://i.ibb.co/85kNKtx/avatar.jpg","https://i.ibb.co/85kNKtx/avatar.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg","https://i.ibb.co/NrxChWL/fotoooo.jpg"]
 
 export default function Album() {
   const classes = useStyles();
@@ -174,8 +175,9 @@ export default function Album() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://i.ibb.co/nwp1pjv/01.jpg"
+                    image={fotos[index]}
                     title="Image title"
+                    style={{translateY:"50%"}}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">

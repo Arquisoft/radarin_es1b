@@ -53,6 +53,7 @@ defineFeature(feature, test => {
     });
   });
   
+  
 
   test('The user is already registered in the site', ({ given, when, then }) => {
 

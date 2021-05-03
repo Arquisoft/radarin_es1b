@@ -179,7 +179,7 @@ const Map = (props) => {
       </MapContainer>
 
       <IconButton id="refreshButton" onClick={onClickMeetButton.bind(this)}>
-        {createMeet ? <img id="imgButtonMeets" src="https://imgur.com/lGHY75A.png" /> : <img id="imgButtonMeets" src="https://www.olondriz.com/wp-content/uploads/2020/04/ambar-perrito-1.jpg" />}
+        {createMeet ? <img id="imgButtonMeets" src="https://imgur.com/PUuoI57.png" /> : <img id="imgButtonMeets" src="https://imgur.com/o2BuMLn.png" />}
       </IconButton>
     </div>
   )

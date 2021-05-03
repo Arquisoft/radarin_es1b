@@ -1,11 +1,13 @@
 [[section-system-scope-and-context]]
 == Alcance y contexto del sistema
 
-Radarin es un sistema descentralizado basado en SOLID para facilitar el encuentro entre amigos utilizando la localización del teléfono siempre 
+Radarin es un sistema pensado para usar junto a SOLID para facilitar el encuentro entre amigos utilizando la localización del teléfono siempre 
 y cuando haya sido autorizada por el usuario, permitiendo que cuando dos amigos se encuentran cerca esto pueda ser notificado, con el objetivo 
 de facilitar los encuentros. El sistema solamente almacenará localizaciones e instantes de tiempo en los que han ocurrido dichas localizaciones pero evitará almacenar cualquier otro tipo de información personal sobre los usuarios.
 
 === Contexto empresarial
+Para cumplir el requisito de compatibilidad con SOLID, Radarin maneajará el proceso de de autenticación a través de SOLID, donde el usuario se unirá usando su proveedor y, una vez que tengamos acceso a la cuenta accederemos a la información que se nos proporcione.
+Para servir al usuario la funcionalidad de localizaciones, amigos y chat, se hará uso de una base datos para almacenar la información necesaria.
 
 Para cumplir el requisito de la descentralización, Radarin empleará SOLID para el almacenamiento de los datos de los usuarios. Cada usuario tendrá un POD (lugar de almacenaje) independiente de los otros usuarios, y del que tendrá el control completo de sus datos.
 La aplicación se conectará con cada uno de los PODs, dependiendo de la información que necesite, para obtener o añadir la información adecuada.
@@ -20,13 +22,17 @@ image:3-1-Diagram.PNG["Example Diagram"]
 | Especifica qué usuarios se definen como su "amigo". Recibe la ubicación de todos ellos.
 | Proporciona su ubicación. 
 
-| POD
-| Registra los "amigos" del usuario.
-| Permite comprobar el listado de "amigos"
+| SOLID
+| Identifica los usuarios que se conecten al sistema.
+| Proporciona a los datos de SOLID de los usuarios que hayan dado los necesarios permisos.
 
 | Radarin
 | Localizaciones y definición de relaciones entre usarios (qué usuarios son amigos) 
 | Ubicaciones de los usuarios.
+
+| Mongo
+| Localizaciones, usuarios, mensajes y reuniones 
+| Ubicaciones de los usuarios, ubicaciones de las reuniones, relaciones entre usuarios y mensajes.
 
 | Comunicación con el usuario
 | 

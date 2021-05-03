@@ -127,5 +127,5 @@ _Es la parte de la aplicación que realizará las acciones de escritura y lectur
 === Nivel 3
 
 La base de datos se divide en 2 partes: el POD y la base de datos de Mongo.
-En el POD se almacenará la lista de amigos y en el Mongo las ubicaciones.
+En el POD se almacenará la información del usuario(nombre, imagen, etc) y en el Mongo las ubicaciones, la lista de amigos y usurios, mensajes entre usuarios y reuniones.
 El cliente en react intercambiara información con el servidor de Node.js que obtiene la información de la base de datos.

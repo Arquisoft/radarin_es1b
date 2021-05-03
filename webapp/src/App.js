@@ -7,8 +7,9 @@ import * as qs from 'query-string';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Profile from './components/profile';
 import NavBar from './components/NavBar';
-import { LoggedIn } from '@solid/react';
+import { LoggedIn, LoggedOut } from '@solid/react';
 import {getSearcByAdmin, getSearcByBan, getLastOnlineUsers} from './api/api'
+
 
 require("leaflet-easybutton");
 

@@ -3,7 +3,10 @@ import {useWebId} from '@solid/react';
 import BottomNav from './BottomNav';
 import BottomNavAdmin from './BottomNavAdmin';
 import StartPage from '../routes/StartPage';
+import StartPage3 from '../routes/StartPage3';
 import StartPageBan from '../routes/StartPageBaneado';
+import App from '../routes/App';
+import P from '../routes/prieba';
 
  const NavBar = (props) => {
     
@@ -40,7 +43,7 @@ import StartPageBan from '../routes/StartPageBaneado';
     }
     else{
 
-        return <StartPage />  
+        return <P/>  
         
     }
 

@@ -96,7 +96,6 @@ class SearchFriends extends React.Component {
 							onSubmit={ (e)=>this.handleChange(e)}
 							onChange={(e)=>this.handleChange(e)}
 						/>
-						{console.log("BUSCAR")}
 						<Button id="searchFriends" type="button" onClick={(e) => this.handleClick(e)}>
 							Buscar
 						</Button>

@@ -76,8 +76,8 @@ participant Servidor
 database Pod as "Pod del usuario"
 Usuario -> Cliente: Petición de vista de amigos
 Cliente --> Servidor: Petición de lista de amigos
-Servidor --> Pod: Consulta la lista de amigos
-Servidor <-- Pod: Responde con la lista de amigos
+Servidor --> Servidor: Consulta la lista de amigos
+Servidor <-- Servidor: Responde con la lista de amigos
 Cliente <-- Servidor: Responde con la lista de amigos solicitada
 Usuario <- Cliente: Responde con la vista de amigos
 ----
@@ -138,4 +138,39 @@ Servidor --> BD: Guarda el Meet en la BD
 Servidor <-- BD: Responde si fue existosa la operacion
 Cliente <-- Servidor: Responde si se consiguió crear
 Usuario <- Cliente: Ve en el mapa la nueva reunion creada
+----
+
+=== <Chat entre amigos>
+
+La aplicación tiene una vista que implementa un chat para poder conversar con tus amigos.
+
+.Al acceder a esta vista se realiza el siguiente proceso:
+. El usuario entra en la aplicación y se dirige a la vista de amigos
+. El cliente recive la petición y solicita al servidor la lista de amigos
+. El servidor consulta en la bbdd los amigos del usuario
+. Una vez tiene los amigos, se los devuelve al cliente
+. El cliente recibe la lista y le muetra la vista al usuario
+. El usuario pincha el amigo con el que quiere chatear
+. La aplicación solicita los mensajes que tienen entre ellos
+. El servidor recibe la patición y devuelve los mensajes
+. La aplicación devuelve la vista al usuario con el chat con su amigo
+
+[plantuml,"Friends chat diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Petición de vista de amigos
+Cliente --> Servidor: Petición de lista de amigos
+Servidor --> BD: Consulta la lista de amigos
+Servidor <-- BD: Responde con la lista de amigos
+Cliente <-- Servidor: Responde con la lista de amigos solicitada
+Usuario <- Cliente: Responde con la vista de amigos
+Usuario -> Cliente: Pincha en amigo con el que quiere chatear
+Cliente -> Servidor: Solicita mensajes entre usuario y amigo
+Servidor -> BD: Recupera el chat entre los participantes
+BD -> Servidor: Devuelve el chat
+Servidor -> Cliente: Devuelve la lista de mensajes solicitados
+Cliente -> Usuario: Proporciona la vista con el chat
 ----

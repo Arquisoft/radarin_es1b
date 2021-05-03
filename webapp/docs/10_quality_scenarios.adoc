@@ -9,7 +9,7 @@ image:10-DiagramaCalidad.png["Árbol de calidad para Radarin ES1B"]
 ==== Privacidad
 
 .Datos del Usuario
-La meta principal que se desea alcanzar es la protección de los datos del usuario final para que así se pueda evitar la descentralización de datos personales y con ello mejorar la privacidad de los usuarios. Para ello se emplea el sistema de PODs empleado por SOLID.
+La meta principal que se desea alcanzar es la protección de los datos del usuario final para que así se pueda evitar la descentralización de datos personales y con ello mejorar la privacidad de los usuarios. Para ello se emplea el sistema de PODs empleado por SOLID, de ahi se obtendrán datos de perfil del usuario. Por otro lado, respecto a las ubicaciones, no se llevará a un seguimiento de donde ha estado el usuario, simplemente se almacenará la última ubicación proporcionado.
 
 .Datos de la empresa
 Aunque la empresa no guarda los datos privados del usuario, esta guarda otros datos que se deberán de proteger para que no sean visibles por personas ajenas a la empresa.

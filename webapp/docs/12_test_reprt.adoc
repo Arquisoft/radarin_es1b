@@ -1,0 +1,11 @@
+[[section-technical-risks]]
+== Informe de pruebas
+
+=== Pruebas unitarias
+[options="header", width="100%"]
+Para realizar la covertura de pruebas de la aplicación Web, nos dedicamos a comprobar la creación de las clases que forman los componentes de la aplicación, asi como la comprobación de la llamada a los elementos que se crean en dichas clases. Tambien comprobamos los métodos que se cran con los componentes interactivos, como los eventos de click o de cambio de estado.
+Las pruebas unitarias emplean las librerias de enzyme par la comprobación de los eventos interactivos y de la creación de elementos. Para la comrpobación d elos métodos componenDidMount se utiliza la librería ReactDOM; y algunos casos emplean la libreria 
+La realización de estos test nos permite tener una covertura del alrrededor del 59% del código.
+
+=== Pruebasde aceptación
+Las pruebas de carge que se realizan son tres:

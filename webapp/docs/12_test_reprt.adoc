@@ -5,7 +5,7 @@
 [options="header", width="100%"]
 Para abordar la cobertura de pruebas de la aplicación Web, nos dedicamos a comprobar la creación de las clases que forman los componentes de la aplicación, así como la comprobación de la llamada a los elementos que se crean en dichas clases. También comprobamos los métodos que se crean con los componentes interactivos, como los eventos de click o de cambio de estado.
 Las pruebas unitarias emplean las librerías de Enzyme para la comprobación de los eventos interactivos y de la creación de elementos; para la comprobación de los métodos componentDidMount se utiliza la librería ReactDOM, y algunos casos emplean la libreria testing-library/jest-dom/extend-expect.
-La realización de estos test nos permite tener una cobertura del alrrededor del 59% del código.
+
 === Pruebas de aceptación
 Las pruebas de carga que se realizan son tres:
  - Prueba de redireccionamiento al crear un pod.
@@ -14,6 +14,9 @@ Las pruebas de carga que se realizan son tres:
 Se intentó realizar las pruebas de aceptación sobre el LoggedIn pero al ser componentes Solid en su mayor parte y además al formarse como una ventana emergente nos daban muchos errores de tiempo; por ello, se decidió no incluirla.
 Para hacer estas prueba se emplea Puppeteer.
 === Resultado de cobertura de código
+Con a realización de estos test se ha conseguido alcanzar una cobertura del alrrededor del 59% del código. Aunque no es la covertura que se planeo alcanzar, al menos se ha conseguido testear más de la mitad de la funcionalidad empeleada.
+
+=== Calidad de calidad de código
 El resultado obtenido en la cobertura de código es de una letra B.
 La mayoria de los issues que se ha obtenido son del estilo de código, siendo estos en su casis totalida del tipo info.
 

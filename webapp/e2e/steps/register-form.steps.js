@@ -18,8 +18,7 @@ defineFeature(feature, test => {
     });
 
     when('Conseguir nuevo pod', async () => {
-      await page.click("a[href='https://solidcommunity.net/register']");
-     
+      await page.click("a[href='https://solidcommunity.net/register']");     
       const newPagePromise = getNewPageWhenLoaded();
       podSolidPage = await newPagePromise;
     });
@@ -38,14 +37,11 @@ defineFeature(feature, test => {
     let email;
     let username;
 
-    given('An unregistered user', () => {
-      searchname="Irene"
-      
+    given('An unregistered user', () => {      
     });
 
     when('Conseguir nuevo pod', async () => {
-      await page.click("a[href='https://solid.mit.edu/']");
-     
+      await page.click("a[href='https://solid.mit.edu/']");     
       const newPagePromise = getNewPageWhenLoaded();
       podSolidPage = await newPagePromise;
     });

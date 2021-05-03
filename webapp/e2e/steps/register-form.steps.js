@@ -5,7 +5,7 @@ defineFeature(feature, test => {
   
   beforeEach(async () => {
     await page.setDefaultNavigationTimeout(0);
-    await global.page.goto('https://localhost:3000/'
+    await global.page.goto('http://localhost:3000/'
    /**  , {
     waitUntil: 'load',
         // Remove the timeout

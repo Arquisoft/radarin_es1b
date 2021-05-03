@@ -64,10 +64,9 @@ defineFeature(feature, test => {
 
     when('Boton iniciarsesión', async () => {
       await expect(page).toClick('button')
-      const [popup] = await Promise.all([
-        new Promise<Page>((x) => page.once('popup', x)),
-        page.evaluate(() => window.open('about:blank')),
-      ]);
+      const { page } = getTestState();
+
+      const [popup] = getPopUp();
       await expect(pop).toFillForm("form[class='custom-idp']", {
         placeholder: placeholder,
       });
@@ -99,3 +98,11 @@ getNewPageWhenLoaded =  async () => {
       })
   );
 };
+
+
+getPopUp = async()=>{
+  return Promise.all([
+    new Promise<Page>((x) => page.once('popup', x)),
+    page.evaluate(() => window.open('about:blank')),
+  ]);
+}

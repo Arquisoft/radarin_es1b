@@ -17,21 +17,26 @@ import {
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import Geocode from "react-geocode";
+
+import { addMeet } from "../../../../api/api";
+
 toast.configure();
 
 export default function MeetCreationDialog(props) {
   const [open, setOpen] = React.useState(props.open);
   const [name, setName] = React.useState("");
+  //const [create, setCreate]= React.useState(props.create)
   const [selectedDate, setSelectedDate] = React.useState(Date.now());
 
   const handleClose = () => {
     setOpen(false);
+    props.create(false)
   };
 
 
-  const handleCancel=()=>{
+  const handleCancel = () => {
     setOpen(false);
-    props.handleCancel();
   }
 
   const handleNameChange = (name) => {
@@ -57,13 +62,45 @@ export default function MeetCreationDialog(props) {
       toast.error("Introduce una fecha y hora posteriores a la actual.", { position: "top-center" });
     }
 
-
-
     if (check) {
-      
-      props.handleCreate(name,selectedDate);
+
+      saveMeet(props.meet)
       handleClose()
     }
+  }
+
+  function saveMeet(meet) {
+
+    var latlng = meet.latlng;
+    var date = selectedDate.getFullYear() + '-' + (selectedDate.getMonth() + 1) + '-' + selectedDate.getDate();
+    var time = selectedDate.getHours() + ":" + selectedDate.getMinutes() + ":" + selectedDate.getSeconds();
+
+    Geocode.fromLatLng(latlng.lat, latlng.lng).then(
+      (response) => {
+        let state, country;
+        for (let i = 0; i < response.results[0].address_components.length; i++) {
+          for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
+            switch (response.results[0].address_components[i].types[j]) {
+              case "administrative_area_level_1":
+                state = response.results[0].address_components[i].long_name;
+                break;
+              case "country":
+                country = response.results[0].address_components[i].long_name;
+                break;
+              default:
+                break;
+            }
+          }
+        }
+        addMeet(
+          meet.creator, latlng,
+          state, country, date, time, name);
+      },
+      (error) => {
+        console.log("No se ha podido guardar la localización")
+        console.error(error);
+      }
+    );
   }
 
   return (
@@ -115,11 +152,11 @@ export default function MeetCreationDialog(props) {
           </MuiPickersUtilsProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} color="primary">
+          <Button onClick={handleClose} color="primary">
             Cancelar
           </Button>
           <Button onClick={handleInput} color="primary">
-            Seleccionar ubicación
+            Crear
           </Button>
         </DialogActions>
       </Dialog>

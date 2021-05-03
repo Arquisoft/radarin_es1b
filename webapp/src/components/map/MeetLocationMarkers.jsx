@@ -16,23 +16,12 @@ export default class MeetLocationMarkers extends Component {
 
     }
 
-
-    componentDidUpdate() {
-        if (this.state.locs.length !== this.props.meets.length) {
-            this.setState({
-                locs: this.props.meets
-            })
-        }
-    }
-
-
-
     render() {
         return (
 
             <LayerGroup >
                 {console.log("UpdateMeets Marker")}
-                {this.state.locs.map((loc) => {
+                {this.props.meets.map((loc) => {
                     return loc.creator != this.state.webId ?
                         <Marker position={[loc.location[0], loc.location[1]]} icon={iconMeet}>
 

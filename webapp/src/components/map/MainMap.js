@@ -9,40 +9,26 @@ import { addLocation, addMeet, getMeetsForUser } from '../../api/api';
 import Geocode from "react-geocode";
 import useProfile from "../profile/useProfile";
 import MeetCreationDialog from './markers/dialog/MeetCreationDialog';
-import isThisHour from 'date-fns/isThisHour/index.js';
-
+import IconButton from '@material-ui/core/IconButton';
 
 
 const Map = (props) => {
   const [map, setMap] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
   const [createMeet, setCreateMeet] = useState(false);
-  const [meetName, setMeetName] = useState(null);
-  const [meetDate, setMeetDate] = useState(null);
   const { position, setPosition } = useContext(LocationsContext);
   const [locateButtonAction, setLocateButtonAction] = useState(false);
   const profile = useProfile(props.webId)
 
+  const [meetObjt, setMeetObjt] = useState(null);
+
   let propsAux = props;
 
-  const createMeetFunct =  useCallback((e)=> {
-    
-    if (createMeet) {
-      
-      alert("Creado meet, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-      saveMeet(e.latlng)
-      setCreateMeet(false)
-      cancelMeetCreation()
-    }
 
-  },[createMeet])
-  
   function useInitialice() {
 
-    if(map){
-      map.on('click', createMeetFunct/*.bind(this)*/);
-      
-    }
+
+
 
     useEffect(() => {
       if (map) {
@@ -50,21 +36,7 @@ const Map = (props) => {
           setView: false,
           watch: true
         })
-        map.on('locationfound', handleOnLocationFound)    
-        
-        
-
-        L.easyButton('<img src="https://imgur.com/lGHY75A.png" style="width:32px">', function (btn, map) {
-          if (showDialog) {
-            setShowDialog(false);
-          } else {
-            setShowDialog(true);
-          }
-        },"Añadir meet").addTo(map);
-
-        
-
-        
+        map.on('locationfound', handleOnLocationFound)
         L.easyButton('<img src="https://imgur.com/GIuLcjF.png" style="width:32px">', function (btn, map) {
           map.locate({
             setView: true
@@ -85,12 +57,15 @@ const Map = (props) => {
           setView: false
         })
         map.on('locationfound', handleOnLocationFound)
-        
-
       }
     }, 20000);
     return () => clearInterval(interval);
   });
+
+
+
+
+
 
   function handleOnLocationFound(e) {
     const latlng = e.latlng;
@@ -100,37 +75,7 @@ const Map = (props) => {
     saveLocation(latlng)
   }
 
-  function saveMeet(latlng) {
-    var date = meetDate.getFullYear() + '-' + (meetDate.getMonth() + 1) + '-' + meetDate.getDate();
-    var time = meetDate.getHours() + ":" + meetDate.getMinutes() + ":" + meetDate.getSeconds();
-    //setCreateMeet(false)
-    Geocode.fromLatLng(latlng.lat, latlng.lng).then(
-      (response) => {
-        let state, country;
-        for (let i = 0; i < response.results[0].address_components.length; i++) {
-          for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
-            switch (response.results[0].address_components[i].types[j]) {
-              case "administrative_area_level_1":
-                state = response.results[0].address_components[i].long_name;
-                break;
-              case "country":
-                country = response.results[0].address_components[i].long_name;
-                break;
-              default:
-                break;
-            }
-          }
-        }
-        addMeet(
-          propsAux.webId, latlng,
-          state, country, date, time, meetName);
-      },
-      (error) => {
-        console.log("No se ha podido guardar la localización")
-        console.error(error);
-      }
-    );
-  }
+
 
   function saveLocation(latlng) {
     Geocode.fromLatLng(latlng.lat, latlng.lng).then(
@@ -163,26 +108,43 @@ const Map = (props) => {
     );
   }
 
-  const cancelMeetCreation= useCallback(()=> {
-    setCreateMeet(false);
-    setMeetName(null);
-    setMeetDate(null);
-    
-  });
-
-  const setMeetData = useCallback((name, date) => {
-    setMeetName(name);
-    setMeetDate(date);
-    setCreateMeet(true);
-    setShowDialog(false);
-  });
 
 
 
-    useInitialice()
+
+
+  function onClickMeetButton() {
+
+    if (createMeet) {
+      setCreateMeet(false);
+      setShowDialog(false)
+      map.off('click')
+
+    } else {
+      setCreateMeet(true);
+      map.on('click', function (e) {
+        let meet = {
+          latlng: e.latlng,
+          creator: propsAux.webId,
+        }
+        setMeetObjt(meet)
+        setShowDialog(true)
+      }, [showDialog, createMeet])
+
+    }
+  }
+
+  function closeCreate(){
+    setCreateMeet(false)
+    setShowDialog(false)
+    onClickMeetButton()
+  }
+
+  useInitialice()
+
   return (
     <div>
-      { showDialog ? <MeetCreationDialog open={showDialog} handleCreate={setMeetData} handleCancel={cancelMeetCreation} /> : null}
+      { showDialog&&createMeet ? <MeetCreationDialog open={showDialog} meet={meetObjt} create={closeCreate} /> : null}
       <MapContainer
         whenCreated={(map => setMap(map))}
         center={[43.36, -5.90]}
@@ -215,7 +177,12 @@ const Map = (props) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
       </MapContainer>
+
+      <IconButton id="refreshButton" onClick={onClickMeetButton.bind(this)}>
+        {createMeet ? <img id="imgButtonMeets" src="https://imgur.com/lGHY75A.png" /> : <img id="imgButtonMeets" src="https://www.olondriz.com/wp-content/uploads/2020/04/ambar-perrito-1.jpg" />}
+      </IconButton>
     </div>
   )
 }

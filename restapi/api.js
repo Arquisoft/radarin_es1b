@@ -69,7 +69,7 @@ router.post("/users/status/update", async (req, res) => {
     if (user2 != null) {
         await user2.save();
         res.send(user2);
-    };
+    }
 
 
 })
@@ -109,9 +109,8 @@ router.post("/users/remove", async (req, res) => {
         { webId: userWebId },
             function (err) {
             if (err) {
-
-            } else {
-
+            } 
+            else {
             }
     });
 

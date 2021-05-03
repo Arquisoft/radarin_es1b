@@ -35,8 +35,6 @@ import MainPage from '../routes/MainPage';
         return <BottomNav webId={webId} usuario = {"1"} /> 
      
 
-        //return  (webId=="https://asw2021es1b.solidcommunity.net/profile/card#me") ? <BottomNavAdmin webId={webId}/> : <BottomNav webId={webId} />      
-
     }
     else{
 

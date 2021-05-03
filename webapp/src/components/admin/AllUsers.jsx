@@ -100,7 +100,7 @@ class AllUsers extends React.Component {
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  
 			  loader={<h4>Cargando...</h4>} //loader
-			  height={this.props.height}>
+			  height={'60vh'}>
 			 
 			  {this.resultQuery.map((webId) => (
 				    

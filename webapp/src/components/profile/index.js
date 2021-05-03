@@ -4,11 +4,6 @@ import ProfileContainer from "./Container";
 import{updateLastTime} from '../../api/api'
 
 const Index = ({webId}) => {
-
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
-
-    updateLastTime(webId, hoy );
       
     const profile = useProfile(webId);
 

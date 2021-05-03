@@ -4,7 +4,14 @@ const feature = loadFeature('./features/register-form.feature');
 defineFeature(feature, test => {
   
   beforeEach(async () => {
-    await global.page.goto('https://radarines1bwebapp.herokuapp.com/')
+    await page.setDefaultNavigationTimeout(0);
+    await global.page.goto('https://radarines1bwebapp.herokuapp.com/'
+   /**  , {
+    waitUntil: 'load',
+        // Remove the timeout
+        timeout: 0
+    }*/
+    );
   })
 
   test('The user does not have a solid pod and will have a new pos', ({given,when,then}) => {
@@ -64,8 +71,6 @@ defineFeature(feature, test => {
 
     when('Boton iniciarsesión', async () => {
       await expect(page).toClick('button')
-      const { page } = getTestState();
-
       const [popup] = getPopUp();
       await expect(pop).toFillForm("form[class='custom-idp']", {
         placeholder: placeholder,

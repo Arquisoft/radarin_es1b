@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 
+
 const useStyles = makeStyles(() => ({
   media: {
     objectFit: 'contain'
@@ -26,8 +27,8 @@ const Start = () => {
           direction="column">
       <Card>
         <CardContent>
-          <Typography gutterBottom variant="h2" component="h1">
-           Usted esta baneado
+          <Typography gutterBottom variant="h2" component="h1" style = {{fontWeight: 800}}>
+           USTED HA SIDO BANEADO
           </Typography>
         </CardContent>
       </Card>
@@ -37,8 +38,9 @@ const Start = () => {
           direction="column">
       <Card>
         <CardContent>
-          <Typography component="p">
-            se ha portado muy mal
+           <img src="/img/alert.png" alt="logo"  style={{marginBottom: "1em"}}/>
+          <Typography component="p" style = {{fontWeight: 800}}>
+            Ha sido baneado por un comportamiento indebido 
           </Typography>
         </CardContent>
       </Card>

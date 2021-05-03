@@ -16,22 +16,23 @@ import MainPage from '../routes/MainPage';
     if(webId!=null){
 
       for(var i = 0; i<usersBan.length;i++){
-        
+
         if(webId==usersBan[i]){
           
           return  <StartPageBan />  
 
         }
+      }
+
+      for(var i = 0; i<adminUsers.length;i++){
 
         if(webId==adminUsers[i]){
           
           return  <BottomNavAdmin webId={webId} usuario = {"admin"}/>     
 
         }
-  
       }
-
-     
+  
         return <BottomNav webId={webId} usuario = {"1"} /> 
      
 

@@ -77,7 +77,6 @@ class SearchFriends extends React.Component {
 			this.fetchData()      
 		}
 		else{
-			//console.error("No hay texto para buscar")
 			this.fetchData()
 		} 
 

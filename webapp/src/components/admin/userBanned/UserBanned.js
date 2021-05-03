@@ -14,7 +14,6 @@ import HowToRegIcon from '@material-ui/icons/HowToReg';
 function UserBan({ webId, fullName, imageSrc}) {
 
   function ChangeTarget(){
-    console.log("baneadooo")
     banUser(webId, "false")
   }
 

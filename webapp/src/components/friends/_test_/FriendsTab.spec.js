@@ -1,16 +1,10 @@
 import React from 'react';
-import {shallow, render} from 'enzyme';
+import {shallow} from 'enzyme';
 
 import FriendsTabs from '../FriendsTabs'
 import SearchFriends from '../SearchFriends';
 import PendingFriends from '../PendingFriends';
 import NewRequest from '../NewRequest';
-
-import CircularProgress from "@material-ui/core/CircularProgress";
-
-const literal = value => ({
-  toString: () => value
-});
 
 describe('Friend tabs container', function () {
    

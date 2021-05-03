@@ -1,6 +1,5 @@
 import React from 'react';
-import {shallow, render} from 'enzyme';
-
+import {shallow} from 'enzyme';
 import AllUsers from '../AllUsers';
 import OnlineUsers from '../OnlineUsers';
 import DeleteUsers from '../DeleteUsers';

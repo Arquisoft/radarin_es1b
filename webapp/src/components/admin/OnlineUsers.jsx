@@ -116,7 +116,6 @@ class OnlineUsers extends React.Component {
 			  dataLength={this.resultQuery.length} //tamaño de la lista de amigos
 			  loader={<h4>Cargando...</h4>} //loader
 			  height={this.props.height}>
-			  {console.log(this.resultQuery.length)}
 			  {this.resultQuery.map((webId) => (
 				     
 					<Friend key={webId} webId={webId}/>

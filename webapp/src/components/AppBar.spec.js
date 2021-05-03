@@ -18,7 +18,6 @@ describe('AppBar ', function () {
 
   it('shows an empty list', () => {
     const result = shallow(<AppBar/>);
-    console.log(result.debug())
     const not = result.find(Toolbar).find(Login);
     expect(not).toBeTruthy();
   });

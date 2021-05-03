@@ -4,7 +4,6 @@ import Friend from "../markers/FriendPopupManager"
 import Map from '../MainMap';
 import FriendsLocationMarkersFunc from '../FriendsLocationMarkersFunc';
 import MeetLocationMarkersFunc from"../MeetLocationMarkersFunc";
-import ReactDOM from 'react-dom';
 import { act } from 'react-dom/test-utils';
 
 const literal = value => ({

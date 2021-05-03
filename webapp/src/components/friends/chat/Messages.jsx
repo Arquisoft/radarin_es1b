@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import Fab from '@material-ui/core/Fab';
@@ -73,7 +72,6 @@ function Messages(props) {
           })          
           //setUpdate(!update)
         })
-        console.log(msgsList)
       }
 
     

@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'enzyme';
-import ChangeStatus, {idleLogout} from '../ChangeStatusContainer';
+import ChangeStatus from '../ChangeStatusContainer';
 
 
 test('ChangeStatus', () => {

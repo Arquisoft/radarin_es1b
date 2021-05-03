@@ -4,7 +4,6 @@ import Chip from '@material-ui/core/Chip';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import LoginBadge from '../LoginBadge';
-import Image from '../../profile/Image';
 
 describe('User is logged in', () => {
   describe('component', () => {

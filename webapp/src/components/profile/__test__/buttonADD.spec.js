@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, instance} from 'enzyme';
+import {shallow} from 'enzyme';
 import ButtonAddDelete from '../ButtonAddDelete';
 import { Button } from '@material-ui/core';
 import ReactDOM from 'react-dom';

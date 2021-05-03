@@ -69,9 +69,6 @@ defineFeature(feature, test => {
 
     then('An error message should be shown in the screen', async () => {
       await expect(page).toMatch("Radarin");
-      await expect(page).toMatch("Perfil de Beatriz");
-      await expect(page).toMatch("Perfil de solid : https://uo225211.solidcommunity.net/profile/card#me");
-      await expect(page).toMatch("Lista de amigos de Beatriz :");
     });
     
   });

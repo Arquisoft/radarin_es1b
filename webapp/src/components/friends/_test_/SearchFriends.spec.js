@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import SearchFriends from '../SearchFriends';
 import { Button } from '@material-ui/core';
 import Friend from "../../friendList/friend";
@@ -40,7 +40,6 @@ describe('Search ', function () {
     //expect(query).toBe(false);
     const searchname=result.state('searchName');
     expect(searchname).toBe("");
-    console.log(result.debug());
   });
   
 });

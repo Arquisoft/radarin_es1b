@@ -48,7 +48,6 @@ describe('MeetPOpup', () => {
     expect(mockCallBack.mock.calls.length>=0).toBeTruthy();
     result.find(Button).at(1).simulate('click');
     expect(mockCallBack.mock.calls.length>=0).toBeTruthy();
-    console.log(result.find(Button).debug())
   });
   it('MeetPOpup loger  asist', () => {   
     

@@ -21,8 +21,6 @@ const popupUri = 'https://solidcommunity.net/common/popup.html';
          return null;
  	}
 
-     //console.log("EL WEB QUE ME LLEGA PARA CERRAR ES EL SIGUIENTE .... " + webId)
-
        function ejecutar(web) {
 
          let webId = web

@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow} from 'enzyme';
 import Image from "../../../profile/Image";
-import LoadingFriend from "../LoadingPopup";
 import Friend from "../FriendPopup"
   
 const profile =

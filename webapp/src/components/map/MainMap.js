@@ -1,6 +1,6 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import L from 'leaflet';
-import { MapContainer, TileLayer, LayersControl, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, LayersControl, Marker, Popup } from 'react-leaflet';
 import FriendsLocationMarkersFunc from './FriendsLocationMarkersFunc';
 import MeetLocationMarkersFunc from "./MeetLocationMarkersFunc";
 import Friend from "./markers/FriendPopupManager"
@@ -107,8 +107,8 @@ const Map = (props) => {
           state, country, date, time);
       },
       (error) => {
-        console.log("No se ha podido guardar la localización")
-        console.error(error);
+        //console.log("No se ha podido guardar la localización")
+       //console.error(error);
       }
     );
   }

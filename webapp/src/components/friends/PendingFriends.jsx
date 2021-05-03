@@ -55,7 +55,6 @@ export default class PendingFriends extends Component {
   //funcion que aumenta la lista de amigos para la gente popular
   fetchMoreData = () => {
     const allFriends = this.props.friends; //almacena en una constante la lista de amigos
-    //console.log(this.props.friends)
     const shownFriends = allFriends.slice(0, this.state.items.length + this.props.fetchCount); //un array con aun mas amigos
     this.setState({
       items: shownFriends, //lista de amigos mas larga

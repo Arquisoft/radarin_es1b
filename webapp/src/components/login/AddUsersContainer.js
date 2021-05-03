@@ -19,7 +19,7 @@ class AddUsersContainer extends React.Component{
   
 
           } catch (e) {
-              //console.log("Error adding users to restapi.")
+              
            }
       }
 

@@ -130,7 +130,6 @@ export async function getFriendsLocations(webId) {
 }
 
 export async function addFriend(userWebId, friendwebId) {
-    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint + '/friends/add', {
         method: 'POST',
@@ -144,7 +143,6 @@ export async function addFriend(userWebId, friendwebId) {
 }
 
 export async function removeFriend(userWebId, friendwebId) {
-    //console.log("Eliminando de amigos amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint + '/friends/remove', {
         method: 'POST',
@@ -308,7 +306,6 @@ export async function getPendingFriends(webId) {
 
 export async function acceptPendingFor(loggedUserWebID, webId) {
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
-    //console.log("Aceptando: "+ webId)
     let response = await fetch(apiEndPoint + '/friends/accept', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -402,7 +399,6 @@ export async function deleteMeets(meetsIds) {
 
 // Menssages ----------------------------------- /msg
 export async function addMsg(from, to, msg) {
-    //console.log("Añadiendo amigos:"+userWebId +" ; "+friendwebId);
     const apiEndPoint = process.env.REACT_APP_API_URI || 'http://localhost:5000/api'
     let response = await fetch(apiEndPoint + '/msg/add', {
         method: 'POST',

@@ -1,6 +1,5 @@
 import React, { Component, useEffect } from 'react'
 import { LayerGroup, Marker, Popup } from 'react-leaflet';
-import { getMeetsForUser } from '../../api/api';
 import { iconMeet } from "./markers/IconMeet"
 import { iconOwnMeet } from "./markers/IconOwnMeet"
 import Meet from "./markers/MeetPopupManager"
@@ -31,7 +30,6 @@ export default class MeetLocationMarkers extends Component {
         return (
 
             <LayerGroup >
-                {console.log("UpdateMeets Marker")}
                 {this.state.locs.map((loc) => {
                     return loc.creator != this.state.webId ?
                         <Marker position={[loc.location[0], loc.location[1]]} icon={iconMeet}>

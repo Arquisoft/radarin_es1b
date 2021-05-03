@@ -46,6 +46,10 @@ Para que el usuario logueado sepa sin acceder al mapa si alguno de sus amigos es
 Tambien notifican las solicitudes de amistades.
 Se intento hacer que notificase en segundo plano y no lo logramos por lo que decidimos notificar mediante ToastNotification dentro de la web.
 
+=== Internacionalización 
+
+Hemos decidido realizar toda la aplicación en español no obstante si se decidiese internacionalizar la cantidad de texto a traducir seria muy pequeña pues mucho del texto que se usa se extrae de SOLID. 
+
 
 
 

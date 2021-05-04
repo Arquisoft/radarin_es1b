@@ -47,10 +47,10 @@ _Test de login y logout. Tasa: 2 usuarios/segundo_
 image:12-2.2-Diagram.PNG["TestLoginLogout_120"]
 
 _Test de enviar Mensaje. Tasa: 0.83 usuarios/segundo_
-image:12-3.1-Diagram.PNG["TestEnviarMensaje_50"]
+image:12-3.1-Diagram.png["TestEnviarMensaje_50"]
 
 _Test de enviar Mensaje. Tasa: 2 usuarios/segundo_
-image:12-3.2-Diagram.PNG["TestEnviarMensaje_120"]
+image:12-3.2-Diagram.png["TestEnviarMensaje_120"]
 
 _Test de enviar solicitud de amistad. Tasa: 0.83 usuarios/segundo_
 image:12-4.1-Diagram.PNG["TestEnviarSolicitud_50"]

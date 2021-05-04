@@ -8,17 +8,19 @@ Las pruebas unitarias emplean las librerías de Enzyme para la comprobación de 
 
 === Pruebas de aceptación
 Las pruebas de carga que se realizan son tres:
+
  - Prueba de redireccionamiento al crear un pod.
- - Prueba de redireccionamiento a saber más de Solid
+ - Prueba de redireccionamiento a saber más de Solid.
  - Intento de ir a una ventana a la cual no podemos acceder al no estar registrado.
+
 Se intentó realizar las pruebas de aceptación sobre el LoggedIn pero al ser componentes Solid en su mayor parte y además al formarse como una ventana emergente nos daban muchos errores de tiempo; por ello, se decidió no incluirla.
 Para hacer estas prueba se emplea Puppeteer.
+
 === Resultado de cobertura de código
-Con a realización de estos test se ha conseguido alcanzar una cobertura del alrrededor del 59% del código. Aunque no es la covertura que se planeo alcanzar, al menos se ha conseguido testear más de la mitad de la funcionalidad empeleada.
+Con la realización de estos tests se ha conseguido alcanzar una cobertura del alrededor del 59% del código. Aunque no es la cobertura que se planeó alcanzar, al menos se ha conseguido testear más de la mitad de la funcionalidad implementada.
 
 === Calidad de calidad de código
 El resultado obtenido en la cobertura de código es de una letra B.
-La mayoria de los issues que se ha obtenido son del estilo de código, siendo estos en su casis totalida del tipo info.
+La mayoría de los issues que se han obtenido son del estilo de código, siendo estos en su casi su totalidad del tipo info.
 
-
-=== Pruebasde carga
+=== Pruebas de carga

@@ -296,7 +296,7 @@ Usuario <- Cliente: Muestra la lista filtrada
 
 Permite al administrador eliminar usuarios de la aplicación.
 
-.El proceso de busqueda de usuarios seguiría los siguientes pasos:
+.El proceso de búsqueda de usuarios seguiría los siguientes pasos:
 . El administrador accede a la pestaña eliminar usuario.
 . El cliente pide al servidor la lista de usuarios.
 . El servidor pide a la base de datos la lista de usuarios.

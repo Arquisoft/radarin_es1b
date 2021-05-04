@@ -6,11 +6,9 @@ y cuando haya sido autorizada por el usuario, permitiendo que cuando dos amigos 
 de facilitar los encuentros. El sistema solamente almacenará localizaciones e instantes de tiempo en los que han ocurrido dichas localizaciones pero evitará almacenar cualquier otro tipo de información personal sobre los usuarios.
 
 === Contexto empresarial
-Para cumplir el requisito de compatibilidad con SOLID, Radarin maneajará el proceso de de autenticación a través de SOLID, donde el usuario se unirá usando su proveedor y, una vez que tengamos acceso a la cuenta accederemos a la información que se nos proporcione.
-Para servir al usuario la funcionalidad de localizaciones, amigos y chat, se hará uso de una base datos para almacenar la información necesaria.
+La aplicacion almacena únicamente datos no privados de los usuarios. Es decir, datos sensibles como los datos personales del usuario se quedan en SOLID, pero localizaciones, amistad, chat,... se alamacenan en MongoDB.
 
-Para cumplir el requisito de la descentralización, Radarin empleará SOLID para el almacenamiento de los datos de los usuarios. Cada usuario tendrá un POD (lugar de almacenaje) independiente de los otros usuarios, y del que tendrá el control completo de sus datos.
-La aplicación se conectará con cada uno de los PODs, dependiendo de la información que necesite, para obtener o añadir la información adecuada.
+Este proceso de almacenaje de las localizaciones es cíclico. De este modo siempre están disponibles para cuando sus "amigos" quieran consultarla.
 
 image:3-1-Diagram.PNG["Example Diagram"]
 
@@ -22,16 +20,13 @@ image:3-1-Diagram.PNG["Example Diagram"]
 | Especifica qué usuarios se definen como su "amigo". Recibe la ubicación de todos ellos.
 | Proporciona su ubicación. 
 
-| SOLID
-| Identifica los usuarios que se conecten al sistema.
-| Proporciona a los datos de SOLID de los usuarios que hayan dado los necesarios permisos.
 
 | Radarin
 | Localizaciones y definición de relaciones entre usarios (qué usuarios son amigos) 
 | Ubicaciones de los usuarios.
 
-| Mongo
-| Localizaciones, usuarios, mensajes y reuniones 
+| MongoDB
+| Localizaciones, usuarios, amistades, mensajes y reuniones 
 | Ubicaciones de los usuarios, ubicaciones de las reuniones, relaciones entre usuarios y mensajes.
 
 | Comunicación con el usuario

@@ -34,23 +34,18 @@ when your infrastructure is more complex.
 * When your (hardware) stakeholders prefer other kinds of diagrams rather than the deployment diagram, let them use any kind that is able to show nodes and channels of the infrastructure.
 ****
 
-El modelo de diseño empleado es MVC (Modelo Vista-Controlador). Siguiendo este patrón obtenemos un desacoplamiento del modelo. Además, obtendremos un controlador común a todas las vistas, particularizando estas a cada uno  las vistas (en principio dos: ordenadores y móviles).
-
 image:7.1Diagrama-Despliegue.png["Diagrama de Despliegue de la aplicación"]
 
 Motivación::
 
-El principal objetivo es conseguir una aplicación con la misma funcionalidad en dos grupos de dispositivos diferenciados: ordenadores  y móviles; con una implementación  los más eficiente posible, es decir, común (en lo posible) a ambos. 
+El principal objetivo es conseguir una aplicación con la misma funcionalidad en dos grupos de dispositivos diferenciados: ordenadores  y móviles; con una implementación  que se adapta a cada uno de estos
 
 
 Rasgos de Rendimiento y/o Calidad::
 
 - Los datos se almacenarán en la BD, ya que el alamacenamiento en Solid es muy costoso a nivel de rendimiernto para la aplicación. Por lo tanto, Radarin no almacenará ningún dato en Solid, pero solo permitirá iniciar sesión en la aplicación a traves de él.
-- Gracias al MVC, las vistas son diferentes para ordenadores y móviles, pero el resto de capas (negocio, persistencia,...) son comunes para cada dispositivo.
+- Las vistas son idénticas para todos los dispositivos. Pero responden al tamaño de la pantalla y se adaptan a ella
 - La aplicación se desplegará en Heroku, y será desde donde el controlador gestione las vistas y el acceso a la capa de persistencia.
-
-
-=== Diagrama MVC
 
 [role="arc42help"]
 ****
@@ -64,6 +59,5 @@ Describe (usually in a combination of diagrams, tables, and text):
 For multiple environments or alternative deployments please copy that section of arc42 for all relevant environments.
 ****
 
-image:Diagrama_07MVC.PNG["MVC Diagram"]
 
 

@@ -68,9 +68,9 @@ _Tabla 1: Objetivos de Calidad_
 [options="header",cols="1,1"]
 |===
 |Objetivo|Detalles
-| _Privacidad_ | _Se mostrará la información del usuario que de permiso a utilizar y no se almacenará en la base da datos mas información de la necesaria para utilizar la aplicación de forma óptima._
 | _Usabilidad_ | _Utilizar la aplicación debería resultar en un proceso sencillo e intuitivo para el usuario final._
 | _Rendimiento_ | _La aplicación debe responder a la interacción del usuario empleando el menor tiempo posible._
+| _Privacidad_ | _Se mostrará la información del usuario que dé permiso a utilizar y no se almacenará en la base de datos más información de la necesaria para utilizar la aplicación de forma óptima._
 | _Mantenibilidad_ | _La arquitectura de la aplicación debe permitir añadir o modificar la funcionalidad de la misma con el menor número posible de cambios._
 | _Testeabilidad_ | _La aceptación y la carga de la aplicación deben ser sometidas a pruebas unitarias realizadas de forma automática en el propio servidor._
 |===

@@ -5,11 +5,13 @@
 [options="header"]
 |===
 | Term         | Definition
-| POD     | Personal Online Data-unit
-| W3C    | World Wide Web Consortium (Estándares para las páginas web)
-| Hooks  | API de React que permite asignar estados y otras características de React a los componentes de la aplicación, sin necesidad de construir clases expresamente para ello 
-| MVC | Modelo-Vista-Controlador. Patrón arquitectónico de diseño de software que divide la aplicación en tres grandes capas: una destinada a la lógica de negocio (Modelo); una destinada a la interfaz de usuario (Vista) y una capa intermedia que captura la interacción del usuario, realiza las operaciones necesarias en la lógica de negocio y lo refleja en la vista (Controlador).
-| W3C | World Wide Web Consortium. Comunidad internacional dedicada al desarrollo de estándares y especificaciones web con el objetivo de garantizar que los desarrolladores construyan sitios web de calidad accesibles para todo tipo de usuarios.
-| Db | Término abreviado para referirse a la base de datos de MongoDB
+| POD     | Personal Online Data-unit.
+| Hooks  | API de React que permite asignar estados y otras características de React a los componentes de la aplicación, sin necesidad de construir clases expresamente para ello.
+|Amigo| Usuario de la apliación que tiene una relación de amistad recíproca con otro usuario.
+|Usuario| Persona que ha iniciado sesión en la apliación.
+|Administrador| Usuario con privilegios por encima del resto de usuarios.
+|Bannear| Prohibir temporal o permanentemente el acceso a la aplicación a un usuario.
+| Db | Término abreviado para referirse a la base de datos de MongoDB.
+|Meet| Reunión localizada en un lugar a una hora y un día determinados por el usuario.
 |===
 

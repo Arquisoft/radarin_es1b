@@ -22,3 +22,48 @@ La mayoria de los issues que se ha obtenido son del estilo de código, siendo es
 
 
 === Pruebasde carga
+Con estas pruebas comprobamos como se comportaría la aplicación frente a una gran cantidad de usuarios simultáneos. Se han comprobado las acciones más habituales que realizaría un usuario que interaccionase con la aplicación que son:
+- Login y logout
+- Búsqueda de amigos
+- Enviar un mensaje
+- Enviar una solicitud de amistad
+- Acceso al mapa
+- Creación de un meet
+Para todos ellos se han creado dos casos, uno que prueba la reacción ante dos usuarios simultáneos durante 60 segundos, es decir, 120 usuarios en un minuto; y otro que comprueba el acceso de 50 usuarios distribuidos uniformemente durante 60 segundos, lo que implicaría una tasa de 0.83 usuarios/segundo.
+Los resultados de estas pruebas han sido notablemente buenos y se muestran a continuación un diagrama general de respuesta de cada uno.
+
+_Test de búsqueda de un amigo. Tasa: 0.83 usuarios/segundo_
+image:12-1.1-Diagram.PNG["TestBuscarAmigo_50"]
+
+_Test de búsqueda de un amigo. Tasa: 2 usuarios/segundo_
+image:12-1.2-Diagram.PNG["TestBuscarAmigo_120"]
+
+_Test de login y logout. Tasa: 0.83 usuarios/segundo_
+image:12-2.1-Diagram.PNG["TestLoginLogout_50"]
+
+_Test de login y logout. Tasa: 2 usuarios/segundo_
+image:12-2.2-Diagram.PNG["TestLoginLogout_120"]
+
+_Test de enviar Mensaje. Tasa: 0.83 usuarios/segundo_
+image:12-3.1-Diagram.PNG["TestEnviarMensaje_50"]
+
+_Test de enviar Mensaje. Tasa: 2 usuarios/segundo_
+image:12-3.2-Diagram.PNG["TestEnviarMensaje_120"]
+
+_Test de enviar solicitud de amistad. Tasa: 0.83 usuarios/segundo_
+image:12-4.1-Diagram.PNG["TestEnviarSolicitud_50"]
+
+_Test de enviar solicitud de amistad. Tasa: 2 usuarios/segundo_
+image:12-4.2-Diagram.PNG["TestEnviarSolicitud_120"]
+
+_Test de acceso a mapa. Tasa: 0.83 usuarios/segundo_
+image:12-5.1-Diagram.PNG["TestMap_50"]
+
+_Test de acceso a mapa. Tasa: 2 usuarios/segundo_
+image:12-5.2-Diagram.PNG["TestMap_120"]
+
+_Test de creación de meet. Tasa: 0.83 usuarios/segundo_
+image:12-6.1-Diagram.PNG["TestMeet_50"]
+
+_Test de creación de meet. Tasa: 2 usuarios/segundo_
+image:12-6.2-Diagram.PNG["TestMeet_120"]

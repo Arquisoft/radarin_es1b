@@ -36,7 +36,7 @@ Al iniciar la aplicación el usuario debe iniciar sesión con SOLID para acceder
 
 .El proceso de logueo seguiría los siguientes pasos:
 . El usuario entra en la aplicación y solicita loguearse
-. Se le pasa un formulario para rellenar los credentials
+. Se le pasa un formulario para rellenar las credenciales
 . El usuario rellena el formulario con sus credenciales
 . Se realiza una autenticación de la información aportada
 . Se responde autorizando o denegando el acceso dependiendo del resultado de la autenticación
@@ -173,4 +173,344 @@ Servidor -> BD: Recupera el chat entre los participantes
 BD -> Servidor: Devuelve el chat
 Servidor -> Cliente: Devuelve la lista de mensajes solicitados
 Cliente -> Usuario: Proporciona la vista con el chat
+----
+
+=== <Notificaciones>
+
+La aplicación implementa dos tipos de notificaciones:
+.Notificaciones de amigos cercanos. Notifica al usuario cuando hay amigos suyos online cerca de él en un radio arbitrario y sigue el siguiente proceso:
+. El usuario accede a la aplicación.
+. Se recive la petición automáticamente y se solicita la lista de amigos al servidor.
+. El servidor consulta en la bbdd los amigos del usuario.
+. La base de datos devuelve la lista de amigos al servidor.
+. El servidor devuelve la lista de amigos.
+. El cliente recibe la lista de amigos y pide al servidor que para cada amigo compruebe si cumple los requisitos.
+. El servidor consulta a la base de datos la última ubicación del usuario y su estado.
+. La base de datos devuelve la ubicación y el estado.
+. El servidor recibe la ubicación y el estado y devuelve al cliente el amigo en caso de cumplir los requisitos.
+. El cliente recibe el nombre del amigo y le muestra la notificación al usuario.
+
+[plantuml,"Near friends notifications diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la aplicación
+Cliente --> Servidor: Petición de lista de amigos
+Servidor --> BD: Consulta la lista de amigos
+Servidor <-- BD: Responde con la lista de amigos
+Cliente <-- Servidor: Devuelve la lista de amigos
+Cliente --> Servidor: Pide que se comprueben los requisitos para cada amigo
+Servidor -> BD: Pide ubicación y estado
+Servidor <-- BD: Devuelve ubicación y estado
+Cliente <- Servidor: Devuelve el amigo
+Usuario <- Cliente: Notifica al usuario
+----
+.Notificaciones de peticiones de amistad. Notifica al usuario cuando alguien le envía una solicitud de amistad. Sigue los siguientes pasos:
+. El usuario accede a la aplicación.
+. Se recive la petición automáticamente y se solicita la lista de solicitudes de amistad pendientes del usuario.
+. El servidor consulta en la bbdd las solicitudes pendientes.
+. La base de datos devuelve la lista de solicitudes.
+. El servidor devuelve la lista de solicitudes.
+. El cliente recibe la lista de amigos y pide al servidor que le devuelva el nombre y webId del amigo que le ha enviado la solicitud.
+. El servidor consulta a la base de datos el nombre y webId del amigo que ha enviado la solicitud.
+. La base de datos devuelve el amigo.
+. El servidor recibe el amigo y se lo envía al cliente.
+. El cliente recibe el nombre del amigo y su webId y le muestra la notificación al usuario.
+
+[plantuml,"Pending friends notifications diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la aplicación
+Cliente --> Servidor: Petición de lista de solicitudes de amistad
+Servidor --> BD: Consulta la lista de solicitudes
+Servidor <-- BD: Responde con la lista de solicitudes
+Cliente <-- Servidor: Devuelve la lista de solicitudes
+Cliente --> Servidor: Pide a qué amigo corresponde el webId de la petición
+Servidor -> BD: Pide nombre y webId del amigo
+Servidor <-- BD: Devuelve nombre y webId
+Cliente <- Servidor: Devuelve el amigo
+Usuario <- Cliente: Notifica al usuario
+----
+
+
+=== <Búsqueda de usuarios para administrador>
+
+Permite al administrador filtrar la lista de usuarios escribiendo el nombre del usuario
+
+.El proceso de búsqueda de usuarios seguiría los siguientes pasos:
+. El administrador accede a la pestaña usuario sistema e introduce el nombre del usuario del nombre que quiere buscar.
+. El cliente pide al servidor que busque el nombre.
+. El servidor pide a la base de datos que encuentre el nombre en la lista de usuarios.
+. La base de datos devuelve la lista filtrada.
+. El servidor devuelve la lista filtrada.
+. El cliente muestra al administrador la lista filtrada.
+
+
+[plantuml,"Search users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de búsqueda de usuarios
+Cliente --> Servidor: Envío del nombre a buscar
+Servidor --> BD: Consulta la lista de usuarios con ese nombre
+Servidor <-- BD: Responde con la lista filtrada
+Cliente <-- Servidor: Devuelve la lista filtrada
+Usuario <- Cliente: Muestra la lista filtrada
+----
+
+=== <Búsqueda de usuarios online para administrador>
+
+Permite al usuario saber qué usuarios se encuentran online.
+
+.El proceso de búsqueda de usuarios seguiría los siguientes pasos:
+. El administrador accede a la pestaña online.
+. El cliente pide al servidor la lista de usuarios online.
+. El servidor pide a la base de datos que filtre los usuarios que están online.
+. La base de datos devuelve la lista filtrada.
+. El servidor devuelve la lista filtrada.
+. El cliente muestra al administrador la lista.
+
+
+[plantuml,"Online users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de búsqueda de usuarios online
+Cliente --> Servidor: Petición de búsqueda de usuarios online
+Servidor --> BD: Petición de filtrado por estado online del usuario
+Servidor <-- BD: Responde con la lista filtrada
+Cliente <-- Servidor: Devuelve la lista filtrada
+Usuario <- Cliente: Muestra la lista filtrada
+----
+
+=== <Eliminación de usuarios para administrador>
+
+Permite al administrador eliminar usuarios de la aplicación.
+
+.El proceso de busqueda de usuarios seguiría los siguientes pasos:
+. El administrador accede a la pestaña eliminar usuario.
+. El cliente pide al servidor la lista de usuarios.
+. El servidor pide a la base de datos la lista de usuarios.
+. La base de datos devuelve la lista.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+. El administrador pulsa el botón eliminar de un usuario.
+. El cliente envía al servidor el usuario.
+. El servidor pide a la base de datos que borre el usuario y esta lo borra.
+
+
+[plantuml,"Delete users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de eliminación de usuarios
+Cliente --> Servidor: Petición de la lista de usuarios
+Servidor --> BD: Petición de la lista de usuarios
+Servidor <-- BD: Devuelve la lista de usuarios
+Cliente <-- Servidor: Devuelve la lista de usuarios
+Usuario <- Cliente: Muestra la lista al administrador
+Usuario -> Cliente: Petición de borrado de un usuario
+Cliente -> Servidor: Petición de borrado del usuario
+Servidor -> BD: Petición y borrado del usuario
+----
+
+=== <Banneo usuarios para administrador>
+
+Da al administración la capacidad de bannear a un usuario de la aplicación.
+
+.El proceso de banneo de un usuario seguiría los siguientes pasos:
+. El administrador accede a la pestaña bannear usuario.
+. El cliente pide al servidor la lista de usuarios.
+. El servidor pide a la base de datos la lista de usuarios.
+. La base de datos devuelve la lista.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+. El administrador pulsa el botón ban de un usuario.
+. El cliente envía al servidor el usuario.
+. El servidor pide a la base de datos que cambie el estado del usuario a banned.
+. La base de datos cambia el estado del usuario.
+
+
+[plantuml,"Ban users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de banneo de usuarios
+Cliente --> Servidor: Petición de la lista de usuarios
+Servidor --> BD: Petición de la lista de usuarios
+Servidor <-- BD: Devuelve la lista de usuarios
+Cliente <-- Servidor: Devuelve la lista de usuarios
+Usuario <- Cliente: Muestra la lista al administrador
+Usuario -> Cliente: Petición de banneo de un usuario
+Cliente -> Servidor: Petición de banneo del usuario
+Servidor -> BD: Petición y banneo del usuario
+----
+
+=== <Desbannear de usuarios para administrador>
+
+Permite al administrador desbannear un usuario de la aplicación.
+
+.El proceso de desbanneo de usuarios seguiría los siguientes pasos:
+. El administrador accede a la pestaña desbannear usuario.
+. El cliente pide al servidor la lista de usuarios banneados.
+. El servidor pide a la base de datos la lista de usuarios banneados.
+. La base de datos devuelve la lista.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+. El administrador pulsa el botón unban de un usuario.
+. El cliente envía al servidor el usuario.
+. El servidor pide a la base de datos que cambie el estado del usuario a unbanned.
+. La base de datos cambia el estado del usuario.
+
+
+[plantuml,"Unban users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de desbanneo de usuarios
+Cliente --> Servidor: Petición de la lista de usuarios
+Servidor --> BD: Petición de la lista de usuarios
+Servidor <-- BD: Devuelve la lista de usuarios
+Cliente <-- Servidor: Devuelve la lista de usuarios
+Usuario <- Cliente: Muestra la lista al administrador
+Usuario -> Cliente: Petición de desbanneo de un usuario
+Cliente -> Servidor: Petición de desbanneo del usuario
+Servidor -> BD: Petición y desbanneo del usuario
+----
+
+=== <Eliminación de usuarios administradores>
+
+Permite a un administrador gestionar los administradores de la aplicación.
+
+.El proceso de eliminación de administradores seguiría los siguientes pasos:
+. El administrador accede a la pestaña administradores.
+. El cliente pide al servidor la lista de administradores.
+. El servidor pide a la base de datos la lista de administradores.
+. La base de datos devuelve la lista.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+. El administrador pulsa el botón delete de un administrador.
+. El cliente envía al servidor el usuario.
+. El servidor pide a la base de datos que cambie el estado del usuario a no administrador.
+. La base de datos cambia el estado del usuario.
+
+
+[plantuml,"Delete admins diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de administradores
+Cliente --> Servidor: Petición de la lista de administradores
+Servidor --> BD: Petición de la lista de administradores
+Servidor <-- BD: Devuelve la lista de administradores
+Cliente <-- Servidor: Devuelve la lista de administradores
+Usuario <- Cliente: Muestra la lista al administrador
+Usuario -> Cliente: Petición de eliminación de un administrador
+Cliente -> Servidor: Petición de eliminación de un administrador
+Servidor -> BD: Petición y cambio de estado del usuario a no administrador
+----
+
+=== <Adición de administradores>
+
+Permite a un administrador convertir a otros usuarios en administradores.
+
+.El proceso de adición de administradores seguiría los siguientes pasos:
+. El administrador accede a la pestaña añadir administrador.
+. El cliente pide al servidor la lista de usuarios que no son administrador.
+. El servidor pide a la base de datos la lista de usuarios no admin.
+. La base de datos devuelve la lista.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+. El administrador pulsa el botón add de un usuario.
+. El cliente envía al servidor el usuario.
+. El servidor pide a la base de datos que cambie el estado del usuario a admin.
+. La base de datos cambia el estado del usuario.
+
+
+[plantuml,"Add admins diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de administradores
+Cliente --> Servidor: Petición de la lista de no administradores
+Servidor --> BD: Petición de la lista de no administradores
+Servidor <-- BD: Devuelve la lista de no administradores
+Cliente <-- Servidor: Devuelve la lista de no administradores
+Usuario <- Cliente: Muestra la lista al administrador
+Usuario -> Cliente: Petición de adición de un administrador
+Cliente -> Servidor: Petición de adición de un administrador
+Servidor -> BD: Petición y cambio de estado del usuario a administrador
+----
+
+=== <Lista de usuarios inactivos para administrador>
+
+Permite al usuario ver qué usuarios llevan un tiempo arbitrario desconectados.
+
+.El proceso de listado de usuarios inactivos seguiría los siguientes pasos:
+. El administrador accede a la pestaña usuarios inactivos.
+. El cliente pide al servidor la lista de usuarios.
+. El servidor pide a la base de datos la lista de usuarios.
+. La base de datos devuelve la lista filtrada por usuarios inactivos.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+
+
+[plantuml,"Inactive users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de usuarios inactivos
+Cliente --> Servidor: Petición de la lista de usuarios inactivos
+Servidor --> BD: Petición de la lista de usuarios inactivos
+Servidor <-- BD: Devuelve la lista de usuarios inactivos
+Cliente <-- Servidor: Devuelve la lista de usuarios inactivos
+Usuario <- Cliente: Muestra la lista al administrador
+----
+
+=== <Lista de usuarios recientes para administrador>
+
+Permite al usuario saber qué usuarios han accedido recientemente a la aplicación.
+
+.El proceso de listado de usuarios recientes seguiría los siguientes pasos:
+. El administrador accede a la pestaña últimos usuarios.
+. El cliente pide al servidor la lista de usuarios.
+. El servidor pide a la base de datos la lista de usuarios.
+. La base de datos devuelve la lista filtrada por usuarios que han entrado recientemente a la aplicación.
+. El servidor devuelve la lista.
+. El cliente muestra al administrador la lista.
+
+
+[plantuml,"Recent users admin diagram",png]
+----
+actor Usuario
+participant Cliente
+participant Servidor
+database BD as "MongoDB"
+Usuario -> Cliente: Accede a la vista de últimos usuarios
+Cliente --> Servidor: Petición de la lista de últimos usuarios
+Servidor --> BD: Petición de la lista de últimos usuarios
+Servidor <-- BD: Devuelve la lista de últimos usuarios
+Cliente <-- Servidor: Devuelve la lista de últimos usuarios
+Usuario <- Cliente: Muestra la lista al administrador
 ----

@@ -11,5 +11,8 @@
 |===
 
 === Deudas técnicas
-- Lentitud de respuesta al utilizar Heroku para alojar nuestra aplicación.
-- Al utilizar SOLID ganamos en privacidad, sin embargo su rendimiento es bastante pobre, su documentación es escasa lo que hace que desarrollar codigo para Solid sea muy complicado para un equipo completamente junior.
+- Recoger una lista de amigos de SOLID y añadirla directamente a la aplicación.
+- Mostrar los amigos según un radio y que este sea configurable.
+- Notificaciones para el chat al recibir un mensaje.
+- Que lo meets tuvieran su propio chat, como si fuera un grupo para hablar entre todos.
+- Terminar el 100% de las pruebas.

@@ -25,6 +25,5 @@
 |Restricción|Explicación
 |Documentación|La documentación se escribirá en su totalidad siguiendo la estructura de arc42
 |Idioma|El idioma de la documentación será español
-|Estándar W3C|Seguiremos en la medida de lo posible las recomendaciones de la W3C
 |Reuniones|Durante las clases de prácticas el equipo se reunirá para ver qué objetivos semanales se han cumplido; se harán más reuniones durante la semana si fuera necesario
 |===
